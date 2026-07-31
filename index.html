@@ -1,0 +1,3793 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>席振り</title>
+<style>
+:root{--bg:#e9edf2;--panel:#fff;--line:#cbd2da;--text:#111827;--accent:#2563eb}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;color:var(--text);overflow:hidden}
+.shell{height:100%;display:flex;flex-direction:column}
+.topbar{flex:0 0 auto;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.08);z-index:10}
+.title{padding:7px 10px 4px;font-weight:950;font-size:16px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:4px 7px 7px}
+.tab-btn{border:1px solid var(--line);background:#f8fafc;border-radius:9px;padding:8px 5px;font-weight:950;font-size:13px}
+.tab-btn.active{background:#111827;color:#fff;border-color:#111827;box-shadow:inset 0 -3px 0 var(--accent)}
+.stage{position:relative;flex:1;min-height:0}
+.app-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff;display:none}
+.app-frame.active{display:block}
+@media(max-width:430px){
+ .title{font-size:14px;padding-top:5px}
+ .tabs{gap:3px;padding:3px 5px 5px}
+ .tab-btn{padding:7px 3px;font-size:12px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+<div class="title">席振り</div>
+<nav class="tabs"><button class="tab-btn active" data-index="0" type="button">1F</button>
+<button class="tab-btn" data-index="1" type="button">2F</button>
+<button class="tab-btn" data-index="2" type="button">3F</button>
+<button class="tab-btn" data-index="3" type="button">個室</button></nav>
+</header>
+<main class="stage"><iframe class="app-frame active" data-index="0" title="1F" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ja&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;&lt;title&gt;1F&lt;/title&gt;&lt;style&gt;
+:root{--bg:#f4f6f8;--card:#fff;--line:#d5d9df;--text:#17202a;--muted:#667085;--empty:#fff;--reserved:#ffe49a;--used:#ef6b73;--accent:#2563eb;--sel:#dbeafe}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,&quot;Noto Sans JP&quot;,sans-serif}button{font:inherit}
+.fixed{position:sticky;top:0;z-index:20;background:rgba(244,246,248,.97);backdrop-filter:blur(7px);border-bottom:1px solid var(--line)}
+.fixed-inner{max-width:980px;margin:auto;padding:7px}.title{display:flex;justify-content:space-between;align-items:center;gap:8px}.title b{font-size:17px}
+.reset{border:1px solid #aaa;background:#fff;border-radius:8px;padding:6px 10px}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:6px}
+.sum{background:#fff;border:1px solid var(--line);border-radius:8px;text-align:center;padding:4px}.sum small{display:block;color:var(--muted);font-size:10px}.sum b{font-size:17px}
+.label{font-size:11px;font-weight:800;margin:6px 2px 3px}.row-scroll{display:flex;gap:5px;overflow-x:auto;padding-bottom:3px}.row-scroll button{flex:0 0 auto;border:1px solid #b9c0ca;background:#fff;border-radius:8px;padding:6px 10px;font-weight:800}
+.row-scroll button.active{border-color:#111;background:#111;color:#fff}.state-row button[data-state=empty].active{background:#fff;color:#111;border:2px solid #111}.state-row button[data-state=reserved].active{background:var(--reserved);color:#111;border:2px solid #9a7200}.state-row button[data-state=used].active{background:var(--used);color:#111;border:2px solid #8f2733}
+.manualbar{display:flex;gap:5px;align-items:center;overflow-x:auto}.manualbar button{border:1px solid #9aa4b2;background:#fff;border-radius:8px;padding:6px 9px;font-weight:900;white-space:nowrap}.manualbar button.active{background:#111;color:#fff}.manualbar .confirm{background:#2563eb;color:#fff;border-color:#2563eb}.manualbar .confirm:disabled{opacity:.35}.selection-info{font-size:11px;font-weight:800;white-space:nowrap;color:#334155}
+main{max-width:980px;margin:auto;padding:7px}.card,.map-card{background:#fff;border:1px solid var(--line);border-radius:11px;padding:8px;margin-bottom:8px}.card-title,.map-title{display:flex;justify-content:space-between;font-weight:900;margin-bottom:7px}
+.options-wrap{display:grid;grid-template-columns:34px minmax(0,1fr) 34px;gap:5px}.scroll-arrow{border:1px solid var(--line);background:#fff;border-radius:8px;font-size:21px;font-weight:900}.scroll-arrow:disabled{opacity:.25}.options{min-width:0;display:flex;gap:7px;overflow-x:auto;scroll-behavior:smooth;padding:1px 1px 6px}.option{flex:0 0 194px;border:2px solid #9ca3af;background:#fff;border-radius:9px;padding:7px;text-align:left}.option.p1{border-color:#16a34a;background:#dcfce7}.option.p2{border-color:#eab308;background:#fef9c3}.option.p3{border-color:#fb923c;background:#ffedd5}.option.low{background:#f3f4f6}.option strong{font-size:15px}.option .cap{font-weight:900;margin-top:3px}.option small{color:var(--muted)}
+.floor-map{min-width:760px;display:grid;grid-template-columns:repeat(14,52px);grid-auto-rows:58px;gap:10px 7px;align-items:stretch;padding:4px}.map-card{overflow:auto}
+.table,.composite{border:1px solid #9ea5af;background:var(--empty);border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;position:relative;min-width:0;padding:2px}.table.reserved,.composite.reserved{background:var(--reserved)}.table.used,.composite.used{background:var(--used)}.table.selected,.composite.selected{outline:4px solid var(--accent);outline-offset:-4px;background:var(--sel)}.cap{font-size:9px;color:#667085}.st{position:absolute;right:3px;top:2px;font-size:8px}
+.composite-wrap,.group-wrap{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:2px;min-width:0}.composite-wrap.merged{display:block}.composite{width:100%;height:100%;border:2px solid #4b5563}.split-action{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);z-index:4;border:1px solid #64748b;background:#fff;border-radius:999px;padding:1px 7px;font-size:9px;font-weight:900;white-space:nowrap}
+.group-wrap{display:block}.merged-group{width:100%;height:100%;border:3px solid var(--accent);border-radius:9px;background:#eef4ff;display:flex;align-items:center;justify-content:center;flex-direction:column;font-weight:900;padding:3px 27px 3px 4px}.merged-group.reserved{background:var(--reserved)}.merged-group.used{background:var(--used)}.group-release{position:absolute;right:3px;top:3px;width:22px;height:22px;border:1px solid #b33;background:#fff;color:#9a1e28;border-radius:6px;font-weight:900;padding:0;z-index:4}
+.room-label{font-weight:900;font-size:14px;align-self:center;padding-left:4px}.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--muted);padding:8px 2px 2px}.dot{display:inline-block;width:12px;height:12px;border:1px solid #999;border-radius:3px;vertical-align:-2px;margin-right:3px}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#111;color:#fff;padding:8px 13px;border-radius:999px;opacity:0;pointer-events:none;transition:.2s;z-index:50;font-size:12px}.toast.show{opacity:1}.empty-note{color:var(--muted);padding:12px}
+@media(max-width:430px){.title b{font-size:15px}.fixed-inner,main{padding:5px}.summary{gap:3px}.row-scroll button,.manualbar button{padding:5px 8px}}
+&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;&lt;div class=&quot;fixed&quot;&gt;&lt;div class=&quot;fixed-inner&quot;&gt;&lt;div class=&quot;title&quot;&gt;&lt;button id=&quot;reset&quot; class=&quot;reset&quot;&gt;リセット&lt;/button&gt;&lt;/div&gt;&lt;div id=&quot;summary&quot; class=&quot;summary&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;label&quot;&gt;タップ時の状態&lt;/div&gt;&lt;div id=&quot;stateRow&quot; class=&quot;row-scroll state-row&quot;&gt;&lt;button data-state=&quot;empty&quot;&gt;空席&lt;/button&gt;&lt;button data-state=&quot;reserved&quot; class=&quot;active&quot;&gt;席取り&lt;/button&gt;&lt;button data-state=&quot;used&quot;&gt;使用中&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;label&quot;&gt;人数&lt;/div&gt;&lt;div id=&quot;peopleRow&quot; class=&quot;row-scroll&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;label&quot;&gt;手動で隣り合う卓を連結&lt;/div&gt;&lt;div class=&quot;manualbar&quot;&gt;&lt;button id=&quot;manualToggle&quot;&gt;手動連結&lt;/button&gt;&lt;span id=&quot;selectionInfo&quot; class=&quot;selection-info&quot;&gt;&lt;/span&gt;&lt;button id=&quot;manualClear&quot;&gt;選択解除&lt;/button&gt;&lt;button id=&quot;manualConfirm&quot; class=&quot;confirm&quot;&gt;連結する&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;main&gt;&lt;section class=&quot;card&quot;&gt;&lt;div class=&quot;card-title&quot;&gt;&lt;span&gt;おすすめ案&lt;/span&gt;&lt;span id=&quot;optionCount&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;options-wrap&quot;&gt;&lt;button id=&quot;prev&quot; class=&quot;scroll-arrow&quot;&gt;‹&lt;/button&gt;&lt;div id=&quot;options&quot; class=&quot;options&quot;&gt;&lt;/div&gt;&lt;button id=&quot;next&quot; class=&quot;scroll-arrow&quot;&gt;›&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section class=&quot;map-card&quot;&gt;&lt;div class=&quot;map-title&quot;&gt;&lt;span&gt;1F 実配置&lt;/span&gt;&lt;/div&gt;&lt;div id=&quot;floorMap&quot; class=&quot;floor-map&quot;&gt;&lt;/div&gt;&lt;div class=&quot;legend&quot;&gt;&lt;span&gt;&lt;i class=&quot;dot&quot; style=&quot;background:white&quot;&gt;&lt;/i&gt;空席&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;dot&quot; style=&quot;background:var(--reserved)&quot;&gt;&lt;/i&gt;席取り&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;dot&quot; style=&quot;background:var(--used)&quot;&gt;&lt;/i&gt;使用中&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;dot&quot; style=&quot;background:var(--sel)&quot;&gt;&lt;/i&gt;手動選択&lt;/span&gt;&lt;/div&gt;&lt;/section&gt;&lt;/main&gt;&lt;div id=&quot;toast&quot; class=&quot;toast&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+(()=&gt;{
+&quot;use strict&quot;;
+const CONFIG={&quot;key&quot;: &quot;sekifuri-1f-v9-osusume&quot;, &quot;resetText&quot;: &quot;1Fをすべて空席・初期連結状態に戻しますか？&quot;, &quot;items&quot;: [{&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;1&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;2&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;3&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;4&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;5&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;6&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 1, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;10&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;11&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;12&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;13&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;14&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;15&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 2, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;16&quot;}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;20&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;21&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;22&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;23&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;24&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;25&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 3, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;26&quot;}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;30&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;31&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;32&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;33&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;34&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;35&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 4, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;36&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;50&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [2, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;51&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;52&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;53&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;54&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;55&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;56&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 5, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;57&quot;}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;60&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;61&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;62&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;63&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;64&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;65&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;66&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;67&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 7, &quot;pos&quot;: [9, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;68&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 8, &quot;pos&quot;: [10, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;69&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 9, &quot;pos&quot;: [11, 6, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;70&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;71&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;72&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;73&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;74&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;75&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;76&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;77&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 7, &quot;pos&quot;: [9, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;78&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 8, &quot;pos&quot;: [10, 7, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;79&quot;}], &quot;composites&quot;: [{&quot;id&quot;: &quot;1&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;1A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;1B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 1, 2]}, {&quot;id&quot;: &quot;10&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;10A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;10B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 2, 2]}, {&quot;id&quot;: &quot;16&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;16A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;16B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 2, 2]}, {&quot;id&quot;: &quot;20&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;20A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;20B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 3, 2]}, {&quot;id&quot;: &quot;26&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;26A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;26B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 3, 2]}, {&quot;id&quot;: &quot;30&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;30A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;30B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 4, 2]}, {&quot;id&quot;: &quot;36&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;36A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;36B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 4, 2]}, {&quot;id&quot;: &quot;57&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;57A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;57B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 7, &quot;pos&quot;: [9, 5, 2]}, {&quot;id&quot;: &quot;60&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;60A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;60B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 6, 2]}, {&quot;id&quot;: &quot;70&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;70A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;70B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 7, 2]}, {&quot;id&quot;: &quot;79&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;79A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;79B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 9, &quot;pos&quot;: [11, 7, 2]}], &quot;rowKeys&quot;: [&quot;r0&quot;, &quot;r1&quot;, &quot;r2&quot;, &quot;r3&quot;, &quot;r4&quot;, &quot;r5&quot;, &quot;r6&quot;]};
+const KEY=CONFIG.key;
+let data=JSON.parse(localStorage.getItem(KEY)||&#x27;{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{}}&#x27;);
+data.states||={}; data.groups||=[]; data.merged||={};
+for(const c of CONFIG.composites) if(data.merged[c.id]===undefined)data.merged[c.id]=true;
+let selectedState=&quot;reserved&quot;, people=4, manual=false, selected=new Set();
+
+const save=()=&gt;localStorage.setItem(KEY,JSON.stringify(data));
+const state=id=&gt;data.states[id]||&quot;empty&quot;;
+const label=s=&gt;s===&quot;reserved&quot;?&quot;席取り&quot;:s===&quot;used&quot;?&quot;使用中&quot;:&quot;空席&quot;;
+function toast(m){const t=document.getElementById(&quot;toast&quot;);t.textContent=m;t.classList.add(&quot;show&quot;);clearTimeout(window.__toast);window.__toast=setTimeout(()=&gt;t.classList.remove(&quot;show&quot;),1250)}
+function compositeById(id){return CONFIG.composites.find(c=&gt;c.id===id)}
+function groupForUnit(id){return data.groups.find(g=&gt;g.ids.includes(id))}
+function activeUnits(){
+ const units=[];
+ CONFIG.items.forEach(item=&gt;{
+   if(item.kind===&quot;single&quot;) units.push({id:item.id,cap:item.cap,base:item.base||item.id,rowKey:item.rowKey,order:item.order,pos:item.pos});
+   else {
+     const c=compositeById(item.id);
+     if(data.merged[c.id]) units.push({id:c.id,cap:c.cap,base:c.id,rowKey:c.rowKey,order:c.order,pos:c.pos,composite:true});
+     else c.parts.forEach((p,i)=&gt;units.push({id:p.id,cap:p.cap,base:c.id,rowKey:c.rowKey,order:c.order+i/10,pos:c.pos,part:true}));
+   }
+ });
+ return units;
+}
+function unitMap(){return Object.fromEntries(activeUnits().map(u=&gt;[u.id,u]))}
+function available(u){return state(u.id)===&quot;empty&quot;&amp;&amp;!groupForUnit(u.id)}
+function currentRows(){
+ const um=unitMap(), rows=[];
+ CONFIG.rowKeys.forEach(key=&gt;{
+   const arr=activeUnits().filter(u=&gt;u.rowKey===key).sort((a,b)=&gt;a.order-b.order);
+   rows.push(arr);
+ });
+ return rows;
+}
+function allRuns(){
+ const out=[];
+ currentRows().forEach((row,rowIndex)=&gt;{
+   for(let i=0;i&lt;row.length;i++){
+     if(!available(row[i]))continue;
+     let cap=0;
+     for(let j=i;j&lt;row.length;j++){
+       if(!available(row[j]))break;
+       cap+=row[j].cap;
+       out.push({ids:row.slice(i,j+1).map(x=&gt;x.id),cap,rowIndex,start:i,count:j-i+1});
+     }
+   }
+ });
+ return out;
+}
+function candidates(){
+ return allRuns().filter(o=&gt;o.cap&gt;=people).sort((a,b)=&gt;
+   a.count-b.count || (a.cap-people)-(b.cap-people) || a.rowIndex-b.rowIndex || a.start-b.start
+ ).slice(0,35);
+}
+function setUnits(ids,s=selectedState){
+ ids.forEach(id=&gt;s===&quot;empty&quot;?delete data.states[id]:data.states[id]=s);
+ const g=data.groups.find(x=&gt;ids.some(id=&gt;x.ids.includes(id)));
+ if(g)g.state=s;
+ save();renderAll();
+}
+function createGroup(ids){
+ if(ids.length&lt;2){setUnits(ids);return}
+ if(ids.some(id=&gt;!available(unitMap()[id]))){toast(&quot;空席ではない卓は連結できません&quot;);return}
+ data.groups.push({id:&quot;g&quot;+Date.now()+Math.random(),ids:[...ids],state:selectedState});
+ setUnits(ids,selectedState);
+ toast(ids.join(&quot;・&quot;)+&quot; を連結しました&quot;);
+}
+function releaseGroup(gid){
+ const i=data.groups.findIndex(g=&gt;g.id===gid); if(i&lt;0)return;
+ data.groups[i].ids.forEach(id=&gt;delete data.states[id]);
+ data.groups.splice(i,1); save();renderAll();toast(&quot;連結解除 → 空席&quot;);
+}
+function toggleComposite(cid){
+ const c=compositeById(cid); if(!c)return;
+ if(groupForUnit(cid)||c.parts.some(p=&gt;groupForUnit(p.id))){toast(&quot;先に手動連結を解除してください&quot;);return}
+ if(data.merged[cid]){
+   if(state(cid)!==&quot;empty&quot;){toast(&quot;空席にしてから分割してください&quot;);return}
+   delete data.states[cid]; c.parts.forEach(p=&gt;delete data.states[p.id]); data.merged[cid]=false;
+ }else{
+   if(c.parts.some(p=&gt;state(p.id)!==&quot;empty&quot;)){toast(&quot;両方を空席にしてから連結してください&quot;);return}
+   c.parts.forEach(p=&gt;delete data.states[p.id]); delete data.states[cid]; data.merged[cid]=true;
+ }
+ selected.clear();save();renderAll();
+}
+function validManual(){
+ if(selected.size&lt;2)return false;
+ const ids=[...selected], rows=currentRows();
+ return rows.some(row=&gt;{
+   const ri=ids.map(id=&gt;row.findIndex(u=&gt;u.id===id));
+   if(ri.some(i=&gt;i&lt;0))return false;
+   ri.sort((a,b)=&gt;a-b);
+   return ri.every((v,i)=&gt;i===0||v===ri[i-1]+1);
+ });
+}
+function toggleSelect(id){
+ const u=unitMap()[id]; if(!u||!available(u)){toast(&quot;空席の卓だけ選択できます&quot;);return}
+ selected.has(id)?selected.delete(id):selected.add(id);renderAll();
+}
+function handleUnit(id){
+ if(manual){toggleSelect(id);return}
+ const g=groupForUnit(id); g?setUnits(g.ids):setUnits([id]);
+}
+function renderPeople(){
+ const h=document.getElementById(&quot;peopleRow&quot;);h.innerHTML=&quot;&quot;;
+ [2,3,4,5,6,7,8,9,10,11,12,13,14,16,18,20].forEach(n=&gt;{
+  const b=document.createElement(&quot;button&quot;);b.textContent=n+&quot;名&quot;;b.classList.toggle(&quot;active&quot;,n===people);
+  b.onclick=()=&gt;{people=n;renderPeople();renderOptions()};h.appendChild(b);
+ });
+}
+function renderManual(){
+ document.getElementById(&quot;manualToggle&quot;).classList.toggle(&quot;active&quot;,manual);
+ document.getElementById(&quot;manualToggle&quot;).textContent=manual?&quot;手動連結中&quot;:&quot;手動連結&quot;;
+ const ids=[...selected], cap=ids.reduce((s,id)=&gt;s+(unitMap()[id]?.cap||0),0);
+ document.getElementById(&quot;selectionInfo&quot;).textContent=ids.length?`選択：${ids.join(&quot;・&quot;)}　合計${cap}席`:&quot;卓を選択してください&quot;;
+ document.getElementById(&quot;manualConfirm&quot;).disabled=!validManual();
+}
+function renderOptions(){
+ const h=document.getElementById(&quot;options&quot;);h.innerHTML=&quot;&quot;;const arr=candidates();
+ document.getElementById(&quot;optionCount&quot;).textContent=arr.length+&quot;案&quot;;
+ if(!arr.length){h.innerHTML=&#x27;&lt;div class=&quot;empty-note&quot;&gt;利用できる連番がありません。&lt;/div&gt;&#x27;;return}
+ arr.forEach((o,i)=&gt;{
+   const excess=o.cap-people;let cls=excess===0?&quot;p1&quot;:excess===1?&quot;p2&quot;:excess&lt;=3?&quot;p3&quot;:&quot;low&quot;;
+   const b=document.createElement(&quot;button&quot;);b.className=&quot;option &quot;+cls;
+   b.innerHTML=`&lt;strong&gt;${o.ids.join(&quot;・&quot;)}&lt;/strong&gt;&lt;div class=&quot;cap&quot;&gt;${o.count}卓・MAX ${o.cap}名&lt;/div&gt;&lt;small&gt;${i===0?&quot;優先&quot;:excess===0?&quot;同数候補&quot;:excess&lt;=3?&quot;予備&quot;:&quot;優先度低&quot;}${excess?&quot;・空き&quot;+excess+&quot;席&quot;:&quot;&quot;}&lt;/small&gt;`;
+   b.onclick=()=&gt;createGroup(o.ids);h.appendChild(b);
+ });
+ requestAnimationFrame(()=&gt;{h.scrollLeft=0;updateArrows()});
+}
+function renderSummary(){
+ const units=activeUnits(), grouped=new Set(data.groups.flatMap(g=&gt;g.ids));
+ const c2=units.filter(u=&gt;u.cap===2&amp;&amp;!grouped.has(u.id)&amp;&amp;state(u.id)===&quot;empty&quot;).length;
+ const c4=units.filter(u=&gt;u.cap===4&amp;&amp;!grouped.has(u.id)&amp;&amp;state(u.id)===&quot;empty&quot;).length;
+ const c6=units.filter(u=&gt;u.cap===6&amp;&amp;!grouped.has(u.id)&amp;&amp;state(u.id)===&quot;empty&quot;).length;
+ const max=allRuns().reduce((m,o)=&gt;Math.max(m,o.cap),0);
+ document.getElementById(&quot;summary&quot;).innerHTML=`&lt;div class=sum&gt;&lt;small&gt;2人卓 空き&lt;/small&gt;&lt;b&gt;${c2}&lt;/b&gt;&lt;/div&gt;&lt;div class=sum&gt;&lt;small&gt;4人卓 空き&lt;/small&gt;&lt;b&gt;${c4}&lt;/b&gt;&lt;/div&gt;&lt;div class=sum&gt;&lt;small&gt;6人卓 空き&lt;/small&gt;&lt;b&gt;${c6}&lt;/b&gt;&lt;/div&gt;&lt;div class=sum&gt;&lt;small&gt;MAX&lt;/small&gt;&lt;b&gt;${max}名&lt;/b&gt;&lt;/div&gt;`;
+}
+function baseButton(id,cap,extra=&quot;&quot;){
+ const b=document.createElement(&quot;button&quot;);b.className=`table ${state(id)} ${selected.has(id)?&quot;selected&quot;:&quot;&quot;} ${extra}`;
+ b.innerHTML=`&lt;span class=st&gt;${label(state(id)).slice(0,1)}&lt;/span&gt;&lt;span&gt;${id}&lt;/span&gt;&lt;span class=cap&gt;${cap}人&lt;/span&gt;`;
+ b.onclick=()=&gt;handleUnit(id);return b;
+}
+function renderMap(){
+ const map=document.getElementById(&quot;floorMap&quot;);map.innerHTML=&quot;&quot;;
+ if(CONFIG.roomLabels) CONFIG.roomLabels.forEach(r=&gt;{const d=document.createElement(&quot;div&quot;);d.className=&quot;room-label&quot;;d.textContent=r.text;d.style.gridColumn=`${r.col} / span ${r.span}`;d.style.gridRow=String(r.row);map.appendChild(d)});
+ const groupedIds=new Set(data.groups.flatMap(g=&gt;g.ids));
+ CONFIG.items.forEach(item=&gt;{
+   if(item.kind===&quot;single&quot;){
+     if(groupedIds.has(item.id))return;
+     const b=baseButton(item.id,item.cap);
+     b.style.gridColumn=`${item.pos[0]} / span ${item.pos[2]}`;b.style.gridRow=String(item.pos[1]);map.appendChild(b);
+   }else{
+     const c=compositeById(item.id);
+     const relevant=data.merged[c.id]?[c.id]:c.parts.map(p=&gt;p.id);
+     if(relevant.some(id=&gt;groupedIds.has(id)))return;
+     const wrap=document.createElement(&quot;div&quot;);wrap.className=&quot;composite-wrap &quot;+(data.merged[c.id]?&quot;merged&quot;:&quot;&quot;);
+     wrap.style.gridColumn=`${c.pos[0]} / span ${c.pos[2]}`;wrap.style.gridRow=String(c.pos[1]);
+     if(data.merged[c.id]){
+       const b=baseButton(c.id,c.cap,&quot;composite&quot;);wrap.appendChild(b);
+     }else c.parts.forEach(p=&gt;wrap.appendChild(baseButton(p.id,p.cap,&quot;composite&quot;)));
+     const t=document.createElement(&quot;button&quot;);t.className=&quot;split-action&quot;;t.textContent=data.merged[c.id]?&quot;分割&quot;:&quot;連結&quot;;t.onclick=e=&gt;{e.stopPropagation();toggleComposite(c.id)};wrap.appendChild(t);map.appendChild(wrap);
+   }
+ });
+ data.groups.forEach(g=&gt;{
+   const units=g.ids.map(id=&gt;unitMap()[id]).filter(Boolean);if(!units.length)return;
+   const posCells=units.map(u=&gt;u.pos);const row=posCells[0][1],min=Math.min(...posCells.map(p=&gt;p[0])),max=Math.max(...posCells.map(p=&gt;p[0]+p[2]));
+   const wrap=document.createElement(&quot;div&quot;);wrap.className=&quot;group-wrap&quot;;wrap.style.gridColumn=`${min} / span ${max-min}`;wrap.style.gridRow=String(row);
+   const b=document.createElement(&quot;button&quot;);b.className=`merged-group ${g.state||state(g.ids[0])}`;const cap=g.ids.reduce((s,id)=&gt;s+(unitMap()[id]?.cap||0),0);b.innerHTML=`&lt;span&gt;${g.ids.join(&quot;・&quot;)}&lt;/span&gt;&lt;span class=cap&gt;MAX ${cap}名&lt;/span&gt;`;b.onclick=()=&gt;manual?toast(&quot;手動連結中です&quot;):setUnits(g.ids);
+   const x=document.createElement(&quot;button&quot;);x.className=&quot;group-release&quot;;x.textContent=&quot;×&quot;;x.onclick=e=&gt;{e.stopPropagation();releaseGroup(g.id)};wrap.append(b,x);map.appendChild(wrap);
+ });
+}
+function updateArrows(){const h=document.getElementById(&quot;options&quot;),m=Math.max(0,h.scrollWidth-h.clientWidth);document.getElementById(&quot;prev&quot;).disabled=h.scrollLeft&lt;=2;document.getElementById(&quot;next&quot;).disabled=h.scrollLeft&gt;=m-2}
+function renderAll(){renderSummary();renderManual();renderOptions();renderMap()}
+document.querySelectorAll(&quot;#stateRow button&quot;).forEach(b=&gt;b.onclick=()=&gt;{selectedState=b.dataset.state;document.querySelectorAll(&quot;#stateRow button&quot;).forEach(x=&gt;x.classList.toggle(&quot;active&quot;,x===b))});
+document.getElementById(&quot;manualToggle&quot;).onclick=()=&gt;{manual=!manual;selected.clear();renderAll()};
+document.getElementById(&quot;manualClear&quot;).onclick=()=&gt;{selected.clear();renderAll()};
+document.getElementById(&quot;manualConfirm&quot;).onclick=()=&gt;{if(!validManual()){toast(&quot;隣り合う卓を選択してください&quot;);return}const ids=[...selected].sort((a,b)=&gt;{const row=currentRows().find(r=&gt;r.some(u=&gt;u.id===a));return row.findIndex(u=&gt;u.id===a)-row.findIndex(u=&gt;u.id===b)});createGroup(ids);manual=false;selected.clear();renderAll()};
+document.getElementById(&quot;reset&quot;).onclick=()=&gt;{data={states:{},groups:[],merged:{}};for(const c of CONFIG.composites)data.merged[c.id]=true;manual=false;selected.clear();save();renderAll();toast(&quot;初期状態に戻しました&quot;)};
+const oh=document.getElementById(&quot;options&quot;);document.getElementById(&quot;prev&quot;).onclick=()=&gt;oh.scrollBy({left:-oh.clientWidth*.85,behavior:&quot;smooth&quot;});document.getElementById(&quot;next&quot;).onclick=()=&gt;oh.scrollBy({left:oh.clientWidth*.85,behavior:&quot;smooth&quot;});oh.addEventListener(&quot;scroll&quot;,updateArrows,{passive:true});
+renderPeople();renderAll();
+})();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+<iframe class="app-frame" data-index="1" title="2F" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;vi&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;
+&lt;title&gt;2F&lt;/title&gt;
+&lt;style&gt;
+:root{
+  --bg:#f3f4f6;
+  --card:#ffffff;
+  --line:#d1d5db;
+  --text:#111827;
+  --muted:#6b7280;
+  --blue:#dbeafe;
+  --green:#dcfce7;
+  --orange:#ffedd5;
+  --purple:#ede9fe;
+  --reserved:#fef3c7;
+  --used:#fee2e2;
+  --accent:#2563eb;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Noto Sans JP&quot;,sans-serif}
+button{font:inherit;color:inherit}
+
+#fixedPanel{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:100;
+  background:rgba(243,244,246,.99);
+  border-bottom:1px solid #cbd5e1;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+.fixed-inner{max-width:760px;margin:auto;padding:6px 8px 7px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.header strong{font-size:16px}
+.reset{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:7px;
+  padding:4px 8px;
+  font-size:11px;
+}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:5px}
+.summary-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  text-align:center;
+  padding:3px;
+}
+.summary-card small{display:block;font-size:9px;color:var(--muted)}
+.summary-card b{font-size:16px}
+
+.label{font-size:10px;font-weight:800;color:var(--muted);margin:2px 0 3px}
+
+.row-scroll{
+  display:flex;
+  gap:4px;
+  overflow-x:auto;
+  white-space:nowrap;
+  scrollbar-width:none;
+  margin-bottom:5px;
+}
+.row-scroll::-webkit-scrollbar{display:none}
+.row-scroll button{
+  flex:0 0 auto;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:900;
+}
+.row-scroll button.active{
+  border-color:var(--accent);
+  outline:2px solid var(--accent);
+  outline-offset:0;
+}
+.state-row button[data-state=&quot;reserved&quot;]{background:var(--reserved)}
+.state-row button[data-state=&quot;used&quot;]{background:var(--used)}
+
+.cluster-strip{
+  display:flex;
+  gap:5px;
+  overflow-x:auto;
+  white-space:nowrap;
+  scrollbar-width:none;
+}
+.cluster-strip::-webkit-scrollbar{display:none}
+.cluster-chip{
+  flex:0 0 auto;
+  border:1px solid #374151;
+  background:#111827;
+  color:#fff;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:900;
+}
+.cluster-chip small{font-size:9px;opacity:.8;margin-left:4px}
+.cluster-chip.disabled{background:#4b5563;color:#d1d5db}
+
+main{max-width:760px;margin:auto;padding:342px 8px 30px}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:8px;
+  margin:7px 0;
+}
+.card-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:900;
+  margin-bottom:7px;
+}
+.card-title span{font-size:11px;color:var(--muted)}
+
+.renban-scroll-wrap{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) 34px;
+  gap:5px;
+  align-items:stretch;
+}
+.scroll-arrow{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  font-size:20px;
+  font-weight:900;
+  touch-action:manipulation;
+}
+.scroll-arrow:disabled{opacity:.3}
+.renban-options{
+  min-width:0;
+  width:100%;
+  display:flex;
+  flex-wrap:nowrap;
+  gap:6px;
+  overflow-x:scroll;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth;
+  overscroll-behavior-x:contain;
+  touch-action:pan-x;
+  cursor:grab;
+  scrollbar-width:auto;
+  padding-bottom:5px;
+}
+.renban-options.dragging{
+  cursor:grabbing;
+  scroll-behavior:auto;
+  user-select:none;
+}
+.renban-options::-webkit-scrollbar{height:7px}
+.renban-options::-webkit-scrollbar-thumb{
+  background:#9ca3af;
+  border-radius:999px;
+}
+.renban-option{
+  flex:0 0 180px;
+  width:180px;
+  min-width:180px;
+  border:2px solid #9ca3af;
+  border-radius:9px;
+  background:#fff;
+  padding:6px;
+  text-align:left;
+}
+.renban-option.priority-1{
+  border-color:#16a34a;
+  background:#dcfce7;
+}
+.renban-option.priority-2{
+  border-color:#eab308;
+  background:#fef9c3;
+}
+.renban-option.priority-3{
+  border-color:#fb923c;
+  background:#ffedd5;
+}
+.renban-option.low{
+  border-color:#9ca3af;
+  background:#f3f4f6;
+}
+.renban-option strong{font-size:17px}
+.renban-option small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.chips{display:flex;gap:3px;margin-top:4px}
+.chip{padding:0;border-radius:0;font-weight:900;font-size:12px;background:transparent!important}
+.c2{background:transparent}
+.c4{background:transparent}
+.c6{background:transparent}
+.cbox{background:transparent}
+
+.table-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:5px;
+}
+.table-btn{
+  min-height:47px;
+  border:2px solid #9ca3af;
+  border-radius:8px;
+  background:#fff;
+  position:relative;
+  font-weight:900;
+}
+.table-btn .cap{
+  position:absolute;
+  top:2px;
+  right:3px;
+  font-size:9px;
+  padding:1px 4px;
+  border-radius:999px;
+}
+.table-btn.c2 .cap{background:var(--blue)}
+.table-btn.c4 .cap{background:var(--green)}
+.table-btn.c6 .cap{background:var(--orange)}
+.table-btn.cbox .cap{background:var(--purple)}
+.table-btn.reserved{background:var(--reserved);border-color:#f59e0b}
+.table-btn.used{background:var(--used);border-color:#ef4444}
+
+.pair-card{
+  grid-column:span 2;
+  border:1px dashed #9ca3af;
+  border-radius:9px;
+  padding:4px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4px;
+  position:relative;
+}
+.pair-card.merged{
+  grid-template-columns:1fr auto;
+  background:#eff6ff;
+  border-style:solid;
+  border-color:#60a5fa;
+}
+.pair-action{
+  position:absolute;
+  right:3px;
+  bottom:3px;
+  font-size:9px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:6px;
+  padding:2px 4px;
+}
+.pair-card.merged .pair-action{position:static}
+
+.empty-note{
+  grid-column:1/-1;
+  text-align:center;
+  padding:12px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.manual-row{
+  display:flex;
+  gap:4px;
+  align-items:center;
+  overflow-x:auto;
+  white-space:nowrap;
+  scrollbar-width:none;
+}
+.manual-row::-webkit-scrollbar{display:none}
+.manual-row button{
+  flex:0 0 auto;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:900;
+}
+.manual-row button.active{
+  background:#111827;
+  color:#fff;
+  border-color:#111827;
+}
+.manual-row .confirm{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+.manual-row .confirm:disabled{opacity:.35}
+.manual-info{
+  flex:0 0 auto;
+  font-size:10px;
+  font-weight:800;
+  color:var(--muted);
+}
+.table-btn.manual-selected{
+  outline:4px solid var(--accent);
+  outline-offset:-4px;
+}
+.manual-groups{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.manual-group{
+  position:relative;
+  width:100%;
+  min-height:54px;
+  border:3px solid var(--accent);
+  border-radius:9px;
+  background:#eff6ff;
+  padding:7px 34px 7px 8px;
+  text-align:left;
+  font-weight:900;
+}
+.manual-group.reserved{background:var(--reserved);border-color:#f59e0b}
+.manual-group.used{background:var(--used);border-color:#ef4444}
+.manual-group small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:10px;
+}
+.manual-release{
+  position:absolute;
+  right:5px;
+  top:5px;
+  width:25px;
+  height:25px;
+  border:1px solid #dc2626;
+  background:#fff;
+  color:#b91c1c;
+  border-radius:6px;
+  font-weight:900;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  background:#111827;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
+  opacity:0;
+  transition:.2s;
+  z-index:200;
+}
+.toast.show{opacity:1}
+
+@media(max-width:390px){
+  main{padding-top:356px}
+  .table-grid{gap:4px}
+  .table-btn{min-height:44px;font-size:13px}
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;fixedPanel&quot;&gt;
+  &lt;div class=&quot;fixed-inner&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+      
+      &lt;button id=&quot;resetBtn&quot; class=&quot;reset&quot;&gt;リセット&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;summary&quot; class=&quot;summary&quot;&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;label&quot;&gt;タップ時の状態&lt;/div&gt;
+    &lt;div id=&quot;stateRow&quot; class=&quot;row-scroll state-row&quot;&gt;
+      &lt;button data-state=&quot;empty&quot;&gt;空席&lt;/button&gt;
+      &lt;button data-state=&quot;reserved&quot; class=&quot;active&quot;&gt;席取り&lt;/button&gt;
+      &lt;button data-state=&quot;used&quot;&gt;使用中&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;label&quot;&gt;卓種別&lt;/div&gt;
+    &lt;div id=&quot;tableFilterRow&quot; class=&quot;row-scroll&quot;&gt;
+      &lt;button data-view=&quot;all&quot; class=&quot;active&quot;&gt;全部&lt;/button&gt;
+      &lt;button data-view=&quot;2&quot;&gt;2人卓&lt;/button&gt;
+      &lt;button data-view=&quot;4&quot;&gt;4人卓&lt;/button&gt;
+      &lt;button data-view=&quot;6&quot;&gt;6人卓&lt;/button&gt;
+      &lt;button data-view=&quot;BOX&quot;&gt;BOX&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;label&quot;&gt;人数&lt;/div&gt;
+    &lt;div id=&quot;peopleRow&quot; class=&quot;row-scroll&quot;&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;label&quot;&gt;空いている連続卓&lt;/div&gt;
+    &lt;div id=&quot;clusterStrip&quot; class=&quot;cluster-strip&quot;&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;label&quot;&gt;手動連結&lt;/div&gt;
+    &lt;div class=&quot;manual-row&quot;&gt;
+      &lt;button id=&quot;manualToggle&quot; type=&quot;button&quot;&gt;手動連結&lt;/button&gt;
+      &lt;span id=&quot;manualInfo&quot; class=&quot;manual-info&quot;&gt;卓を選択&lt;/span&gt;
+      &lt;button id=&quot;manualClear&quot; type=&quot;button&quot;&gt;選択解除&lt;/button&gt;
+      &lt;button id=&quot;manualConfirm&quot; class=&quot;confirm&quot; type=&quot;button&quot; disabled&gt;連結する&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;main&gt;
+  &lt;section class=&quot;card&quot;&gt;
+    &lt;div class=&quot;card-title&quot;&gt;
+      &lt;span&gt;おすすめ案&lt;/span&gt;
+      &lt;span id=&quot;renbanCount&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;renban-scroll-wrap&quot;&gt;
+      &lt;button id=&quot;renbanPrev&quot; class=&quot;scroll-arrow&quot; type=&quot;button&quot; aria-label=&quot;前の候補&quot;&gt;‹&lt;/button&gt;
+      &lt;div id=&quot;renbanOptions&quot; class=&quot;renban-options&quot;&gt;&lt;/div&gt;
+      &lt;button id=&quot;renbanNext&quot; class=&quot;scroll-arrow&quot; type=&quot;button&quot; aria-label=&quot;次の候補&quot;&gt;›&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+
+
+
+  &lt;section id=&quot;largeManualSection&quot; class=&quot;card&quot; hidden&gt;
+    &lt;div class=&quot;card-title&quot;&gt;
+      &lt;span&gt;連結卓（7名以上）&lt;/span&gt;
+      &lt;span id=&quot;largeManualCount&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;largeManualGrid&quot; class=&quot;table-grid&quot;&gt;&lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;div id=&quot;tableArea&quot;&gt;&lt;/div&gt;
+&lt;/main&gt;
+
+&lt;div id=&quot;toast&quot; class=&quot;toast&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+(() =&gt; {
+  &quot;use strict&quot;;
+
+  const STORAGE_KEY = &quot;sekifuri-2f-v28-display-clean&quot;;
+  const PREVIOUS_STORAGE_KEY = &quot;sekifuri-2f-v27-priority-route&quot;;
+  if(!localStorage.getItem(STORAGE_KEY) &amp;&amp; localStorage.getItem(PREVIOUS_STORAGE_KEY)){
+    localStorage.setItem(STORAGE_KEY, localStorage.getItem(PREVIOUS_STORAGE_KEY));
+  }
+
+  const fixedTables = {
+    &quot;S1&quot;:2,&quot;S2&quot;:2,&quot;S3&quot;:2,&quot;S4&quot;:2,&quot;S5&quot;:2,
+    &quot;80&quot;:6,&quot;81&quot;:6,
+    &quot;90&quot;:6,&quot;91&quot;:4,&quot;92&quot;:6,&quot;93&quot;:4,&quot;94&quot;:6,&quot;95&quot;:4,&quot;96&quot;:4,
+    &quot;97&quot;:2,&quot;98&quot;:2,&quot;99&quot;:2,&quot;100&quot;:2,&quot;101&quot;:2,
+    &quot;C1&quot;:6,&quot;C2&quot;:6,&quot;C3&quot;:6,&quot;C4&quot;:6,&quot;C5&quot;:6,&quot;C6&quot;:6,
+    &quot;C7&quot;:&quot;BOX&quot;,&quot;C8&quot;:&quot;BOX&quot;,
+    &quot;D1&quot;:&quot;BOX&quot;,&quot;D2&quot;:&quot;BOX&quot;,&quot;D3&quot;:&quot;BOX&quot;,&quot;D4&quot;:&quot;BOX&quot;,
+    &quot;D5&quot;:&quot;BOX&quot;,&quot;D6&quot;:&quot;BOX&quot;,&quot;D7&quot;:&quot;BOX&quot;,&quot;D8&quot;:&quot;BOX&quot;,
+    &quot;D9&quot;:6,&quot;D10&quot;:4,&quot;D11&quot;:4
+  };
+
+  const pairPrefixes = [&quot;82&quot;,&quot;83&quot;,&quot;84&quot;,&quot;85&quot;,&quot;86&quot;,&quot;87&quot;,&quot;88&quot;];
+
+  /* 卓種別の表示順は、番号順ではなく実際の案内動線に合わせる。 */
+  const twoFixedOrder = [&quot;S1&quot;,&quot;S2&quot;,&quot;S3&quot;,&quot;S4&quot;,&quot;S5&quot;,&quot;97&quot;,&quot;98&quot;,&quot;99&quot;,&quot;100&quot;,&quot;101&quot;];
+  const fourFixedOrder = [&quot;91&quot;,&quot;93&quot;,&quot;95&quot;,&quot;96&quot;,&quot;D10&quot;,&quot;D11&quot;];
+  const sixOrder = [&quot;80&quot;,&quot;81&quot;,&quot;C1&quot;,&quot;C2&quot;,&quot;C3&quot;,&quot;C4&quot;,&quot;C5&quot;,&quot;C6&quot;,&quot;90&quot;,&quot;92&quot;,&quot;94&quot;,&quot;D9&quot;];
+  const boxOrder = [&quot;C7&quot;,&quot;C8&quot;,&quot;D1&quot;,&quot;D2&quot;,&quot;D3&quot;,&quot;D4&quot;,&quot;D5&quot;,&quot;D6&quot;,&quot;D7&quot;,&quot;D8&quot;];
+
+  /*
+    おすすめ案の案内優先順。
+    S卓 → 80番台 → 90番台 → C卓 → D卓。
+    同じ列の中では番号の小さい卓から先に表示する。
+  */
+  const recommendationRoute = [
+    &quot;S1&quot;,&quot;S2&quot;,&quot;S3&quot;,&quot;S4&quot;,&quot;S5&quot;,
+    &quot;80&quot;,&quot;81&quot;,
+    &quot;82A&quot;,&quot;82B&quot;,&quot;82AB&quot;,&quot;83A&quot;,&quot;83B&quot;,&quot;83AB&quot;,&quot;84A&quot;,&quot;84B&quot;,&quot;84AB&quot;,
+    &quot;85A&quot;,&quot;85B&quot;,&quot;85AB&quot;,&quot;86A&quot;,&quot;86B&quot;,&quot;86AB&quot;,&quot;87A&quot;,&quot;87B&quot;,&quot;87AB&quot;,&quot;88A&quot;,&quot;88B&quot;,&quot;88AB&quot;,
+    &quot;90&quot;,&quot;91&quot;,&quot;92&quot;,&quot;93&quot;,&quot;94&quot;,&quot;95&quot;,&quot;96&quot;,&quot;97&quot;,&quot;98&quot;,&quot;99&quot;,&quot;100&quot;,&quot;101&quot;,
+    &quot;C1&quot;,&quot;C2&quot;,&quot;C3&quot;,&quot;C4&quot;,&quot;C5&quot;,&quot;C6&quot;,&quot;C7&quot;,&quot;C8&quot;,
+    &quot;D1&quot;,&quot;D2&quot;,&quot;D3&quot;,&quot;D4&quot;,&quot;D5&quot;,&quot;D6&quot;,&quot;D7&quot;,&quot;D8&quot;,&quot;D9&quot;,&quot;D10&quot;,&quot;D11&quot;
+  ];
+
+  function recommendationIdRank(id){
+    const direct = recommendationRoute.indexOf(id);
+    if(direct &gt;= 0) return direct;
+
+    const group = appState?.groups?.find(group =&gt; group.id === id);
+    if(group){
+      const ranks = group.ids.map(recommendationIdRank).filter(Number.isFinite);
+      return ranks.length ? Math.min(...ranks) : Number.MAX_SAFE_INTEGER;
+    }
+    return Number.MAX_SAFE_INTEGER;
+  }
+
+  function recommendationKey(option){
+    return option.ids
+      .flatMap(id =&gt; {
+        const group = appState?.groups?.find(group =&gt; group.id === id);
+        return group ? group.ids : [id];
+      })
+      .map(recommendationIdRank)
+      .sort((a,b) =&gt; a-b);
+  }
+
+  function compareRecommendationRoute(a,b){
+    const ka = recommendationKey(a);
+    const kb = recommendationKey(b);
+    const n = Math.max(ka.length,kb.length);
+    for(let i=0;i&lt;n;i++){
+      const av = ka[i] ?? Number.MAX_SAFE_INTEGER;
+      const bv = kb[i] ?? Number.MAX_SAFE_INTEGER;
+      if(av !== bv) return av-bv;
+    }
+    return 0;
+  }
+
+  const renbanGroups = [
+    [&quot;80&quot;,&quot;81&quot;],
+    [&quot;90&quot;,&quot;91&quot;,&quot;92&quot;,&quot;93&quot;,&quot;94&quot;,&quot;95&quot;,&quot;96&quot;],
+    [&quot;97&quot;,&quot;98&quot;,&quot;99&quot;,&quot;100&quot;,&quot;101&quot;],
+    [&quot;C1&quot;,&quot;C2&quot;,&quot;C3&quot;,&quot;C4&quot;,&quot;C5&quot;,&quot;C6&quot;],
+    [&quot;C7&quot;,&quot;C8&quot;],
+    [&quot;D1&quot;,&quot;D2&quot;,&quot;D3&quot;,&quot;D4&quot;,&quot;D5&quot;,&quot;D6&quot;,&quot;D7&quot;,&quot;D8&quot;],
+    [&quot;D9&quot;,&quot;D10&quot;,&quot;D11&quot;]
+  ];
+
+  /*
+    手動連結卓の表示順。
+    作成した順番ではなく、もとの卓位置に従って必ず並べる。
+  */
+  const pairRouteIds = pairPrefixes.flatMap(prefix =&gt; [
+    prefix + &quot;A&quot;, prefix + &quot;B&quot;, prefix + &quot;AB&quot;
+  ]);
+
+  const manualOrderByCapacity = {
+    2: [
+      ...pairRouteIds,
+      &quot;S1&quot;,&quot;S2&quot;,&quot;S3&quot;,&quot;S4&quot;,&quot;S5&quot;,
+      &quot;97&quot;,&quot;98&quot;,&quot;99&quot;,&quot;100&quot;,&quot;101&quot;
+    ],
+    4: [
+      ...pairRouteIds,
+      &quot;91&quot;,&quot;93&quot;,&quot;95&quot;,&quot;96&quot;,
+      &quot;97&quot;,&quot;98&quot;,&quot;99&quot;,&quot;100&quot;,&quot;101&quot;,
+      &quot;D10&quot;,&quot;D11&quot;
+    ],
+    6: [
+      &quot;80&quot;,&quot;81&quot;,
+      ...pairRouteIds,
+      &quot;C1&quot;,&quot;C2&quot;,&quot;C3&quot;,&quot;C4&quot;,&quot;C5&quot;,&quot;C6&quot;,
+      &quot;90&quot;,&quot;91&quot;,&quot;92&quot;,&quot;93&quot;,&quot;94&quot;,&quot;95&quot;,&quot;96&quot;,
+      &quot;97&quot;,&quot;98&quot;,&quot;99&quot;,&quot;100&quot;,&quot;101&quot;,
+      &quot;D9&quot;,&quot;D10&quot;,&quot;D11&quot;
+    ],
+    large: [
+      &quot;80&quot;,&quot;81&quot;,
+      ...pairRouteIds,
+      &quot;C1&quot;,&quot;C2&quot;,&quot;C3&quot;,&quot;C4&quot;,&quot;C5&quot;,&quot;C6&quot;,&quot;C7&quot;,&quot;C8&quot;,
+      &quot;90&quot;,&quot;91&quot;,&quot;92&quot;,&quot;93&quot;,&quot;94&quot;,&quot;95&quot;,&quot;96&quot;,
+      &quot;97&quot;,&quot;98&quot;,&quot;99&quot;,&quot;100&quot;,&quot;101&quot;,
+      &quot;D1&quot;,&quot;D2&quot;,&quot;D3&quot;,&quot;D4&quot;,&quot;D5&quot;,&quot;D6&quot;,&quot;D7&quot;,&quot;D8&quot;,&quot;D9&quot;,&quot;D10&quot;,&quot;D11&quot;
+    ]
+  };
+
+  function manualGroupRank(group, capacityKey){
+    const route = manualOrderByCapacity[capacityKey] || manualOrderByCapacity.large;
+    const indexes = group.ids
+      .map(id =&gt; route.indexOf(id))
+      .filter(index =&gt; index &gt;= 0);
+
+    return indexes.length ? Math.min(...indexes) : Number.MAX_SAFE_INTEGER;
+  }
+
+  function sortedManualGroups(groups, capacityKey){
+    return [...groups].sort((a,b) =&gt; {
+      const rankDiff = manualGroupRank(a, capacityKey) - manualGroupRank(b, capacityKey);
+      if(rankDiff !== 0) return rankDiff;
+
+      const aLabel = a.ids.join(&quot;・&quot;);
+      const bLabel = b.ids.join(&quot;・&quot;);
+      return aLabel.localeCompare(bLabel, &quot;ja&quot;);
+    });
+  }
+
+  let appState = loadState();
+  let selectedStatus = &quot;reserved&quot;;
+  let tableView = &quot;all&quot;;
+  let peopleFilter = &quot;all&quot;;
+  let manualMode = false;
+  let manualSelected = new Set();
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : {};
+      return {
+        states: parsed.states || {},
+        merged: parsed.merged || {},
+        groups: parsed.groups || []
+      };
+    }catch{
+      return {states:{}, merged:{}, groups:[]};
+    }
+  }
+
+  function saveState(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+  }
+
+
+  function groupFor(id){
+    return appState.groups.find(group =&gt; group.id === id || group.ids.includes(id));
+  }
+
+  function isGrouped(id){
+    return Boolean(groupFor(id));
+  }
+
+  function isAvailable(id){
+    const virtualGroup = appState.groups.some(group =&gt; group.id === id);
+    return getStatus(id) === &quot;empty&quot; &amp;&amp; (virtualGroup || !isGrouped(id));
+  }
+
+  function activePairRow(){
+    return pairPrefixes.flatMap(prefix =&gt;
+      appState.merged[prefix]
+        ? [prefix + &quot;AB&quot;]
+        : [prefix + &quot;A&quot;, prefix + &quot;B&quot;]
+    );
+  }
+
+  function recommendationRows(){
+    return [activePairRow(), ...renbanGroups];
+  }
+
+  function manualRows(){
+    return recommendationRows();
+  }
+
+  function sortedManualSelection(){
+    const ids = [...manualSelected];
+    for(const row of manualRows()){
+      if(ids.every(id =&gt; row.includes(id))){
+        return ids.sort((a,b) =&gt; row.indexOf(a) - row.indexOf(b));
+      }
+    }
+    return ids;
+  }
+
+  function validManualSelection(){
+    if(manualSelected.size &lt; 2) return false;
+
+    const ids = [...manualSelected];
+    return manualRows().some(row =&gt; {
+      const indexes = ids.map(id =&gt; row.indexOf(id));
+      if(indexes.some(index =&gt; index &lt; 0)) return false;
+      indexes.sort((a,b) =&gt; a-b);
+      return indexes.every((value,index) =&gt;
+        index === 0 || value === indexes[index - 1] + 1
+      );
+    });
+  }
+
+  function currentTables(){
+    const tables = {...fixedTables};
+    pairPrefixes.forEach(prefix =&gt; {
+      if(appState.merged[prefix]){
+        tables[prefix + &quot;AB&quot;] = 4;
+      }else{
+        tables[prefix + &quot;A&quot;] = 2;
+        tables[prefix + &quot;B&quot;] = 2;
+      }
+    });
+
+    appState.groups.forEach(group =&gt; {
+      const total = group.capacity || group.ids.reduce((sum,id) =&gt; {
+        const capacity = tables[id];
+        return sum + (capacity === &quot;BOX&quot; ? 7 : Number(capacity || 0));
+      },0);
+      group.capacity = total;
+      tables[group.id] = total;
+    });
+
+    return tables;
+  }
+
+  function getStatus(id){
+    const group = appState.groups.find(item =&gt; item.id === id);
+    if(group) return group.state || &quot;empty&quot;;
+    return appState.states[id] || &quot;empty&quot;;
+  }
+
+  function setStatus(ids){
+    const expanded = new Set();
+
+    ids.forEach(id =&gt; {
+      const group = groupFor(id);
+      (group ? group.ids : [id]).forEach(groupId =&gt; expanded.add(groupId));
+    });
+
+    [...expanded].forEach(id =&gt; {
+      if(selectedStatus === &quot;empty&quot;){
+        delete appState.states[id];
+      }else{
+        appState.states[id] = selectedStatus;
+      }
+    });
+
+    appState.groups.forEach(group =&gt; {
+      if(group.ids.some(id =&gt; expanded.has(id))){
+        group.state = selectedStatus;
+      }
+    });
+
+    saveState();
+    renderAll();
+    showToast([...expanded].join(&quot;・&quot;) + &quot; → &quot; + statusLabel(selectedStatus));
+  }
+
+  function statusLabel(value){
+    if(value === &quot;reserved&quot;) return &quot;席取り&quot;;
+    if(value === &quot;used&quot;) return &quot;使用中&quot;;
+    return &quot;空席&quot;;
+  }
+
+  function capacityClass(capacity){
+    if(capacity === &quot;BOX&quot;) return &quot;cbox&quot;;
+    return &quot;c&quot; + capacity;
+  }
+
+  function createTableButton(id, capacity){
+    const btn = document.createElement(&quot;button&quot;);
+    btn.className = &quot;table-btn &quot; + capacityClass(capacity) + &quot; &quot; + getStatus(id);
+    if(manualSelected.has(id)) btn.classList.add(&quot;manual-selected&quot;);
+
+    btn.innerHTML = id + &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
+
+    btn.addEventListener(&quot;click&quot;, () =&gt; {
+      if(!manualMode){
+        setStatus([id]);
+        return;
+      }
+
+      if(getStatus(id) !== &quot;empty&quot;){
+        showToast(&quot;空席の卓だけ選択できます&quot;);
+        return;
+      }
+
+      if(isGrouped(id)){
+        showToast(&quot;すでに手動連結されています&quot;);
+        return;
+      }
+
+      if(manualSelected.has(id)){
+        manualSelected.delete(id);
+      }else{
+        manualSelected.add(id);
+      }
+
+      renderAll();
+    });
+
+    return btn;
+  }
+
+
+  function createManualGroupCard(group){
+    const wrap = document.createElement(&quot;div&quot;);
+    wrap.className = &quot;pair-card merged&quot;;
+
+    const table = createTableButton(group.id, group.capacity);
+    table.innerHTML =
+      group.ids.join(&quot;・&quot;) +
+      &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + group.capacity + &#x27;&lt;/span&gt;&#x27;;
+    wrap.appendChild(table);
+
+    const release = document.createElement(&quot;button&quot;);
+    release.className = &quot;pair-action&quot;;
+    release.textContent = &quot;解除&quot;;
+    release.addEventListener(&quot;click&quot;, event =&gt; {
+      event.stopPropagation();
+      releaseManualGroup(group.id);
+    });
+    wrap.appendChild(release);
+
+    return wrap;
+  }
+
+  function togglePair(prefix){
+    const relatedIds = [prefix + &quot;AB&quot;, prefix + &quot;A&quot;, prefix + &quot;B&quot;];
+    if(relatedIds.some(isGrouped)){
+      showToast(&quot;先に手動連結を解除してください&quot;);
+      return;
+    }
+
+    if(appState.merged[prefix]){
+      const mergedId = prefix + &quot;AB&quot;;
+      const oldStatus = getStatus(mergedId);
+
+      delete appState.states[mergedId];
+      appState.merged[prefix] = false;
+
+      if(oldStatus !== &quot;empty&quot;){
+        appState.states[prefix + &quot;A&quot;] = oldStatus;
+        appState.states[prefix + &quot;B&quot;] = oldStatus;
+      }
+    }else{
+      const aId = prefix + &quot;A&quot;;
+      const bId = prefix + &quot;B&quot;;
+      const aStatus = getStatus(aId);
+      const bStatus = getStatus(bId);
+
+      delete appState.states[aId];
+      delete appState.states[bId];
+      appState.merged[prefix] = true;
+
+      const mergedId = prefix + &quot;AB&quot;;
+      if(aStatus === &quot;used&quot; || bStatus === &quot;used&quot;){
+        appState.states[mergedId] = &quot;used&quot;;
+      }else if(aStatus === &quot;reserved&quot; || bStatus === &quot;reserved&quot;){
+        appState.states[mergedId] = &quot;reserved&quot;;
+      }
+    }
+
+    saveState();
+    renderAll();
+  }
+
+  function createPairCard(prefix){
+    const wrap = document.createElement(&quot;div&quot;);
+
+    if(appState.merged[prefix]){
+      wrap.className = &quot;pair-card merged&quot;;
+      wrap.appendChild(createTableButton(prefix + &quot;AB&quot;, 4));
+
+      const btn = document.createElement(&quot;button&quot;);
+      btn.className = &quot;pair-action&quot;;
+      btn.textContent = &quot;分割&quot;;
+      btn.addEventListener(&quot;click&quot;, () =&gt; togglePair(prefix));
+      wrap.appendChild(btn);
+    }else{
+      wrap.className = &quot;pair-card&quot;;
+      wrap.appendChild(createTableButton(prefix + &quot;A&quot;, 2));
+      wrap.appendChild(createTableButton(prefix + &quot;B&quot;, 2));
+
+      const btn = document.createElement(&quot;button&quot;);
+      btn.className = &quot;pair-action&quot;;
+      btn.textContent = &quot;連結&quot;;
+      btn.addEventListener(&quot;click&quot;, () =&gt; togglePair(prefix));
+      wrap.appendChild(btn);
+    }
+
+    return wrap;
+  }
+
+  function countFree(ids){
+    return ids.filter(id =&gt; getStatus(id) === &quot;empty&quot;).length;
+  }
+
+  function createSection(title, ids, pairMode){
+    const section = document.createElement(&quot;section&quot;);
+    section.className = &quot;card&quot;;
+
+    let freeCount = ids.filter(id =&gt; !isGrouped(id) &amp;&amp; getStatus(id) === &quot;empty&quot;).length;
+    const sectionCapacity = Number(title.replace(&quot;人卓&quot;,&quot;&quot;));
+    const manualGroups = appState.groups.filter(group =&gt;
+      group.capacity &lt;= 6 &amp;&amp; group.capacity === sectionCapacity
+    );
+    freeCount += manualGroups.filter(group =&gt; getStatus(group.id) === &quot;empty&quot;).length;
+
+    if(pairMode === &quot;split-first&quot;){
+      pairPrefixes.forEach(prefix =&gt; {
+        if(!appState.merged[prefix]){
+          if(!isGrouped(prefix + &quot;A&quot;) &amp;&amp; getStatus(prefix + &quot;A&quot;) === &quot;empty&quot;) freeCount++;
+          if(!isGrouped(prefix + &quot;B&quot;) &amp;&amp; getStatus(prefix + &quot;B&quot;) === &quot;empty&quot;) freeCount++;
+        }
+      });
+    }
+
+    if(pairMode === &quot;merged-first&quot;){
+      pairPrefixes.forEach(prefix =&gt; {
+        if(appState.merged[prefix] &amp;&amp; !isGrouped(prefix + &quot;AB&quot;) &amp;&amp; getStatus(prefix + &quot;AB&quot;) === &quot;empty&quot;){
+          freeCount++;
+        }
+      });
+    }
+
+    section.innerHTML =
+      &#x27;&lt;div class=&quot;card-title&quot;&gt;&lt;span&gt;&#x27; + title + &#x27;&lt;/span&gt;&lt;span&gt;空き &#x27; + freeCount + &quot;&lt;/span&gt;&lt;/div&gt;&quot;;
+
+    const grid = document.createElement(&quot;div&quot;);
+    grid.className = &quot;table-grid&quot;;
+    const tables = currentTables();
+    const renderedGroups = new Set();
+
+    const route = manualOrderByCapacity[sectionCapacity] || ids;
+    const orderedGroups = sortedManualGroups(manualGroups, sectionCapacity);
+
+    function groupAt(id){
+      return orderedGroups.find(group =&gt;
+        !renderedGroups.has(group.id) &amp;&amp; group.ids.includes(id)
+      );
+    }
+
+    route.forEach(routeId =&gt; {
+      const group = groupAt(routeId);
+      if(group){
+        grid.appendChild(createManualGroupCard(group));
+        renderedGroups.add(group.id);
+        return;
+      }
+
+      const pairPrefix = pairPrefixes.find(prefix =&gt;
+        routeId === prefix + &quot;A&quot; ||
+        routeId === prefix + &quot;B&quot; ||
+        routeId === prefix + &quot;AB&quot;
+      );
+
+      if(pairPrefix){
+        if(
+          pairMode === &quot;split-first&quot; &amp;&amp;
+          routeId === pairPrefix + &quot;A&quot; &amp;&amp;
+          !appState.merged[pairPrefix] &amp;&amp;
+          !isGrouped(pairPrefix + &quot;A&quot;) &amp;&amp;
+          !isGrouped(pairPrefix + &quot;B&quot;)
+        ){
+          grid.appendChild(createPairCard(pairPrefix));
+        }
+
+        if(
+          pairMode === &quot;merged-first&quot; &amp;&amp;
+          routeId === pairPrefix + &quot;AB&quot; &amp;&amp;
+          appState.merged[pairPrefix] &amp;&amp;
+          !isGrouped(pairPrefix + &quot;AB&quot;)
+        ){
+          grid.appendChild(createPairCard(pairPrefix));
+        }
+        return;
+      }
+
+      if(ids.includes(routeId) &amp;&amp; !isGrouped(routeId)){
+        grid.appendChild(createTableButton(routeId, tables[routeId]));
+      }
+    });
+
+    /*
+      念のため、順序表にない卓が追加された場合だけ最後に表示する。
+      現在の卓構成では通常ここには入らない。
+    */
+    orderedGroups
+      .filter(group =&gt; !renderedGroups.has(group.id))
+      .forEach(group =&gt; {
+        grid.appendChild(createManualGroupCard(group));
+        renderedGroups.add(group.id);
+      });
+
+    ids
+      .filter(id =&gt; !route.includes(id) &amp;&amp; !isGrouped(id))
+      .forEach(id =&gt; grid.appendChild(createTableButton(id, tables[id])));
+
+    if(!grid.children.length){
+      const empty = document.createElement(&quot;div&quot;);
+      empty.className = &quot;empty-note&quot;;
+      empty.textContent = &quot;この種類の卓はありません。&quot;;
+      grid.appendChild(empty);
+    }
+
+    section.appendChild(grid);
+    return section;
+  }
+
+  function renderTables(){
+    const area = document.getElementById(&quot;tableArea&quot;);
+    area.innerHTML = &quot;&quot;;
+
+    if(tableView === &quot;all&quot; || tableView === &quot;2&quot;){
+      area.appendChild(createSection(&quot;2人卓&quot;, twoFixedOrder, &quot;split-first&quot;));
+    }
+
+    if(tableView === &quot;all&quot; || tableView === &quot;4&quot;){
+      area.appendChild(createSection(&quot;4人卓&quot;, fourFixedOrder, &quot;merged-first&quot;));
+    }
+
+    if(tableView === &quot;all&quot; || tableView === &quot;6&quot;){
+      area.appendChild(createSection(&quot;6人卓&quot;, sixOrder, null));
+    }
+
+    if(tableView === &quot;all&quot; || tableView === &quot;BOX&quot;){
+      area.appendChild(createSection(&quot;BOX&quot;, boxOrder, null));
+    }
+  }
+
+  function maximalEmptyRuns(){
+    const tables = currentTables();
+    const runs = [];
+
+    recommendationRows().forEach(group =&gt; {
+      let run = [];
+
+      const flush = () =&gt; {
+        if(run.length &gt;= 2){
+          let total = 0;
+          let allBox = true;
+
+          run.forEach(id =&gt; {
+            if(tables[id] === &quot;BOX&quot;){
+              total += 7;
+            }else{
+              allBox = false;
+              total += Number(tables[id]);
+            }
+          });
+
+          runs.push({
+            ids:[...run],
+            label: run.length === 2 ? run.join(&quot;・&quot;) : run[0] + &quot;〜&quot; + run[run.length - 1],
+            max:total,
+            allBox
+          });
+        }
+        run = [];
+      };
+
+      group.forEach(id =&gt; {
+        if(isAvailable(id)){
+          run.push(id);
+        }else{
+          flush();
+        }
+      });
+
+      flush();
+    });
+
+    return runs;
+  }
+
+  function renderClusterStrip(){
+    const strip = document.getElementById(&quot;clusterStrip&quot;);
+    strip.innerHTML = &quot;&quot;;
+
+    const runs = maximalEmptyRuns();
+
+    if(!runs.length){
+      const chip = document.createElement(&quot;span&quot;);
+      chip.className = &quot;cluster-chip disabled&quot;;
+      chip.textContent = &quot;空いている連続卓はありません&quot;;
+      strip.appendChild(chip);
+      return;
+    }
+
+    runs.forEach(run =&gt; {
+      const btn = document.createElement(&quot;button&quot;);
+      btn.className = &quot;cluster-chip&quot;;
+      btn.innerHTML =
+        run.label +
+        &quot;&lt;small&gt;&quot; +
+        (run.allBox ? &quot;BOX×&quot; + run.ids.length : run.max + &quot;名 max&quot;) +
+        &quot;&lt;/small&gt;&quot;;
+      btn.addEventListener(&quot;click&quot;, () =&gt; {
+        peopleFilter = &quot;all&quot;;
+        renderPeopleRow();
+        renderRenbanOptions();
+        document.getElementById(&quot;renbanOptions&quot;).scrollIntoView({behavior:&quot;smooth&quot;,block:&quot;start&quot;});
+        showToast(&quot;空き連番: &quot; + run.label);
+      });
+      strip.appendChild(btn);
+    });
+  }
+
+  function allRenbanOptions(){
+    const tables = currentTables();
+    const options = [];
+
+    recommendationRows().forEach(group =&gt; {
+      let run = [];
+
+      const flush = () =&gt; {
+        if(run.length &gt;= 2){
+          for(let start = 0; start &lt; run.length; start++){
+            let capacity = 0;
+
+            for(let end = start; end &lt; run.length; end++){
+              const ids = run.slice(start, end + 1);
+              const cap = tables[run[end]];
+
+              if(cap === &quot;BOX&quot;){
+                if(ids.length === 1) continue;
+
+                if(ids.length === 2){
+                  [9,10,11,12,13,14].forEach(pax =&gt; {
+                    options.push({
+                      ids,
+                      pax,
+                      capacity:14,
+                      low:pax !== 14,
+                      box:true
+                    });
+                  });
+                }
+              }else{
+                capacity += Number(cap);
+
+                if(end &gt; start){
+                  options.push({
+                    ids,
+                    pax:capacity,
+                    capacity,
+                    low:false,
+                    box:false
+                  });
+                }
+              }
+            }
+          }
+        }
+
+        run = [];
+      };
+
+      group.forEach(id =&gt; {
+        if(isAvailable(id)){
+          run.push(id);
+        }else{
+          flush();
+        }
+      });
+
+      flush();
+    });
+
+    /* 単卓もおすすめ候補に含める。
+       2名なら空いている2人卓、4名なら4人卓、6名なら6人卓を最優先にできる。 */
+    Object.keys(tables)
+      .filter(id =&gt; tables[id] !== &quot;BOX&quot; &amp;&amp; isAvailable(id))
+      .forEach(id =&gt; {
+        const capacity = Number(tables[id]);
+        if(capacity &gt; 0){
+          options.push({
+            ids:[id],
+            pax:capacity,
+            capacity,
+            low:false,
+            box:false
+          });
+        }
+      });
+
+    Object.keys(tables)
+      .filter(id =&gt; tables[id] === &quot;BOX&quot; &amp;&amp; isAvailable(id))
+      .forEach(id =&gt; {
+        options.push({ids:[id], pax:7, capacity:7, low:false, box:true});
+        options.push({ids:[id], pax:8, capacity:7, low:true, box:true});
+      });
+
+    const seen = new Set();
+
+    return options
+      .filter(option =&gt; {
+        const key = option.pax + &quot;|&quot; + option.ids.join(&quot;-&quot;);
+        if(seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .sort((a,b) =&gt;
+        a.pax - b.pax ||
+        Number(a.low) - Number(b.low) ||
+        a.ids.length - b.ids.length
+      );
+  }
+
+  function renderPeopleRow(){
+    const row = document.getElementById(&quot;peopleRow&quot;);
+    row.innerHTML = &quot;&quot;;
+
+    const capacities = [...new Set(allRenbanOptions().map(item =&gt; item.pax))]
+      .sort((a,b) =&gt; a-b);
+
+    const choices = [[&quot;all&quot;,&quot;全部&quot;], ...capacities.map(value =&gt; [String(value), value + &quot;名&quot;])];
+
+    choices.forEach(([value,label]) =&gt; {
+      const btn = document.createElement(&quot;button&quot;);
+      btn.textContent = label;
+      btn.classList.toggle(&quot;active&quot;, peopleFilter === value);
+      btn.addEventListener(&quot;click&quot;, () =&gt; {
+        peopleFilter = value;
+        renderPeopleRow();
+        renderRenbanOptions();
+      });
+      row.appendChild(btn);
+    });
+  }
+
+
+  function updateRenbanArrows(){
+    const holder = document.getElementById(&quot;renbanOptions&quot;);
+    const prev = document.getElementById(&quot;renbanPrev&quot;);
+    const next = document.getElementById(&quot;renbanNext&quot;);
+    const max = Math.max(0, holder.scrollWidth - holder.clientWidth);
+    prev.disabled = holder.scrollLeft &lt;= 2;
+    next.disabled = holder.scrollLeft &gt;= max - 2;
+  }
+
+  function setupRenbanScroller(){
+    const holder = document.getElementById(&quot;renbanOptions&quot;);
+    const prev = document.getElementById(&quot;renbanPrev&quot;);
+    const next = document.getElementById(&quot;renbanNext&quot;);
+
+    prev.addEventListener(&quot;click&quot;, () =&gt; {
+      holder.scrollBy({left:-holder.clientWidth * 0.85, behavior:&quot;smooth&quot;});
+    });
+    next.addEventListener(&quot;click&quot;, () =&gt; {
+      holder.scrollBy({left:holder.clientWidth * 0.85, behavior:&quot;smooth&quot;});
+    });
+    holder.addEventListener(&quot;scroll&quot;, updateRenbanArrows, {passive:true});
+
+    let dragging = false;
+    let startX = 0;
+    let startScroll = 0;
+
+    holder.addEventListener(&quot;pointerdown&quot;, event =&gt; {
+      if(event.pointerType === &quot;touch&quot;) return;
+      dragging = true;
+      startX = event.clientX;
+      startScroll = holder.scrollLeft;
+      holder.classList.add(&quot;dragging&quot;);
+      holder.setPointerCapture(event.pointerId);
+    });
+
+    holder.addEventListener(&quot;pointermove&quot;, event =&gt; {
+      if(!dragging) return;
+      holder.scrollLeft = startScroll - (event.clientX - startX);
+    });
+
+    const stopDragging = event =&gt; {
+      if(!dragging) return;
+      dragging = false;
+      holder.classList.remove(&quot;dragging&quot;);
+      try{ holder.releasePointerCapture(event.pointerId); }catch{}
+    };
+
+    holder.addEventListener(&quot;pointerup&quot;, stopDragging);
+    holder.addEventListener(&quot;pointercancel&quot;, stopDragging);
+    holder.addEventListener(&quot;lostpointercapture&quot;, () =&gt; {
+      dragging = false;
+      holder.classList.remove(&quot;dragging&quot;);
+    });
+
+    window.addEventListener(&quot;resize&quot;, updateRenbanArrows);
+  }
+
+  function renderRenbanOptions(){
+    const all = allRenbanOptions();
+    let filtered;
+
+    if(peopleFilter === &quot;all&quot;){
+      filtered = [...all].sort(compareRecommendationRoute);
+    }else{
+      const requested = Number(peopleFilter);
+      const bestByTables = new Map();
+
+      all
+        .filter(item =&gt; {
+          const actualCapacity = item.capacity ?? item.pax;
+          /* BOX単体の8名利用は従来どおり低優先で残す。 */
+          return actualCapacity &gt;= requested || (item.box &amp;&amp; item.ids.length === 1 &amp;&amp; item.pax === requested);
+        })
+        .forEach(item =&gt; {
+          const key = item.ids.join(&quot;-&quot;);
+          const current = bestByTables.get(key);
+          const itemCapacity = item.capacity ?? item.pax;
+          const currentCapacity = current ? (current.capacity ?? current.pax) : Infinity;
+
+          if(!current ||
+             itemCapacity &lt; currentCapacity ||
+             (itemCapacity === currentCapacity &amp;&amp; Number(item.low) &lt; Number(current.low))){
+            bestByTables.set(key, item);
+          }
+        });
+
+      filtered = [...bestByTables.values()]
+        .sort((a,b) =&gt; {
+          const capA = a.capacity ?? a.pax;
+          const capB = b.capacity ?? b.pax;
+
+          /* 優先順位:
+             1. 使用する卓数が少ない
+             2. 同じ卓数なら空き席が少ない
+             3. 同条件なら通常卓をBOXより先にする */
+          return a.ids.length - b.ids.length ||
+                 (capA - requested) - (capB - requested) ||
+                 Number(a.low) - Number(b.low) ||
+                 Number(a.box) - Number(b.box) ||
+                 compareRecommendationRoute(a,b);
+        });
+    }
+
+    document.getElementById(&quot;renbanCount&quot;).textContent = filtered.length + &quot;案&quot;;
+
+    const holder = document.getElementById(&quot;renbanOptions&quot;);
+    holder.innerHTML = &quot;&quot;;
+
+    if(!filtered.length){
+      const empty = document.createElement(&quot;div&quot;);
+      empty.className = &quot;empty-note&quot;;
+      empty.textContent = &quot;案内できる空席候補はありません。&quot;;
+      holder.appendChild(empty);
+      requestAnimationFrame(updateRenbanArrows);
+      return;
+    }
+
+    const tables = currentTables();
+    const requested = peopleFilter === &quot;all&quot; ? null : Number(peopleFilter);
+
+    filtered.forEach((option,index) =&gt; {
+      const btn = document.createElement(&quot;button&quot;);
+      const actualCapacity = option.capacity ?? option.pax;
+      const excess = requested === null ? 0 : Math.max(0, actualCapacity - requested);
+
+      let priorityClass = &quot;&quot;;
+      let priorityLabel = &quot;&quot;;
+
+      if(requested !== null){
+        if(excess === 0){
+          priorityClass = &quot; priority-1&quot;;
+          priorityLabel = &quot;優先&quot;;
+        }else if(excess === 1){
+          priorityClass = &quot; priority-2&quot;;
+          priorityLabel = &quot;次点&quot;;
+        }else if(excess &lt;= 3){
+          priorityClass = &quot; priority-3&quot;;
+          priorityLabel = &quot;予備&quot;;
+        }else{
+          priorityClass = &quot; low&quot;;
+          priorityLabel = &quot;優先度低&quot;;
+        }
+      }else{
+        priorityClass = option.low ? &quot; low&quot; : &quot;&quot;;
+        priorityLabel = option.low ? &quot;優先度低&quot; : &quot;使用可能&quot;;
+      }
+
+      btn.className = &quot;renban-option&quot; + priorityClass;
+
+      let note;
+      if(requested !== null){
+        note = priorityLabel + &quot;・&quot; + option.ids.length + &quot;卓・MAX &quot; + actualCapacity + &quot;名&quot;;
+        if(excess &gt; 0) note += &quot;・空き &quot; + excess + &quot;席&quot;;
+      }else if(option.box &amp;&amp; actualCapacity === 14){
+        note = priorityLabel + &quot;・2 BOX&quot;;
+      }else{
+        note = priorityLabel;
+      }
+
+      btn.innerHTML =
+        &quot;&lt;strong&gt;&quot; + (requested ?? option.pax) + &quot;名&lt;/strong&gt;&quot; +
+        &#x27;&lt;div class=&quot;chips&quot;&gt;&#x27; +
+        option.ids.map(id =&gt;
+          &#x27;&lt;span class=&quot;chip &#x27; + capacityClass(tables[id]) + &#x27;&quot;&gt;&#x27; + id + &quot;&lt;/span&gt;&quot;
+        ).join(&quot;&quot;) +
+        &quot;&lt;/div&gt;&quot; +
+        &quot;&lt;small&gt;&quot; + note + &quot;&lt;/small&gt;&quot;;
+
+      btn.addEventListener(&quot;click&quot;, () =&gt; setStatus(option.ids));
+      holder.appendChild(btn);
+    });
+
+    requestAnimationFrame(updateRenbanArrows);
+  }
+
+  function renderSummary(){
+    const summary = document.getElementById(&quot;summary&quot;);
+    summary.innerHTML = &quot;&quot;;
+
+    const tables = currentTables();
+    const groups = [
+      [2,&quot;2人&quot;],
+      [4,&quot;4人&quot;],
+      [6,&quot;6人&quot;],
+      [&quot;BOX&quot;,&quot;BOX&quot;]
+    ];
+
+    groups.forEach(([capacity,label]) =&gt; {
+      const count = Object.keys(tables).filter(id =&gt; {
+        if(tables[id] !== capacity) return false;
+        const isVirtual = appState.groups.some(group =&gt; group.id === id);
+        if(!isVirtual &amp;&amp; isGrouped(id)) return false;
+        return isAvailable(id);
+      }).length;
+
+      const card = document.createElement(&quot;div&quot;);
+      card.className = &quot;summary-card&quot;;
+      card.innerHTML = &quot;&lt;small&gt;&quot; + label + &quot; 空き&lt;/small&gt;&lt;b&gt;&quot; + count + &quot;&lt;/b&gt;&quot;;
+      summary.appendChild(card);
+    });
+  }
+
+  function showToast(message){
+    const toast = document.getElementById(&quot;toast&quot;);
+    toast.textContent = message;
+    toast.classList.add(&quot;show&quot;);
+
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() =&gt; toast.classList.remove(&quot;show&quot;), 1100);
+  }
+
+
+  function createManualGroup(){
+    if(!validManualSelection()){
+      showToast(&quot;同じ連番内の隣り合う卓を選択してください&quot;);
+      return;
+    }
+
+    const ids = sortedManualSelection();
+    const state = selectedStatus;
+    const tables = currentTables();
+    const capacity = ids.reduce((sum,id) =&gt; {
+      const value = tables[id];
+      return sum + (value === &quot;BOX&quot; ? 7 : Number(value || 0));
+    },0);
+
+    const group = {
+      id:&quot;manual-&quot; + Date.now(),
+      ids,
+      state,
+      capacity
+    };
+
+    appState.groups.push(group);
+
+    ids.forEach(id =&gt; {
+      if(state === &quot;empty&quot;){
+        delete appState.states[id];
+      }else{
+        appState.states[id] = state;
+      }
+    });
+
+    manualMode = false;
+    manualSelected.clear();
+    saveState();
+    renderAll();
+    showToast(ids.join(&quot;・&quot;) + &quot; を手動連結&quot;);
+  }
+
+  function releaseManualGroup(groupId){
+    const index = appState.groups.findIndex(group =&gt; group.id === groupId);
+    if(index &lt; 0) return;
+
+    const [group] = appState.groups.splice(index,1);
+    group.ids.forEach(id =&gt; delete appState.states[id]);
+
+    manualSelected.clear();
+    saveState();
+    renderAll();
+    showToast(group.ids.join(&quot;・&quot;) + &quot; → 空席&quot;);
+  }
+
+  function renderManualControls(){
+    const ids = sortedManualSelection();
+    const tables = currentTables();
+    const total = ids.reduce((sum,id) =&gt; {
+      const capacity = tables[id];
+      return sum + (capacity === &quot;BOX&quot; ? 7 : Number(capacity || 0));
+    },0);
+
+    const toggle = document.getElementById(&quot;manualToggle&quot;);
+    toggle.classList.toggle(&quot;active&quot;, manualMode);
+    toggle.textContent = manualMode ? &quot;手動連結中&quot; : &quot;手動連結&quot;;
+
+    document.getElementById(&quot;manualInfo&quot;).textContent =
+      ids.length
+        ? &quot;選択：&quot; + ids.join(&quot;・&quot;) + &quot;　合計&quot; + total + &quot;席&quot;
+        : &quot;卓を選択&quot;;
+
+    document.getElementById(&quot;manualConfirm&quot;).disabled = !validManualSelection();
+  }
+
+
+  function renderLargeManualGroups(){
+    const section = document.getElementById(&quot;largeManualSection&quot;);
+    const grid = document.getElementById(&quot;largeManualGrid&quot;);
+    const count = document.getElementById(&quot;largeManualCount&quot;);
+
+    const groups = sortedManualGroups(
+      appState.groups.filter(group =&gt; Number(group.capacity) &gt; 6),
+      &quot;large&quot;
+    );
+
+    section.hidden = groups.length === 0;
+    count.textContent = groups.length + &quot;組&quot;;
+    grid.innerHTML = &quot;&quot;;
+
+    groups.forEach(group =&gt; {
+      grid.appendChild(createManualGroupCard(group));
+    });
+  }
+
+  function renderAll(){
+    renderSummary();
+    renderPeopleRow();
+    renderClusterStrip();
+    renderRenbanOptions();
+    renderManualControls();
+    renderLargeManualGroups();
+    renderTables();
+  }
+
+
+  document.getElementById(&quot;manualToggle&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+    manualMode = !manualMode;
+    manualSelected.clear();
+    renderAll();
+  });
+
+  document.getElementById(&quot;manualClear&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+    manualSelected.clear();
+    renderAll();
+  });
+
+  document.getElementById(&quot;manualConfirm&quot;).addEventListener(&quot;click&quot;, createManualGroup);
+
+  document.querySelectorAll(&quot;#stateRow button&quot;).forEach(btn =&gt; {
+    btn.addEventListener(&quot;click&quot;, () =&gt; {
+      selectedStatus = btn.dataset.state;
+      document.querySelectorAll(&quot;#stateRow button&quot;).forEach(item =&gt; {
+        item.classList.toggle(&quot;active&quot;, item === btn);
+      });
+    });
+  });
+
+  document.querySelectorAll(&quot;#tableFilterRow button&quot;).forEach(btn =&gt; {
+    btn.addEventListener(&quot;click&quot;, () =&gt; {
+      tableView = btn.dataset.view;
+      document.querySelectorAll(&quot;#tableFilterRow button&quot;).forEach(item =&gt; {
+        item.classList.toggle(&quot;active&quot;, item === btn);
+      });
+      renderTables();
+    });
+  });
+
+  document.getElementById(&quot;resetBtn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+    appState = {states:{}, merged:{}, groups:[]};
+    selectedStatus = &quot;reserved&quot;;
+    tableView = &quot;all&quot;;
+    peopleFilter = &quot;all&quot;;
+    saveState();
+
+    document.querySelectorAll(&quot;#stateRow button&quot;).forEach(btn =&gt; {
+      btn.classList.toggle(&quot;active&quot;, btn.dataset.state === &quot;reserved&quot;);
+    });
+
+    document.querySelectorAll(&quot;#tableFilterRow button&quot;).forEach(btn =&gt; {
+      btn.classList.toggle(&quot;active&quot;, btn.dataset.view === &quot;all&quot;);
+    });
+
+    renderAll();
+  });
+
+  setupRenbanScroller();
+  renderAll();
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+<iframe class="app-frame" data-index="2" title="3F" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;vi&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;
+&lt;title&gt;3F&lt;/title&gt;
+&lt;style&gt;
+:root{
+  --bg:#f3f4f6;
+  --card:#ffffff;
+  --line:#d1d5db;
+  --text:#111827;
+  --muted:#6b7280;
+  --blue:#dbeafe;
+  --green:#dcfce7;
+  --orange:#ffedd5;
+  --purple:#ede9fe;
+  --reserved:#fef3c7;
+  --used:#fee2e2;
+  --accent:#2563eb;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Noto Sans JP&quot;,sans-serif}
+button{font:inherit;color:inherit}
+
+#fixedPanel{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:100;
+  background:rgba(243,244,246,.99);
+  border-bottom:1px solid #cbd5e1;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+.fixed-inner{max-width:760px;margin:auto;padding:6px 8px 7px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.header strong{font-size:16px}
+.reset{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:7px;
+  padding:4px 8px;
+  font-size:11px;
+}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:5px}
+.summary-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  text-align:center;
+  padding:3px;
+}
+.summary-card small{display:block;font-size:9px;color:var(--muted)}
+.summary-card b{font-size:16px}
+
+.label{font-size:10px;font-weight:800;color:var(--muted);margin:2px 0 3px}
+
+.row-scroll{
+  display:flex;
+  gap:4px;
+  overflow-x:auto;
+  white-space:nowrap;
+  scrollbar-width:none;
+  margin-bottom:5px;
+}
+.row-scroll::-webkit-scrollbar{display:none}
+.row-scroll button{
+  flex:0 0 auto;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:900;
+}
+.row-scroll button.active{
+  border-color:var(--accent);
+  outline:2px solid var(--accent);
+  outline-offset:0;
+}
+.state-row button[data-state=&quot;reserved&quot;]{background:var(--reserved)}
+.state-row button[data-state=&quot;used&quot;]{background:var(--used)}
+
+.cluster-strip{
+  display:flex;
+  gap:5px;
+  overflow-x:auto;
+  white-space:nowrap;
+  scrollbar-width:none;
+}
+.cluster-strip::-webkit-scrollbar{display:none}
+.cluster-chip{
+  flex:0 0 auto;
+  border:1px solid #374151;
+  background:#111827;
+  color:#fff;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:900;
+}
+.cluster-chip small{font-size:9px;opacity:.8;margin-left:4px}
+.cluster-chip.disabled{background:#4b5563;color:#d1d5db}
+
+main{max-width:760px;margin:auto;padding:342px 8px 30px}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:8px;
+  margin:7px 0;
+}
+.card-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:900;
+  margin-bottom:7px;
+}
+.card-title span{font-size:11px;color:var(--muted)}
+
+.renban-scroll-wrap{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) 34px;
+  gap:5px;
+  align-items:stretch;
+}
+.scroll-arrow{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  font-size:20px;
+  font-weight:900;
+  touch-action:manipulation;
+}
+.scroll-arrow:disabled{opacity:.3}
+.renban-options{
+  min-width:0;
+  width:100%;
+  display:flex;
+  flex-wrap:nowrap;
+  gap:6px;
+  overflow-x:scroll;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth;
+  overscroll-behavior-x:contain;
+  touch-action:pan-x;
+  cursor:grab;
+  scrollbar-width:auto;
+  padding-bottom:5px;
+}
+.renban-options.dragging{
+  cursor:grabbing;
+  scroll-behavior:auto;
+  user-select:none;
+}
+.renban-options::-webkit-scrollbar{height:7px}
+.renban-options::-webkit-scrollbar-thumb{
+  background:#9ca3af;
+  border-radius:999px;
+}
+.renban-option{
+  flex:0 0 180px;
+  width:180px;
+  min-width:180px;
+  border:2px solid #9ca3af;
+  border-radius:9px;
+  background:#fff;
+  padding:6px;
+  text-align:left;
+}
+.renban-option.priority-1{
+  border-color:#16a34a;
+  background:#dcfce7;
+}
+.renban-option.priority-2{
+  border-color:#eab308;
+  background:#fef9c3;
+}
+.renban-option.priority-3{
+  border-color:#fb923c;
+  background:#ffedd5;
+}
+.renban-option.low{
+  border-color:#9ca3af;
+  background:#f3f4f6;
+}
+.renban-option strong{font-size:17px}
+.renban-option small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.chips{display:flex;gap:3px;margin-top:4px}
+.chip{padding:0;border-radius:0;font-weight:900;font-size:12px;background:transparent!important}
+.c2{background:transparent}
+.c4{background:transparent}
+.c6{background:transparent}
+.cbox{background:transparent}
+
+.table-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:5px;
+}
+.table-btn{
+  min-height:47px;
+  border:2px solid #9ca3af;
+  border-radius:8px;
+  background:#fff;
+  position:relative;
+  font-weight:900;
+}
+.table-btn .cap{
+  position:absolute;
+  top:2px;
+  right:3px;
+  font-size:9px;
+  padding:1px 4px;
+  border-radius:999px;
+}
+.table-btn.c2 .cap{background:var(--blue)}
+.table-btn.c4 .cap{background:var(--green)}
+.table-btn.c6 .cap{background:var(--orange)}
+.table-btn.cbox .cap{background:var(--purple)}
+.table-btn.reserved{background:var(--reserved);border-color:#f59e0b}
+.table-btn.used{background:var(--used);border-color:#ef4444}
+
+.pair-card{
+  grid-column:span 2;
+  border:1px dashed #9ca3af;
+  border-radius:9px;
+  padding:4px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4px;
+  position:relative;
+}
+.pair-card.merged{
+  grid-template-columns:1fr auto;
+  background:#eff6ff;
+  border-style:solid;
+  border-color:#60a5fa;
+}
+.pair-action{
+  position:absolute;
+  right:3px;
+  bottom:3px;
+  font-size:9px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:6px;
+  padding:2px 4px;
+}
+.pair-card.merged .pair-action{position:static}
+
+.empty-note{
+  grid-column:1/-1;
+  text-align:center;
+  padding:12px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.manual-row{
+  display:flex;
+  gap:4px;
+  align-items:center;
+  overflow-x:auto;
+  white-space:nowrap;
+  scrollbar-width:none;
+}
+.manual-row::-webkit-scrollbar{display:none}
+.manual-row button{
+  flex:0 0 auto;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  padding:6px 9px;
+  font-size:11px;
+  font-weight:900;
+}
+.manual-row button.active{
+  background:#111827;
+  color:#fff;
+  border-color:#111827;
+}
+.manual-row .confirm{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+.manual-row .confirm:disabled{opacity:.35}
+.manual-info{
+  flex:0 0 auto;
+  font-size:10px;
+  font-weight:800;
+  color:var(--muted);
+}
+.table-btn.manual-selected{
+  outline:4px solid var(--accent);
+  outline-offset:-4px;
+}
+.manual-groups{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.manual-group{
+  position:relative;
+  width:100%;
+  min-height:54px;
+  border:3px solid var(--accent);
+  border-radius:9px;
+  background:#eff6ff;
+  padding:7px 34px 7px 8px;
+  text-align:left;
+  font-weight:900;
+}
+.manual-group.reserved{background:var(--reserved);border-color:#f59e0b}
+.manual-group.used{background:var(--used);border-color:#ef4444}
+.manual-group small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:10px;
+}
+.manual-release{
+  position:absolute;
+  right:5px;
+  top:5px;
+  width:25px;
+  height:25px;
+  border:1px solid #dc2626;
+  background:#fff;
+  color:#b91c1c;
+  border-radius:6px;
+  font-weight:900;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  background:#111827;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
+  opacity:0;
+  transition:.2s;
+  z-index:200;
+}
+.toast.show{opacity:1}
+
+@media(max-width:390px){
+  main{padding-top:356px}
+  .table-grid{gap:4px}
+  .table-btn{min-height:44px;font-size:13px}
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;fixedPanel&quot;&gt;
+  &lt;div class=&quot;fixed-inner&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+      
+      &lt;button id=&quot;resetBtn&quot; class=&quot;reset&quot;&gt;リセット&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;summary&quot; class=&quot;summary&quot;&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;label&quot;&gt;タップ時の状態&lt;/div&gt;
+    &lt;div id=&quot;stateRow&quot; class=&quot;row-scroll state-row&quot;&gt;
+      &lt;button data-state=&quot;empty&quot;&gt;空席&lt;/button&gt;
+      &lt;button data-state=&quot;reserved&quot; class=&quot;active&quot;&gt;席取り&lt;/button&gt;
+      &lt;button data-state=&quot;used&quot;&gt;使用中&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;label&quot;&gt;卓種別&lt;/div&gt;
+    &lt;div id=&quot;tableFilterRow&quot; class=&quot;row-scroll&quot;&gt;
+      &lt;button data-view=&quot;all&quot; class=&quot;active&quot;&gt;全部&lt;/button&gt;
+      &lt;button data-view=&quot;2&quot;&gt;2人卓&lt;/button&gt;
+      &lt;button data-view=&quot;4&quot;&gt;4人卓&lt;/button&gt;
+      &lt;button data-view=&quot;6&quot;&gt;6人卓&lt;/button&gt;
+      &lt;button data-view=&quot;BOX&quot;&gt;BOX&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;label&quot;&gt;人数&lt;/div&gt;
+    &lt;div id=&quot;peopleRow&quot; class=&quot;row-scroll&quot;&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;label&quot;&gt;空いている連続卓&lt;/div&gt;
+    &lt;div id=&quot;clusterStrip&quot; class=&quot;cluster-strip&quot;&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;label&quot;&gt;手動連結&lt;/div&gt;
+    &lt;div class=&quot;manual-row&quot;&gt;
+      &lt;button id=&quot;manualToggle&quot; type=&quot;button&quot;&gt;手動連結&lt;/button&gt;
+      &lt;span id=&quot;manualInfo&quot; class=&quot;manual-info&quot;&gt;卓を選択&lt;/span&gt;
+      &lt;button id=&quot;manualClear&quot; type=&quot;button&quot;&gt;選択解除&lt;/button&gt;
+      &lt;button id=&quot;manualConfirm&quot; class=&quot;confirm&quot; type=&quot;button&quot; disabled&gt;連結する&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;main&gt;
+  &lt;section class=&quot;card&quot;&gt;
+    &lt;div class=&quot;card-title&quot;&gt;
+      &lt;span&gt;おすすめ案&lt;/span&gt;
+      &lt;span id=&quot;renbanCount&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;renban-scroll-wrap&quot;&gt;
+      &lt;button id=&quot;renbanPrev&quot; class=&quot;scroll-arrow&quot; type=&quot;button&quot; aria-label=&quot;前の候補&quot;&gt;‹&lt;/button&gt;
+      &lt;div id=&quot;renbanOptions&quot; class=&quot;renban-options&quot;&gt;&lt;/div&gt;
+      &lt;button id=&quot;renbanNext&quot; class=&quot;scroll-arrow&quot; type=&quot;button&quot; aria-label=&quot;次の候補&quot;&gt;›&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+
+
+
+  &lt;section id=&quot;largeManualSection&quot; class=&quot;card&quot; hidden&gt;
+    &lt;div class=&quot;card-title&quot;&gt;
+      &lt;span&gt;連結卓（7名以上）&lt;/span&gt;
+      &lt;span id=&quot;largeManualCount&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;largeManualGrid&quot; class=&quot;table-grid&quot;&gt;&lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;div id=&quot;tableArea&quot;&gt;&lt;/div&gt;
+&lt;/main&gt;
+
+&lt;div id=&quot;toast&quot; class=&quot;toast&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+(() =&gt; {
+  &quot;use strict&quot;;
+
+  const STORAGE_KEY = &quot;sekifuri-3f-v8-display-clean&quot;;
+  const PREVIOUS_STORAGE_KEY = &quot;sekifuri-3f-v7-priority-route&quot;;
+  if(!localStorage.getItem(STORAGE_KEY) &amp;&amp; localStorage.getItem(PREVIOUS_STORAGE_KEY)){
+    localStorage.setItem(STORAGE_KEY, localStorage.getItem(PREVIOUS_STORAGE_KEY));
+  }
+
+  const fixedTables = {
+    &quot;F1&quot;:2,&quot;F2&quot;:2,&quot;F3&quot;:2,&quot;F4&quot;:2,&quot;F5&quot;:2,
+
+    &quot;G6&quot;:2,&quot;G7&quot;:2,&quot;G8&quot;:2,&quot;G9&quot;:2,&quot;G10&quot;:2,&quot;G11&quot;:2
+  };
+
+  const pairDefinitions = [
+    {id:&quot;E1&quot;, parts:[&quot;E1A&quot;,&quot;E1B&quot;]},
+    {id:&quot;E2&quot;, parts:[&quot;E2A&quot;,&quot;E2B&quot;]},
+    {id:&quot;E3E4&quot;, parts:[&quot;E3&quot;,&quot;E4&quot;]},
+    {id:&quot;E5E6&quot;, parts:[&quot;E5&quot;,&quot;E6&quot;]},
+    {id:&quot;E7&quot;, parts:[&quot;E7A&quot;,&quot;E7B&quot;]},
+    {id:&quot;E8E9&quot;, parts:[&quot;E8&quot;,&quot;E9&quot;]},
+    {id:&quot;E10&quot;, parts:[&quot;E10A&quot;,&quot;E10B&quot;]},
+    {id:&quot;E11&quot;, parts:[&quot;E11A&quot;,&quot;E11B&quot;]},
+
+    {id:&quot;G1&quot;, parts:[&quot;G1A&quot;,&quot;G1B&quot;]},
+    {id:&quot;G2G3&quot;, parts:[&quot;G2&quot;,&quot;G3&quot;]},
+    {id:&quot;G4&quot;, parts:[&quot;G4A&quot;,&quot;G4B&quot;]},
+    {id:&quot;G5&quot;, parts:[&quot;G5A&quot;,&quot;G5B&quot;]}
+  ];
+
+  const pairPrefixes = pairDefinitions.map(def =&gt; def.id);
+  const pairById = Object.fromEntries(pairDefinitions.map(def =&gt; [def.id, def]));
+
+  const defaultMerged = Object.fromEntries(
+    pairDefinitions
+      .filter(def =&gt; def.parts.every(part =&gt; /[AB]$/.test(part)))
+      .map(def =&gt; [def.id, true])
+  );
+
+  const twoFixedOrder = [
+    &quot;F1&quot;,&quot;F2&quot;,&quot;F3&quot;,&quot;F4&quot;,&quot;F5&quot;,
+    &quot;G6&quot;,&quot;G7&quot;,&quot;G8&quot;,&quot;G9&quot;,&quot;G10&quot;,&quot;G11&quot;
+  ];
+
+  const fourFixedOrder = [];
+  const sixOrder = [];
+  const boxOrder = [];
+
+  /*
+    おすすめ案の案内優先順。
+    F卓を先にし、その後はE卓を番号の大きい順、
+    G卓を番号の小さい順に表示する。
+  */
+  const recommendationRoute = [
+    &quot;F1&quot;,&quot;F2&quot;,&quot;F3&quot;,&quot;F4&quot;,&quot;F5&quot;,
+
+    &quot;E11&quot;,&quot;E11A&quot;,&quot;E11B&quot;,
+    &quot;E10&quot;,&quot;E10A&quot;,&quot;E10B&quot;,
+    &quot;E8E9&quot;,&quot;E9&quot;,&quot;E8&quot;,
+    &quot;E7&quot;,&quot;E7A&quot;,&quot;E7B&quot;,
+    &quot;E5E6&quot;,&quot;E6&quot;,&quot;E5&quot;,
+    &quot;E3E4&quot;,&quot;E4&quot;,&quot;E3&quot;,
+    &quot;E2&quot;,&quot;E2A&quot;,&quot;E2B&quot;,
+    &quot;E1&quot;,&quot;E1A&quot;,&quot;E1B&quot;,
+
+    &quot;G1&quot;,&quot;G1A&quot;,&quot;G1B&quot;,
+    &quot;G2G3&quot;,&quot;G2&quot;,&quot;G3&quot;,
+    &quot;G4&quot;,&quot;G4A&quot;,&quot;G4B&quot;,
+    &quot;G5&quot;,&quot;G5A&quot;,&quot;G5B&quot;,
+    &quot;G6&quot;,&quot;G7&quot;,&quot;G8&quot;,&quot;G9&quot;,&quot;G10&quot;,&quot;G11&quot;
+  ];
+
+  function recommendationIdRank(id){
+    const direct = recommendationRoute.indexOf(id);
+    if(direct &gt;= 0) return direct;
+
+    const group = appState?.groups?.find(group =&gt; group.id === id);
+    if(group){
+      const ranks = group.ids.map(recommendationIdRank).filter(Number.isFinite);
+      return ranks.length ? Math.min(...ranks) : Number.MAX_SAFE_INTEGER;
+    }
+    return Number.MAX_SAFE_INTEGER;
+  }
+
+  function recommendationKey(option){
+    return option.ids
+      .flatMap(id =&gt; {
+        const group = appState?.groups?.find(group =&gt; group.id === id);
+        return group ? group.ids : [id];
+      })
+      .map(recommendationIdRank)
+      .sort((a,b) =&gt; a-b);
+  }
+
+  function compareRecommendationRoute(a,b){
+    const ka = recommendationKey(a);
+    const kb = recommendationKey(b);
+    const n = Math.max(ka.length,kb.length);
+    for(let i=0;i&lt;n;i++){
+      const av = ka[i] ?? Number.MAX_SAFE_INTEGER;
+      const bv = kb[i] ?? Number.MAX_SAFE_INTEGER;
+      if(av !== bv) return av-bv;
+    }
+    return 0;
+  }
+
+  const renbanBaseGroups = [
+    [&quot;E1&quot;,&quot;E2&quot;,&quot;E3E4&quot;,&quot;E5E6&quot;,&quot;E7&quot;,&quot;E8E9&quot;,&quot;E10&quot;,&quot;E11&quot;],
+    [&quot;G1&quot;,&quot;G2G3&quot;,&quot;G4&quot;,&quot;G5&quot;,&quot;G6&quot;,&quot;G7&quot;,&quot;G8&quot;,&quot;G9&quot;,&quot;G10&quot;,&quot;G11&quot;]
+  ];
+
+  let appState = loadState();
+  let selectedStatus = &quot;reserved&quot;;
+  let tableView = &quot;all&quot;;
+  let peopleFilter = &quot;all&quot;;
+  let manualMode = false;
+  let manualSelected = new Set();
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : {};
+      return {
+        states: parsed.states || {},
+        merged: {...defaultMerged, ...(parsed.merged || {})},
+        groups: parsed.groups || []
+      };
+    }catch{
+      return {states:{}, merged:{...defaultMerged}, groups:[]};
+    }
+  }
+
+  function saveState(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+  }
+
+
+  function groupFor(id){
+    return appState.groups.find(group =&gt; group.id === id || group.ids.includes(id));
+  }
+
+  function isGrouped(id){
+    return Boolean(groupFor(id));
+  }
+
+  function isAvailable(id){
+    const virtualGroup = appState.groups.some(group =&gt; group.id === id);
+    return getStatus(id) === &quot;empty&quot; &amp;&amp; (virtualGroup || !isGrouped(id));
+  }
+
+  function currentRenbanGroups(){
+    return renbanBaseGroups.map(group =&gt; group.flatMap(id =&gt; {
+      const def = pairById[id];
+      if(!def) return [id];
+      return appState.merged[id] ? [def.id] : [...def.parts];
+    }));
+  }
+
+  function recommendationRows(){
+    return currentRenbanGroups();
+  }
+
+  function manualRows(){
+    return recommendationRows();
+  }
+
+  function sortedManualSelection(){
+    const ids = [...manualSelected];
+    for(const row of manualRows()){
+      if(ids.every(id =&gt; row.includes(id))){
+        return ids.sort((a,b) =&gt; row.indexOf(a) - row.indexOf(b));
+      }
+    }
+    return ids;
+  }
+
+  function validManualSelection(){
+    if(manualSelected.size &lt; 2) return false;
+
+    const ids = [...manualSelected];
+    return manualRows().some(row =&gt; {
+      const indexes = ids.map(id =&gt; row.indexOf(id));
+      if(indexes.some(index =&gt; index &lt; 0)) return false;
+      indexes.sort((a,b) =&gt; a-b);
+      return indexes.every((value,index) =&gt;
+        index === 0 || value === indexes[index - 1] + 1
+      );
+    });
+  }
+
+  function currentTables(){
+    const tables = {...fixedTables};
+
+    pairDefinitions.forEach(def =&gt; {
+      if(appState.merged[def.id]){
+        tables[def.id] = 4;
+      }else{
+        tables[def.parts[0]] = 2;
+        tables[def.parts[1]] = 2;
+      }
+    });
+
+    appState.groups.forEach(group =&gt; {
+      const total = group.capacity || group.ids.reduce((sum,id) =&gt; {
+        const capacity = tables[id];
+        return sum + (capacity === &quot;BOX&quot; ? 7 : Number(capacity || 0));
+      },0);
+      group.capacity = total;
+      tables[group.id] = total;
+    });
+
+    return tables;
+  }
+
+  function getStatus(id){
+    const group = appState.groups.find(item =&gt; item.id === id);
+    if(group) return group.state || &quot;empty&quot;;
+    return appState.states[id] || &quot;empty&quot;;
+  }
+
+  function setStatus(ids){
+    const expanded = new Set();
+
+    ids.forEach(id =&gt; {
+      const group = groupFor(id);
+      (group ? group.ids : [id]).forEach(groupId =&gt; expanded.add(groupId));
+    });
+
+    [...expanded].forEach(id =&gt; {
+      if(selectedStatus === &quot;empty&quot;){
+        delete appState.states[id];
+      }else{
+        appState.states[id] = selectedStatus;
+      }
+    });
+
+    appState.groups.forEach(group =&gt; {
+      if(group.ids.some(id =&gt; expanded.has(id))){
+        group.state = selectedStatus;
+      }
+    });
+
+    saveState();
+    renderAll();
+    showToast([...expanded].join(&quot;・&quot;) + &quot; → &quot; + statusLabel(selectedStatus));
+  }
+
+  function statusLabel(value){
+    if(value === &quot;reserved&quot;) return &quot;席取り&quot;;
+    if(value === &quot;used&quot;) return &quot;使用中&quot;;
+    return &quot;空席&quot;;
+  }
+
+  function capacityClass(capacity){
+    if(capacity === &quot;BOX&quot;) return &quot;cbox&quot;;
+    return &quot;c&quot; + capacity;
+  }
+
+  function createTableButton(id, capacity){
+    const btn = document.createElement(&quot;button&quot;);
+    btn.className = &quot;table-btn &quot; + capacityClass(capacity) + &quot; &quot; + getStatus(id);
+    if(manualSelected.has(id)) btn.classList.add(&quot;manual-selected&quot;);
+
+    btn.innerHTML = id + &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
+
+    btn.addEventListener(&quot;click&quot;, () =&gt; {
+      if(!manualMode){
+        setStatus([id]);
+        return;
+      }
+
+      if(getStatus(id) !== &quot;empty&quot;){
+        showToast(&quot;空席の卓だけ選択できます&quot;);
+        return;
+      }
+
+      if(isGrouped(id)){
+        showToast(&quot;すでに手動連結されています&quot;);
+        return;
+      }
+
+      if(manualSelected.has(id)){
+        manualSelected.delete(id);
+      }else{
+        manualSelected.add(id);
+      }
+
+      renderAll();
+    });
+
+    return btn;
+  }
+
+
+  function createManualGroupCard(group){
+    const wrap = document.createElement(&quot;div&quot;);
+    wrap.className = &quot;pair-card merged&quot;;
+
+    const table = createTableButton(group.id, group.capacity);
+    table.innerHTML =
+      group.ids.join(&quot;・&quot;) +
+      &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + group.capacity + &#x27;&lt;/span&gt;&#x27;;
+    wrap.appendChild(table);
+
+    const release = document.createElement(&quot;button&quot;);
+    release.className = &quot;pair-action&quot;;
+    release.textContent = &quot;解除&quot;;
+    release.addEventListener(&quot;click&quot;, event =&gt; {
+      event.stopPropagation();
+      releaseManualGroup(group.id);
+    });
+    wrap.appendChild(release);
+
+    return wrap;
+  }
+
+  function togglePair(prefix){
+    const def = pairById[prefix];
+    const relatedIds = [def.id, ...def.parts];
+
+    if(relatedIds.some(isGrouped)){
+      showToast(&quot;先に手動連結を解除してください&quot;);
+      return;
+    }
+
+    if(appState.merged[prefix]){
+      const oldStatus = getStatus(def.id);
+
+      delete appState.states[def.id];
+      appState.merged[prefix] = false;
+
+      if(oldStatus !== &quot;empty&quot;){
+        appState.states[def.parts[0]] = oldStatus;
+        appState.states[def.parts[1]] = oldStatus;
+      }
+    }else{
+      const firstStatus = getStatus(def.parts[0]);
+      const secondStatus = getStatus(def.parts[1]);
+
+      delete appState.states[def.parts[0]];
+      delete appState.states[def.parts[1]];
+      appState.merged[prefix] = true;
+
+      if(firstStatus === &quot;used&quot; || secondStatus === &quot;used&quot;){
+        appState.states[def.id] = &quot;used&quot;;
+      }else if(firstStatus === &quot;reserved&quot; || secondStatus === &quot;reserved&quot;){
+        appState.states[def.id] = &quot;reserved&quot;;
+      }
+    }
+
+    saveState();
+    renderAll();
+  }
+
+  function createPairCard(prefix){
+    const def = pairById[prefix];
+    const wrap = document.createElement(&quot;div&quot;);
+
+    if(appState.merged[prefix]){
+      wrap.className = &quot;pair-card merged&quot;;
+      wrap.appendChild(createTableButton(def.id, 4));
+
+      const btn = document.createElement(&quot;button&quot;);
+      btn.className = &quot;pair-action&quot;;
+      btn.textContent = &quot;分割&quot;;
+      btn.addEventListener(&quot;click&quot;, () =&gt; togglePair(prefix));
+      wrap.appendChild(btn);
+    }else{
+      wrap.className = &quot;pair-card&quot;;
+      wrap.appendChild(createTableButton(def.parts[0], 2));
+      wrap.appendChild(createTableButton(def.parts[1], 2));
+
+      const btn = document.createElement(&quot;button&quot;);
+      btn.className = &quot;pair-action&quot;;
+      btn.textContent = &quot;連結&quot;;
+      btn.addEventListener(&quot;click&quot;, () =&gt; togglePair(prefix));
+      wrap.appendChild(btn);
+    }
+
+    return wrap;
+  }
+
+  function countFree(ids){
+    return ids.filter(id =&gt; getStatus(id) === &quot;empty&quot;).length;
+  }
+
+  function createSection(title, ids, pairMode){
+    const section = document.createElement(&quot;section&quot;);
+    section.className = &quot;card&quot;;
+
+    let freeCount = ids.filter(id =&gt; !isGrouped(id) &amp;&amp; getStatus(id) === &quot;empty&quot;).length;
+    const manualGroups = appState.groups.filter(group =&gt; group.capacity === Number(title.replace(&quot;人卓&quot;,&quot;&quot;)));
+    freeCount += manualGroups.filter(group =&gt; getStatus(group.id) === &quot;empty&quot;).length;
+
+    if(pairMode === &quot;split-first&quot;){
+      pairDefinitions.forEach(def =&gt; {
+        if(!appState.merged[def.id]){
+          if(!isGrouped(def.parts[0]) &amp;&amp; getStatus(def.parts[0]) === &quot;empty&quot;) freeCount++;
+          if(!isGrouped(def.parts[1]) &amp;&amp; getStatus(def.parts[1]) === &quot;empty&quot;) freeCount++;
+        }
+      });
+    }
+
+    if(pairMode === &quot;merged-first&quot;){
+      pairDefinitions.forEach(def =&gt; {
+        if(appState.merged[def.id] &amp;&amp; !isGrouped(def.id) &amp;&amp; getStatus(def.id) === &quot;empty&quot;){
+          freeCount++;
+        }
+      });
+    }
+
+    section.innerHTML =
+      &#x27;&lt;div class=&quot;card-title&quot;&gt;&lt;span&gt;&#x27; + title + &#x27;&lt;/span&gt;&lt;span&gt;空き &#x27; + freeCount + &quot;&lt;/span&gt;&lt;/div&gt;&quot;;
+
+    const grid = document.createElement(&quot;div&quot;);
+    grid.className = &quot;table-grid&quot;;
+
+    const tables = currentTables();
+
+    /* 2人卓・4人卓は82〜88を先頭に置き、その後に各エリアを動線順で並べる。 */
+    if(pairMode === &quot;split-first&quot;){
+      pairDefinitions
+        .filter(def =&gt;
+          !appState.merged[def.id] &amp;&amp;
+          !isGrouped(def.parts[0]) &amp;&amp;
+          !isGrouped(def.parts[1])
+        )
+        .forEach(def =&gt; grid.appendChild(createPairCard(def.id)));
+    }
+
+    if(pairMode === &quot;merged-first&quot;){
+      pairDefinitions
+        .filter(def =&gt;
+          appState.merged[def.id] &amp;&amp;
+          !isGrouped(def.id)
+        )
+        .forEach(def =&gt; grid.appendChild(createPairCard(def.id)));
+    }
+
+    const sectionCapacity = Number(title.replace(&quot;人卓&quot;,&quot;&quot;));
+    appState.groups
+      .filter(group =&gt; group.capacity &lt;= 6 &amp;&amp; group.capacity === sectionCapacity)
+      .forEach(group =&gt; grid.appendChild(createManualGroupCard(group)));
+
+    ids
+      .filter(id =&gt; !isGrouped(id))
+      .forEach(id =&gt; grid.appendChild(createTableButton(id, tables[id])));
+
+    if(!grid.children.length){
+      const empty = document.createElement(&quot;div&quot;);
+      empty.className = &quot;empty-note&quot;;
+      empty.textContent = &quot;この種類の卓はありません。&quot;;
+      grid.appendChild(empty);
+    }
+
+    section.appendChild(grid);
+    return section;
+  }
+
+  function renderTables(){
+    const area = document.getElementById(&quot;tableArea&quot;);
+    area.innerHTML = &quot;&quot;;
+
+    if(tableView === &quot;all&quot; || tableView === &quot;2&quot;){
+      area.appendChild(createSection(&quot;2人卓&quot;, twoFixedOrder, &quot;split-first&quot;));
+    }
+
+    if(tableView === &quot;all&quot; || tableView === &quot;4&quot;){
+      area.appendChild(createSection(&quot;4人卓&quot;, fourFixedOrder, &quot;merged-first&quot;));
+    }
+
+    if(tableView === &quot;all&quot; || tableView === &quot;6&quot;){
+      area.appendChild(createSection(&quot;6人卓&quot;, sixOrder, null));
+    }
+
+    if(tableView === &quot;all&quot; || tableView === &quot;BOX&quot;){
+      area.appendChild(createSection(&quot;BOX&quot;, boxOrder, null));
+    }
+  }
+
+  function maximalEmptyRuns(){
+    const tables = currentTables();
+    const runs = [];
+
+    recommendationRows().forEach(group =&gt; {
+      let run = [];
+
+      const flush = () =&gt; {
+        if(run.length &gt;= 2){
+          let total = 0;
+          let allBox = true;
+
+          run.forEach(id =&gt; {
+            if(tables[id] === &quot;BOX&quot;){
+              total += 7;
+            }else{
+              allBox = false;
+              total += Number(tables[id]);
+            }
+          });
+
+          runs.push({
+            ids:[...run],
+            label: run.length === 2 ? run.join(&quot;・&quot;) : run[0] + &quot;〜&quot; + run[run.length - 1],
+            max:total,
+            allBox
+          });
+        }
+        run = [];
+      };
+
+      group.forEach(id =&gt; {
+        if(isAvailable(id)){
+          run.push(id);
+        }else{
+          flush();
+        }
+      });
+
+      flush();
+    });
+
+    return runs;
+  }
+
+  function renderClusterStrip(){
+    const strip = document.getElementById(&quot;clusterStrip&quot;);
+    strip.innerHTML = &quot;&quot;;
+
+    const runs = maximalEmptyRuns();
+
+    if(!runs.length){
+      const chip = document.createElement(&quot;span&quot;);
+      chip.className = &quot;cluster-chip disabled&quot;;
+      chip.textContent = &quot;空いている連続卓はありません&quot;;
+      strip.appendChild(chip);
+      return;
+    }
+
+    runs.forEach(run =&gt; {
+      const btn = document.createElement(&quot;button&quot;);
+      btn.className = &quot;cluster-chip&quot;;
+      btn.innerHTML =
+        run.label +
+        &quot;&lt;small&gt;&quot; +
+        (run.allBox ? &quot;BOX×&quot; + run.ids.length : run.max + &quot;名 max&quot;) +
+        &quot;&lt;/small&gt;&quot;;
+      btn.addEventListener(&quot;click&quot;, () =&gt; {
+        peopleFilter = &quot;all&quot;;
+        renderPeopleRow();
+        renderRenbanOptions();
+        document.getElementById(&quot;renbanOptions&quot;).scrollIntoView({behavior:&quot;smooth&quot;,block:&quot;start&quot;});
+        showToast(&quot;空き連番: &quot; + run.label);
+      });
+      strip.appendChild(btn);
+    });
+  }
+
+  function allRenbanOptions(){
+    const tables = currentTables();
+    const options = [];
+
+    recommendationRows().forEach(group =&gt; {
+      let run = [];
+
+      const flush = () =&gt; {
+        if(run.length &gt;= 2){
+          for(let start = 0; start &lt; run.length; start++){
+            let capacity = 0;
+
+            for(let end = start; end &lt; run.length; end++){
+              const ids = run.slice(start, end + 1);
+              const cap = tables[run[end]];
+
+              if(cap === &quot;BOX&quot;){
+                if(ids.length === 1) continue;
+
+                if(ids.length === 2){
+                  [9,10,11,12,13,14].forEach(pax =&gt; {
+                    options.push({
+                      ids,
+                      pax,
+                      capacity:14,
+                      low:pax !== 14,
+                      box:true
+                    });
+                  });
+                }
+              }else{
+                capacity += Number(cap);
+
+                if(end &gt; start){
+                  options.push({
+                    ids,
+                    pax:capacity,
+                    capacity,
+                    low:false,
+                    box:false
+                  });
+                }
+              }
+            }
+          }
+        }
+
+        run = [];
+      };
+
+      group.forEach(id =&gt; {
+        if(isAvailable(id)){
+          run.push(id);
+        }else{
+          flush();
+        }
+      });
+
+      flush();
+    });
+
+    /* 単卓もおすすめ候補に含める。
+       2名なら空いている2人卓、4名なら4人卓、6名なら6人卓を最優先にできる。 */
+    Object.keys(tables)
+      .filter(id =&gt; tables[id] !== &quot;BOX&quot; &amp;&amp; isAvailable(id))
+      .forEach(id =&gt; {
+        const capacity = Number(tables[id]);
+        if(capacity &gt; 0){
+          options.push({
+            ids:[id],
+            pax:capacity,
+            capacity,
+            low:false,
+            box:false
+          });
+        }
+      });
+
+    Object.keys(tables)
+      .filter(id =&gt; tables[id] === &quot;BOX&quot; &amp;&amp; isAvailable(id))
+      .forEach(id =&gt; {
+        options.push({ids:[id], pax:7, capacity:7, low:false, box:true});
+        options.push({ids:[id], pax:8, capacity:7, low:true, box:true});
+      });
+
+    const seen = new Set();
+
+    return options
+      .filter(option =&gt; {
+        const key = option.pax + &quot;|&quot; + option.ids.join(&quot;-&quot;);
+        if(seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .sort((a,b) =&gt;
+        a.pax - b.pax ||
+        Number(a.low) - Number(b.low) ||
+        a.ids.length - b.ids.length
+      );
+  }
+
+  function renderPeopleRow(){
+    const row = document.getElementById(&quot;peopleRow&quot;);
+    row.innerHTML = &quot;&quot;;
+
+    const capacities = [...new Set(allRenbanOptions().map(item =&gt; item.pax))]
+      .sort((a,b) =&gt; a-b);
+
+    const choices = [[&quot;all&quot;,&quot;全部&quot;], ...capacities.map(value =&gt; [String(value), value + &quot;名&quot;])];
+
+    choices.forEach(([value,label]) =&gt; {
+      const btn = document.createElement(&quot;button&quot;);
+      btn.textContent = label;
+      btn.classList.toggle(&quot;active&quot;, peopleFilter === value);
+      btn.addEventListener(&quot;click&quot;, () =&gt; {
+        peopleFilter = value;
+        renderPeopleRow();
+        renderRenbanOptions();
+      });
+      row.appendChild(btn);
+    });
+  }
+
+
+  function updateRenbanArrows(){
+    const holder = document.getElementById(&quot;renbanOptions&quot;);
+    const prev = document.getElementById(&quot;renbanPrev&quot;);
+    const next = document.getElementById(&quot;renbanNext&quot;);
+    const max = Math.max(0, holder.scrollWidth - holder.clientWidth);
+    prev.disabled = holder.scrollLeft &lt;= 2;
+    next.disabled = holder.scrollLeft &gt;= max - 2;
+  }
+
+  function setupRenbanScroller(){
+    const holder = document.getElementById(&quot;renbanOptions&quot;);
+    const prev = document.getElementById(&quot;renbanPrev&quot;);
+    const next = document.getElementById(&quot;renbanNext&quot;);
+
+    prev.addEventListener(&quot;click&quot;, () =&gt; {
+      holder.scrollBy({left:-holder.clientWidth * 0.85, behavior:&quot;smooth&quot;});
+    });
+    next.addEventListener(&quot;click&quot;, () =&gt; {
+      holder.scrollBy({left:holder.clientWidth * 0.85, behavior:&quot;smooth&quot;});
+    });
+    holder.addEventListener(&quot;scroll&quot;, updateRenbanArrows, {passive:true});
+
+    let dragging = false;
+    let startX = 0;
+    let startScroll = 0;
+
+    holder.addEventListener(&quot;pointerdown&quot;, event =&gt; {
+      if(event.pointerType === &quot;touch&quot;) return;
+      dragging = true;
+      startX = event.clientX;
+      startScroll = holder.scrollLeft;
+      holder.classList.add(&quot;dragging&quot;);
+      holder.setPointerCapture(event.pointerId);
+    });
+
+    holder.addEventListener(&quot;pointermove&quot;, event =&gt; {
+      if(!dragging) return;
+      holder.scrollLeft = startScroll - (event.clientX - startX);
+    });
+
+    const stopDragging = event =&gt; {
+      if(!dragging) return;
+      dragging = false;
+      holder.classList.remove(&quot;dragging&quot;);
+      try{ holder.releasePointerCapture(event.pointerId); }catch{}
+    };
+
+    holder.addEventListener(&quot;pointerup&quot;, stopDragging);
+    holder.addEventListener(&quot;pointercancel&quot;, stopDragging);
+    holder.addEventListener(&quot;lostpointercapture&quot;, () =&gt; {
+      dragging = false;
+      holder.classList.remove(&quot;dragging&quot;);
+    });
+
+    window.addEventListener(&quot;resize&quot;, updateRenbanArrows);
+  }
+
+  function renderRenbanOptions(){
+    const all = allRenbanOptions();
+    let filtered;
+
+    if(peopleFilter === &quot;all&quot;){
+      filtered = [...all].sort(compareRecommendationRoute);
+    }else{
+      const requested = Number(peopleFilter);
+      const bestByTables = new Map();
+
+      all
+        .filter(item =&gt; {
+          const actualCapacity = item.capacity ?? item.pax;
+          /* BOX単体の8名利用は従来どおり低優先で残す。 */
+          return actualCapacity &gt;= requested || (item.box &amp;&amp; item.ids.length === 1 &amp;&amp; item.pax === requested);
+        })
+        .forEach(item =&gt; {
+          const key = item.ids.join(&quot;-&quot;);
+          const current = bestByTables.get(key);
+          const itemCapacity = item.capacity ?? item.pax;
+          const currentCapacity = current ? (current.capacity ?? current.pax) : Infinity;
+
+          if(!current ||
+             itemCapacity &lt; currentCapacity ||
+             (itemCapacity === currentCapacity &amp;&amp; Number(item.low) &lt; Number(current.low))){
+            bestByTables.set(key, item);
+          }
+        });
+
+      filtered = [...bestByTables.values()]
+        .sort((a,b) =&gt; {
+          const capA = a.capacity ?? a.pax;
+          const capB = b.capacity ?? b.pax;
+
+          /* 優先順位:
+             1. 使用する卓数が少ない
+             2. 同じ卓数なら空き席が少ない
+             3. 同条件なら通常卓をBOXより先にする */
+          return a.ids.length - b.ids.length ||
+                 (capA - requested) - (capB - requested) ||
+                 Number(a.low) - Number(b.low) ||
+                 Number(a.box) - Number(b.box) ||
+                 compareRecommendationRoute(a,b);
+        });
+    }
+
+    document.getElementById(&quot;renbanCount&quot;).textContent = filtered.length + &quot;案&quot;;
+
+    const holder = document.getElementById(&quot;renbanOptions&quot;);
+    holder.innerHTML = &quot;&quot;;
+
+    if(!filtered.length){
+      const empty = document.createElement(&quot;div&quot;);
+      empty.className = &quot;empty-note&quot;;
+      empty.textContent = &quot;案内できる空席候補はありません。&quot;;
+      holder.appendChild(empty);
+      requestAnimationFrame(updateRenbanArrows);
+      return;
+    }
+
+    const tables = currentTables();
+    const requested = peopleFilter === &quot;all&quot; ? null : Number(peopleFilter);
+
+    filtered.forEach((option,index) =&gt; {
+      const btn = document.createElement(&quot;button&quot;);
+      const actualCapacity = option.capacity ?? option.pax;
+      const excess = requested === null ? 0 : Math.max(0, actualCapacity - requested);
+
+      let priorityClass = &quot;&quot;;
+      let priorityLabel = &quot;&quot;;
+
+      if(requested !== null){
+        if(excess === 0){
+          priorityClass = &quot; priority-1&quot;;
+          priorityLabel = &quot;優先&quot;;
+        }else if(excess === 1){
+          priorityClass = &quot; priority-2&quot;;
+          priorityLabel = &quot;次点&quot;;
+        }else if(excess &lt;= 3){
+          priorityClass = &quot; priority-3&quot;;
+          priorityLabel = &quot;予備&quot;;
+        }else{
+          priorityClass = &quot; low&quot;;
+          priorityLabel = &quot;優先度低&quot;;
+        }
+      }else{
+        priorityClass = option.low ? &quot; low&quot; : &quot;&quot;;
+        priorityLabel = option.low ? &quot;優先度低&quot; : &quot;使用可能&quot;;
+      }
+
+      btn.className = &quot;renban-option&quot; + priorityClass;
+
+      let note;
+      if(requested !== null){
+        note = priorityLabel + &quot;・&quot; + option.ids.length + &quot;卓・MAX &quot; + actualCapacity + &quot;名&quot;;
+        if(excess &gt; 0) note += &quot;・空き &quot; + excess + &quot;席&quot;;
+      }else if(option.box &amp;&amp; actualCapacity === 14){
+        note = priorityLabel + &quot;・2 BOX&quot;;
+      }else{
+        note = priorityLabel;
+      }
+
+      btn.innerHTML =
+        &quot;&lt;strong&gt;&quot; + (requested ?? option.pax) + &quot;名&lt;/strong&gt;&quot; +
+        &#x27;&lt;div class=&quot;chips&quot;&gt;&#x27; +
+        option.ids.map(id =&gt;
+          &#x27;&lt;span class=&quot;chip &#x27; + capacityClass(tables[id]) + &#x27;&quot;&gt;&#x27; + id + &quot;&lt;/span&gt;&quot;
+        ).join(&quot;&quot;) +
+        &quot;&lt;/div&gt;&quot; +
+        &quot;&lt;small&gt;&quot; + note + &quot;&lt;/small&gt;&quot;;
+
+      btn.addEventListener(&quot;click&quot;, () =&gt; setStatus(option.ids));
+      holder.appendChild(btn);
+    });
+
+    requestAnimationFrame(updateRenbanArrows);
+  }
+
+  function renderSummary(){
+    const summary = document.getElementById(&quot;summary&quot;);
+    summary.innerHTML = &quot;&quot;;
+
+    const tables = currentTables();
+    const groups = [
+      [2,&quot;2人&quot;],
+      [4,&quot;4人&quot;],
+      [6,&quot;6人&quot;],
+      [&quot;BOX&quot;,&quot;BOX&quot;]
+    ];
+
+    groups.forEach(([capacity,label]) =&gt; {
+      const count = Object.keys(tables).filter(id =&gt; {
+        if(tables[id] !== capacity) return false;
+        const isVirtual = appState.groups.some(group =&gt; group.id === id);
+        if(!isVirtual &amp;&amp; isGrouped(id)) return false;
+        return isAvailable(id);
+      }).length;
+
+      const card = document.createElement(&quot;div&quot;);
+      card.className = &quot;summary-card&quot;;
+      card.innerHTML = &quot;&lt;small&gt;&quot; + label + &quot; 空き&lt;/small&gt;&lt;b&gt;&quot; + count + &quot;&lt;/b&gt;&quot;;
+      summary.appendChild(card);
+    });
+  }
+
+  function showToast(message){
+    const toast = document.getElementById(&quot;toast&quot;);
+    toast.textContent = message;
+    toast.classList.add(&quot;show&quot;);
+
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() =&gt; toast.classList.remove(&quot;show&quot;), 1100);
+  }
+
+
+  function createManualGroup(){
+    if(!validManualSelection()){
+      showToast(&quot;同じ連番内の隣り合う卓を選択してください&quot;);
+      return;
+    }
+
+    const ids = sortedManualSelection();
+    const state = selectedStatus;
+    const tables = currentTables();
+    const capacity = ids.reduce((sum,id) =&gt; {
+      const value = tables[id];
+      return sum + (value === &quot;BOX&quot; ? 7 : Number(value || 0));
+    },0);
+
+    const group = {
+      id:&quot;manual-&quot; + Date.now(),
+      ids,
+      state,
+      capacity
+    };
+
+    appState.groups.push(group);
+
+    ids.forEach(id =&gt; {
+      if(state === &quot;empty&quot;){
+        delete appState.states[id];
+      }else{
+        appState.states[id] = state;
+      }
+    });
+
+    manualMode = false;
+    manualSelected.clear();
+    saveState();
+    renderAll();
+    showToast(ids.join(&quot;・&quot;) + &quot; を手動連結&quot;);
+  }
+
+  function releaseManualGroup(groupId){
+    const index = appState.groups.findIndex(group =&gt; group.id === groupId);
+    if(index &lt; 0) return;
+
+    const [group] = appState.groups.splice(index,1);
+    group.ids.forEach(id =&gt; delete appState.states[id]);
+
+    manualSelected.clear();
+    saveState();
+    renderAll();
+    showToast(group.ids.join(&quot;・&quot;) + &quot; → 空席&quot;);
+  }
+
+  function renderManualControls(){
+    const ids = sortedManualSelection();
+    const tables = currentTables();
+    const total = ids.reduce((sum,id) =&gt; {
+      const capacity = tables[id];
+      return sum + (capacity === &quot;BOX&quot; ? 7 : Number(capacity || 0));
+    },0);
+
+    const toggle = document.getElementById(&quot;manualToggle&quot;);
+    toggle.classList.toggle(&quot;active&quot;, manualMode);
+    toggle.textContent = manualMode ? &quot;手動連結中&quot; : &quot;手動連結&quot;;
+
+    document.getElementById(&quot;manualInfo&quot;).textContent =
+      ids.length
+        ? &quot;選択：&quot; + ids.join(&quot;・&quot;) + &quot;　合計&quot; + total + &quot;席&quot;
+        : &quot;卓を選択&quot;;
+
+    document.getElementById(&quot;manualConfirm&quot;).disabled = !validManualSelection();
+  }
+
+
+  function renderLargeManualGroups(){
+    const section = document.getElementById(&quot;largeManualSection&quot;);
+    const grid = document.getElementById(&quot;largeManualGrid&quot;);
+    const count = document.getElementById(&quot;largeManualCount&quot;);
+
+    const groups = appState.groups.filter(group =&gt; Number(group.capacity) &gt; 6);
+
+    section.hidden = groups.length === 0;
+    count.textContent = groups.length + &quot;組&quot;;
+    grid.innerHTML = &quot;&quot;;
+
+    groups.forEach(group =&gt; {
+      grid.appendChild(createManualGroupCard(group));
+    });
+  }
+
+  function renderAll(){
+    renderSummary();
+    renderPeopleRow();
+    renderClusterStrip();
+    renderRenbanOptions();
+    renderManualControls();
+    renderLargeManualGroups();
+    renderTables();
+  }
+
+
+  document.getElementById(&quot;manualToggle&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+    manualMode = !manualMode;
+    manualSelected.clear();
+    renderAll();
+  });
+
+  document.getElementById(&quot;manualClear&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+    manualSelected.clear();
+    renderAll();
+  });
+
+  document.getElementById(&quot;manualConfirm&quot;).addEventListener(&quot;click&quot;, createManualGroup);
+
+  document.querySelectorAll(&quot;#stateRow button&quot;).forEach(btn =&gt; {
+    btn.addEventListener(&quot;click&quot;, () =&gt; {
+      selectedStatus = btn.dataset.state;
+      document.querySelectorAll(&quot;#stateRow button&quot;).forEach(item =&gt; {
+        item.classList.toggle(&quot;active&quot;, item === btn);
+      });
+    });
+  });
+
+  document.querySelectorAll(&quot;#tableFilterRow button&quot;).forEach(btn =&gt; {
+    btn.addEventListener(&quot;click&quot;, () =&gt; {
+      tableView = btn.dataset.view;
+      document.querySelectorAll(&quot;#tableFilterRow button&quot;).forEach(item =&gt; {
+        item.classList.toggle(&quot;active&quot;, item === btn);
+      });
+      renderTables();
+    });
+  });
+
+  document.getElementById(&quot;resetBtn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+    appState = {states:{}, merged:{...defaultMerged}, groups:[]};
+    selectedStatus = &quot;reserved&quot;;
+    tableView = &quot;all&quot;;
+    peopleFilter = &quot;all&quot;;
+    saveState();
+
+    document.querySelectorAll(&quot;#stateRow button&quot;).forEach(btn =&gt; {
+      btn.classList.toggle(&quot;active&quot;, btn.dataset.state === &quot;reserved&quot;);
+    });
+
+    document.querySelectorAll(&quot;#tableFilterRow button&quot;).forEach(btn =&gt; {
+      btn.classList.toggle(&quot;active&quot;, btn.dataset.view === &quot;all&quot;);
+    });
+
+    renderAll();
+  });
+
+  setupRenbanScroller();
+  renderAll();
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+<iframe class="app-frame" data-index="3" title="個室" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;ja&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;
+&lt;title&gt;個室&lt;/title&gt;
+&lt;style&gt;
+:root{
+  --bg:#f3f4f6;--card:#fff;--line:#cfd4dc;--text:#17202a;--muted:#667085;
+  --empty2:#eadcff;--empty4:#dcecff;--empty6:#d9f3e4;
+  --reserved:#ffe29a;--used:#f29aa1;--accent:#2563eb;--selected:#fff3b0
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,&quot;Noto Sans JP&quot;,sans-serif}
+button{font:inherit}
+.fixed{position:sticky;top:0;z-index:30;background:rgba(243,244,246,.97);backdrop-filter:blur(7px);border-bottom:1px solid var(--line)}
+.fixed-inner{max-width:1040px;margin:auto;padding:7px}
+.title{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.title b{font-size:17px}
+.reset{border:1px solid #9ca3af;background:#fff;border-radius:8px;padding:6px 10px;font-weight:800}
+.summary-all{display:grid;gap:5px;margin-top:6px}
+.room-summary{display:grid;grid-template-columns:42px repeat(4,minmax(58px,1fr));gap:4px}
+.room-name{display:flex;align-items:center;justify-content:center;background:#111;color:#fff;border-radius:8px;font-weight:950}
+.sum{background:#fff;border:1px solid var(--line);border-radius:8px;text-align:center;padding:4px 2px}
+.sum small{display:block;color:var(--muted);font-size:9px;line-height:1.1}
+.sum b{font-size:16px;line-height:1.2}
+.label{font-size:11px;font-weight:850;margin:6px 2px 3px}
+.row-scroll{display:flex;gap:5px;overflow-x:auto;padding-bottom:3px}
+.row-scroll button{flex:0 0 auto;border:1px solid #b9c0ca;background:#fff;border-radius:8px;padding:6px 10px;font-weight:850}
+.row-scroll button.active{border-color:#111;background:#111;color:#fff}
+.room-row button{min-width:78px}
+.state-row button[data-state=empty].active{background:#fff;color:#111;border:2px solid #111}
+.state-row button[data-state=reserved].active{background:var(--reserved);color:#111;border:2px solid #9a7200}
+.state-row button[data-state=used].active{background:var(--used);color:#111;border:2px solid #8f2733}
+.manualbar{display:flex;gap:5px;align-items:center;overflow-x:auto}
+.manualbar button{border:1px solid #9aa4b2;background:#fff;border-radius:8px;padding:6px 9px;font-weight:900;white-space:nowrap}
+.manualbar button.active{background:#111;color:#fff}
+.manualbar .confirm{background:#2563eb;color:#fff;border-color:#2563eb}
+.manualbar .confirm:disabled{opacity:.35}
+.selection-info{font-size:11px;font-weight:800;white-space:nowrap;color:#334155}
+main{max-width:1040px;margin:auto;padding:7px}
+.card,.map-card{background:#fff;border:1px solid var(--line);border-radius:11px;padding:8px;margin-bottom:8px}
+.card-title,.map-title{display:flex;justify-content:space-between;font-weight:900;margin-bottom:7px}
+.options-wrap{display:grid;grid-template-columns:34px minmax(0,1fr) 34px;gap:5px}
+.scroll-arrow{border:1px solid var(--line);background:#fff;border-radius:8px;font-size:21px;font-weight:900}
+.scroll-arrow:disabled{opacity:.25}
+.options{min-width:0;display:flex;gap:7px;overflow-x:auto;scroll-behavior:smooth;padding:1px 1px 6px}
+.option{flex:0 0 194px;border:2px solid #9ca3af;background:#fff;border-radius:9px;padding:7px;text-align:left}
+.option.p1{border-color:#16a34a;background:#dcfce7}.option.p2{border-color:#eab308;background:#fef9c3}
+.option.p3{border-color:#fb923c;background:#ffedd5}.option.low{background:#f3f4f6}
+.option strong{font-size:15px}.option .cap{font-weight:900;margin-top:3px}.option small{color:var(--muted)}
+.map-card{overflow:auto}
+.room-map{
+  position:relative;min-width:760px;height:360px;border:2px solid #9ca3af;background:#fafafa;border-radius:10px;overflow:hidden
+}
+.room-header{position:absolute;left:18px;top:10px;font-size:24px;font-weight:950}
+.entrance{position:absolute;left:2%;top:46%;transform:none;font-size:16px;font-weight:900;writing-mode:vertical-rl}
+.fixture{position:absolute;border:2px solid #9ca3af;background:#f1f5f9;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;font-weight:850}
+.table-wrap{position:absolute}
+.table{
+  width:100%;height:100%;border:2px solid #64748b;border-radius:4px;display:flex;align-items:center;justify-content:center;
+  font-weight:950;position:relative;padding:1px;background:var(--empty4);font-size:12px
+}
+.table.cap2{background:var(--empty2)}
+.table.cap4{background:var(--empty4)}
+.table.cap6{background:var(--empty6);border-width:3px}
+.table.reserved,.split-merged.reserved .segment{background:var(--reserved)!important}
+.table.used,.split-merged.used .segment{background:var(--used)!important}
+.table.selected,.split-merged.selected{outline:4px solid var(--accent);outline-offset:2px}
+.table.grouped,.split-merged.grouped{box-shadow:0 0 0 4px rgba(37,99,235,.35)}
+.table .cap{position:absolute;bottom:3px;font-size:9px;color:#475569}
+.table .st{position:absolute;right:4px;top:2px;font-size:8px}
+.split-wrap{position:absolute}
+.split-merged{
+  width:100%;height:100%;border:3px solid #047857;border-radius:4px;overflow:hidden;position:relative;background:#fff;
+  display:grid;grid-template-columns:1fr 2fr
+}
+.split-merged .segment{display:flex;align-items:center;justify-content:center;font-weight:950}
+.split-merged .seg2{background:var(--empty2);border-right:2px solid #64748b}
+.split-merged .seg4{background:var(--empty4)}
+.split-merged .state-badge{position:absolute;right:4px;top:2px;font-size:8px;font-weight:900}
+.split-merged .merged-label{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,.82);padding:2px 5px;border-radius:5px;font-size:11px;font-weight:950;white-space:nowrap}
+.split-parts{width:100%;height:100%;display:grid;grid-template-columns:1fr 2fr;gap:3px}
+.split-parts .table{border-width:2px}
+.split-action{position:absolute;right:-44px;top:50%;transform:translateY(-50%);border:1px solid #64748b;background:#fff;border-radius:999px;padding:2px 7px;font-size:10px;font-weight:950;z-index:5}
+.group-badge{position:absolute;left:2px;top:2px;background:#2563eb;color:white;border-radius:999px;padding:1px 5px;font-size:8px;font-weight:900;z-index:5}
+.legend{display:flex;gap:11px;flex-wrap:wrap;font-size:11px;color:var(--muted);padding:8px 2px 2px}
+.swatch{display:inline-block;width:17px;height:13px;border:1px solid #777;border-radius:3px;vertical-align:-2px;margin-right:3px}
+.composite-demo{display:inline-grid;grid-template-columns:1fr 2fr;width:30px;height:18px;border:2px solid #047857;vertical-align:-8px;margin-right:4px}
+.composite-demo i:first-child{background:var(--empty2);border-right:1px solid #555}.composite-demo i:last-child{background:var(--empty4)}
+
+.manual-group-wrap{position:absolute;z-index:12}
+.manual-group{
+ width:100%;height:100%;border:4px solid var(--accent);border-radius:10px;
+ background:rgba(219,234,254,.94);display:flex;flex-direction:column;
+ align-items:center;justify-content:center;font-weight:950;padding:5px 32px 5px 5px;
+ box-shadow:0 2px 8px rgba(0,0,0,.18)
+}
+.manual-group.reserved{background:rgba(255,226,154,.95)}
+.manual-group.used{background:rgba(242,154,161,.95)}
+.manual-group .group-ids{font-size:13px;text-align:center;line-height:1.25}
+.manual-group .group-cap{font-size:10px;color:#475569;margin-top:3px}
+.group-release{
+ position:absolute;right:5px;top:5px;width:25px;height:25px;border:1px solid #b4232c;
+ background:#fff;color:#a21720;border-radius:6px;font-weight:950;padding:0;z-index:15
+}
+
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#111;color:#fff;padding:8px 13px;border-radius:999px;opacity:0;pointer-events:none;transition:.2s;z-index:60;font-size:12px}
+.toast.show{opacity:1}
+.empty-note{color:var(--muted);padding:12px}
+@media(max-width:430px){
+ .title b{font-size:15px}.fixed-inner,main{padding:5px}.room-summary{grid-template-columns:37px repeat(4,minmax(53px,1fr));gap:3px}
+ .sum small{font-size:8px}.sum b{font-size:14px}.row-scroll button,.manualbar button{padding:5px 8px}
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;fixed&quot;&gt;&lt;div class=&quot;fixed-inner&quot;&gt;
+ &lt;div class=&quot;title&quot;&gt;&lt;button id=&quot;reset&quot; class=&quot;reset&quot;&gt;リセット&lt;/button&gt;&lt;/div&gt;
+ &lt;div id=&quot;summaryAll&quot; class=&quot;summary-all&quot;&gt;&lt;/div&gt;
+
+ &lt;div class=&quot;label&quot;&gt;表示する個室&lt;/div&gt;
+ &lt;div id=&quot;roomRow&quot; class=&quot;row-scroll room-row&quot;&gt;&lt;/div&gt;
+
+ &lt;div class=&quot;label&quot;&gt;タップ時の状態&lt;/div&gt;
+ &lt;div id=&quot;stateRow&quot; class=&quot;row-scroll state-row&quot;&gt;
+   &lt;button data-state=&quot;empty&quot;&gt;空席&lt;/button&gt;&lt;button data-state=&quot;reserved&quot; class=&quot;active&quot;&gt;席取り&lt;/button&gt;&lt;button data-state=&quot;used&quot;&gt;使用中&lt;/button&gt;
+ &lt;/div&gt;
+
+ &lt;div class=&quot;label&quot;&gt;人数&lt;/div&gt;
+ &lt;div id=&quot;peopleRow&quot; class=&quot;row-scroll&quot;&gt;&lt;/div&gt;
+
+ &lt;div class=&quot;label&quot;&gt;手動連結&lt;/div&gt;
+ &lt;div class=&quot;manualbar&quot;&gt;
+   &lt;button id=&quot;manualToggle&quot;&gt;手動連結&lt;/button&gt;&lt;span id=&quot;selectionInfo&quot; class=&quot;selection-info&quot;&gt;&lt;/span&gt;
+   &lt;button id=&quot;manualClear&quot;&gt;選択解除&lt;/button&gt;&lt;button id=&quot;manualConfirm&quot; class=&quot;confirm&quot;&gt;連結する&lt;/button&gt;
+ &lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+
+&lt;main&gt;
+ &lt;section class=&quot;card&quot;&gt;
+  &lt;div class=&quot;card-title&quot;&gt;&lt;span id=&quot;recommendTitle&quot;&gt;おすすめ&lt;/span&gt;&lt;span id=&quot;optionCount&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;options-wrap&quot;&gt;&lt;button id=&quot;prev&quot; class=&quot;scroll-arrow&quot;&gt;‹&lt;/button&gt;&lt;div id=&quot;options&quot; class=&quot;options&quot;&gt;&lt;/div&gt;&lt;button id=&quot;next&quot; class=&quot;scroll-arrow&quot;&gt;›&lt;/button&gt;&lt;/div&gt;
+ &lt;/section&gt;
+
+ &lt;section class=&quot;map-card&quot;&gt;
+  &lt;div class=&quot;map-title&quot;&gt;&lt;span id=&quot;mapTitle&quot;&gt;個室配置&lt;/span&gt;&lt;span&gt;実配置&lt;/span&gt;&lt;/div&gt;
+  &lt;div id=&quot;roomMap&quot; class=&quot;room-map&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;legend&quot;&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch&quot; style=&quot;background:var(--empty2)&quot;&gt;&lt;/i&gt;2人卓&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch&quot; style=&quot;background:var(--empty4)&quot;&gt;&lt;/i&gt;4人卓&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch&quot; style=&quot;background:var(--empty6)&quot;&gt;&lt;/i&gt;6人卓（固定）&lt;/span&gt;
+    &lt;span&gt;&lt;span class=&quot;composite-demo&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;6人卓（2+4・分割可）&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch&quot; style=&quot;background:var(--reserved)&quot;&gt;&lt;/i&gt;席取り&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;swatch&quot; style=&quot;background:var(--used)&quot;&gt;&lt;/i&gt;使用中&lt;/span&gt;
+  &lt;/div&gt;
+ &lt;/section&gt;
+&lt;/main&gt;
+&lt;div id=&quot;toast&quot; class=&quot;toast&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+(()=&gt;{
+&quot;use strict&quot;;
+
+const ROOMS={
+ SG:{
+  label:&quot;SG&quot;,
+  positions:{
+   SG5:{x:8,y:63,w:18,h:18,type:&quot;split&quot;},
+   SG3:{x:32,y:63,w:10,h:18,type:&quot;fixed4&quot;},
+   SG1:{x:48,y:63,w:10,h:18,type:&quot;fixed4&quot;},
+
+   SG8:{x:8,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   SG7:{x:25,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   SG4:{x:42,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   SG2:{x:59,y:18,w:10,h:18,type:&quot;fixed4&quot;}
+  },
+  autoLanes:[[&quot;SG1&quot;,&quot;SG3&quot;,&quot;SG5&quot;],[&quot;SG2&quot;,&quot;SG4&quot;,&quot;SG7&quot;,&quot;SG8&quot;]]
+ },
+ KH:{
+  label:&quot;KH&quot;,
+  positions:{
+   KH7:{x:6,y:63,w:18,h:18,type:&quot;split&quot;},
+   KH5:{x:29,y:63,w:18,h:18,type:&quot;split&quot;},
+   KH3:{x:52,y:63,w:10,h:18,type:&quot;fixed4&quot;},
+   KH1:{x:67,y:63,w:10,h:18,type:&quot;fixed4&quot;},
+
+   KH8:{x:6,y:18,w:18,h:18,type:&quot;fixed6&quot;},
+   KH6:{x:29,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   KH4:{x:45,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   KH2:{x:61,y:18,w:10,h:18,type:&quot;fixed4&quot;}
+  },
+  autoLanes:[[&quot;KH1&quot;,&quot;KH3&quot;,&quot;KH5&quot;,&quot;KH7&quot;],[&quot;KH2&quot;,&quot;KH4&quot;,&quot;KH6&quot;,&quot;KH8&quot;]]
+ },
+ CD:{
+  label:&quot;CD&quot;,
+  positions:{
+   CD7:{x:6,y:63,w:9,h:18,type:&quot;fixed4h&quot;},
+   ICE:{x:19,y:60,w:18,h:24,type:&quot;fixture&quot;,label:&quot;わたあめ機&quot;},
+   CD5:{x:42,y:63,w:9,h:18,type:&quot;fixed4&quot;},
+   CD3:{x:55,y:63,w:9,h:18,type:&quot;fixed4&quot;},
+   CD1:{x:68,y:63,w:9,h:18,type:&quot;fixed4&quot;},
+
+   CD8:{x:6,y:18,w:9,h:18,type:&quot;fixed4&quot;},
+   CD6:{x:23,y:18,w:9,h:18,type:&quot;fixed4&quot;},
+   CD4:{x:40,y:18,w:9,h:18,type:&quot;fixed4&quot;},
+   CD2:{x:57,y:18,w:9,h:18,type:&quot;fixed4&quot;}
+  },
+  autoLanes:[[&quot;CD1&quot;,&quot;CD3&quot;,&quot;CD5&quot;],[&quot;CD2&quot;,&quot;CD4&quot;,&quot;CD6&quot;,&quot;CD8&quot;],[&quot;CD7&quot;]]
+ }
+};
+const ROOM_ORDER=[&quot;SG&quot;,&quot;KH&quot;,&quot;CD&quot;];
+const KEY=&quot;sekifuri-koshitsu-v11-horizontal-size-fixed&quot;;
+let data=JSON.parse(localStorage.getItem(KEY)||&#x27;{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{}}&#x27;);
+data.states||={};data.groups||=[];data.merged||={};
+for(const room of ROOM_ORDER)for(const [id,p] of Object.entries(ROOMS[room].positions))if(p.type===&quot;split&quot;&amp;&amp;data.merged[id]===undefined)data.merged[id]=true;
+
+let selectedRoom=&quot;SG&quot;,selectedState=&quot;reserved&quot;,people=4,manual=false,selected=new Set();
+const save=()=&gt;localStorage.setItem(KEY,JSON.stringify(data));
+const state=id=&gt;data.states[id]||&quot;empty&quot;;
+const stateLabel=s=&gt;s===&quot;reserved&quot;?&quot;席取り&quot;:s===&quot;used&quot;?&quot;使用中&quot;:&quot;空席&quot;;
+function toast(m){const t=document.getElementById(&quot;toast&quot;);t.textContent=m;t.classList.add(&quot;show&quot;);clearTimeout(window.__t);window.__t=setTimeout(()=&gt;t.classList.remove(&quot;show&quot;),1250)}
+function roomOf(id){return ROOM_ORDER.find(r=&gt;id.startsWith(r))||null}
+function baseOf(id){return id.endsWith(&quot;A&quot;)||id.endsWith(&quot;B&quot;)?id.slice(0,-1):id}
+function posOf(id){const r=roomOf(id),b=baseOf(id);return r?ROOMS[r].positions[b]:null}
+function capOf(id){
+ const p=posOf(id);if(!p)return 0;
+ if(id.endsWith(&quot;A&quot;))return 2;if(id.endsWith(&quot;B&quot;))return 4;
+ return p.type===&quot;fixed6&quot;||p.type===&quot;split&quot;?6:4;
+}
+function activeIds(room){
+ const out=[];
+ for(const [id,p] of Object.entries(ROOMS[room].positions)){
+  if(p.type===&quot;fixture&quot;)continue;
+  if(p.type===&quot;split&quot;&amp;&amp;!data.merged[id])out.push(id+&quot;A&quot;,id+&quot;B&quot;);else out.push(id);
+ }
+ return out;
+}
+function groupFor(id){return data.groups.find(g=&gt;g.ids.includes(id))}
+function available(id){return state(id)===&quot;empty&quot;&amp;&amp;!groupFor(id)}
+
+function laneUnits(room,lane){
+ const ids=[];
+ lane.forEach(base=&gt;{
+  const p=ROOMS[room].positions[base];
+  if(p.type===&quot;split&quot;&amp;&amp;!data.merged[base])ids.push(base+&quot;B&quot;,base+&quot;A&quot;); else ids.push(base);
+ });
+ return ids;
+}
+function allRuns(room){
+ const out=[];
+ ROOMS[room].autoLanes.forEach((lane,laneIndex)=&gt;{
+  const units=laneUnits(room,lane);
+  for(let i=0;i&lt;units.length;i++){
+   if(!available(units[i]))continue;
+   let cap=0;
+   for(let j=i;j&lt;units.length;j++){
+    if(!available(units[j]))break;
+    cap+=capOf(units[j]);
+    out.push({ids:units.slice(i,j+1),cap,count:j-i+1,laneIndex,start:i});
+   }
+  }
+ });
+ return out;
+}
+function tableNumber(id){
+ const nums=String(id).match(/\d+/g);
+ return nums ? Math.min(...nums.map(Number)) : Number.MAX_SAFE_INTEGER;
+}
+function compareByTableNumber(a,b){
+ const aa=a.ids.map(tableNumber).sort((x,y)=&gt;x-y);
+ const bb=b.ids.map(tableNumber).sort((x,y)=&gt;x-y);
+ const n=Math.max(aa.length,bb.length);
+ for(let i=0;i&lt;n;i++){
+  const av=aa[i]??Number.MAX_SAFE_INTEGER;
+  const bv=bb[i]??Number.MAX_SAFE_INTEGER;
+  if(av!==bv)return av-bv;
+ }
+ return 0;
+}
+function candidates(){
+ const roomPriority=room=&gt;ROOM_ORDER.indexOf(room);
+ const all=ROOM_ORDER.flatMap(room=&gt;
+   allRuns(room)
+    .filter(x=&gt;x.cap&gt;=people)
+    .map(x=&gt;({...x,room}))
+ );
+ return all.sort((a,b)=&gt;
+   (a.cap-people)-(b.cap-people)||
+   roomPriority(a.room)-roomPriority(b.room)||
+   a.count-b.count||
+   compareByTableNumber(a,b)||
+   a.laneIndex-b.laneIndex||
+   a.start-b.start
+ ).slice(0,35);
+}
+function setIds(ids,s=selectedState){
+ ids.forEach(id=&gt;s===&quot;empty&quot;?delete data.states[id]:data.states[id]=s);
+ const g=data.groups.find(g=&gt;ids.some(id=&gt;g.ids.includes(id)));if(g)g.state=s;
+ save();renderAll();
+}
+function createGroup(ids,room=roomOf(ids[0])||selectedRoom){
+ selectedRoom=room;
+ if(ids.length&lt;2){setIds(ids);return}
+ if(ids.some(id=&gt;!available(id))){toast(&quot;空席の卓だけ連結できます&quot;);return}
+ data.groups.push({id:&quot;g&quot;+Date.now()+Math.random(),room,ids:[...ids],state:selectedState});
+ setIds(ids,selectedState);toast(ids.join(&quot;・&quot;)+&quot; を連結しました&quot;);
+}
+function releaseGroup(gid){
+ const i=data.groups.findIndex(g=&gt;g.id===gid);if(i&lt;0)return;
+ data.groups[i].ids.forEach(id=&gt;delete data.states[id]);data.groups.splice(i,1);save();renderAll();toast(&quot;連結解除 → 空席&quot;);
+}
+function toggleSplit(base){
+ if(groupFor(base)||groupFor(base+&quot;A&quot;)||groupFor(base+&quot;B&quot;)){toast(&quot;先に手動連結を解除してください&quot;);return}
+ if(data.merged[base]){
+  if(state(base)!==&quot;empty&quot;){toast(&quot;空席にしてから分割してください&quot;);return}
+  delete data.states[base];delete data.states[base+&quot;A&quot;];delete data.states[base+&quot;B&quot;];data.merged[base]=false;
+ }else{
+  if(state(base+&quot;A&quot;)!==&quot;empty&quot;||state(base+&quot;B&quot;)!==&quot;empty&quot;){toast(&quot;両方を空席にしてから連結してください&quot;);return}
+  delete data.states[base];delete data.states[base+&quot;A&quot;];delete data.states[base+&quot;B&quot;];data.merged[base]=true;
+ }
+ selected.clear();save();renderAll();
+}
+function handle(id){
+ if(manual){
+  if(!available(id)){toast(&quot;空席の卓だけ選択できます&quot;);return}
+  selected.has(id)?selected.delete(id):selected.add(id);renderAll();return;
+ }
+ const g=groupFor(id);g?setIds(g.ids):setIds([id]);
+}
+
+function renderRoomButtons(){
+ const h=document.getElementById(&quot;roomRow&quot;);h.innerHTML=&quot;&quot;;
+ ROOM_ORDER.forEach(r=&gt;{const b=document.createElement(&quot;button&quot;);b.textContent=r;b.classList.toggle(&quot;active&quot;,r===selectedRoom);
+  b.onclick=()=&gt;{selectedRoom=r;manual=false;selected.clear();renderAll()};h.appendChild(b)});
+}
+function renderPeople(){
+ const h=document.getElementById(&quot;peopleRow&quot;);h.innerHTML=&quot;&quot;;
+ [2,3,4,5,6,7,8,9,10,11,12,13,14,16,18,20].forEach(n=&gt;{const b=document.createElement(&quot;button&quot;);b.textContent=n+&quot;名&quot;;b.classList.toggle(&quot;active&quot;,n===people);
+  b.onclick=()=&gt;{people=n;renderPeople();renderOptions()};h.appendChild(b)});
+}
+function summary(room){
+ const ids=activeIds(room),grouped=new Set(data.groups.filter(g=&gt;g.room===room).flatMap(g=&gt;g.ids));
+ const c=n=&gt;ids.filter(id=&gt;capOf(id)===n&amp;&amp;!grouped.has(id)&amp;&amp;state(id)===&quot;empty&quot;).length;
+ return {c2:c(2),c4:c(4),c6:c(6),max:allRuns(room).reduce((m,x)=&gt;Math.max(m,x.cap),0)};
+}
+function renderSummary(){
+ const h=document.getElementById(&quot;summaryAll&quot;);h.innerHTML=&quot;&quot;;
+ ROOM_ORDER.forEach(r=&gt;{const s=summary(r),d=document.createElement(&quot;div&quot;);d.className=&quot;room-summary&quot;;
+ d.innerHTML=`&lt;div class=&quot;room-name&quot;&gt;${r}&lt;/div&gt;&lt;div class=&quot;sum&quot;&gt;&lt;small&gt;2人卓 空き&lt;/small&gt;&lt;b&gt;${s.c2}&lt;/b&gt;&lt;/div&gt;
+ &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;4人卓 空き&lt;/small&gt;&lt;b&gt;${s.c4}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;sum&quot;&gt;&lt;small&gt;6人卓 空き&lt;/small&gt;&lt;b&gt;${s.c6}&lt;/b&gt;&lt;/div&gt;
+ &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;MAX&lt;/small&gt;&lt;b&gt;${s.max}名&lt;/b&gt;&lt;/div&gt;`;h.appendChild(d)});
+}
+function renderManual(){
+ document.getElementById(&quot;manualToggle&quot;).classList.toggle(&quot;active&quot;,manual);
+ document.getElementById(&quot;manualToggle&quot;).textContent=manual?&quot;手動連結中&quot;:&quot;手動連結&quot;;
+ const ids=[...selected],cap=ids.reduce((s,id)=&gt;s+capOf(id),0);
+ document.getElementById(&quot;selectionInfo&quot;).textContent=ids.length?`選択：${ids.join(&quot;・&quot;)}　合計${cap}席`:&quot;卓を選択してください&quot;;
+ document.getElementById(&quot;manualConfirm&quot;).disabled=ids.length&lt;2;
+}
+function renderOptions(){
+ document.getElementById(&quot;recommendTitle&quot;).textContent=&quot;おすすめ案&quot;;
+ const h=document.getElementById(&quot;options&quot;);h.innerHTML=&quot;&quot;;const arr=candidates();
+ document.getElementById(&quot;optionCount&quot;).textContent=arr.length+&quot;案&quot;;
+ if(!arr.length){h.innerHTML=&#x27;&lt;div class=&quot;empty-note&quot;&gt;利用できる組み合わせがありません。&lt;/div&gt;&#x27;;updateArrows();return}
+ arr.forEach((o,i)=&gt;{const excess=o.cap-people,cls=excess===0?&quot;p1&quot;:excess===1?&quot;p2&quot;:excess&lt;=3?&quot;p3&quot;:&quot;low&quot;;
+ const b=document.createElement(&quot;button&quot;);b.className=&quot;option &quot;+cls;
+ b.innerHTML=`&lt;strong&gt;${o.ids.join(&quot;・&quot;)}&lt;/strong&gt;&lt;div class=&quot;cap&quot;&gt;${o.room}・${o.count}卓・MAX ${o.cap}名&lt;/div&gt;&lt;small&gt;${i===0?&quot;優先&quot;:excess===0?&quot;同数候補&quot;:excess&lt;=3?&quot;予備&quot;:&quot;優先度低&quot;}${excess?&quot;・空き&quot;+excess+&quot;席&quot;:&quot;&quot;}&lt;/small&gt;`;
+ b.onclick=()=&gt;createGroup(o.ids,o.room);h.appendChild(b)});
+ requestAnimationFrame(()=&gt;{h.scrollLeft=0;updateArrows()});
+}
+function styleBox(el,p){
+ el.style.left=p.x+&quot;%&quot;;el.style.top=p.y+&quot;%&quot;;el.style.width=p.w+&quot;%&quot;;el.style.height=p.h+&quot;%&quot;;
+}
+function tableButton(id,cap){
+ const b=document.createElement(&quot;button&quot;),g=groupFor(id);
+ b.className=`table cap${cap} ${state(id)} ${selected.has(id)?&quot;selected&quot;:&quot;&quot;} ${g?&quot;grouped&quot;:&quot;&quot;}`;
+ b.innerHTML=`&lt;span class=&quot;st&quot;&gt;${stateLabel(state(id)).slice(0,1)}&lt;/span&gt;&lt;span&gt;${id}&lt;/span&gt;&lt;span class=&quot;cap&quot;&gt;${cap}人&lt;/span&gt;`;
+ if(g){const badge=document.createElement(&quot;span&quot;);badge.className=&quot;group-badge&quot;;badge.textContent=&quot;連&quot;;b.appendChild(badge)}
+ b.onclick=()=&gt;handle(id);return b;
+}
+function splitElement(base,p){
+ const wrap=document.createElement(&quot;div&quot;);wrap.className=&quot;split-wrap&quot;;styleBox(wrap,p);
+ if(data.merged[base]){
+  const g=groupFor(base),d=document.createElement(&quot;button&quot;);
+  d.className=`split-merged ${state(base)} ${selected.has(base)?&quot;selected&quot;:&quot;&quot;} ${g?&quot;grouped&quot;:&quot;&quot;}`;
+  d.innerHTML=`&lt;div class=&quot;segment seg2&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;segment seg4&quot;&gt;4&lt;/div&gt;&lt;span class=&quot;state-badge&quot;&gt;${stateLabel(state(base)).slice(0,1)}&lt;/span&gt;&lt;span class=&quot;merged-label&quot;&gt;${base}　6人&lt;/span&gt;`;
+  if(g){const badge=document.createElement(&quot;span&quot;);badge.className=&quot;group-badge&quot;;badge.textContent=&quot;連&quot;;d.appendChild(badge)}
+  d.onclick=()=&gt;handle(base);wrap.appendChild(d);
+ }else{
+  const d=document.createElement(&quot;div&quot;);d.className=&quot;split-parts&quot;;d.append(tableButton(base+&quot;A&quot;,2),tableButton(base+&quot;B&quot;,4));wrap.appendChild(d);
+ }
+ const t=document.createElement(&quot;button&quot;);t.className=&quot;split-action&quot;;t.textContent=data.merged[base]?&quot;分割&quot;:&quot;連結&quot;;t.onclick=e=&gt;{e.stopPropagation();toggleSplit(base)};
+ wrap.appendChild(t);return wrap;
+}
+function rectOfId(id){
+ const p=posOf(id);if(!p)return null;
+ let y=p.y,h=p.h;
+ if(id.endsWith(&quot;A&quot;)){h=p.h/3}
+ else if(id.endsWith(&quot;B&quot;)){y=p.y+p.h/3;h=p.h*2/3}
+ return {x:p.x,y,w:p.w,h};
+}
+function placeAbsolute(el,r){
+ el.style.left=r.x+&quot;%&quot;;el.style.top=r.y+&quot;%&quot;;el.style.width=r.w+&quot;%&quot;;el.style.height=r.h+&quot;%&quot;;
+}
+function renderSplitBase(map,base,p,grouped){
+ const a=base+&quot;A&quot;,b=base+&quot;B&quot;;
+ if(data.merged[base]){
+   if(grouped.has(base))return;
+   map.appendChild(splitElement(base,p));return;
+ }
+ const wrap=document.createElement(&quot;div&quot;);wrap.className=&quot;split-wrap&quot;;styleBox(wrap,p);
+ const parts=document.createElement(&quot;div&quot;);parts.className=&quot;split-parts&quot;;
+ if(grouped.has(a)){
+   const gap=document.createElement(&quot;div&quot;);gap.style.visibility=&quot;hidden&quot;;parts.appendChild(gap);
+ }else parts.appendChild(tableButton(a,2));
+ if(grouped.has(b)){
+   const gap=document.createElement(&quot;div&quot;);gap.style.visibility=&quot;hidden&quot;;parts.appendChild(gap);
+ }else parts.appendChild(tableButton(b,4));
+ wrap.appendChild(parts);
+ const t=document.createElement(&quot;button&quot;);t.className=&quot;split-action&quot;;t.textContent=&quot;連結&quot;;
+ t.onclick=e=&gt;{e.stopPropagation();toggleSplit(base)};wrap.appendChild(t);map.appendChild(wrap);
+}
+function renderManualGroups(map){
+ data.groups.filter(g=&gt;g.room===selectedRoom).forEach(g=&gt;{
+   const rects=g.ids.map(rectOfId).filter(Boolean);if(!rects.length)return;
+   const minX=Math.min(...rects.map(r=&gt;r.x)),minY=Math.min(...rects.map(r=&gt;r.y));
+   const maxX=Math.max(...rects.map(r=&gt;r.x+r.w)),maxY=Math.max(...rects.map(r=&gt;r.y+r.h));
+   const pad=0.7;
+   const wrap=document.createElement(&quot;div&quot;);wrap.className=&quot;manual-group-wrap&quot;;
+   placeAbsolute(wrap,{x:Math.max(0,minX-pad),y:Math.max(0,minY-pad),w:Math.min(100,maxX-minX+pad*2),h:Math.min(100,maxY-minY+pad*2)});
+   const b=document.createElement(&quot;button&quot;);b.className=`manual-group ${g.state||state(g.ids[0])}`;
+   const cap=g.ids.reduce((s,id)=&gt;s+capOf(id),0);
+   b.innerHTML=`&lt;span class=&quot;group-ids&quot;&gt;${g.ids.join(&quot;・&quot;)}&lt;/span&gt;&lt;span class=&quot;group-cap&quot;&gt;MAX ${cap}名&lt;/span&gt;`;
+   b.onclick=()=&gt;manual?toast(&quot;手動連結中です&quot;):setIds(g.ids);
+   const x=document.createElement(&quot;button&quot;);x.className=&quot;group-release&quot;;x.textContent=&quot;×&quot;;
+   x.title=&quot;連結解除&quot;;x.onclick=e=&gt;{e.stopPropagation();releaseGroup(g.id)};
+   wrap.append(b,x);map.appendChild(wrap);
+ });
+}
+function renderMap(){
+ document.getElementById(&quot;mapTitle&quot;).textContent=`${selectedRoom} 実配置`;
+ const map=document.getElementById(&quot;roomMap&quot;);map.innerHTML=&quot;&quot;;
+ const head=document.createElement(&quot;div&quot;);head.className=&quot;room-header&quot;;head.textContent=selectedRoom;map.appendChild(head);
+ const ent=document.createElement(&quot;div&quot;);ent.className=&quot;entrance&quot;;ent.textContent=&quot;入口&quot;;map.appendChild(ent);
+
+ const grouped=new Set(data.groups.filter(g=&gt;g.room===selectedRoom).flatMap(g=&gt;g.ids));
+ const positions=ROOMS[selectedRoom].positions;
+ for(const [id,p] of Object.entries(positions)){
+   if(p.type===&quot;fixture&quot;){
+     const f=document.createElement(&quot;div&quot;);f.className=&quot;fixture&quot;;f.innerHTML=p.label;styleBox(f,p);map.appendChild(f);continue;
+   }
+   if(p.type===&quot;split&quot;){renderSplitBase(map,id,p,grouped);continue}
+   if(grouped.has(id))continue;
+   const wrap=document.createElement(&quot;div&quot;);wrap.className=&quot;table-wrap&quot;;styleBox(wrap,p);
+   wrap.appendChild(tableButton(id,p.type===&quot;fixed6&quot;?6:4));map.appendChild(wrap);
+ }
+ renderManualGroups(map);
+}
+function updateArrows(){
+ const h=document.getElementById(&quot;options&quot;),m=Math.max(0,h.scrollWidth-h.clientWidth);
+ document.getElementById(&quot;prev&quot;).disabled=h.scrollLeft&lt;=2;document.getElementById(&quot;next&quot;).disabled=h.scrollLeft&gt;=m-2;
+}
+function renderAll(){renderSummary();renderRoomButtons();renderManual();renderOptions();renderMap()}
+
+document.querySelectorAll(&quot;#stateRow button&quot;).forEach(b=&gt;b.onclick=()=&gt;{
+ selectedState=b.dataset.state;document.querySelectorAll(&quot;#stateRow button&quot;).forEach(x=&gt;x.classList.toggle(&quot;active&quot;,x===b))
+});
+document.getElementById(&quot;manualToggle&quot;).onclick=()=&gt;{manual=!manual;selected.clear();renderAll()};
+document.getElementById(&quot;manualClear&quot;).onclick=()=&gt;{selected.clear();renderAll()};
+document.getElementById(&quot;manualConfirm&quot;).onclick=()=&gt;{const ids=[...selected];if(ids.length&lt;2){toast(&quot;2卓以上を選択してください&quot;);return}createGroup(ids);manual=false;selected.clear();renderAll()};
+document.getElementById(&quot;reset&quot;).onclick=()=&gt;{
+ data={states:{},groups:[],merged:{}};for(const r of ROOM_ORDER)for(const [id,p] of Object.entries(ROOMS[r].positions))if(p.type===&quot;split&quot;)data.merged[id]=true;
+ manual=false;selected.clear();save();renderAll();toast(&quot;初期状態に戻しました&quot;)
+};
+const oh=document.getElementById(&quot;options&quot;);
+document.getElementById(&quot;prev&quot;).onclick=()=&gt;oh.scrollBy({left:-oh.clientWidth*.85,behavior:&quot;smooth&quot;});
+document.getElementById(&quot;next&quot;).onclick=()=&gt;oh.scrollBy({left:oh.clientWidth*.85,behavior:&quot;smooth&quot;});
+oh.addEventListener(&quot;scroll&quot;,updateArrows,{passive:true});
+
+renderPeople();renderAll();
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe></main>
+</div>
+<script>
+(()=>{
+ "use strict";
+ const buttons=[...document.querySelectorAll(".tab-btn")];
+ const frames=[...document.querySelectorAll(".app-frame")];
+ const key="sekifuri-all-tabs-active";
+ let active=Number(localStorage.getItem(key)||0);
+ if(!Number.isInteger(active)||active<0||active>=frames.length) active=0;
+ function show(index){
+   buttons.forEach((button,i)=>button.classList.toggle("active",i===index));
+   frames.forEach((frame,i)=>frame.classList.toggle("active",i===index));
+   localStorage.setItem(key,String(index));
+ }
+ buttons.forEach((button,i)=>button.addEventListener("click",()=>show(i)));
+ show(active);
+})();
+</script>
+</body>
+</html>
