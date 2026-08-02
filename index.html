@@ -6,35 +6,25 @@
 <title>席振り</title>
 <style>
 :root{--bg:#e9edf2;--panel:#fff;--line:#cbd2da;--text:#111827;--accent:#2563eb}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;color:var(--text);overflow:hidden}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;color:var(--text);overflow:hidden}
 .shell{height:100%;display:flex;flex-direction:column}
 .topbar{flex:0 0 auto;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.08);z-index:10}
-.title{padding:7px 10px 4px;font-weight:950;font-size:16px}
+.outer-title{padding:7px 10px 4px;font-weight:950;font-size:16px}
 .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:4px 7px 7px}
 .tab-btn{border:1px solid var(--line);background:#f8fafc;border-radius:9px;padding:8px 5px;font-weight:950;font-size:13px}
 .tab-btn.active{background:#111827;color:#fff;border-color:#111827;box-shadow:inset 0 -3px 0 var(--accent)}
 .stage{position:relative;flex:1;min-height:0}
 .app-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff;display:none}
 .app-frame.active{display:block}
-@media(max-width:430px){
- .title{font-size:14px;padding-top:5px}
- .tabs{gap:3px;padding:3px 5px 5px}
- .tab-btn{padding:7px 3px;font-size:12px}
-}
+@media(max-width:430px){.outer-title{font-size:14px;padding-top:5px}.tabs{gap:3px;padding:3px 5px 5px}.tab-btn{padding:7px 3px;font-size:12px}}
 </style>
 </head>
 <body>
 <div class="shell">
 <header class="topbar">
-<div class="title">席振り</div>
-<nav class="tabs"><button class="tab-btn active" data-index="0" type="button">1F</button>
-<button class="tab-btn" data-index="1" type="button">2F</button>
-<button class="tab-btn" data-index="2" type="button">3F</button>
-<button class="tab-btn" data-index="3" type="button">個室</button></nav>
-</header>
-<main class="stage"><iframe class="app-frame active" data-index="0" title="1F" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ja&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;&lt;title&gt;1F&lt;/title&gt;&lt;style&gt;
-:root{--bg:#f4f6f8;--card:#fff;--line:#d5d9df;--text:#17202a;--muted:#667085;--empty:#fff;--reserved:#ffe49a;--used:#ef6b73;--accent:#2563eb;--sel:#dbeafe}
+<div class="outer-title">席振り</div>
+<nav class="tabs"><button class="tab-btn active" data-index="0" type="button">1F</button><button class="tab-btn" data-index="1" type="button">2F</button><button class="tab-btn" data-index="2" type="button">3F</button><button class="tab-btn" data-index="3" type="button">個室</button></nav></header><main class="stage"><iframe class="app-frame active" data-index="0" title="1F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ja&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;&lt;title&gt;1F 席振り 清掃待ちテスト&lt;/title&gt;&lt;style&gt;
+:root{--bg:#f4f6f8;--card:#fff;--line:#d5d9df;--text:#17202a;--muted:#667085;--empty:#fff;--reserved:#ffe49a;--used:#ef6b73;--cleaning:#dbe2ea;--accent:#2563eb;--sel:#dbeafe}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,&quot;Noto Sans JP&quot;,sans-serif}button{font:inherit}
 .fixed{position:sticky;top:0;z-index:20;background:rgba(244,246,248,.97);backdrop-filter:blur(7px);border-bottom:1px solid var(--line)}
 .fixed-inner{max-width:980px;margin:auto;padding:7px}.title{display:flex;justify-content:space-between;align-items:center;gap:8px}.title b{font-size:17px}
@@ -46,15 +36,15 @@ html,body{margin:0;width:100%;height:100%;background:var(--bg);font-family:syste
 main{max-width:980px;margin:auto;padding:7px}.card,.map-card{background:#fff;border:1px solid var(--line);border-radius:11px;padding:8px;margin-bottom:8px}.card-title,.map-title{display:flex;justify-content:space-between;font-weight:900;margin-bottom:7px}
 .options-wrap{display:grid;grid-template-columns:34px minmax(0,1fr) 34px;gap:5px}.scroll-arrow{border:1px solid var(--line);background:#fff;border-radius:8px;font-size:21px;font-weight:900}.scroll-arrow:disabled{opacity:.25}.options{min-width:0;display:flex;gap:7px;overflow-x:auto;scroll-behavior:smooth;padding:1px 1px 6px}.option{flex:0 0 194px;border:2px solid #9ca3af;background:#fff;border-radius:9px;padding:7px;text-align:left}.option.p1{border-color:#16a34a;background:#dcfce7}.option.p2{border-color:#eab308;background:#fef9c3}.option.p3{border-color:#fb923c;background:#ffedd5}.option.low{background:#f3f4f6}.option strong{font-size:15px}.option .cap{font-weight:900;margin-top:3px}.option small{color:var(--muted)}
 .floor-map{min-width:760px;display:grid;grid-template-columns:repeat(14,52px);grid-auto-rows:58px;gap:10px 7px;align-items:stretch;padding:4px}.map-card{overflow:auto}
-.table,.composite{border:1px solid #9ea5af;background:var(--empty);border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;position:relative;min-width:0;padding:2px}.table.reserved,.composite.reserved{background:var(--reserved)}.table.used,.composite.used{background:var(--used)}.table.selected,.composite.selected{outline:4px solid var(--accent);outline-offset:-4px;background:var(--sel)}.cap{font-size:9px;color:#667085}.st{position:absolute;right:3px;top:2px;font-size:8px}
+.table,.composite{border:1px solid #9ea5af;background:var(--empty);border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;position:relative;min-width:0;padding:2px}.table.reserved,.composite.reserved{background:var(--reserved)}.table.used,.composite.used{background:var(--used)}.table.cleaning,.composite.cleaning{background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)}.table.selected,.composite.selected{outline:4px solid var(--accent);outline-offset:-4px;background:var(--sel)}.cap{font-size:9px;color:#667085}.st{position:absolute;right:3px;top:2px;font-size:8px}
 .composite-wrap,.group-wrap{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:2px;min-width:0}.composite-wrap.merged{display:block}.composite{width:100%;height:100%;border:2px solid #4b5563}.split-action{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);z-index:4;border:1px solid #64748b;background:#fff;border-radius:999px;padding:1px 7px;font-size:9px;font-weight:900;white-space:nowrap}
 .group-wrap{display:block}.merged-group{width:100%;height:100%;border:3px solid var(--accent);border-radius:9px;background:#eef4ff;display:flex;align-items:center;justify-content:center;flex-direction:column;font-weight:900;padding:3px 27px 3px 4px}.merged-group.reserved{background:var(--reserved)}.merged-group.used{background:var(--used)}.group-release{position:absolute;right:3px;top:3px;width:22px;height:22px;border:1px solid #b33;background:#fff;color:#9a1e28;border-radius:6px;font-weight:900;padding:0;z-index:4}
 .room-label{font-weight:900;font-size:14px;align-self:center;padding-left:4px}.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--muted);padding:8px 2px 2px}.dot{display:inline-block;width:12px;height:12px;border:1px solid #999;border-radius:3px;vertical-align:-2px;margin-right:3px}
 .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#111;color:#fff;padding:8px 13px;border-radius:999px;opacity:0;pointer-events:none;transition:.2s;z-index:50;font-size:12px}.toast.show{opacity:1}.empty-note{color:var(--muted);padding:12px}
 @media(max-width:430px){.title b{font-size:15px}.fixed-inner,main{padding:5px}.summary{gap:3px}.row-scroll button,.manualbar button{padding:5px 8px}}
 &lt;/style&gt;&lt;/head&gt;
-&lt;body&gt;&lt;div class=&quot;fixed&quot;&gt;&lt;div class=&quot;fixed-inner&quot;&gt;&lt;div class=&quot;title&quot;&gt;&lt;button id=&quot;reset&quot; class=&quot;reset&quot;&gt;リセット&lt;/button&gt;&lt;/div&gt;&lt;div id=&quot;summary&quot; class=&quot;summary&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;label&quot;&gt;タップ時の状態&lt;/div&gt;&lt;div id=&quot;stateRow&quot; class=&quot;row-scroll state-row&quot;&gt;&lt;button data-state=&quot;empty&quot;&gt;空席&lt;/button&gt;&lt;button data-state=&quot;reserved&quot; class=&quot;active&quot;&gt;席取り&lt;/button&gt;&lt;button data-state=&quot;used&quot;&gt;使用中&lt;/button&gt;&lt;/div&gt;
+&lt;body&gt;&lt;div class=&quot;fixed&quot;&gt;&lt;div class=&quot;fixed-inner&quot;&gt;&lt;div class=&quot;title&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;button id=&quot;reset&quot; class=&quot;reset&quot;&gt;リセット&lt;/button&gt;&lt;/div&gt;&lt;div id=&quot;summary&quot; class=&quot;summary&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;label&quot;&gt;タップ時の状態 &lt;span style=&quot;font-weight:400;color:var(--muted)&quot;&gt;（長押し＝清掃待ち）&lt;/span&gt;&lt;/div&gt;&lt;div id=&quot;stateRow&quot; class=&quot;row-scroll state-row&quot;&gt;&lt;button data-state=&quot;empty&quot;&gt;空席&lt;/button&gt;&lt;button data-state=&quot;reserved&quot; class=&quot;active&quot;&gt;席取り&lt;/button&gt;&lt;button data-state=&quot;used&quot;&gt;使用中&lt;/button&gt;&lt;/div&gt;
 &lt;div class=&quot;label&quot;&gt;人数&lt;/div&gt;&lt;div id=&quot;peopleRow&quot; class=&quot;row-scroll&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;label&quot;&gt;手動で隣り合う卓を連結&lt;/div&gt;&lt;div class=&quot;manualbar&quot;&gt;&lt;button id=&quot;manualToggle&quot;&gt;手動連結&lt;/button&gt;&lt;span id=&quot;selectionInfo&quot; class=&quot;selection-info&quot;&gt;&lt;/span&gt;&lt;button id=&quot;manualClear&quot;&gt;選択解除&lt;/button&gt;&lt;button id=&quot;manualConfirm&quot; class=&quot;confirm&quot;&gt;連結する&lt;/button&gt;&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;main&gt;&lt;section class=&quot;card&quot;&gt;&lt;div class=&quot;card-title&quot;&gt;&lt;span&gt;おすすめ案&lt;/span&gt;&lt;span id=&quot;optionCount&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;options-wrap&quot;&gt;&lt;button id=&quot;prev&quot; class=&quot;scroll-arrow&quot;&gt;‹&lt;/button&gt;&lt;div id=&quot;options&quot; class=&quot;options&quot;&gt;&lt;/div&gt;&lt;button id=&quot;next&quot; class=&quot;scroll-arrow&quot;&gt;›&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
@@ -62,10 +52,10 @@ main{max-width:980px;margin:auto;padding:7px}.card,.map-card{background:#fff;bor
 &lt;script&gt;
 (()=&gt;{
 &quot;use strict&quot;;
-const CONFIG={&quot;key&quot;: &quot;sekifuri-1f-v9-osusume&quot;, &quot;resetText&quot;: &quot;1Fをすべて空席・初期連結状態に戻しますか？&quot;, &quot;items&quot;: [{&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;1&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;2&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;3&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;4&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;5&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;6&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 1, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;10&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;11&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;12&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;13&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;14&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;15&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 2, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;16&quot;}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;20&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;21&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;22&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;23&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;24&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;25&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 3, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;26&quot;}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;30&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;31&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;32&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;33&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;34&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;35&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 4, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;36&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;50&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [2, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;51&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;52&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;53&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;54&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;55&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;56&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 5, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;57&quot;}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;60&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;61&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;62&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;63&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;64&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;65&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;66&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;67&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 7, &quot;pos&quot;: [9, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;68&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 8, &quot;pos&quot;: [10, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;69&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 9, &quot;pos&quot;: [11, 6, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;70&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;71&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;72&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;73&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;74&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;75&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;76&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;77&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 7, &quot;pos&quot;: [9, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;78&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 8, &quot;pos&quot;: [10, 7, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;79&quot;}], &quot;composites&quot;: [{&quot;id&quot;: &quot;1&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;1A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;1B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 1, 2]}, {&quot;id&quot;: &quot;10&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;10A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;10B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 2, 2]}, {&quot;id&quot;: &quot;16&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;16A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;16B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 2, 2]}, {&quot;id&quot;: &quot;20&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;20A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;20B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 3, 2]}, {&quot;id&quot;: &quot;26&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;26A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;26B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 3, 2]}, {&quot;id&quot;: &quot;30&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;30A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;30B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 4, 2]}, {&quot;id&quot;: &quot;36&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;36A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;36B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 4, 2]}, {&quot;id&quot;: &quot;57&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;57A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;57B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 7, &quot;pos&quot;: [9, 5, 2]}, {&quot;id&quot;: &quot;60&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;60A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;60B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 6, 2]}, {&quot;id&quot;: &quot;70&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;70A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;70B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 7, 2]}, {&quot;id&quot;: &quot;79&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;79A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;79B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 9, &quot;pos&quot;: [11, 7, 2]}], &quot;rowKeys&quot;: [&quot;r0&quot;, &quot;r1&quot;, &quot;r2&quot;, &quot;r3&quot;, &quot;r4&quot;, &quot;r5&quot;, &quot;r6&quot;]};
+const CONFIG={&quot;key&quot;: &quot;sekifuri-1f-cleaning-physical-priority&quot;, &quot;resetText&quot;: &quot;1Fをすべて空席・初期連結状態に戻しますか？&quot;, &quot;items&quot;: [{&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;1&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;2&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;3&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;4&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;5&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 1, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;6&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 1, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;10&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;11&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;12&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;13&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;14&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 2, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;15&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 2, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;16&quot;}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;20&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;21&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;22&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;23&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;24&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 3, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;25&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 3, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;26&quot;}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;30&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;31&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;32&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;33&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;34&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 4, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;35&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 4, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;36&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;50&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [2, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;51&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;52&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;53&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;54&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;55&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 5, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;56&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 5, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;57&quot;}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;60&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;61&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;62&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;63&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;64&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;65&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;66&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;67&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 7, &quot;pos&quot;: [9, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;68&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 8, &quot;pos&quot;: [10, 6, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;69&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 9, &quot;pos&quot;: [11, 6, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;70&quot;}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;71&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 1, &quot;pos&quot;: [3, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;72&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 2, &quot;pos&quot;: [4, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;73&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 3, &quot;pos&quot;: [5, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;74&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 4, &quot;pos&quot;: [6, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;75&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 5, &quot;pos&quot;: [7, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;76&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;77&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 7, &quot;pos&quot;: [9, 7, 1]}, {&quot;kind&quot;: &quot;single&quot;, &quot;id&quot;: &quot;78&quot;, &quot;cap&quot;: 2, &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 8, &quot;pos&quot;: [10, 7, 1]}, {&quot;kind&quot;: &quot;composite&quot;, &quot;id&quot;: &quot;79&quot;}], &quot;composites&quot;: [{&quot;id&quot;: &quot;1&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;1A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;1B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r0&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 1, 2]}, {&quot;id&quot;: &quot;10&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;10A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;10B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 2, 2]}, {&quot;id&quot;: &quot;16&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;16A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;16B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r1&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 2, 2]}, {&quot;id&quot;: &quot;20&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;20A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;20B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 3, 2]}, {&quot;id&quot;: &quot;26&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;26A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;26B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r2&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 3, 2]}, {&quot;id&quot;: &quot;30&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;30A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;30B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 4, 2]}, {&quot;id&quot;: &quot;36&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;36A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;36B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r3&quot;, &quot;order&quot;: 6, &quot;pos&quot;: [8, 4, 2]}, {&quot;id&quot;: &quot;57&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;57A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;57B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r4&quot;, &quot;order&quot;: 7, &quot;pos&quot;: [9, 5, 2]}, {&quot;id&quot;: &quot;60&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;60A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;60B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r5&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 6, 2]}, {&quot;id&quot;: &quot;70&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;70A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;70B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 0, &quot;pos&quot;: [1, 7, 2]}, {&quot;id&quot;: &quot;79&quot;, &quot;cap&quot;: 4, &quot;parts&quot;: [{&quot;id&quot;: &quot;79A&quot;, &quot;cap&quot;: 2}, {&quot;id&quot;: &quot;79B&quot;, &quot;cap&quot;: 2}], &quot;rowKey&quot;: &quot;r6&quot;, &quot;order&quot;: 9, &quot;pos&quot;: [11, 7, 2]}], &quot;rowKeys&quot;: [&quot;r0&quot;, &quot;r1&quot;, &quot;r2&quot;, &quot;r3&quot;, &quot;r4&quot;, &quot;r5&quot;, &quot;r6&quot;]};
 const KEY=CONFIG.key;
 let data=JSON.parse(localStorage.getItem(KEY)||&#x27;{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{}}&#x27;);
-data.states||={}; data.groups||=[]; data.merged||={};
+data.states||={}; data.groups||=[]; data.merged||={}; data.cleaning||={};
 for(const c of CONFIG.composites) if(data.merged[c.id]===undefined)data.merged[c.id]=true;
 let selectedState=&quot;reserved&quot;, people=4, manual=false, selected=new Set();
 
@@ -88,7 +78,9 @@ function activeUnits(){
  return units;
 }
 function unitMap(){return Object.fromEntries(activeUnits().map(u=&gt;[u.id,u]))}
-function available(u){return state(u.id)===&quot;empty&quot;&amp;&amp;!groupForUnit(u.id)}
+function isCleaning(id){return !!data.cleaning[id]}
+function vacant(u){return state(u.id)===&quot;empty&quot;&amp;&amp;!groupForUnit(u.id)}
+function available(u){return vacant(u)&amp;&amp;!isCleaning(u.id)}
 function currentRows(){
  const um=unitMap(), rows=[];
  CONFIG.rowKeys.forEach(key=&gt;{
@@ -101,26 +93,118 @@ function allRuns(){
  const out=[];
  currentRows().forEach((row,rowIndex)=&gt;{
    for(let i=0;i&lt;row.length;i++){
-     if(!available(row[i]))continue;
-     let cap=0;
+     if(!vacant(row[i]))continue;
+     let cap=0,cleaning=false;
      for(let j=i;j&lt;row.length;j++){
-       if(!available(row[j]))break;
+       if(!vacant(row[j]))break;
        cap+=row[j].cap;
-       out.push({ids:row.slice(i,j+1).map(x=&gt;x.id),cap,rowIndex,start:i,count:j-i+1});
+       cleaning=cleaning||isCleaning(row[j].id);
+       out.push({ids:row.slice(i,j+1).map(x=&gt;x.id),cap,rowIndex,start:i,count:j-i+1,cleaning});
      }
    }
  });
  return out;
 }
+function remainingMaxAfter(ids){
+ const used=new Set(ids);
+ let best=0;
+ currentRows().forEach(row=&gt;{
+   let cap=0;
+   row.forEach(u=&gt;{
+     if(vacant(u)&amp;&amp;!used.has(u.id)){
+       cap+=u.cap;
+       if(cap&gt;best)best=cap;
+     }else{
+       cap=0;
+     }
+   });
+ });
+ return best;
+}
+function physicalTableCountForId(id){
+ const c=compositeById(id);
+ if(c&amp;&amp;data.merged[c.id])return c.parts.length;
+ return 1;
+}
+function physicalTableCount(ids){
+ return ids.reduce((sum,id)=&gt;sum+physicalTableCountForId(id),0);
+}
+function cleaningPhysicalCount(ids){
+ return ids.reduce((sum,id)=&gt;{
+   if(!isCleaning(id))return sum;
+   return sum+physicalTableCountForId(id);
+ },0);
+}
 function candidates(){
- return allRuns().filter(o=&gt;o.cap&gt;=people).sort((a,b)=&gt;
-   a.count-b.count || (a.cap-people)-(b.cap-people) || a.rowIndex-b.rowIndex || a.start-b.start
- ).slice(0,35);
+ const fitting=allRuns().filter(o=&gt;o.cap&gt;=people);
+ if(!fitting.length)return [];
+
+ const enrich=o=&gt;({
+   ...o,
+   physicalCount:physicalTableCount(o.ids),
+   cleaningPhysical:cleaningPhysicalCount(o.ids),
+   remainMax:remainingMaxAfter(o.ids)
+ });
+
+ const readyAll=fitting.filter(o=&gt;!o.cleaning);
+ const waitingAll=fitting.filter(o=&gt;o.cleaning);
+
+ let ready=[];
+ if(readyAll.length){
+   const minReadyCap=Math.min(...readyAll.map(o=&gt;o.cap));
+
+   /* 新しく連結する案は必要最小MAXだけ。
+      ただし、現在すでに1つの卓として存在する結合卓は
+      MAXが大きくても予備候補として残す。 */
+   ready=readyAll
+     .filter(o=&gt;{
+       if(o.cap===minReadyCap)return true;
+       if(o.ids.length!==1)return false;
+       const u=unitMap()[o.ids[0]];
+       return !!u?.composite;
+     })
+     .map(enrich);
+ }
+
+ let waiting=[];
+ if(waitingAll.length){
+   /* 清掃待ちは従来どおり、必要最小MAXだけ。 */
+   const minWaitingCap=Math.min(...waitingAll.map(o=&gt;o.cap));
+   waiting=waitingAll
+     .filter(o=&gt;o.cap===minWaitingCap)
+     .map(enrich);
+ }
+
+ const sorter=(a,b)=&gt;
+   a.cleaningPhysical-b.cleaningPhysical ||
+   a.physicalCount-b.physicalCount ||
+   b.remainMax-a.remainMax ||
+   Number(a.rowIndex===0)-Number(b.rowIndex===0) ||
+   a.rowIndex-b.rowIndex ||
+   a.start-b.start;
+
+ /* お客様優先：すぐ案内できる候補を全部先に、清掃待ちは後。 */
+ return [
+   ...ready.sort((a,b)=&gt;
+     (a.cap-people)-(b.cap-people) ||
+     sorter(a,b)
+   ),
+   ...waiting.sort((a,b)=&gt;
+     (a.cap-people)-(b.cap-people) ||
+     sorter(a,b)
+   )
+ ].slice(0,35);
 }
 function setUnits(ids,s=selectedState){
- ids.forEach(id=&gt;s===&quot;empty&quot;?delete data.states[id]:data.states[id]=s);
+ ids.forEach(id=&gt;{
+   delete data.cleaning[id];
+   s===&quot;empty&quot;?delete data.states[id]:data.states[id]=s;
+ });
  const g=data.groups.find(x=&gt;ids.some(id=&gt;x.ids.includes(id)));
- if(g)g.state=s;
+ if(g){
+   g.state=s;
+   g.ids.forEach(id=&gt;delete data.cleaning[id]);
+ }
  save();renderAll();
 }
 function createGroup(ids){
@@ -132,7 +216,7 @@ function createGroup(ids){
 }
 function releaseGroup(gid){
  const i=data.groups.findIndex(g=&gt;g.id===gid); if(i&lt;0)return;
- data.groups[i].ids.forEach(id=&gt;delete data.states[id]);
+ data.groups[i].ids.forEach(id=&gt;{delete data.states[id];delete data.cleaning[id]});
  data.groups.splice(i,1); save();renderAll();toast(&quot;連結解除 → 空席&quot;);
 }
 function toggleComposite(cid){
@@ -166,10 +250,36 @@ function handleUnit(id){
  const g=groupForUnit(id); g?setUnits(g.ids):setUnits([id]);
 }
 function renderPeople(){
- const h=document.getElementById(&quot;peopleRow&quot;);h.innerHTML=&quot;&quot;;
- [2,3,4,5,6,7,8,9,10,11,12,13,14,16,18,20].forEach(n=&gt;{
-  const b=document.createElement(&quot;button&quot;);b.textContent=n+&quot;名&quot;;b.classList.toggle(&quot;active&quot;,n===people);
-  b.onclick=()=&gt;{people=n;renderPeople();renderOptions()};h.appendChild(b);
+ const h=document.getElementById(&quot;peopleRow&quot;);
+ h.innerHTML=&quot;&quot;;
+
+ /* Chỉ hiện số khách mà trạng thái bàn HIỆN TẠI thực sự còn có thể nhận.
+    allRuns() bao gồm cả bàn sạch và 清掃待ち miễn bàn vẫn là 空席,
+    nên MAX ở đây phản ánh cả trường hợp dọn xong rồi annai. */
+ const runs=allRuns();
+ const maxCap=runs.reduce((m,o)=&gt;Math.max(m,o.cap),0);
+
+ const choices=[];
+ for(let n=2;n&lt;=maxCap;n++){
+  if(runs.some(o=&gt;o.cap&gt;=n)) choices.push(n);
+ }
+
+ /* Nếu trạng thái bàn thay đổi khiến số người đang chọn không còn khả thi,
+    tự chuyển về mức lớn nhất còn nhận được. */
+ if(choices.length &amp;&amp; !choices.includes(people)){
+  people=choices[choices.length-1];
+ }
+
+ choices.forEach(n=&gt;{
+  const b=document.createElement(&quot;button&quot;);
+  b.textContent=n+&quot;名&quot;;
+  b.classList.toggle(&quot;active&quot;,n===people);
+  b.onclick=()=&gt;{
+   people=n;
+   renderPeople();
+   renderOptions();
+  };
+  h.appendChild(b);
  });
 }
 function renderManual(){
@@ -179,15 +289,35 @@ function renderManual(){
  document.getElementById(&quot;selectionInfo&quot;).textContent=ids.length?`選択：${ids.join(&quot;・&quot;)}　合計${cap}席`:&quot;卓を選択してください&quot;;
  document.getElementById(&quot;manualConfirm&quot;).disabled=!validManual();
 }
+function applyRecommendedCleaning(ids){
+ ids.forEach(id=&gt;delete data.cleaning[id]);
+ if(ids.length&lt;2){
+  setUnits(ids,selectedState);
+  return;
+ }
+ const um=unitMap();
+ if(ids.every(id=&gt;um[id]&amp;&amp;available(um[id]))){
+  createGroup(ids);
+  return;
+ }
+ toast(&quot;この案は現在そのまま確定できません&quot;);
+}
+
 function renderOptions(){
  const h=document.getElementById(&quot;options&quot;);h.innerHTML=&quot;&quot;;const arr=candidates();
  document.getElementById(&quot;optionCount&quot;).textContent=arr.length+&quot;案&quot;;
  if(!arr.length){h.innerHTML=&#x27;&lt;div class=&quot;empty-note&quot;&gt;利用できる連番がありません。&lt;/div&gt;&#x27;;return}
  arr.forEach((o,i)=&gt;{
-   const excess=o.cap-people;let cls=excess===0?&quot;p1&quot;:excess===1?&quot;p2&quot;:excess&lt;=3?&quot;p3&quot;:&quot;low&quot;;
+   const excess=o.cap-people;
+   let cls=o.cleaning?&quot;low&quot;:excess===0?&quot;p1&quot;:excess===1?&quot;p2&quot;:&quot;p3&quot;;
    const b=document.createElement(&quot;button&quot;);b.className=&quot;option &quot;+cls;
-   b.innerHTML=`&lt;strong&gt;${o.ids.join(&quot;・&quot;)}&lt;/strong&gt;&lt;div class=&quot;cap&quot;&gt;${o.count}卓・MAX ${o.cap}名&lt;/div&gt;&lt;small&gt;${i===0?&quot;優先&quot;:excess===0?&quot;同数候補&quot;:excess&lt;=3?&quot;予備&quot;:&quot;優先度低&quot;}${excess?&quot;・空き&quot;+excess+&quot;席&quot;:&quot;&quot;}&lt;/small&gt;`;
-   b.onclick=()=&gt;createGroup(o.ids);h.appendChild(b);
+   const note=o.cleaning?&quot;清掃待ち&quot;:(i===0&amp;&amp;excess===0?&quot;優先&quot;:excess===0?&quot;同数候補&quot;:&quot;予備&quot;);
+   b.innerHTML=`&lt;strong&gt;${o.ids.join(&quot;・&quot;)}&lt;/strong&gt;&lt;div class=&quot;cap&quot;&gt;${o.physicalCount}卓・MAX ${o.cap}名&lt;/div&gt;&lt;small&gt;${note}${o.cleaning?&quot;・清掃&quot;+o.cleaningPhysical+&quot;卓&quot;:&quot;&quot;}${excess?&quot;・空き&quot;+excess+&quot;席&quot;:&quot;&quot;}・残すMAX ${o.remainMax}名&lt;/small&gt;`;
+   b.onclick=()=&gt;{
+     if(o.cleaning){applyRecommendedCleaning(o.ids);return}
+     createGroup(o.ids)
+   };
+   h.appendChild(b);
  });
  requestAnimationFrame(()=&gt;{h.scrollLeft=0;updateArrows()});
 }
@@ -196,13 +326,87 @@ function renderSummary(){
  const c2=units.filter(u=&gt;u.cap===2&amp;&amp;!grouped.has(u.id)&amp;&amp;state(u.id)===&quot;empty&quot;).length;
  const c4=units.filter(u=&gt;u.cap===4&amp;&amp;!grouped.has(u.id)&amp;&amp;state(u.id)===&quot;empty&quot;).length;
  const c6=units.filter(u=&gt;u.cap===6&amp;&amp;!grouped.has(u.id)&amp;&amp;state(u.id)===&quot;empty&quot;).length;
+ const cleaning=units.filter(u=&gt;!grouped.has(u.id)&amp;&amp;isCleaning(u.id)).length;
  const max=allRuns().reduce((m,o)=&gt;Math.max(m,o.cap),0);
- document.getElementById(&quot;summary&quot;).innerHTML=`&lt;div class=sum&gt;&lt;small&gt;2人卓 空き&lt;/small&gt;&lt;b&gt;${c2}&lt;/b&gt;&lt;/div&gt;&lt;div class=sum&gt;&lt;small&gt;4人卓 空き&lt;/small&gt;&lt;b&gt;${c4}&lt;/b&gt;&lt;/div&gt;&lt;div class=sum&gt;&lt;small&gt;6人卓 空き&lt;/small&gt;&lt;b&gt;${c6}&lt;/b&gt;&lt;/div&gt;&lt;div class=sum&gt;&lt;small&gt;MAX&lt;/small&gt;&lt;b&gt;${max}名&lt;/b&gt;&lt;/div&gt;`;
+ document.getElementById(&quot;summary&quot;).innerHTML=`&lt;div class=sum&gt;&lt;small&gt;2人卓 空き&lt;/small&gt;&lt;b&gt;${c2}&lt;/b&gt;&lt;/div&gt;&lt;div class=sum&gt;&lt;small&gt;4人卓 空き&lt;/small&gt;&lt;b&gt;${c4}&lt;/b&gt;&lt;/div&gt;&lt;div class=sum&gt;&lt;small&gt;6人卓 空き&lt;/small&gt;&lt;b&gt;${c6}&lt;/b&gt;&lt;/div&gt;&lt;div class=sum&gt;&lt;small&gt;MAX&lt;/small&gt;&lt;b&gt;${max}名&lt;/b&gt;&lt;/div&gt;&lt;div class=sum&gt;&lt;small&gt;清掃待ち&lt;/small&gt;&lt;b&gt;${cleaning}&lt;/b&gt;&lt;/div&gt;`;
+}
+
+function markCleaning(ids){
+ if(!Array.isArray(ids))ids=[ids];
+ ids.forEach(id=&gt;{delete data.states[id];data.cleaning[id]=true});
+ const g=data.groups.find(x=&gt;ids.some(id=&gt;x.ids.includes(id)));
+ if(g){
+   g.state=&quot;empty&quot;;
+   g.ids.forEach(id=&gt;{delete data.states[id];data.cleaning[id]=true});
+ }
+ save();renderAll();
+ toast(ids.join(&quot;・&quot;)+&quot; 清掃待ち&quot;);
+}
+function bindLongPress(btn,ids){
+ let timer=null,held=false,suppressClick=false,startX=0,startY=0;
+
+ function begin(x,y){
+   held=false;
+   startX=x;startY=y;
+   clearTimeout(timer);
+   timer=setTimeout(()=&gt;{
+     held=true;
+     suppressClick=true;
+     markCleaning(ids);
+     try{navigator.vibrate&amp;&amp;navigator.vibrate(25)}catch{}
+   },500);
+ }
+ function move(x,y){
+   if(Math.abs(x-startX)&gt;12||Math.abs(y-startY)&gt;12){
+     clearTimeout(timer);timer=null;
+   }
+ }
+ function end(){
+   clearTimeout(timer);timer=null;
+ }
+
+ // Điện thoại / màn hình cảm ứng
+ btn.addEventListener(&quot;touchstart&quot;,e=&gt;{
+   const t=e.touches[0];
+   begin(t.clientX,t.clientY);
+ },{passive:true});
+ btn.addEventListener(&quot;touchmove&quot;,e=&gt;{
+   const t=e.touches[0];
+   move(t.clientX,t.clientY);
+ },{passive:true});
+ btn.addEventListener(&quot;touchend&quot;,e=&gt;{
+   end();
+   if(held)e.preventDefault();
+ },{passive:false});
+ btn.addEventListener(&quot;touchcancel&quot;,end);
+
+ // Máy tính / chuột
+ btn.addEventListener(&quot;mousedown&quot;,e=&gt;{
+   if(e.button!==0)return;
+   begin(e.clientX,e.clientY);
+ });
+ btn.addEventListener(&quot;mousemove&quot;,e=&gt;move(e.clientX,e.clientY));
+ btn.addEventListener(&quot;mouseup&quot;,end);
+ btn.addEventListener(&quot;mouseleave&quot;,end);
+
+ // Chặn đúng 1 click phát sinh sau khi nhấn giữ; click bình thường vẫn chạy.
+ btn.addEventListener(&quot;click&quot;,e=&gt;{
+   if(suppressClick){
+     suppressClick=false;
+     e.preventDefault();
+     e.stopImmediatePropagation();
+   }
+ },true);
+
+ btn.addEventListener(&quot;contextmenu&quot;,e=&gt;e.preventDefault());
 }
 function baseButton(id,cap,extra=&quot;&quot;){
- const b=document.createElement(&quot;button&quot;);b.className=`table ${state(id)} ${selected.has(id)?&quot;selected&quot;:&quot;&quot;} ${extra}`;
- b.innerHTML=`&lt;span class=st&gt;${label(state(id)).slice(0,1)}&lt;/span&gt;&lt;span&gt;${id}&lt;/span&gt;&lt;span class=cap&gt;${cap}人&lt;/span&gt;`;
- b.onclick=()=&gt;handleUnit(id);return b;
+ const cleaning=isCleaning(id);
+ const b=document.createElement(&quot;button&quot;);b.className=`table ${cleaning?&quot;cleaning&quot;:state(id)} ${selected.has(id)?&quot;selected&quot;:&quot;&quot;} ${extra}`;
+ b.innerHTML=`&lt;span class=st&gt;${cleaning?&quot;清&quot;:label(state(id)).slice(0,1)}&lt;/span&gt;&lt;span&gt;${id}&lt;/span&gt;&lt;span class=cap&gt;${cap}人&lt;/span&gt;`;
+ b.onclick=()=&gt;handleUnit(id);
+ bindLongPress(b,id);
+ return b;
 }
 function renderMap(){
  const map=document.getElementById(&quot;floorMap&quot;);map.innerHTML=&quot;&quot;;
@@ -234,22 +438,27 @@ function renderMap(){
  });
 }
 function updateArrows(){const h=document.getElementById(&quot;options&quot;),m=Math.max(0,h.scrollWidth-h.clientWidth);document.getElementById(&quot;prev&quot;).disabled=h.scrollLeft&lt;=2;document.getElementById(&quot;next&quot;).disabled=h.scrollLeft&gt;=m-2}
-function renderAll(){renderSummary();renderManual();renderOptions();renderMap()}
+function renderAll(){
+ renderPeople();
+ renderSummary();
+ renderManual();
+ renderOptions();
+ renderMap();
+}
 document.querySelectorAll(&quot;#stateRow button&quot;).forEach(b=&gt;b.onclick=()=&gt;{selectedState=b.dataset.state;document.querySelectorAll(&quot;#stateRow button&quot;).forEach(x=&gt;x.classList.toggle(&quot;active&quot;,x===b))});
 document.getElementById(&quot;manualToggle&quot;).onclick=()=&gt;{manual=!manual;selected.clear();renderAll()};
 document.getElementById(&quot;manualClear&quot;).onclick=()=&gt;{selected.clear();renderAll()};
 document.getElementById(&quot;manualConfirm&quot;).onclick=()=&gt;{if(!validManual()){toast(&quot;隣り合う卓を選択してください&quot;);return}const ids=[...selected].sort((a,b)=&gt;{const row=currentRows().find(r=&gt;r.some(u=&gt;u.id===a));return row.findIndex(u=&gt;u.id===a)-row.findIndex(u=&gt;u.id===b)});createGroup(ids);manual=false;selected.clear();renderAll()};
-document.getElementById(&quot;reset&quot;).onclick=()=&gt;{data={states:{},groups:[],merged:{}};for(const c of CONFIG.composites)data.merged[c.id]=true;manual=false;selected.clear();save();renderAll();toast(&quot;初期状態に戻しました&quot;)};
+document.getElementById(&quot;reset&quot;).onclick=()=&gt;{data={states:{},groups:[],merged:{},cleaning:{}};for(const c of CONFIG.composites)data.merged[c.id]=true;manual=false;selected.clear();save();renderAll();toast(&quot;初期状態に戻しました&quot;)};
 const oh=document.getElementById(&quot;options&quot;);document.getElementById(&quot;prev&quot;).onclick=()=&gt;oh.scrollBy({left:-oh.clientWidth*.85,behavior:&quot;smooth&quot;});document.getElementById(&quot;next&quot;).onclick=()=&gt;oh.scrollBy({left:oh.clientWidth*.85,behavior:&quot;smooth&quot;});oh.addEventListener(&quot;scroll&quot;,updateArrows,{passive:true});
 renderPeople();renderAll();
 })();
-&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
-<iframe class="app-frame" data-index="1" title="2F" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!doctype html&gt;
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe><iframe class="app-frame" data-index="1" title="2F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;vi&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;
-&lt;title&gt;2F&lt;/title&gt;
+&lt;title&gt;2F 席振り v28 表示調整版&lt;/title&gt;
 &lt;style&gt;
 :root{
   --bg:#f3f4f6;
@@ -270,8 +479,8 @@ html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-sys
 button{font:inherit;color:inherit}
 
 #fixedPanel{
-  position:fixed;
-  inset:0 0 auto 0;
+  position:sticky;
+  top:0;
   z-index:100;
   background:rgba(243,244,246,.99);
   border-bottom:1px solid #cbd5e1;
@@ -347,7 +556,7 @@ button{font:inherit;color:inherit}
 .cluster-chip small{font-size:9px;opacity:.8;margin-left:4px}
 .cluster-chip.disabled{background:#4b5563;color:#d1d5db}
 
-main{max-width:760px;margin:auto;padding:342px 8px 30px}
+main{max-width:760px;margin:auto;padding:7px 8px 30px}
 
 .card{
   background:var(--card);
@@ -432,6 +641,11 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
   border-color:#9ca3af;
   background:#f3f4f6;
 }
+.renban-option.box8-fallback{
+  border-color:#7c3aed;
+  background:#f3e8ff;
+}
+
 .renban-option strong{font-size:17px}
 .renban-option small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
 .chips{display:flex;gap:3px;margin-top:4px}
@@ -467,6 +681,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 .table-btn.c6 .cap{background:var(--orange)}
 .table-btn.cbox .cap{background:var(--purple)}
 .table-btn.reserved{background:var(--reserved);border-color:#f59e0b}
+.table-btn.cleaning{background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)}
 .table-btn.used{background:var(--used);border-color:#ef4444}
 
 .pair-card{
@@ -608,13 +823,13 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 &lt;div id=&quot;fixedPanel&quot;&gt;
   &lt;div class=&quot;fixed-inner&quot;&gt;
     &lt;div class=&quot;header&quot;&gt;
-      
+      &lt;span aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
       &lt;button id=&quot;resetBtn&quot; class=&quot;reset&quot;&gt;リセット&lt;/button&gt;
     &lt;/div&gt;
 
     &lt;div id=&quot;summary&quot; class=&quot;summary&quot;&gt;&lt;/div&gt;
 
-    &lt;div class=&quot;label&quot;&gt;タップ時の状態&lt;/div&gt;
+    &lt;div class=&quot;label&quot;&gt;タップ時の状態 &lt;span style=&quot;font-weight:400;color:var(--muted)&quot;&gt;（長押し＝清掃待ち）&lt;/span&gt;&lt;/div&gt;
     &lt;div id=&quot;stateRow&quot; class=&quot;row-scroll state-row&quot;&gt;
       &lt;button data-state=&quot;empty&quot;&gt;空席&lt;/button&gt;
       &lt;button data-state=&quot;reserved&quot; class=&quot;active&quot;&gt;席取り&lt;/button&gt;
@@ -679,7 +894,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 (() =&gt; {
   &quot;use strict&quot;;
 
-  const STORAGE_KEY = &quot;sekifuri-2f-v28-display-clean&quot;;
+  const STORAGE_KEY = &quot;sekifuri-2f-cleaning-final-v13-cleaning-renban&quot;;
   const PREVIOUS_STORAGE_KEY = &quot;sekifuri-2f-v27-priority-route&quot;;
   if(!localStorage.getItem(STORAGE_KEY) &amp;&amp; localStorage.getItem(PREVIOUS_STORAGE_KEY)){
     localStorage.setItem(STORAGE_KEY, localStorage.getItem(PREVIOUS_STORAGE_KEY));
@@ -836,10 +1051,11 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       return {
         states: parsed.states || {},
         merged: parsed.merged || {},
-        groups: parsed.groups || []
+        groups: parsed.groups || [],
+        cleaning: parsed.cleaning || {}
       };
     }catch{
-      return {states:{}, merged:{}, groups:[]};
+      return {states:{}, merged:{}, groups:[], cleaning:{}};
     }
   }
 
@@ -856,9 +1072,19 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     return Boolean(groupFor(id));
   }
 
-  function isAvailable(id){
+  function isCleaning(id){
+    const group = groupFor(id);
+    const ids = group ? group.ids : [id];
+    return ids.some(x =&gt; !!appState.cleaning?.[x]);
+  }
+
+  function isVacant(id){
     const virtualGroup = appState.groups.some(group =&gt; group.id === id);
     return getStatus(id) === &quot;empty&quot; &amp;&amp; (virtualGroup || !isGrouped(id));
+  }
+
+  function isAvailable(id){
+    return isVacant(id) &amp;&amp; !isCleaning(id);
   }
 
   function activePairRow(){
@@ -939,6 +1165,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     });
 
     [...expanded].forEach(id =&gt; {
+      delete appState.cleaning[id];
       if(selectedStatus === &quot;empty&quot;){
         delete appState.states[id];
       }else{
@@ -968,12 +1195,63 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     return &quot;c&quot; + capacity;
   }
 
+  function markCleaning(id){
+    const group = groupFor(id);
+    const ids = group ? group.ids : [id];
+    ids.forEach(x =&gt; {
+      delete appState.states[x];
+      appState.cleaning[x] = true;
+    });
+    if(group) group.state = &quot;empty&quot;;
+    saveState();
+    renderAll();
+    showToast(ids.join(&quot;・&quot;) + &quot; → 清掃待ち&quot;);
+  }
+
+  function bindLongPress(btn,id){
+    let timer=null, held=false, suppressClick=false, startX=0, startY=0;
+    const begin=(x,y)=&gt;{
+      held=false; startX=x; startY=y;
+      clearTimeout(timer);
+      timer=setTimeout(()=&gt;{
+        held=true; suppressClick=true;
+        markCleaning(id);
+        try{navigator.vibrate&amp;&amp;navigator.vibrate(25)}catch{}
+      },500);
+    };
+    const move=(x,y)=&gt;{
+      if(Math.abs(x-startX)&gt;12 || Math.abs(y-startY)&gt;12){
+        clearTimeout(timer); timer=null;
+      }
+    };
+    const end=()=&gt;{ clearTimeout(timer); timer=null; };
+
+    btn.addEventListener(&quot;touchstart&quot;,e=&gt;{const t=e.touches[0];begin(t.clientX,t.clientY)},{passive:true});
+    btn.addEventListener(&quot;touchmove&quot;,e=&gt;{const t=e.touches[0];move(t.clientX,t.clientY)},{passive:true});
+    btn.addEventListener(&quot;touchend&quot;,e=&gt;{end();if(held)e.preventDefault()},{passive:false});
+    btn.addEventListener(&quot;touchcancel&quot;,end);
+
+    btn.addEventListener(&quot;mousedown&quot;,e=&gt;{if(e.button===0)begin(e.clientX,e.clientY)});
+    btn.addEventListener(&quot;mousemove&quot;,e=&gt;move(e.clientX,e.clientY));
+    btn.addEventListener(&quot;mouseup&quot;,end);
+    btn.addEventListener(&quot;mouseleave&quot;,end);
+
+    btn.addEventListener(&quot;click&quot;,e=&gt;{
+      if(suppressClick){
+        suppressClick=false;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    },true);
+    btn.addEventListener(&quot;contextmenu&quot;,e=&gt;e.preventDefault());
+  }
+
   function createTableButton(id, capacity){
     const btn = document.createElement(&quot;button&quot;);
-    btn.className = &quot;table-btn &quot; + capacityClass(capacity) + &quot; &quot; + getStatus(id);
+    btn.className = &quot;table-btn &quot; + capacityClass(capacity) + &quot; &quot; + (isCleaning(id) ? &quot;cleaning&quot; : getStatus(id));
     if(manualSelected.has(id)) btn.classList.add(&quot;manual-selected&quot;);
 
-    btn.innerHTML = id + &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
+    btn.innerHTML = (isCleaning(id) ? &quot;清 &quot; : &quot;&quot;) + id + &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
 
     btn.addEventListener(&quot;click&quot;, () =&gt; {
       if(!manualMode){
@@ -999,6 +1277,8 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 
       renderAll();
     });
+
+    bindLongPress(btn,id);
 
     return btn;
   }
@@ -1036,22 +1316,31 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     if(appState.merged[prefix]){
       const mergedId = prefix + &quot;AB&quot;;
       const oldStatus = getStatus(mergedId);
+      const wasCleaning = !!appState.cleaning[mergedId];
 
       delete appState.states[mergedId];
+      delete appState.cleaning[mergedId];
       appState.merged[prefix] = false;
 
       if(oldStatus !== &quot;empty&quot;){
         appState.states[prefix + &quot;A&quot;] = oldStatus;
         appState.states[prefix + &quot;B&quot;] = oldStatus;
       }
+      if(wasCleaning){
+        appState.cleaning[prefix + &quot;A&quot;] = true;
+        appState.cleaning[prefix + &quot;B&quot;] = true;
+      }
     }else{
       const aId = prefix + &quot;A&quot;;
       const bId = prefix + &quot;B&quot;;
       const aStatus = getStatus(aId);
       const bStatus = getStatus(bId);
+      const wasCleaning = !!appState.cleaning[aId] || !!appState.cleaning[bId];
 
       delete appState.states[aId];
       delete appState.states[bId];
+      delete appState.cleaning[aId];
+      delete appState.cleaning[bId];
       appState.merged[prefix] = true;
 
       const mergedId = prefix + &quot;AB&quot;;
@@ -1059,13 +1348,14 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
         appState.states[mergedId] = &quot;used&quot;;
       }else if(aStatus === &quot;reserved&quot; || bStatus === &quot;reserved&quot;){
         appState.states[mergedId] = &quot;reserved&quot;;
+      }else if(wasCleaning){
+        appState.cleaning[mergedId] = true;
       }
     }
 
     saveState();
     renderAll();
   }
-
   function createPairCard(prefix){
     const wrap = document.createElement(&quot;div&quot;);
 
@@ -1262,7 +1552,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       };
 
       group.forEach(id =&gt; {
-        if(isAvailable(id)){
+        if(isVacant(id)){
           run.push(id);
         }else{
           flush();
@@ -1312,45 +1602,53 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     const tables = currentTables();
     const options = [];
 
-    recommendationRows().forEach(group =&gt; {
+    const seatCapacity = id =&gt; {
+      const value = tables[id];
+      return value === &quot;BOX&quot; ? 7 : Number(value || 0);
+    };
+
+    recommendationRows().forEach(row =&gt; {
       let run = [];
 
       const flush = () =&gt; {
-        if(run.length &gt;= 2){
-          for(let start = 0; start &lt; run.length; start++){
-            let capacity = 0;
+        if(!run.length) return;
 
-            for(let end = start; end &lt; run.length; end++){
-              const ids = run.slice(start, end + 1);
-              const cap = tables[run[end]];
+        /* 連続して空いている卓から、隣り合う全組み合わせを作る。
+           2Fは卓種が多いので、4+4=8、6+4=10、BOX+BOX=14等も
+           実際に隣接していれば候補として残す。 */
+        for(let start = 0; start &lt; run.length; start++){
+          let capacity = 0;
 
-              if(cap === &quot;BOX&quot;){
-                if(ids.length === 1) continue;
+          for(let finish = start; finish &lt; run.length; finish++){
+            const id = run[finish];
+            capacity += seatCapacity(id);
 
-                if(ids.length === 2){
-                  [9,10,11,12,13,14].forEach(pax =&gt; {
-                    options.push({
-                      ids,
-                      pax,
-                      capacity:14,
-                      low:pax !== 14,
-                      box:true
-                    });
-                  });
-                }
-              }else{
-                capacity += Number(cap);
+            const ids = run.slice(start, finish + 1);
+            if(ids.length &lt; 2) continue;
 
-                if(end &gt; start){
-                  options.push({
-                    ids,
-                    pax:capacity,
-                    capacity,
-                    low:false,
-                    box:false
-                  });
-                }
-              }
+            const allBox = ids.every(x =&gt; tables[x] === &quot;BOX&quot;);
+
+            if(allBox &amp;&amp; ids.length === 2){
+              /* 2 BOX = MAX14.
+                 実際の案内人数として9〜14名を選べるように、
+                 人数フィルター用の候補を保持する。 */
+              [9,10,11,12,13,14].forEach(pax =&gt; {
+                options.push({
+                  ids:[...ids],
+                  pax,
+                  capacity:14,
+                  low:pax !== 14,
+                  box:true
+                });
+              });
+            }else{
+              options.push({
+                ids,
+                pax:capacity,
+                capacity,
+                low:false,
+                box:allBox
+              });
             }
           }
         }
@@ -1358,8 +1656,8 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
         run = [];
       };
 
-      group.forEach(id =&gt; {
-        if(isAvailable(id)){
+      row.forEach(id =&gt; {
+        if(isVacant(id)){
           run.push(id);
         }else{
           flush();
@@ -1369,35 +1667,59 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       flush();
     });
 
-    /* 単卓もおすすめ候補に含める。
-       2名なら空いている2人卓、4名なら4人卓、6名なら6人卓を最優先にできる。 */
+    /* 単卓候補 */
     Object.keys(tables)
-      .filter(id =&gt; tables[id] !== &quot;BOX&quot; &amp;&amp; isAvailable(id))
+      .filter(id =&gt; isVacant(id))
       .forEach(id =&gt; {
-        const capacity = Number(tables[id]);
-        if(capacity &gt; 0){
+        if(tables[id] === &quot;BOX&quot;){
           options.push({
             ids:[id],
-            pax:capacity,
-            capacity,
+            pax:7,
+            capacity:7,
             low:false,
-            box:false
+            box:true,
+            singleBox:true
           });
+
+          /* 8名をBOX1卓に入れるのは最終手段だけ。
+             候補自体は保持し、表示側で他案が無い時だけ使う。 */
+          options.push({
+            ids:[id],
+            pax:8,
+            capacity:7,
+            low:true,
+            box:true,
+            singleBox:true,
+            tightEight:true
+          });
+        }else{
+          const capacity = Number(tables[id] || 0);
+          if(capacity &gt; 0){
+            options.push({
+              ids:[id],
+              pax:capacity,
+              capacity,
+              low:false,
+              box:false
+            });
+          }
         }
       });
 
-    Object.keys(tables)
-      .filter(id =&gt; tables[id] === &quot;BOX&quot; &amp;&amp; isAvailable(id))
-      .forEach(id =&gt; {
-        options.push({ids:[id], pax:7, capacity:7, low:false, box:true});
-        options.push({ids:[id], pax:8, capacity:7, low:true, box:true});
-      });
+    options.forEach(option =&gt; {
+      option.cleaning = option.ids.some(id =&gt; isCleaning(id));
+    });
 
     const seen = new Set();
 
     return options
       .filter(option =&gt; {
-        const key = option.pax + &quot;|&quot; + option.ids.join(&quot;-&quot;);
+        const key =
+          option.pax + &quot;|&quot; +
+          option.capacity + &quot;|&quot; +
+          option.ids.join(&quot;-&quot;) + &quot;|&quot; +
+          Number(!!option.tightEight);
+
         if(seen.has(key)) return false;
         seen.add(key);
         return true;
@@ -1413,10 +1735,39 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     const row = document.getElementById(&quot;peopleRow&quot;);
     row.innerHTML = &quot;&quot;;
 
-    const capacities = [...new Set(allRenbanOptions().map(item =&gt; item.pax))]
+    const options = allRenbanOptions();
+    const availablePax = new Set();
+
+    /* Các mức nhỏ giữ theo những lựa chọn vốn có của 2F. */
+    options.forEach(item =&gt; {
+      const pax = Number(item.pax);
+      if(Number.isFinite(pax)) availablePax.add(pax);
+    });
+
+    /* Từ 9 người trở lên phải hiển thị LIÊN TỤC tới MAX hiện tại,
+       không phụ thuộc MAX đó đến từ 2 BOX hay từ các bàn đặc thù khác.
+       Ví dụ còn phương án MAX14 thì luôn có 9,10,11,12,13,14.
+       Nếu MAX12 thì có 9,10,11,12. */
+    const maxGuideCapacity = options.reduce((max,item) =&gt; {
+      const cap = Number(item.capacity ?? item.pax);
+      return Number.isFinite(cap) ? Math.max(max,cap) : max;
+    },0);
+
+    if(maxGuideCapacity &gt;= 9){
+      for(let n=9; n&lt;=maxGuideCapacity; n++){
+        availablePax.add(n);
+      }
+    }
+
+    const capacities = [...availablePax]
+      .filter(value =&gt; Number.isFinite(Number(value)))
+      .map(Number)
       .sort((a,b) =&gt; a-b);
 
-    const choices = [[&quot;all&quot;,&quot;全部&quot;], ...capacities.map(value =&gt; [String(value), value + &quot;名&quot;])];
+    const choices = [
+      [&quot;all&quot;,&quot;全部&quot;],
+      ...capacities.map(value =&gt; [String(value), value + &quot;名&quot;])
+    ];
 
     choices.forEach(([value,label]) =&gt; {
       const btn = document.createElement(&quot;button&quot;);
@@ -1430,7 +1781,6 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       row.appendChild(btn);
     });
   }
-
 
   function updateRenbanArrows(){
     const holder = document.getElementById(&quot;renbanOptions&quot;);
@@ -1460,6 +1810,12 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 
     holder.addEventListener(&quot;pointerdown&quot;, event =&gt; {
       if(event.pointerType === &quot;touch&quot;) return;
+
+      /* おすすめ案ボタンをクリックした時は、
+         親の横スクロールがpointerを奪わないようにする。
+         これが原因でPCでは案を押してもclickが発火しなかった。 */
+      if(event.target.closest(&quot;.renban-option&quot;)) return;
+
       dragging = true;
       startX = event.clientX;
       startScroll = holder.scrollLeft;
@@ -1489,50 +1845,338 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     window.addEventListener(&quot;resize&quot;, updateRenbanArrows);
   }
 
-  function renderRenbanOptions(){
+
+  function remainingRenbanScore(usedIds){
+    const used = new Set(usedIds);
+    const tables = currentTables();
+
+    const capOf = id =&gt; {
+      const value = tables[id];
+      return value === &quot;BOX&quot; ? 7 : Number(value || 0);
+    };
+
+    let bestCapacity = 0;
+    let totalCapacityInRuns = 0;
+
+    recommendationRows().forEach(row =&gt; {
+      let runCapacity = 0;
+      let runLength = 0;
+
+      const flush = () =&gt; {
+        if(runLength &gt;= 2){
+          totalCapacityInRuns += runCapacity;
+          bestCapacity = Math.max(bestCapacity, runCapacity);
+        }
+        runCapacity = 0;
+        runLength = 0;
+      };
+
+      row.forEach(id =&gt; {
+        if(isVacant(id) &amp;&amp; !used.has(id)){
+          runLength++;
+          runCapacity += capOf(id);
+        }else{
+          flush();
+        }
+      });
+
+      flush();
+    });
+
+    /* 最大連番容量を最優先、同じなら残っている連番容量の合計。 */
+    return bestCapacity * 1000 + totalCapacityInRuns;
+  }
+
+  function physicalCountForId(id){
+    const group = appState.groups.find(g =&gt; g.id === id);
+    if(group) return group.ids.reduce((sum,x)=&gt;sum+physicalCountForId(x),0);
+
+    const tables = currentTables();
+    const cap = tables[id] === &quot;BOX&quot; ? 7 : Number(tables[id] || 0);
+
+    if(/AB$/.test(id)) return 2;
+    return 1;
+  }
+
+  function cleaningEffort(option){
+    let physical = 0;
+    let capacity = 0;
+    option.ids.forEach(id =&gt; {
+      if(isCleaning(id)){
+        physical += physicalCountForId(id);
+        const tables = currentTables();
+        capacity += tables[id] === &quot;BOX&quot; ? 7 : Number(tables[id] || 0);
+      }
+    });
+    return {physical, capacity};
+  }
+
+  function cleaningPhysicalKeys(option){
+    const keys = [];
+
+    const expand = id =&gt; {
+      const group = appState.groups.find(g =&gt; g.id === id);
+      if(group){
+        group.ids.forEach(expand);
+        return;
+      }
+
+      if(/AB$/.test(id)){
+        const prefix = id.slice(0,-2);
+        keys.push(prefix + &quot;A&quot;, prefix + &quot;B&quot;);
+        return;
+      }
+
+      keys.push(id);
+    };
+
+    option.ids.forEach(id =&gt; {
+      if(isCleaning(id)) expand(id);
+    });
+
+    return [...new Set(keys)];
+  }
+
+  function cleaningSetDominated(option, candidates){
+    const mine = new Set(cleaningPhysicalKeys(option));
+    if(!mine.size) return false;
+
+    return candidates.some(other =&gt; {
+      if(other === option) return false;
+
+      const theirs = new Set(cleaningPhysicalKeys(other));
+      if(!theirs.size || theirs.size &gt;= mine.size) return false;
+
+      /* Remove an option only when another same-MAX option needs cleaning
+         a strict SUBSET of the exact same physical tables.
+         Example:
+         clean 82AB+83AB  vs  clean 83AB + use clean 84AB
+         -&gt; {83A,83B} is a strict subset of {82A,82B,83A,83B},
+            so the heavier option is unnecessary.
+
+         But 82AB vs 99+100 are different physical-table choices,
+         so neither is a subset of the other and BOTH remain. */
+      for(const key of theirs){
+        if(!mine.has(key)) return false;
+      }
+      return true;
+    });
+  }
+
+  function applyRecommendationOption(option){
+    /* Khi bấm một phương án trong おすすめ案:
+       - xóa 清掃待ち của mọi bàn thuộc phương án
+       - áp dụng thẳng trạng thái đang chọn (席取り / 使用中 / 空席)
+       - KHÔNG bắt buộc tạo group ghép mới
+       Như vậy ví dụ C7 đang 清掃待ち + C8 đang sạch:
+       bấm phương án khi chọn 使用中 =&gt; cả C7 và C8 đều thành 使用中. */
+    const expanded = new Set();
+
+    option.ids.forEach(id =&gt; {
+      const group = groupFor(id);
+      if(group){
+        group.ids.forEach(x =&gt; expanded.add(x));
+      }else{
+        expanded.add(id);
+      }
+    });
+
+    [...expanded].forEach(id =&gt; {
+      delete appState.cleaning[id];
+
+      if(selectedStatus === &quot;empty&quot;){
+        delete appState.states[id];
+      }else{
+        appState.states[id] = selectedStatus;
+      }
+    });
+
+    /* Nếu phương án chạm vào một group đã tồn tại thì cập nhật group đó.
+       Không tự tạo group mới chỉ vì chọn một phương án đề nghị. */
+    appState.groups.forEach(group =&gt; {
+      if(group.ids.some(id =&gt; expanded.has(id))){
+        group.state = selectedStatus;
+        group.ids.forEach(id =&gt; delete appState.cleaning[id]);
+      }
+    });
+
+    saveState();
+    renderAll();
+    showToast([...expanded].join(&quot;・&quot;) + &quot; → &quot; + statusLabel(selectedStatus));
+  }
+
+function renderRenbanOptions(){
     const all = allRenbanOptions();
     let filtered;
 
     if(peopleFilter === &quot;all&quot;){
-      filtered = [...all].sort(compareRecommendationRoute);
+      filtered = [...all].sort((a,b) =&gt;
+        Number(a.cleaning) - Number(b.cleaning) ||
+        Number(!!a.tightEight) - Number(!!b.tightEight) ||
+        compareRecommendationRoute(a,b)
+      );
     }else{
       const requested = Number(peopleFilter);
-      const bestByTables = new Map();
+      const capacityOf = item =&gt; item.capacity ?? item.pax;
 
-      all
-        .filter(item =&gt; {
-          const actualCapacity = item.capacity ?? item.pax;
-          /* BOX単体の8名利用は従来どおり低優先で残す。 */
-          return actualCapacity &gt;= requested || (item.box &amp;&amp; item.ids.length === 1 &amp;&amp; item.pax === requested);
-        })
-        .forEach(item =&gt; {
-          const key = item.ids.join(&quot;-&quot;);
-          const current = bestByTables.get(key);
-          const itemCapacity = item.capacity ?? item.pax;
-          const currentCapacity = current ? (current.capacity ?? current.pax) : Infinity;
+      /* 8名用のBOX1卓だけは通常候補とは別枠。
+         ただし完全に消さず、比較候補として最後に残す。 */
+      const normalAll = all.filter(item =&gt;
+        !item.tightEight &amp;&amp;
+        capacityOf(item) &gt;= requested
+      );
 
-          if(!current ||
-             itemCapacity &lt; currentCapacity ||
-             (itemCapacity === currentCapacity &amp;&amp; Number(item.low) &lt; Number(current.low))){
-            bestByTables.set(key, item);
-          }
-        });
+      const deduped = new Map();
+      normalAll.forEach(item =&gt; {
+        const key = item.ids.join(&quot;-&quot;);
+        const current = deduped.get(key);
 
-      filtered = [...bestByTables.values()]
-        .sort((a,b) =&gt; {
-          const capA = a.capacity ?? a.pax;
-          const capB = b.capacity ?? b.pax;
+        if(!current ||
+           capacityOf(item) &lt; capacityOf(current) ||
+           (capacityOf(item) === capacityOf(current) &amp;&amp;
+            Number(item.low) &lt; Number(current.low))){
+          deduped.set(key,item);
+        }
+      });
+      const normal = [...deduped.values()];
 
-          /* 優先順位:
-             1. 使用する卓数が少ない
-             2. 同じ卓数なら空き席が少ない
-             3. 同条件なら通常卓をBOXより先にする */
-          return a.ids.length - b.ids.length ||
-                 (capA - requested) - (capB - requested) ||
-                 Number(a.low) - Number(b.low) ||
-                 Number(a.box) - Number(b.box) ||
-                 compareRecommendationRoute(a,b);
-        });
+      const keepReasonableCombos = list =&gt; {
+        if(!list.length) return [];
+
+        const singles = list.filter(item =&gt; item.ids.length === 1);
+        const combos = list.filter(item =&gt; item.ids.length &gt; 1);
+        const minOverallCapacity = Math.min(
+          ...list.map(item =&gt; capacityOf(item))
+        );
+
+        /* 現在の分割/連結状態をその時点の実配置として扱う。
+           - ids.length===1: すでに存在する単卓 / 当日すでに連結済みの卓
+             → MAXが大きくても予備候補として残す
+           - ids.length&gt;1: 今から新しく連結する案
+             → 必要最小MAXの案だけ残す
+           例：2名で82A/82Bが分割中なら82A+82B=4は出さない。
+               82ABとして連結済みならMAX4の予備候補として出す。 */
+        return [
+          ...singles,
+          ...combos.filter(item =&gt; capacityOf(item) === minOverallCapacity)
+        ];
+      };
+
+      const sorter = (a,b) =&gt; {
+        const capA = capacityOf(a);
+        const capB = capacityOf(b);
+
+        /* まず人数に近いMAXを優先。 */
+        const capacityDiff =
+          (capA - requested) - (capB - requested);
+        if(capacityDiff) return capacityDiff;
+
+        /* 清掃待ち同士では、表示上の「1卓/2卓」より先に
+           実際の清掃負担を見る。
+           82AB等は実卓2卓として数える。 */
+        if(a.cleaning &amp;&amp; b.cleaning){
+          const ea = cleaningEffort(a);
+          const eb = cleaningEffort(b);
+
+          const cleanDiff =
+            ea.physical - eb.physical ||
+            ea.capacity - eb.capacity;
+          if(cleanDiff) return cleanDiff;
+        }
+
+        /* 次に、残る連番のMAX容量を大きく保つ。 */
+        const renDiff =
+          remainingRenbanScore(b.ids) - remainingRenbanScore(a.ids);
+        if(renDiff) return renDiff;
+
+        /* ここまで同じなら、実際に使う表示単位数が少ない方。 */
+        const tableCountDiff = a.ids.length - b.ids.length;
+        if(tableCountDiff) return tableCountDiff;
+
+        return compareRecommendationRoute(a,b);
+      };
+
+      const ready = keepReasonableCombos(
+        normal.filter(item =&gt; !item.cleaning)
+      ).sort(sorter);
+
+      const waitingBase = keepReasonableCombos(
+        normal.filter(item =&gt; item.cleaning)
+      );
+
+      let waiting = [];
+      if(waitingBase.length){
+        /* 清掃待ちはまず「必要十分なMAX」に絞る。 */
+        const minWaitingCapacity = Math.min(
+          ...waitingBase.map(item =&gt; capacityOf(item))
+        );
+
+        const sameCapacity = waitingBase
+          .filter(item =&gt; capacityOf(item) === minWaitingCapacity);
+
+        /* 同じMAXでも、他の候補が「同じ清掃卓の一部だけ」を掃除すれば
+           成立するなら、余分に掃除する案は不要なので除外する。
+           ただし清掃する卓の場所が違う案は残す。
+           これで:
+           - 8名: 83AB清掃+84AB空席 があるなら
+                  82AB+83AB両方清掃 は消える
+           - 4名: 82AB清掃 と 99+100清掃 は
+                  後客用の2人卓温存という意味が違うので両方残る */
+        waiting = sameCapacity
+          .filter(item =&gt; !cleaningSetDominated(item, sameCapacity))
+          .sort(sorter);
+      }
+
+      /* 8名時のBOX1卓:
+         - 空いているBOXなら、待たずに案内できる比較候補として残す
+         - 清掃待ちBOXも、2卓掃除などと比較できるよう残す
+         ただし通常の8名向け候補より後ろに置く。 */
+      let box8Ready = [];
+      let box8Waiting = [];
+
+      if(requested === 8){
+        box8Ready = all
+          .filter(item =&gt; item.tightEight &amp;&amp; !item.cleaning)
+          .sort(compareRecommendationRoute);
+
+        const allBoxWaiting = all
+          .filter(item =&gt; item.tightEight &amp;&amp; item.cleaning)
+          .sort((a,b) =&gt; {
+            const ea = cleaningEffort(a);
+            const eb = cleaningEffort(b);
+            return ea.physical - eb.physical ||
+                   ea.capacity - eb.capacity ||
+                   compareRecommendationRoute(a,b);
+          });
+
+        /* BOXは8名だと窮屈なので通常は後順位。
+           ただし、通常案より明らかに掃除が早い
+           （例：BOX1卓掃除 vs 4人卓2卓分掃除）なら比較候補として残す。 */
+        if(allBoxWaiting.length){
+          const bestNormalCleaningPhysical =
+            waiting.length
+              ? Math.min(...waiting.map(item =&gt; cleaningEffort(item).physical))
+              : Infinity;
+
+          box8Waiting = allBoxWaiting.filter(item =&gt;
+            cleaningEffort(item).physical &lt; bestNormalCleaningPhysical
+          );
+        }
+      }
+
+      /* お客様優先:
+         1) 通常の案内可能
+         2) BOX1卓8名（空席・窮屈だが待たない）
+         3) 通常の清掃待ち
+         4) BOX1卓8名の清掃待ち
+         こうすることで、空いているBOXと「2卓掃除」も比較でき、
+         清掃BOX候補も消えない。 */
+      filtered = [
+        ...ready,
+        ...box8Ready,
+        ...waiting,
+        ...box8Waiting
+      ];
     }
 
     document.getElementById(&quot;renbanCount&quot;).textContent = filtered.length + &quot;案&quot;;
@@ -1552,27 +2196,33 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     const tables = currentTables();
     const requested = peopleFilter === &quot;all&quot; ? null : Number(peopleFilter);
 
-    filtered.forEach((option,index) =&gt; {
+    filtered.forEach(option =&gt; {
       const btn = document.createElement(&quot;button&quot;);
-      const actualCapacity = option.capacity ?? option.pax;
-      const excess = requested === null ? 0 : Math.max(0, actualCapacity - requested);
+      const cap = option.capacity ?? option.pax;
+      const excess = requested === null ? 0 : Math.max(0, cap - requested);
 
       let priorityClass = &quot;&quot;;
       let priorityLabel = &quot;&quot;;
 
-      if(requested !== null){
+      if(option.tightEight &amp;&amp; !option.cleaning){
+        priorityClass = &quot; box8-fallback&quot;;
+        priorityLabel = &quot;予備&quot;;
+      }else if(option.tightEight &amp;&amp; option.cleaning){
+        priorityClass = &quot; low&quot;;
+        priorityLabel = &quot;清掃待ち&quot;;
+      }else if(option.cleaning){
+        priorityClass = &quot; low&quot;;
+        priorityLabel = &quot;清掃待ち&quot;;
+      }else if(requested !== null){
         if(excess === 0){
           priorityClass = &quot; priority-1&quot;;
           priorityLabel = &quot;優先&quot;;
         }else if(excess === 1){
           priorityClass = &quot; priority-2&quot;;
           priorityLabel = &quot;次点&quot;;
-        }else if(excess &lt;= 3){
+        }else{
           priorityClass = &quot; priority-3&quot;;
           priorityLabel = &quot;予備&quot;;
-        }else{
-          priorityClass = &quot; low&quot;;
-          priorityLabel = &quot;優先度低&quot;;
         }
       }else{
         priorityClass = option.low ? &quot; low&quot; : &quot;&quot;;
@@ -1582,11 +2232,31 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       btn.className = &quot;renban-option&quot; + priorityClass;
 
       let note;
-      if(requested !== null){
-        note = priorityLabel + &quot;・&quot; + option.ids.length + &quot;卓・MAX &quot; + actualCapacity + &quot;名&quot;;
+
+      if(option.tightEight &amp;&amp; !option.cleaning){
+        note = &quot;予備・BOXは7名推奨・8名は窮屈・待ち時間なし&quot;;
+      }else if(option.tightEight &amp;&amp; option.cleaning){
+        const effort = cleaningEffort(option);
+        const renScore = remainingRenbanScore(option.ids);
+        const remainingMaxRenban = Math.floor(renScore / 1000);
+        note =
+          &quot;清掃待ち・BOXは7名推奨・8名は窮屈&quot; +
+          &quot;・清掃&quot; + effort.physical + &quot;卓&quot; +
+          &quot;・残す連番MAX &quot; + remainingMaxRenban + &quot;名&quot;;
+      }else if(option.cleaning){
+        const effort = cleaningEffort(option);
+        const renScore = remainingRenbanScore(option.ids);
+        const remainingMaxRenban = Math.floor(renScore / 1000);
+        note =
+          &quot;清掃待ち・MAX &quot; + cap + &quot;名&quot; +
+          &quot;・清掃&quot; + effort.physical + &quot;卓&quot; +
+          &quot;・残す連番MAX &quot; + remainingMaxRenban + &quot;名&quot;;
         if(excess &gt; 0) note += &quot;・空き &quot; + excess + &quot;席&quot;;
-      }else if(option.box &amp;&amp; actualCapacity === 14){
-        note = priorityLabel + &quot;・2 BOX&quot;;
+      }else if(requested !== null){
+        note =
+          priorityLabel + &quot;・&quot; +
+          option.ids.length + &quot;卓・MAX &quot; + cap + &quot;名&quot;;
+        if(excess &gt; 0) note += &quot;・空き &quot; + excess + &quot;席&quot;;
       }else{
         note = priorityLabel;
       }
@@ -1595,12 +2265,22 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
         &quot;&lt;strong&gt;&quot; + (requested ?? option.pax) + &quot;名&lt;/strong&gt;&quot; +
         &#x27;&lt;div class=&quot;chips&quot;&gt;&#x27; +
         option.ids.map(id =&gt;
-          &#x27;&lt;span class=&quot;chip &#x27; + capacityClass(tables[id]) + &#x27;&quot;&gt;&#x27; + id + &quot;&lt;/span&gt;&quot;
+          &#x27;&lt;span class=&quot;chip &#x27; + capacityClass(tables[id]) + &#x27;&quot;&gt;&#x27; +
+          id +
+          &quot;&lt;/span&gt;&quot;
         ).join(&quot;&quot;) +
         &quot;&lt;/div&gt;&quot; +
         &quot;&lt;small&gt;&quot; + note + &quot;&lt;/small&gt;&quot;;
 
-      btn.addEventListener(&quot;click&quot;, () =&gt; setStatus(option.ids));
+      btn.addEventListener(&quot;click&quot;, () =&gt; {
+        if(option.tightEight){
+          showToast(&quot;BOX1卓は8名だと窮屈です&quot;);
+          return;
+        }
+
+        applyRecommendationOption(option);
+      });
+
       holder.appendChild(btn);
     });
 
@@ -1624,7 +2304,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
         if(tables[id] !== capacity) return false;
         const isVirtual = appState.groups.some(group =&gt; group.id === id);
         if(!isVirtual &amp;&amp; isGrouped(id)) return false;
-        return isAvailable(id);
+        return isVacant(id);
       }).length;
 
       const card = document.createElement(&quot;div&quot;);
@@ -1632,6 +2312,15 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       card.innerHTML = &quot;&lt;small&gt;&quot; + label + &quot; 空き&lt;/small&gt;&lt;b&gt;&quot; + count + &quot;&lt;/b&gt;&quot;;
       summary.appendChild(card);
     });
+    const cleaningCount = Object.keys(tables).filter(id =&gt; {
+      const isVirtual = appState.groups.some(group =&gt; group.id === id);
+      if(!isVirtual &amp;&amp; isGrouped(id)) return false;
+      return isVacant(id) &amp;&amp; isCleaning(id);
+    }).length;
+    const cleaningCard = document.createElement(&quot;div&quot;);
+    cleaningCard.className = &quot;summary-card&quot;;
+    cleaningCard.innerHTML = &quot;&lt;small&gt;清掃待ち&lt;/small&gt;&lt;b&gt;&quot; + cleaningCount + &quot;&lt;/b&gt;&quot;;
+    summary.appendChild(cleaningCard);
   }
 
   function showToast(message){
@@ -1779,7 +2468,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
   });
 
   document.getElementById(&quot;resetBtn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-    appState = {states:{}, merged:{}, groups:[]};
+    appState = {states:{}, merged:{}, groups:[], cleaning:{}};
     selectedStatus = &quot;reserved&quot;;
     tableView = &quot;all&quot;;
     peopleFilter = &quot;all&quot;;
@@ -1802,13 +2491,12 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-"></iframe>
-<iframe class="app-frame" data-index="2" title="3F" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!doctype html&gt;
+"></iframe><iframe class="app-frame" data-index="2" title="3F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;vi&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;
-&lt;title&gt;3F&lt;/title&gt;
+&lt;title&gt;3F 席振り v8 表示調整版&lt;/title&gt;
 &lt;style&gt;
 :root{
   --bg:#f3f4f6;
@@ -1829,8 +2517,8 @@ html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-sys
 button{font:inherit;color:inherit}
 
 #fixedPanel{
-  position:fixed;
-  inset:0 0 auto 0;
+  position:sticky;
+  top:0;
   z-index:100;
   background:rgba(243,244,246,.99);
   border-bottom:1px solid #cbd5e1;
@@ -1906,7 +2594,7 @@ button{font:inherit;color:inherit}
 .cluster-chip small{font-size:9px;opacity:.8;margin-left:4px}
 .cluster-chip.disabled{background:#4b5563;color:#d1d5db}
 
-main{max-width:760px;margin:auto;padding:342px 8px 30px}
+main{max-width:760px;margin:auto;padding:7px 8px 30px}
 
 .card{
   background:var(--card);
@@ -2026,6 +2714,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 .table-btn.c6 .cap{background:var(--orange)}
 .table-btn.cbox .cap{background:var(--purple)}
 .table-btn.reserved{background:var(--reserved);border-color:#f59e0b}
+.table-btn.cleaning{background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)}
 .table-btn.used{background:var(--used);border-color:#ef4444}
 
 .pair-card{
@@ -2167,13 +2856,13 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 &lt;div id=&quot;fixedPanel&quot;&gt;
   &lt;div class=&quot;fixed-inner&quot;&gt;
     &lt;div class=&quot;header&quot;&gt;
-      
+      &lt;span aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
       &lt;button id=&quot;resetBtn&quot; class=&quot;reset&quot;&gt;リセット&lt;/button&gt;
     &lt;/div&gt;
 
     &lt;div id=&quot;summary&quot; class=&quot;summary&quot;&gt;&lt;/div&gt;
 
-    &lt;div class=&quot;label&quot;&gt;タップ時の状態&lt;/div&gt;
+    &lt;div class=&quot;label&quot;&gt;タップ時の状態 &lt;span style=&quot;font-weight:400;color:var(--muted)&quot;&gt;（長押し＝清掃待ち）&lt;/span&gt;&lt;/div&gt;
     &lt;div id=&quot;stateRow&quot; class=&quot;row-scroll state-row&quot;&gt;
       &lt;button data-state=&quot;empty&quot;&gt;空席&lt;/button&gt;
       &lt;button data-state=&quot;reserved&quot; class=&quot;active&quot;&gt;席取り&lt;/button&gt;
@@ -2208,7 +2897,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 &lt;main&gt;
   &lt;section class=&quot;card&quot;&gt;
     &lt;div class=&quot;card-title&quot;&gt;
-      &lt;span&gt;おすすめ案&lt;/span&gt;
+      &lt;span&gt;&lt;strong&gt;おすすめ案&lt;/strong&gt;&lt;/span&gt;
       &lt;span id=&quot;renbanCount&quot;&gt;&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class=&quot;renban-scroll-wrap&quot;&gt;
@@ -2238,7 +2927,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 (() =&gt; {
   &quot;use strict&quot;;
 
-  const STORAGE_KEY = &quot;sekifuri-3f-v8-display-clean&quot;;
+  const STORAGE_KEY = &quot;sekifuri-3f-cleaning-v4-baseline&quot;;
   const PREVIOUS_STORAGE_KEY = &quot;sekifuri-3f-v7-priority-route&quot;;
   if(!localStorage.getItem(STORAGE_KEY) &amp;&amp; localStorage.getItem(PREVIOUS_STORAGE_KEY)){
     localStorage.setItem(STORAGE_KEY, localStorage.getItem(PREVIOUS_STORAGE_KEY));
@@ -2361,10 +3050,11 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       return {
         states: parsed.states || {},
         merged: {...defaultMerged, ...(parsed.merged || {})},
-        groups: parsed.groups || []
+        groups: parsed.groups || [],
+        cleaning: parsed.cleaning || {}
       };
     }catch{
-      return {states:{}, merged:{...defaultMerged}, groups:[]};
+      return {states:{}, merged:{...defaultMerged}, groups:[], cleaning:{}};
     }
   }
 
@@ -2381,9 +3071,19 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     return Boolean(groupFor(id));
   }
 
-  function isAvailable(id){
+  function isCleaning(id){
+    const group = groupFor(id);
+    const ids = group ? group.ids : [id];
+    return ids.some(x =&gt; !!appState.cleaning?.[x]);
+  }
+
+  function isVacant(id){
     const virtualGroup = appState.groups.some(group =&gt; group.id === id);
     return getStatus(id) === &quot;empty&quot; &amp;&amp; (virtualGroup || !isGrouped(id));
+  }
+
+  function isAvailable(id){
+    return isVacant(id) &amp;&amp; !isCleaning(id);
   }
 
   function currentRenbanGroups(){
@@ -2465,6 +3165,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     });
 
     [...expanded].forEach(id =&gt; {
+      delete appState.cleaning[id];
       if(selectedStatus === &quot;empty&quot;){
         delete appState.states[id];
       }else{
@@ -2494,12 +3195,63 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     return &quot;c&quot; + capacity;
   }
 
+  function markCleaning(id){
+    const group = groupFor(id);
+    const ids = group ? group.ids : [id];
+    ids.forEach(x =&gt; {
+      delete appState.states[x];
+      appState.cleaning[x] = true;
+    });
+    if(group) group.state = &quot;empty&quot;;
+    saveState();
+    renderAll();
+    showToast(ids.join(&quot;・&quot;) + &quot; → 清掃待ち&quot;);
+  }
+
+  function bindLongPress(btn,id){
+    let timer=null, held=false, suppressClick=false, startX=0, startY=0;
+    const begin=(x,y)=&gt;{
+      held=false; startX=x; startY=y;
+      clearTimeout(timer);
+      timer=setTimeout(()=&gt;{
+        held=true; suppressClick=true;
+        markCleaning(id);
+        try{navigator.vibrate&amp;&amp;navigator.vibrate(25)}catch{}
+      },500);
+    };
+    const move=(x,y)=&gt;{
+      if(Math.abs(x-startX)&gt;12 || Math.abs(y-startY)&gt;12){
+        clearTimeout(timer); timer=null;
+      }
+    };
+    const end=()=&gt;{ clearTimeout(timer); timer=null; };
+
+    btn.addEventListener(&quot;touchstart&quot;,e=&gt;{const t=e.touches[0];begin(t.clientX,t.clientY)},{passive:true});
+    btn.addEventListener(&quot;touchmove&quot;,e=&gt;{const t=e.touches[0];move(t.clientX,t.clientY)},{passive:true});
+    btn.addEventListener(&quot;touchend&quot;,e=&gt;{end();if(held)e.preventDefault()},{passive:false});
+    btn.addEventListener(&quot;touchcancel&quot;,end);
+
+    btn.addEventListener(&quot;mousedown&quot;,e=&gt;{if(e.button===0)begin(e.clientX,e.clientY)});
+    btn.addEventListener(&quot;mousemove&quot;,e=&gt;move(e.clientX,e.clientY));
+    btn.addEventListener(&quot;mouseup&quot;,end);
+    btn.addEventListener(&quot;mouseleave&quot;,end);
+
+    btn.addEventListener(&quot;click&quot;,e=&gt;{
+      if(suppressClick){
+        suppressClick=false;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    },true);
+    btn.addEventListener(&quot;contextmenu&quot;,e=&gt;e.preventDefault());
+  }
+
   function createTableButton(id, capacity){
     const btn = document.createElement(&quot;button&quot;);
-    btn.className = &quot;table-btn &quot; + capacityClass(capacity) + &quot; &quot; + getStatus(id);
+    btn.className = &quot;table-btn &quot; + capacityClass(capacity) + &quot; &quot; + (isCleaning(id) ? &quot;cleaning&quot; : getStatus(id));
     if(manualSelected.has(id)) btn.classList.add(&quot;manual-selected&quot;);
 
-    btn.innerHTML = id + &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
+    btn.innerHTML = (isCleaning(id) ? &quot;清 &quot; : &quot;&quot;) + id + &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
 
     btn.addEventListener(&quot;click&quot;, () =&gt; {
       if(!manualMode){
@@ -2525,6 +3277,8 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 
       renderAll();
     });
+
+    bindLongPress(btn,id);
 
     return btn;
   }
@@ -2563,33 +3317,44 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 
     if(appState.merged[prefix]){
       const oldStatus = getStatus(def.id);
+      const wasCleaning = !!appState.cleaning[def.id];
 
       delete appState.states[def.id];
+      delete appState.cleaning[def.id];
       appState.merged[prefix] = false;
 
       if(oldStatus !== &quot;empty&quot;){
         appState.states[def.parts[0]] = oldStatus;
         appState.states[def.parts[1]] = oldStatus;
       }
+      if(wasCleaning){
+        appState.cleaning[def.parts[0]] = true;
+        appState.cleaning[def.parts[1]] = true;
+      }
     }else{
       const firstStatus = getStatus(def.parts[0]);
       const secondStatus = getStatus(def.parts[1]);
+      const wasCleaning =
+        !!appState.cleaning[def.parts[0]] || !!appState.cleaning[def.parts[1]];
 
       delete appState.states[def.parts[0]];
       delete appState.states[def.parts[1]];
+      delete appState.cleaning[def.parts[0]];
+      delete appState.cleaning[def.parts[1]];
       appState.merged[prefix] = true;
 
       if(firstStatus === &quot;used&quot; || secondStatus === &quot;used&quot;){
         appState.states[def.id] = &quot;used&quot;;
       }else if(firstStatus === &quot;reserved&quot; || secondStatus === &quot;reserved&quot;){
         appState.states[def.id] = &quot;reserved&quot;;
+      }else if(wasCleaning){
+        appState.cleaning[def.id] = true;
       }
     }
 
     saveState();
     renderAll();
   }
-
   function createPairCard(prefix){
     const def = pairById[prefix];
     const wrap = document.createElement(&quot;div&quot;);
@@ -2748,7 +3513,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       };
 
       group.forEach(id =&gt; {
-        if(isAvailable(id)){
+        if(isVacant(id)){
           run.push(id);
         }else{
           flush();
@@ -2845,7 +3610,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       };
 
       group.forEach(id =&gt; {
-        if(isAvailable(id)){
+        if(isVacant(id)){
           run.push(id);
         }else{
           flush();
@@ -2858,7 +3623,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     /* 単卓もおすすめ候補に含める。
        2名なら空いている2人卓、4名なら4人卓、6名なら6人卓を最優先にできる。 */
     Object.keys(tables)
-      .filter(id =&gt; tables[id] !== &quot;BOX&quot; &amp;&amp; isAvailable(id))
+      .filter(id =&gt; tables[id] !== &quot;BOX&quot; &amp;&amp; isVacant(id))
       .forEach(id =&gt; {
         const capacity = Number(tables[id]);
         if(capacity &gt; 0){
@@ -2873,11 +3638,15 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       });
 
     Object.keys(tables)
-      .filter(id =&gt; tables[id] === &quot;BOX&quot; &amp;&amp; isAvailable(id))
+      .filter(id =&gt; tables[id] === &quot;BOX&quot; &amp;&amp; isVacant(id))
       .forEach(id =&gt; {
         options.push({ids:[id], pax:7, capacity:7, low:false, box:true});
         options.push({ids:[id], pax:8, capacity:7, low:true, box:true});
       });
+
+    options.forEach(option =&gt; {
+      option.cleaning = option.ids.some(id =&gt; isCleaning(id));
+    });
 
     const seen = new Set();
 
@@ -2899,10 +3668,34 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     const row = document.getElementById(&quot;peopleRow&quot;);
     row.innerHTML = &quot;&quot;;
 
-    const capacities = [...new Set(allRenbanOptions().map(item =&gt; item.pax))]
+    const options = allRenbanOptions();
+    const availablePax = new Set();
+
+    options.forEach(item =&gt; {
+      const pax = Number(item.pax);
+      if(Number.isFinite(pax)) availablePax.add(pax);
+    });
+
+    const maxGuideCapacity = options.reduce((max,item) =&gt; {
+      const cap = Number(item.capacity ?? item.pax);
+      return Number.isFinite(cap) ? Math.max(max,cap) : max;
+    },0);
+
+    if(maxGuideCapacity &gt;= 9){
+      for(let n=9; n&lt;=maxGuideCapacity; n++){
+        availablePax.add(n);
+      }
+    }
+
+    const capacities = [...availablePax]
+      .filter(value =&gt; Number.isFinite(Number(value)))
+      .map(Number)
       .sort((a,b) =&gt; a-b);
 
-    const choices = [[&quot;all&quot;,&quot;全部&quot;], ...capacities.map(value =&gt; [String(value), value + &quot;名&quot;])];
+    const choices = [
+      [&quot;all&quot;,&quot;全部&quot;],
+      ...capacities.map(value =&gt; [String(value), value + &quot;名&quot;])
+    ];
 
     choices.forEach(([value,label]) =&gt; {
       const btn = document.createElement(&quot;button&quot;);
@@ -2916,7 +3709,6 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       row.appendChild(btn);
     });
   }
-
 
   function updateRenbanArrows(){
     const holder = document.getElementById(&quot;renbanOptions&quot;);
@@ -2946,6 +3738,12 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 
     holder.addEventListener(&quot;pointerdown&quot;, event =&gt; {
       if(event.pointerType === &quot;touch&quot;) return;
+
+      /* おすすめ案ボタンをクリックした時は、
+         親の横スクロールがpointerを奪わないようにする。
+         これが原因でPCでは案を押してもclickが発火しなかった。 */
+      if(event.target.closest(&quot;.renban-option&quot;)) return;
+
       dragging = true;
       startX = event.clientX;
       startScroll = holder.scrollLeft;
@@ -2975,50 +3773,267 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     window.addEventListener(&quot;resize&quot;, updateRenbanArrows);
   }
 
-  function renderRenbanOptions(){
+
+  function remainingRenbanScore(usedIds){
+    const used = new Set(usedIds);
+    const tables = currentTables();
+
+    const capOf = id =&gt; Number(tables[id] || 0);
+
+    let bestCapacity = 0;
+    let totalCapacityInRuns = 0;
+
+    recommendationRows().forEach(row =&gt; {
+      let runCapacity = 0;
+      let runLength = 0;
+
+      const flush = () =&gt; {
+        if(runLength &gt;= 2){
+          totalCapacityInRuns += runCapacity;
+          bestCapacity = Math.max(bestCapacity, runCapacity);
+        }
+        runCapacity = 0;
+        runLength = 0;
+      };
+
+      row.forEach(id =&gt; {
+        if(isVacant(id) &amp;&amp; !used.has(id)){
+          runLength++;
+          runCapacity += capOf(id);
+        }else{
+          flush();
+        }
+      });
+
+      flush();
+    });
+
+    return bestCapacity * 1000 + totalCapacityInRuns;
+  }
+
+  function physicalCountForId(id){
+    const group = appState.groups.find(g =&gt; g.id === id);
+    if(group){
+      return group.ids.reduce((sum,x)=&gt;sum+physicalCountForId(x),0);
+    }
+
+    const tables = currentTables();
+    const cap = Number(tables[id] || 0);
+
+    /* 3Fは表示上4人卓等でも、実際は2人卓を組み合わせたものとして
+       清掃負担を数える。4名=2実卓、6名=3実卓… */
+    return Math.max(1, Math.ceil(cap / 2));
+  }
+
+  function cleaningEffort(option){
+    let physical = 0;
+    let capacity = 0;
+
+    option.ids.forEach(id =&gt; {
+      if(isCleaning(id)){
+        physical += physicalCountForId(id);
+        const tables = currentTables();
+        capacity += Number(tables[id] || 0);
+      }
+    });
+
+    return {physical, capacity};
+  }
+
+  function cleaningPhysicalKeys(option){
+    const keys = [];
+
+    const expand = id =&gt; {
+      const group = appState.groups.find(g =&gt; g.id === id);
+      if(group){
+        group.ids.forEach(expand);
+        return;
+      }
+
+      const def = pairById[id];
+      if(def &amp;&amp; appState.merged[id]){
+        def.parts.forEach(part =&gt; keys.push(part));
+        return;
+      }
+
+      keys.push(id);
+    };
+
+    option.ids.forEach(id =&gt; {
+      if(isCleaning(id)) expand(id);
+    });
+
+    return [...new Set(keys)];
+  }
+
+  function cleaningSetDominated(option,candidates){
+    const mine = new Set(cleaningPhysicalKeys(option));
+    if(!mine.size) return false;
+
+    return candidates.some(other =&gt; {
+      if(other === option) return false;
+
+      const theirs = new Set(cleaningPhysicalKeys(other));
+      if(!theirs.size || theirs.size &gt;= mine.size) return false;
+
+      for(const key of theirs){
+        if(!mine.has(key)) return false;
+      }
+
+      return true;
+    });
+  }
+
+  function applyRecommendationOption(option){
+    /* Khi bấm một phương án trong おすすめ案:
+       - xóa 清掃待ち của mọi bàn thuộc phương án
+       - áp dụng thẳng trạng thái đang chọn (席取り / 使用中 / 空席)
+       - KHÔNG bắt buộc tạo group ghép mới
+       Như vậy ví dụ C7 đang 清掃待ち + C8 đang sạch:
+       bấm phương án khi chọn 使用中 =&gt; cả C7 và C8 đều thành 使用中. */
+    const expanded = new Set();
+
+    option.ids.forEach(id =&gt; {
+      const group = groupFor(id);
+      if(group){
+        group.ids.forEach(x =&gt; expanded.add(x));
+      }else{
+        expanded.add(id);
+      }
+    });
+
+    [...expanded].forEach(id =&gt; {
+      delete appState.cleaning[id];
+
+      if(selectedStatus === &quot;empty&quot;){
+        delete appState.states[id];
+      }else{
+        appState.states[id] = selectedStatus;
+      }
+    });
+
+    /* Nếu phương án chạm vào một group đã tồn tại thì cập nhật group đó.
+       Không tự tạo group mới chỉ vì chọn một phương án đề nghị. */
+    appState.groups.forEach(group =&gt; {
+      if(group.ids.some(id =&gt; expanded.has(id))){
+        group.state = selectedStatus;
+        group.ids.forEach(id =&gt; delete appState.cleaning[id]);
+      }
+    });
+
+    saveState();
+    renderAll();
+    showToast([...expanded].join(&quot;・&quot;) + &quot; → &quot; + statusLabel(selectedStatus));
+  }
+
+function renderRenbanOptions(){
     const all = allRenbanOptions();
     let filtered;
 
     if(peopleFilter === &quot;all&quot;){
-      filtered = [...all].sort(compareRecommendationRoute);
+      filtered = [...all].sort((a,b) =&gt;
+        Number(a.cleaning) - Number(b.cleaning) ||
+        compareRecommendationRoute(a,b)
+      );
     }else{
       const requested = Number(peopleFilter);
+      const capacityOf = item =&gt; item.capacity ?? item.pax;
+
       const bestByTables = new Map();
 
       all
-        .filter(item =&gt; {
-          const actualCapacity = item.capacity ?? item.pax;
-          /* BOX単体の8名利用は従来どおり低優先で残す。 */
-          return actualCapacity &gt;= requested || (item.box &amp;&amp; item.ids.length === 1 &amp;&amp; item.pax === requested);
-        })
+        .filter(item =&gt; capacityOf(item) &gt;= requested)
         .forEach(item =&gt; {
           const key = item.ids.join(&quot;-&quot;);
           const current = bestByTables.get(key);
-          const itemCapacity = item.capacity ?? item.pax;
-          const currentCapacity = current ? (current.capacity ?? current.pax) : Infinity;
 
           if(!current ||
-             itemCapacity &lt; currentCapacity ||
-             (itemCapacity === currentCapacity &amp;&amp; Number(item.low) &lt; Number(current.low))){
-            bestByTables.set(key, item);
+             capacityOf(item) &lt; capacityOf(current) ||
+             (capacityOf(item) === capacityOf(current) &amp;&amp;
+              Number(item.low) &lt; Number(current.low))){
+            bestByTables.set(key,item);
           }
         });
 
-      filtered = [...bestByTables.values()]
-        .sort((a,b) =&gt; {
-          const capA = a.capacity ?? a.pax;
-          const capB = b.capacity ?? b.pax;
+      const normal = [...bestByTables.values()];
 
-          /* 優先順位:
-             1. 使用する卓数が少ない
-             2. 同じ卓数なら空き席が少ない
-             3. 同条件なら通常卓をBOXより先にする */
-          return a.ids.length - b.ids.length ||
-                 (capA - requested) - (capB - requested) ||
-                 Number(a.low) - Number(b.low) ||
-                 Number(a.box) - Number(b.box) ||
-                 compareRecommendationRoute(a,b);
-        });
+      const keepReasonableCombos = list =&gt; {
+        if(!list.length) return [];
+
+        const singles = list.filter(item =&gt; item.ids.length === 1);
+        const combos = list.filter(item =&gt; item.ids.length &gt; 1);
+        const minOverallCapacity = Math.min(
+          ...list.map(item =&gt; capacityOf(item))
+        );
+
+        /* その時点の分割/連結状態を実配置として扱う。
+           E3E4等が現在連結済みなら ids.length===1 の既存卓として
+           MAXが大きくても予備候補に残す。
+           現在E3/E4に分割されているなら、2名客のために
+           E3+E4=4を新規連結する案は出さない。 */
+        return [
+          ...singles,
+          ...combos.filter(item =&gt; capacityOf(item) === minOverallCapacity)
+        ];
+      };
+
+      const sorter = (a,b) =&gt; {
+        const capA = capacityOf(a);
+        const capB = capacityOf(b);
+
+        const capacityDiff =
+          (capA - requested) - (capB - requested);
+        if(capacityDiff) return capacityDiff;
+
+        if(a.cleaning &amp;&amp; b.cleaning){
+          const ea = cleaningEffort(a);
+          const eb = cleaningEffort(b);
+
+          const cleanDiff =
+            ea.physical - eb.physical ||
+            ea.capacity - eb.capacity;
+          if(cleanDiff) return cleanDiff;
+        }
+
+        const renDiff =
+          remainingRenbanScore(b.ids) - remainingRenbanScore(a.ids);
+        if(renDiff) return renDiff;
+
+        const displayCountDiff = a.ids.length - b.ids.length;
+        if(displayCountDiff) return displayCountDiff;
+
+        return compareRecommendationRoute(a,b);
+      };
+
+      /* 案内可能候補:
+         現在すでに存在する単卓/連結済み卓は大きめMAXでも予備として残し、
+         今から新しく作る連結案だけ必要最小MAXに制限する。 */
+      const ready = keepReasonableCombos(
+        normal.filter(item =&gt; !item.cleaning)
+      ).sort(sorter);
+
+      const waitingBase = keepReasonableCombos(
+        normal.filter(item =&gt; item.cleaning)
+      );
+
+      let waiting = [];
+
+      if(waitingBase.length){
+        const minWaitingCapacity = Math.min(
+          ...waitingBase.map(item =&gt; capacityOf(item))
+        );
+
+        const sameCapacity = waitingBase
+          .filter(item =&gt; capacityOf(item) === minWaitingCapacity);
+
+        waiting = sameCapacity
+          .filter(item =&gt; !cleaningSetDominated(item,sameCapacity))
+          .sort(sorter);
+      }
+
+      /* お客様最優先：案内可能な最小MAX候補を全部先に、
+         その後に清掃待ちの最小MAX候補。 */
+      filtered = [...ready, ...waiting];
     }
 
     document.getElementById(&quot;renbanCount&quot;).textContent = filtered.length + &quot;案&quot;;
@@ -3038,27 +4053,28 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
     const tables = currentTables();
     const requested = peopleFilter === &quot;all&quot; ? null : Number(peopleFilter);
 
-    filtered.forEach((option,index) =&gt; {
+    filtered.forEach(option =&gt; {
       const btn = document.createElement(&quot;button&quot;);
       const actualCapacity = option.capacity ?? option.pax;
-      const excess = requested === null ? 0 : Math.max(0, actualCapacity - requested);
+      const excess =
+        requested === null ? 0 : Math.max(0,actualCapacity-requested);
 
       let priorityClass = &quot;&quot;;
       let priorityLabel = &quot;&quot;;
 
-      if(requested !== null){
+      if(option.cleaning){
+        priorityClass = &quot; low&quot;;
+        priorityLabel = &quot;清掃待ち&quot;;
+      }else if(requested !== null){
         if(excess === 0){
           priorityClass = &quot; priority-1&quot;;
           priorityLabel = &quot;優先&quot;;
         }else if(excess === 1){
           priorityClass = &quot; priority-2&quot;;
           priorityLabel = &quot;次点&quot;;
-        }else if(excess &lt;= 3){
+        }else{
           priorityClass = &quot; priority-3&quot;;
           priorityLabel = &quot;予備&quot;;
-        }else{
-          priorityClass = &quot; low&quot;;
-          priorityLabel = &quot;優先度低&quot;;
         }
       }else{
         priorityClass = option.low ? &quot; low&quot; : &quot;&quot;;
@@ -3068,11 +4084,24 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       btn.className = &quot;renban-option&quot; + priorityClass;
 
       let note;
-      if(requested !== null){
-        note = priorityLabel + &quot;・&quot; + option.ids.length + &quot;卓・MAX &quot; + actualCapacity + &quot;名&quot;;
+
+      if(option.cleaning){
+        const effort = cleaningEffort(option);
+        const renScore = remainingRenbanScore(option.ids);
+        const remainingMaxRenban = Math.floor(renScore / 1000);
+
+        note =
+          &quot;清掃待ち・MAX &quot; + actualCapacity + &quot;名&quot; +
+          &quot;・清掃&quot; + effort.physical + &quot;卓相当&quot; +
+          &quot;・残す連番MAX &quot; + remainingMaxRenban + &quot;名&quot;;
+
         if(excess &gt; 0) note += &quot;・空き &quot; + excess + &quot;席&quot;;
-      }else if(option.box &amp;&amp; actualCapacity === 14){
-        note = priorityLabel + &quot;・2 BOX&quot;;
+      }else if(requested !== null){
+        note =
+          priorityLabel + &quot;・&quot; +
+          option.ids.length + &quot;卓・MAX &quot; + actualCapacity + &quot;名&quot;;
+
+        if(excess &gt; 0) note += &quot;・空き &quot; + excess + &quot;席&quot;;
       }else{
         note = priorityLabel;
       }
@@ -3081,12 +4110,17 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
         &quot;&lt;strong&gt;&quot; + (requested ?? option.pax) + &quot;名&lt;/strong&gt;&quot; +
         &#x27;&lt;div class=&quot;chips&quot;&gt;&#x27; +
         option.ids.map(id =&gt;
-          &#x27;&lt;span class=&quot;chip &#x27; + capacityClass(tables[id]) + &#x27;&quot;&gt;&#x27; + id + &quot;&lt;/span&gt;&quot;
+          &#x27;&lt;span class=&quot;chip &#x27; + capacityClass(tables[id]) + &#x27;&quot;&gt;&#x27; +
+          id +
+          &quot;&lt;/span&gt;&quot;
         ).join(&quot;&quot;) +
         &quot;&lt;/div&gt;&quot; +
         &quot;&lt;small&gt;&quot; + note + &quot;&lt;/small&gt;&quot;;
 
-      btn.addEventListener(&quot;click&quot;, () =&gt; setStatus(option.ids));
+      btn.addEventListener(&quot;click&quot;, () =&gt; {
+        applyRecommendationOption(option);
+      });
+
       holder.appendChild(btn);
     });
 
@@ -3110,7 +4144,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
         if(tables[id] !== capacity) return false;
         const isVirtual = appState.groups.some(group =&gt; group.id === id);
         if(!isVirtual &amp;&amp; isGrouped(id)) return false;
-        return isAvailable(id);
+        return isVacant(id);
       }).length;
 
       const card = document.createElement(&quot;div&quot;);
@@ -3118,6 +4152,15 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
       card.innerHTML = &quot;&lt;small&gt;&quot; + label + &quot; 空き&lt;/small&gt;&lt;b&gt;&quot; + count + &quot;&lt;/b&gt;&quot;;
       summary.appendChild(card);
     });
+    const cleaningCount = Object.keys(tables).filter(id =&gt; {
+      const isVirtual = appState.groups.some(group =&gt; group.id === id);
+      if(!isVirtual &amp;&amp; isGrouped(id)) return false;
+      return isVacant(id) &amp;&amp; isCleaning(id);
+    }).length;
+    const cleaningCard = document.createElement(&quot;div&quot;);
+    cleaningCard.className = &quot;summary-card&quot;;
+    cleaningCard.innerHTML = &quot;&lt;small&gt;清掃待ち&lt;/small&gt;&lt;b&gt;&quot; + cleaningCount + &quot;&lt;/b&gt;&quot;;
+    summary.appendChild(cleaningCard);
   }
 
   function showToast(message){
@@ -3262,7 +4305,7 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
   });
 
   document.getElementById(&quot;resetBtn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-    appState = {states:{}, merged:{...defaultMerged}, groups:[]};
+    appState = {states:{}, merged:{...defaultMerged}, groups:[], cleaning:{}};
     selectedStatus = &quot;reserved&quot;;
     tableView = &quot;all&quot;;
     peopleFilter = &quot;all&quot;;
@@ -3285,13 +4328,12 @@ main{max-width:760px;margin:auto;padding:342px 8px 30px}
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-"></iframe>
-<iframe class="app-frame" data-index="3" title="個室" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!doctype html&gt;
+"></iframe><iframe class="app-frame" data-index="3" title="個室" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;ja&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;
-&lt;title&gt;個室&lt;/title&gt;
+&lt;title&gt;個室 席振り&lt;/title&gt;
 &lt;style&gt;
 :root{
   --bg:#f3f4f6;--card:#fff;--line:#cfd4dc;--text:#17202a;--muted:#667085;
@@ -3307,7 +4349,7 @@ button{font:inherit}
 .title b{font-size:17px}
 .reset{border:1px solid #9ca3af;background:#fff;border-radius:8px;padding:6px 10px;font-weight:800}
 .summary-all{display:grid;gap:5px;margin-top:6px}
-.room-summary{display:grid;grid-template-columns:42px repeat(4,minmax(58px,1fr));gap:4px}
+.room-summary{display:grid;grid-template-columns:42px repeat(5,minmax(54px,1fr));gap:4px}
 .room-name{display:flex;align-items:center;justify-content:center;background:#111;color:#fff;border-radius:8px;font-weight:950}
 .sum{background:#fff;border:1px solid var(--line);border-radius:8px;text-align:center;padding:4px 2px}
 .sum small{display:block;color:var(--muted);font-size:9px;line-height:1.1}
@@ -3354,6 +4396,8 @@ main{max-width:1040px;margin:auto;padding:7px}
 .table.cap6{background:var(--empty6);border-width:3px}
 .table.reserved,.split-merged.reserved .segment{background:var(--reserved)!important}
 .table.used,.split-merged.used .segment{background:var(--used)!important}
+.table.cleaning{background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)!important}
+.split-merged.cleaning .segment{background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)!important}
 .table.selected,.split-merged.selected{outline:4px solid var(--accent);outline-offset:2px}
 .table.grouped,.split-merged.grouped{box-shadow:0 0 0 4px rgba(37,99,235,.35)}
 .table .cap{position:absolute;bottom:3px;font-size:9px;color:#475569}
@@ -3404,13 +4448,13 @@ main{max-width:1040px;margin:auto;padding:7px}
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div class=&quot;fixed&quot;&gt;&lt;div class=&quot;fixed-inner&quot;&gt;
- &lt;div class=&quot;title&quot;&gt;&lt;button id=&quot;reset&quot; class=&quot;reset&quot;&gt;リセット&lt;/button&gt;&lt;/div&gt;
+ &lt;div class=&quot;title&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;button id=&quot;reset&quot; class=&quot;reset&quot;&gt;リセット&lt;/button&gt;&lt;/div&gt;
  &lt;div id=&quot;summaryAll&quot; class=&quot;summary-all&quot;&gt;&lt;/div&gt;
 
  &lt;div class=&quot;label&quot;&gt;表示する個室&lt;/div&gt;
  &lt;div id=&quot;roomRow&quot; class=&quot;row-scroll room-row&quot;&gt;&lt;/div&gt;
 
- &lt;div class=&quot;label&quot;&gt;タップ時の状態&lt;/div&gt;
+ &lt;div class=&quot;label&quot;&gt;タップ時の状態 &lt;span style=&quot;font-weight:400;color:var(--muted)&quot;&gt;（長押し＝清掃待ち）&lt;/span&gt;&lt;/div&gt;
  &lt;div id=&quot;stateRow&quot; class=&quot;row-scroll state-row&quot;&gt;
    &lt;button data-state=&quot;empty&quot;&gt;空席&lt;/button&gt;&lt;button data-state=&quot;reserved&quot; class=&quot;active&quot;&gt;席取り&lt;/button&gt;&lt;button data-state=&quot;used&quot;&gt;使用中&lt;/button&gt;
  &lt;/div&gt;
@@ -3427,7 +4471,7 @@ main{max-width:1040px;margin:auto;padding:7px}
 
 &lt;main&gt;
  &lt;section class=&quot;card&quot;&gt;
-  &lt;div class=&quot;card-title&quot;&gt;&lt;span id=&quot;recommendTitle&quot;&gt;おすすめ&lt;/span&gt;&lt;span id=&quot;optionCount&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;card-title&quot;&gt;&lt;span id=&quot;recommendTitle&quot;&gt;&lt;strong&gt;おすすめ案&lt;/strong&gt;&lt;/span&gt;&lt;span id=&quot;optionCount&quot;&gt;&lt;/span&gt;&lt;/div&gt;
   &lt;div class=&quot;options-wrap&quot;&gt;&lt;button id=&quot;prev&quot; class=&quot;scroll-arrow&quot;&gt;‹&lt;/button&gt;&lt;div id=&quot;options&quot; class=&quot;options&quot;&gt;&lt;/div&gt;&lt;button id=&quot;next&quot; class=&quot;scroll-arrow&quot;&gt;›&lt;/button&gt;&lt;/div&gt;
  &lt;/section&gt;
 
@@ -3498,9 +4542,9 @@ const ROOMS={
  }
 };
 const ROOM_ORDER=[&quot;SG&quot;,&quot;KH&quot;,&quot;CD&quot;];
-const KEY=&quot;sekifuri-koshitsu-v11-horizontal-size-fixed&quot;;
+const KEY=&quot;sekifuri-koshitsu-cleaning-final-v3&quot;;
 let data=JSON.parse(localStorage.getItem(KEY)||&#x27;{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{}}&#x27;);
-data.states||={};data.groups||=[];data.merged||={};
+data.states||={};data.groups||=[];data.merged||={};data.cleaning||={};
 for(const room of ROOM_ORDER)for(const [id,p] of Object.entries(ROOMS[room].positions))if(p.type===&quot;split&quot;&amp;&amp;data.merged[id]===undefined)data.merged[id]=true;
 
 let selectedRoom=&quot;SG&quot;,selectedState=&quot;reserved&quot;,people=4,manual=false,selected=new Set();
@@ -3525,7 +4569,12 @@ function activeIds(room){
  return out;
 }
 function groupFor(id){return data.groups.find(g=&gt;g.ids.includes(id))}
-function available(id){return state(id)===&quot;empty&quot;&amp;&amp;!groupFor(id)}
+function isCleaning(id){
+ const g=groupFor(id),ids=g?g.ids:[id];
+ return ids.some(x=&gt;!!data.cleaning[x]);
+}
+function vacant(id){return state(id)===&quot;empty&quot;&amp;&amp;!groupFor(id)}
+function available(id){return vacant(id)&amp;&amp;!isCleaning(id)}
 
 function laneUnits(room,lane){
  const ids=[];
@@ -3540,12 +4589,13 @@ function allRuns(room){
  ROOMS[room].autoLanes.forEach((lane,laneIndex)=&gt;{
   const units=laneUnits(room,lane);
   for(let i=0;i&lt;units.length;i++){
-   if(!available(units[i]))continue;
-   let cap=0;
+   if(!vacant(units[i]))continue;
+   let cap=0,cleaning=false;
    for(let j=i;j&lt;units.length;j++){
-    if(!available(units[j]))break;
+    if(!vacant(units[j]))break;
     cap+=capOf(units[j]);
-    out.push({ids:units.slice(i,j+1),cap,count:j-i+1,laneIndex,start:i});
+    cleaning=cleaning||isCleaning(units[j]);
+    out.push({ids:units.slice(i,j+1),cap,count:j-i+1,laneIndex,start:i,cleaning});
    }
   }
  });
@@ -3566,25 +4616,424 @@ function compareByTableNumber(a,b){
  }
  return 0;
 }
+function remainingMaxAfter(room,usedIds){
+ const used=new Set(usedIds);
+ let best=0;
+
+ ROOMS[room].autoLanes.forEach(lane=&gt;{
+  const units=laneUnits(room,lane);
+  let cap=0;
+  units.forEach(id=&gt;{
+   if(vacant(id)&amp;&amp;!used.has(id)){
+    cap+=capOf(id);
+    if(cap&gt;best)best=cap;
+   }else{
+    cap=0;
+   }
+  });
+ });
+
+ return best;
+}
+
+function physicalCountForId(id){
+ const g=groupFor(id);
+ if(g){
+  return g.ids.reduce((sum,x)=&gt;sum+physicalCountForId(x),0);
+ }
+
+ const p=posOf(id);
+ if(!p)return 1;
+
+ /* 個室には固定卓と分割/連結卓が混在する。
+    - 固定4/固定6: そのまま1卓
+    - splitを現在連結中: 2つの実卓を連結したものなので2卓
+    - splitを分割中のA/B: それぞれ1卓 */
+ const base=baseOf(id);
+ const bp=ROOMS[roomOf(id)]?.positions?.[base];
+
+ if(bp?.type===&quot;split&quot;){
+  if(id===base &amp;&amp; data.merged[base])return 2;
+  return 1;
+ }
+
+ return 1;
+}
+
+function cleaningEffort(option){
+ let physical=0,capacity=0;
+ option.ids.forEach(id=&gt;{
+  if(isCleaning(id)){
+   physical+=physicalCountForId(id);
+   capacity+=capOf(id);
+  }
+ });
+ return {physical,capacity};
+}
+
+function cleaningPhysicalKeys(option){
+ const keys=[];
+
+ const expand=id=&gt;{
+  const g=groupFor(id);
+  if(g){
+   g.ids.forEach(expand);
+   return;
+  }
+
+  const base=baseOf(id);
+  const room=roomOf(id);
+  const p=room?ROOMS[room].positions[base]:null;
+
+  if(p?.type===&quot;split&quot; &amp;&amp; id===base &amp;&amp; data.merged[base]){
+   keys.push(base+&quot;A&quot;,base+&quot;B&quot;);
+   return;
+  }
+
+  keys.push(id);
+ };
+
+ option.ids.forEach(id=&gt;{
+  if(isCleaning(id))expand(id);
+ });
+
+ return [...new Set(keys)];
+}
+
+function cleaningSetDominated(option,candidates){
+ const mine=new Set(cleaningPhysicalKeys(option));
+ if(!mine.size)return false;
+
+ return candidates.some(other=&gt;{
+  if(other===option)return false;
+  const theirs=new Set(cleaningPhysicalKeys(other));
+  if(!theirs.size||theirs.size&gt;=mine.size)return false;
+
+  for(const key of theirs){
+   if(!mine.has(key))return false;
+  }
+  return true;
+ });
+}
+
+function roomActivityProfile(room){
+ let total=0;
+ let used=0;
+ const countedGroups=new Set();
+
+ activeIds(room).forEach(id=&gt;{
+  const g=groupFor(id);
+
+  if(g){
+   if(countedGroups.has(g.id))return;
+   countedGroups.add(g.id);
+   total+=1;
+
+   const active=
+     (g.state||&quot;empty&quot;)!==&quot;empty&quot; ||
+     g.ids.some(x=&gt;state(x)!==&quot;empty&quot;) ||
+     g.ids.some(x=&gt;isCleaning(x));
+
+   if(active)used+=1;
+   return;
+  }
+
+  total+=1;
+  if(state(id)!==&quot;empty&quot; || isCleaning(id))used+=1;
+ });
+
+ return {used,total,remaining:Math.max(0,total-used)};
+}
+
+function roomActivityScore(room){
+ const p=roomActivityProfile(room);
+ return p.total ? p.used/p.total : 0;
+}
+
+function roomRemainingProfile(chosenRoom,usedIds){
+ const profile={};
+ ROOM_ORDER.forEach(room=&gt;{
+  profile[room]=remainingMaxAfter(
+    room,
+    room===chosenRoom ? usedIds : []
+  );
+ });
+ return profile;
+}
+
+function strongestOtherRoomMax(chosenRoom,usedIds){
+ const p=roomRemainingProfile(chosenRoom,usedIds);
+ return Math.max(...ROOM_ORDER.map(r=&gt;p[r]||0));
+}
+
+function splitUseCandidates(){
+ const out=[];
+
+ ROOM_ORDER.forEach(room=&gt;{
+  for(const [base,p] of Object.entries(ROOMS[room].positions)){
+   if(p.type!==&quot;split&quot; || !data.merged[base])continue;
+   if(!vacant(base) || isCleaning(base))continue;
+
+   /* Cụm split hiện tại = 2 + 4.
+      Nếu khách cần 2 người, có thể tách và dùng A, giữ lại B=4.
+      Nếu khách cần 3-4 người, có thể tách và dùng B=4, giữ lại A=2.
+      Đây phải được ưu tiên hơn dùng một bàn cố định 6 người. */
+   let part=null,cap=0,kept=0;
+
+   if(people&lt;=2){
+    part=base+&quot;A&quot;;
+    cap=2;
+    kept=4;
+   }else if(people&lt;=4){
+    part=base+&quot;B&quot;;
+    cap=4;
+    kept=2;
+   }else{
+    continue;
+   }
+
+   out.push({
+    ids:[part],
+    base,
+    room,
+    cap,
+    count:1,
+    laneIndex:0,
+    start:tableNumber(base),
+    cleaning:false,
+    splitUse:true,
+    keptSplitCapacity:kept,
+    remainMax:remainingMaxAfter(room,[base]),
+    roomActivity:roomActivityScore(room),
+    roomActivityProfile:roomActivityProfile(room),
+    globalRemainMax:strongestOtherRoomMax(room,[base]),
+    remainProfile:roomRemainingProfile(room,[base])
+   });
+  }
+ });
+
+ return out;
+}
+
+function applySplitUse(option){
+ const base=option.base;
+ if(!base || !data.merged[base])return;
+
+ if(state(base)!==&quot;empty&quot; || isCleaning(base)){
+  toast(base+&quot; は現在分割できません&quot;);
+  return;
+ }
+
+ delete data.states[base];
+ delete data.cleaning[base];
+ delete data.states[base+&quot;A&quot;];
+ delete data.states[base+&quot;B&quot;];
+ data.merged[base]=false;
+
+ const target=option.ids[0];
+ if(selectedState===&quot;empty&quot;){
+  delete data.states[target];
+ }else{
+  data.states[target]=selectedState;
+ }
+
+ save();
+ renderAll();
+ toast(base+&quot; を分割 → &quot;+target+&quot; を&quot;+stateLabel(selectedState));
+}
+
+function flexibilityPenalty(option){
+ /* Cùng phòng + cùng MAX:
+    bàn cố định nên được dùng trước để giữ các bàn có thể tách 2+4 cho lượt sau.
+    0 = bàn cố định / không làm mất tính linh hoạt
+    1 = cụm split hiện đang ghép (2+4) sẽ mất cơ hội tách thành 2 nhóm 2 và 4
+    2 = phương án phải ghép mới nhiều bàn
+ */
+ if(option.splitUse)return 0;
+
+ if(option.count===1 &amp;&amp; option.ids.length===1){
+  const id=option.ids[0];
+  const p=posOf(id);
+  if(p?.type===&quot;split&quot; &amp;&amp; data.merged[id])return 1;
+  return 0;
+ }
+
+ return option.count&gt;1 ? 2 : 0;
+}
+
 function candidates(){
  const roomPriority=room=&gt;ROOM_ORDER.indexOf(room);
- const all=ROOM_ORDER.flatMap(room=&gt;
+
+ const normal=ROOM_ORDER.flatMap(room=&gt;
    allRuns(room)
     .filter(x=&gt;x.cap&gt;=people)
-    .map(x=&gt;({...x,room}))
+    .map(x=&gt;({
+      ...x,
+      room,
+      remainMax:remainingMaxAfter(room,x.ids),
+      roomActivity:roomActivityScore(room),
+      roomActivityProfile:roomActivityProfile(room),
+      flexibilityPenalty:0,
+      globalRemainMax:strongestOtherRoomMax(room,x.ids),
+      remainProfile:roomRemainingProfile(room,x.ids)
+    }))
  );
- return all.sort((a,b)=&gt;
-   (a.cap-people)-(b.cap-people)||
-   roomPriority(a.room)-roomPriority(b.room)||
-   a.count-b.count||
-   compareByTableNumber(a,b)||
-   a.laneIndex-b.laneIndex||
-   a.start-b.start
- ).slice(0,35);
+
+ /* Cụm 2+4 đang ghép sẵn có thể tách để dùng đúng phần cần thiết. */
+ const splitReady=splitUseCandidates();
+
+ const all=[...normal,...splitReady];
+
+ const keepCurrentTablesAndMinimumNewCombos=list=&gt;{
+  if(!list.length)return [];
+
+  const existing=list.filter(x=&gt;x.count===1 || x.splitUse);
+  const combos=list.filter(x=&gt;x.count&gt;1 &amp;&amp; !x.splitUse);
+  const minOverallCap=Math.min(...list.map(x=&gt;x.cap));
+
+  return [
+    ...existing,
+    ...combos.filter(x=&gt;x.cap===minOverallCap)
+  ];
+ };
+
+ const readyAll=all.filter(x=&gt;!x.cleaning);
+
+ /* 案内可能な空席案は、各部屋ごとに必要最小MAXの新規連結案を残す。
+    個室全体で一括して絞ると、別の部屋の候補のせいで
+    SGの4+4=8のような「今すぐ案内できる案」が消えることがある。 */
+ const readyBase=ROOM_ORDER.flatMap(room=&gt;
+   keepCurrentTablesAndMinimumNewCombos(
+     readyAll.filter(x=&gt;x.room===room)
+   )
+ );
+
+ const readySorter=(a,b)=&gt;{
+  /* 1) Vừa số khách nhất.
+        Ví dụ 4名: phần 4 của SG5/KH5 tự nhiên đứng trước bàn cố định6 KH8. */
+  const capDiff=(a.cap-people)-(b.cap-people);
+  if(capDiff)return capDiff;
+
+  /* 2) Dồn khách vào phòng đã dùng nhiều hơn TRƯỚC.
+        Nếu SG đang dùng nhiều hơn KH thì SG phải đứng trước KH. */
+  const ap=a.roomActivityProfile||roomActivityProfile(a.room);
+  const bp=b.roomActivityProfile||roomActivityProfile(b.room);
+
+  /* 使用率 used/total が高い部屋を先に埋める。 */
+  const ratioDiff=(bp.used*ap.total)-(ap.used*bp.total);
+  if(ratioDiff)return ratioDiff;
+
+  /* 使用率が同じなら、残り卓数が少ない部屋を先にする。 */
+  const remainingDiff=ap.remaining-bp.remaining;
+  if(remainingDiff)return remainingDiff;
+
+  const usedDiff=bp.used-ap.used;
+  if(usedDiff)return usedDiff;
+
+  /* 3) Nếu cùng phòng / cùng mức vừa khách:
+        ưu tiên bàn CỐ ĐỊNH trước bàn split đang ghép.
+        Ví dụ 6名 trong KH: KH8 cố định phải trước KH5=2+4,
+        vì KH5 còn có thể tách ra dùng cho 4名 + 2名 sau. */
+  if(a.room===b.room){
+   const flexibilityDiff=flexibilityPenalty(a)-flexibilityPenalty(b);
+   if(flexibilityDiff)return flexibilityDiff;
+  }
+
+  /* 4) Với nhóm 2〜4名, nếu đang dùng chính cụm split thì
+        phương án tách lấy đúng phần cần vẫn được ưu tiên. */
+  const splitDiff=Number(!!b.splitUse)-Number(!!a.splitUse);
+  if(splitDiff)return splitDiff;
+
+  /* 4) Nếu đều là split-use, giữ phần bàn có ích hơn cho lượt sau. */
+  const keptDiff=(b.keptSplitCapacity||0)-(a.keptSplitCapacity||0);
+  if(keptDiff)return keptDiff;
+
+  /* 5) Ít đơn vị bàn hơn */
+  const countDiff=a.count-b.count;
+  if(countDiff)return countDiff;
+
+  /* 6) Giữ MAX toàn khu rồi MAX trong phòng */
+  const globalDiff=b.globalRemainMax-a.globalRemainMax;
+  if(globalDiff)return globalDiff;
+
+  const roomMaxDiff=b.remainMax-a.remainMax;
+  if(roomMaxDiff)return roomMaxDiff;
+
+  return roomPriority(a.room)-roomPriority(b.room)||
+    compareByTableNumber(a,b)||
+    a.laneIndex-b.laneIndex||
+    a.start-b.start;
+ };
+
+ const ready=readyBase.sort(readySorter);
+
+ /* 清掃待ち không dùng split-use ảo vì trạng thái merged không cho biết
+    chính xác phần A hay B đã bẩn; giữ logic dọn an toàn như v6. */
+ const waitingAll=normal.filter(x=&gt;x.cleaning);
+
+ /* 清掃待ちも部屋ごとに候補を作ってから全体比較する。 */
+ const waitingBase=ROOM_ORDER.flatMap(room=&gt;
+   keepCurrentTablesAndMinimumNewCombos(
+     waitingAll.filter(x=&gt;x.room===room)
+   )
+ );
+
+ let waiting=[];
+ if(waitingBase.length){
+  const minWaitingCap=Math.min(...waitingBase.map(x=&gt;x.cap));
+  const sameCapacity=waitingBase.filter(x=&gt;x.cap===minWaitingCap);
+
+  waiting=sameCapacity.filter(
+    x=&gt;!cleaningSetDominated(x,sameCapacity)
+  );
+
+  waiting.sort((a,b)=&gt;{
+   const ap=a.roomActivityProfile||roomActivityProfile(a.room);
+   const bp=b.roomActivityProfile||roomActivityProfile(b.room);
+
+   /* 使用率 used/total が高い部屋を先に埋める。 */
+   const ratioDiff=(bp.used*ap.total)-(ap.used*bp.total);
+   if(ratioDiff)return ratioDiff;
+
+   /* 使用率が同じなら、残り卓数が少ない部屋を先にする。 */
+   const remainingDiff=ap.remaining-bp.remaining;
+   if(remainingDiff)return remainingDiff;
+
+   const usedDiff=bp.used-ap.used;
+   if(usedDiff)return usedDiff;
+
+   const ea=cleaningEffort(a),eb=cleaningEffort(b);
+   const cleanDiff=
+     ea.physical-eb.physical||
+     ea.capacity-eb.capacity;
+   if(cleanDiff)return cleanDiff;
+
+   const globalDiff=b.globalRemainMax-a.globalRemainMax;
+   if(globalDiff)return globalDiff;
+
+   const roomMaxDiff=b.remainMax-a.remainMax;
+   if(roomMaxDiff)return roomMaxDiff;
+
+   return roomPriority(a.room)-roomPriority(b.room)||
+     a.count-b.count||
+     compareByTableNumber(a,b)||
+     a.laneIndex-b.laneIndex||
+     a.start-b.start;
+  });
+ }
+
+ return [...ready,...waiting].slice(0,35);
 }
 function setIds(ids,s=selectedState){
- ids.forEach(id=&gt;s===&quot;empty&quot;?delete data.states[id]:data.states[id]=s);
- const g=data.groups.find(g=&gt;ids.some(id=&gt;g.ids.includes(id)));if(g)g.state=s;
+ ids.forEach(id=&gt;{
+   delete data.cleaning[id];
+   s===&quot;empty&quot;?delete data.states[id]:data.states[id]=s;
+ });
+ const g=data.groups.find(g=&gt;ids.some(id=&gt;g.ids.includes(id)));
+ if(g){
+   g.state=s;
+   g.ids.forEach(id=&gt;delete data.cleaning[id]);
+ }
  save();renderAll();
 }
 function createGroup(ids,room=roomOf(ids[0])||selectedRoom){
@@ -3596,19 +5045,78 @@ function createGroup(ids,room=roomOf(ids[0])||selectedRoom){
 }
 function releaseGroup(gid){
  const i=data.groups.findIndex(g=&gt;g.id===gid);if(i&lt;0)return;
- data.groups[i].ids.forEach(id=&gt;delete data.states[id]);data.groups.splice(i,1);save();renderAll();toast(&quot;連結解除 → 空席&quot;);
+ data.groups[i].ids.forEach(id=&gt;{delete data.states[id];delete data.cleaning[id]});data.groups.splice(i,1);save();renderAll();toast(&quot;連結解除 → 空席&quot;);
 }
 function toggleSplit(base){
- if(groupFor(base)||groupFor(base+&quot;A&quot;)||groupFor(base+&quot;B&quot;)){toast(&quot;先に手動連結を解除してください&quot;);return}
+ if(groupFor(base)||groupFor(base+&quot;A&quot;)||groupFor(base+&quot;B&quot;)){
+  toast(&quot;先に手動連結を解除してください&quot;);return
+ }
+
  if(data.merged[base]){
   if(state(base)!==&quot;empty&quot;){toast(&quot;空席にしてから分割してください&quot;);return}
-  delete data.states[base];delete data.states[base+&quot;A&quot;];delete data.states[base+&quot;B&quot;];data.merged[base]=false;
+  const wasCleaning=!!data.cleaning[base];
+
+  delete data.states[base];
+  delete data.cleaning[base];
+  delete data.states[base+&quot;A&quot;];
+  delete data.states[base+&quot;B&quot;];
+  data.merged[base]=false;
+
+  if(wasCleaning){
+   data.cleaning[base+&quot;A&quot;]=true;
+   data.cleaning[base+&quot;B&quot;]=true;
+  }
  }else{
-  if(state(base+&quot;A&quot;)!==&quot;empty&quot;||state(base+&quot;B&quot;)!==&quot;empty&quot;){toast(&quot;両方を空席にしてから連結してください&quot;);return}
-  delete data.states[base];delete data.states[base+&quot;A&quot;];delete data.states[base+&quot;B&quot;];data.merged[base]=true;
+  if(state(base+&quot;A&quot;)!==&quot;empty&quot;||state(base+&quot;B&quot;)!==&quot;empty&quot;){
+   toast(&quot;両方を空席にしてから連結してください&quot;);return
+  }
+
+  const wasCleaning=!!data.cleaning[base+&quot;A&quot;]||!!data.cleaning[base+&quot;B&quot;];
+
+  delete data.states[base];
+  delete data.states[base+&quot;A&quot;];
+  delete data.states[base+&quot;B&quot;];
+  delete data.cleaning[base+&quot;A&quot;];
+  delete data.cleaning[base+&quot;B&quot;];
+  data.merged[base]=true;
+
+  if(wasCleaning)data.cleaning[base]=true;
  }
+
  selected.clear();save();renderAll();
 }
+function markCleaning(id){
+ const g=groupFor(id),ids=g?g.ids:[id];
+ ids.forEach(x=&gt;{delete data.states[x];data.cleaning[x]=true});
+ if(g)g.state=&quot;empty&quot;;
+ save();renderAll();toast(ids.join(&quot;・&quot;)+&quot; → 清掃待ち&quot;);
+}
+function bindLongPress(btn,id){
+ let timer=null,held=false,suppressClick=false,startX=0,startY=0;
+ const begin=(x,y)=&gt;{
+  held=false;startX=x;startY=y;clearTimeout(timer);
+  timer=setTimeout(()=&gt;{
+   held=true;suppressClick=true;markCleaning(id);
+   try{navigator.vibrate&amp;&amp;navigator.vibrate(25)}catch{}
+  },500);
+ };
+ const move=(x,y)=&gt;{
+  if(Math.abs(x-startX)&gt;12||Math.abs(y-startY)&gt;12){clearTimeout(timer);timer=null}
+ };
+ const end=()=&gt;{clearTimeout(timer);timer=null};
+ btn.addEventListener(&quot;touchstart&quot;,e=&gt;{const t=e.touches[0];begin(t.clientX,t.clientY)},{passive:true});
+ btn.addEventListener(&quot;touchmove&quot;,e=&gt;{const t=e.touches[0];move(t.clientX,t.clientY)},{passive:true});
+ btn.addEventListener(&quot;touchend&quot;,e=&gt;{end();if(held)e.preventDefault()},{passive:false});
+ btn.addEventListener(&quot;touchcancel&quot;,end);
+ btn.addEventListener(&quot;mousedown&quot;,e=&gt;{if(e.button===0)begin(e.clientX,e.clientY)});
+ btn.addEventListener(&quot;mousemove&quot;,e=&gt;move(e.clientX,e.clientY));
+ btn.addEventListener(&quot;mouseup&quot;,end);btn.addEventListener(&quot;mouseleave&quot;,end);
+ btn.addEventListener(&quot;click&quot;,e=&gt;{
+  if(suppressClick){suppressClick=false;e.preventDefault();e.stopImmediatePropagation()}
+ },true);
+ btn.addEventListener(&quot;contextmenu&quot;,e=&gt;e.preventDefault());
+}
+
 function handle(id){
  if(manual){
   if(!available(id)){toast(&quot;空席の卓だけ選択できます&quot;);return}
@@ -3623,21 +5131,56 @@ function renderRoomButtons(){
   b.onclick=()=&gt;{selectedRoom=r;manual=false;selected.clear();renderAll()};h.appendChild(b)});
 }
 function renderPeople(){
- const h=document.getElementById(&quot;peopleRow&quot;);h.innerHTML=&quot;&quot;;
- [2,3,4,5,6,7,8,9,10,11,12,13,14,16,18,20].forEach(n=&gt;{const b=document.createElement(&quot;button&quot;);b.textContent=n+&quot;名&quot;;b.classList.toggle(&quot;active&quot;,n===people);
-  b.onclick=()=&gt;{people=n;renderPeople();renderOptions()};h.appendChild(b)});
+ const h=document.getElementById(&quot;peopleRow&quot;);
+ h.innerHTML=&quot;&quot;;
+
+ /* Chỉ hiển thị số người mà trạng thái bàn HIỆN TẠI thực sự còn có thể nhận.
+    Dùng allRuns() của toàn bộ SG/KH/CD, bao gồm cả bàn sạch và 清掃待ち,
+    vì cả hai đều là phương án có thể phục vụ sau khi dọn.
+    Không dùng danh sách cố định tới 20 nữa. */
+ const maxCapacity=ROOM_ORDER.reduce((max,room)=&gt;{
+   const roomMax=allRuns(room).reduce((m,x)=&gt;Math.max(m,x.cap),0);
+   return Math.max(max,roomMax);
+ },0);
+
+ const choices=[];
+ for(let n=2;n&lt;=maxCapacity;n++){
+   const possible=ROOM_ORDER.some(room=&gt;
+     allRuns(room).some(x=&gt;x.cap&gt;=n)
+   );
+   if(possible)choices.push(n);
+ }
+
+ /* Nếu trạng thái thay đổi làm số người đang chọn không còn hợp lệ,
+    chuyển về mức lớn nhất còn có thể nhận. */
+ if(choices.length &amp;&amp; !choices.includes(people)){
+   people=choices[choices.length-1];
+ }
+
+ choices.forEach(n=&gt;{
+   const b=document.createElement(&quot;button&quot;);
+   b.textContent=n+&quot;名&quot;;
+   b.classList.toggle(&quot;active&quot;,n===people);
+   b.onclick=()=&gt;{
+     people=n;
+     renderPeople();
+     renderOptions();
+   };
+   h.appendChild(b)
+ });
 }
 function summary(room){
  const ids=activeIds(room),grouped=new Set(data.groups.filter(g=&gt;g.room===room).flatMap(g=&gt;g.ids));
  const c=n=&gt;ids.filter(id=&gt;capOf(id)===n&amp;&amp;!grouped.has(id)&amp;&amp;state(id)===&quot;empty&quot;).length;
- return {c2:c(2),c4:c(4),c6:c(6),max:allRuns(room).reduce((m,x)=&gt;Math.max(m,x.cap),0)};
+ const cleaning=ids.filter(id=&gt;!grouped.has(id)&amp;&amp;state(id)===&quot;empty&quot;&amp;&amp;isCleaning(id)).length;
+ return {c2:c(2),c4:c(4),c6:c(6),max:allRuns(room).reduce((m,x)=&gt;Math.max(m,x.cap),0),cleaning};
 }
 function renderSummary(){
  const h=document.getElementById(&quot;summaryAll&quot;);h.innerHTML=&quot;&quot;;
  ROOM_ORDER.forEach(r=&gt;{const s=summary(r),d=document.createElement(&quot;div&quot;);d.className=&quot;room-summary&quot;;
  d.innerHTML=`&lt;div class=&quot;room-name&quot;&gt;${r}&lt;/div&gt;&lt;div class=&quot;sum&quot;&gt;&lt;small&gt;2人卓 空き&lt;/small&gt;&lt;b&gt;${s.c2}&lt;/b&gt;&lt;/div&gt;
  &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;4人卓 空き&lt;/small&gt;&lt;b&gt;${s.c4}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;sum&quot;&gt;&lt;small&gt;6人卓 空き&lt;/small&gt;&lt;b&gt;${s.c6}&lt;/b&gt;&lt;/div&gt;
- &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;MAX&lt;/small&gt;&lt;b&gt;${s.max}名&lt;/b&gt;&lt;/div&gt;`;h.appendChild(d)});
+ &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;MAX&lt;/small&gt;&lt;b&gt;${s.max}名&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;sum&quot;&gt;&lt;small&gt;清掃待ち&lt;/small&gt;&lt;b&gt;${s.cleaning}&lt;/b&gt;&lt;/div&gt;`;h.appendChild(d)});
 }
 function renderManual(){
  document.getElementById(&quot;manualToggle&quot;).classList.toggle(&quot;active&quot;,manual);
@@ -3646,35 +5189,139 @@ function renderManual(){
  document.getElementById(&quot;selectionInfo&quot;).textContent=ids.length?`選択：${ids.join(&quot;・&quot;)}　合計${cap}席`:&quot;卓を選択してください&quot;;
  document.getElementById(&quot;manualConfirm&quot;).disabled=ids.length&lt;2;
 }
+function applyCleaningOption(option){
+ const ids=[...option.ids];
+
+ /* 同じsplit卓のA+Bなら、清掃待ちを解除してその場で再連結し、
+    選択中の 席取り / 使用中 にする。
+    例: SG5A + SG5B → SG5（6人） */
+ if(ids.length===2){
+  const bases=[...new Set(ids.map(baseOf))];
+  if(bases.length===1){
+   const base=bases[0];
+   const room=roomOf(base);
+   const p=room ? ROOMS[room].positions[base] : null;
+   const expected=new Set([base+&quot;A&quot;,base+&quot;B&quot;]);
+
+   if(
+    p?.type===&quot;split&quot; &amp;&amp;
+    !data.merged[base] &amp;&amp;
+    ids.every(id=&gt;expected.has(id)) &amp;&amp;
+    ids.every(id=&gt;state(id)===&quot;empty&quot;)
+   ){
+    delete data.states[base+&quot;A&quot;];
+    delete data.states[base+&quot;B&quot;];
+    delete data.cleaning[base+&quot;A&quot;];
+    delete data.cleaning[base+&quot;B&quot;];
+    delete data.states[base];
+    delete data.cleaning[base];
+
+    data.merged[base]=true;
+    if(selectedState!==&quot;empty&quot;)data.states[base]=selectedState;
+
+    selectedRoom=room;
+    save();
+    renderAll();
+    toast(base+&quot; を連結 → &quot;+stateLabel(selectedState));
+    return;
+   }
+  }
+ }
+
+ /* 通常の清掃待ち案:
+    清掃待ちを解除し、必要ならそのまま連結して選択状態にする。 */
+ ids.forEach(id=&gt;delete data.cleaning[id]);
+
+ if(ids.length&lt;2){
+  setIds(ids,selectedState);
+  return;
+ }
+
+ if(ids.every(id=&gt;available(id))){
+  createGroup(ids,option.room);
+  return;
+ }
+
+ toast(&quot;この案は現在そのまま連結できません&quot;);
+}
+
 function renderOptions(){
- document.getElementById(&quot;recommendTitle&quot;).textContent=&quot;おすすめ案&quot;;
+ document.getElementById(&quot;recommendTitle&quot;).innerHTML=&quot;&lt;strong&gt;おすすめ案&lt;/strong&gt;&quot;;
  const h=document.getElementById(&quot;options&quot;);h.innerHTML=&quot;&quot;;const arr=candidates();
  document.getElementById(&quot;optionCount&quot;).textContent=arr.length+&quot;案&quot;;
- if(!arr.length){h.innerHTML=&#x27;&lt;div class=&quot;empty-note&quot;&gt;利用できる組み合わせがありません。&lt;/div&gt;&#x27;;updateArrows();return}
- arr.forEach((o,i)=&gt;{const excess=o.cap-people,cls=excess===0?&quot;p1&quot;:excess===1?&quot;p2&quot;:excess&lt;=3?&quot;p3&quot;:&quot;low&quot;;
- const b=document.createElement(&quot;button&quot;);b.className=&quot;option &quot;+cls;
- b.innerHTML=`&lt;strong&gt;${o.ids.join(&quot;・&quot;)}&lt;/strong&gt;&lt;div class=&quot;cap&quot;&gt;${o.room}・${o.count}卓・MAX ${o.cap}名&lt;/div&gt;&lt;small&gt;${i===0?&quot;優先&quot;:excess===0?&quot;同数候補&quot;:excess&lt;=3?&quot;予備&quot;:&quot;優先度低&quot;}${excess?&quot;・空き&quot;+excess+&quot;席&quot;:&quot;&quot;}&lt;/small&gt;`;
- b.onclick=()=&gt;createGroup(o.ids,o.room);h.appendChild(b)});
+ if(!arr.length){
+  h.innerHTML=&#x27;&lt;div class=&quot;empty-note&quot;&gt;利用できる組み合わせがありません。&lt;/div&gt;&#x27;;
+  updateArrows();return
+ }
+
+ arr.forEach((o,i)=&gt;{
+  const excess=o.cap-people;
+  const cls=o.cleaning?&quot;low&quot;:excess===0?&quot;p1&quot;:excess===1?&quot;p2&quot;:&quot;p3&quot;;
+  const b=document.createElement(&quot;button&quot;);
+  b.className=&quot;option &quot;+cls;
+
+  let note;
+  if(o.cleaning){
+   const effort=cleaningEffort(o);
+   note=
+    &quot;清掃待ち&quot;+
+    &quot;・MAX &quot;+o.cap+&quot;名&quot;+
+    &quot;・清掃&quot;+effort.physical+&quot;卓&quot;+
+    &quot;・残すMAX &quot;+o.remainMax+&quot;名&quot;;
+   if(excess&gt;0)note+=&quot;・空き&quot;+excess+&quot;席&quot;;
+  }else if(o.splitUse){
+   note=
+    &quot;優先・&quot;+o.base+&quot;を分割&quot;+
+    &quot;・MAX &quot;+o.cap+&quot;名&quot;+
+    &quot;・&quot;+o.keptSplitCapacity+&quot;人卓を残す&quot;;
+  }else{
+   note=(i===0&amp;&amp;excess===0)?&quot;優先&quot;:excess===0?&quot;同数候補&quot;:&quot;予備&quot;;
+   if(excess&gt;0)note+=&quot;・空き&quot;+excess+&quot;席&quot;;
+   note+=&quot;・残すMAX &quot;+o.remainMax+&quot;名&quot;;
+  }
+
+  const title=o.splitUse ? (o.ids[0]+&quot;（分割）&quot;) : o.ids.join(&quot;・&quot;);
+
+  b.innerHTML=
+   `&lt;strong&gt;${title}&lt;/strong&gt;`+
+   `&lt;div class=&quot;cap&quot;&gt;${o.room}・${o.count}卓・MAX ${o.cap}名&lt;/div&gt;`+
+   `&lt;small&gt;${note}&lt;/small&gt;`;
+
+  b.onclick=()=&gt;{
+   if(o.cleaning){
+    applyCleaningOption(o);
+    return
+   }
+   if(o.splitUse){
+    applySplitUse(o);
+    return
+   }
+   createGroup(o.ids,o.room)
+  };
+  h.appendChild(b)
+ });
+
  requestAnimationFrame(()=&gt;{h.scrollLeft=0;updateArrows()});
 }
 function styleBox(el,p){
  el.style.left=p.x+&quot;%&quot;;el.style.top=p.y+&quot;%&quot;;el.style.width=p.w+&quot;%&quot;;el.style.height=p.h+&quot;%&quot;;
 }
 function tableButton(id,cap){
- const b=document.createElement(&quot;button&quot;),g=groupFor(id);
- b.className=`table cap${cap} ${state(id)} ${selected.has(id)?&quot;selected&quot;:&quot;&quot;} ${g?&quot;grouped&quot;:&quot;&quot;}`;
- b.innerHTML=`&lt;span class=&quot;st&quot;&gt;${stateLabel(state(id)).slice(0,1)}&lt;/span&gt;&lt;span&gt;${id}&lt;/span&gt;&lt;span class=&quot;cap&quot;&gt;${cap}人&lt;/span&gt;`;
+ const b=document.createElement(&quot;button&quot;),g=groupFor(id),cleaning=isCleaning(id);
+ b.className=`table cap${cap} ${cleaning?&quot;cleaning&quot;:state(id)} ${selected.has(id)?&quot;selected&quot;:&quot;&quot;} ${g?&quot;grouped&quot;:&quot;&quot;}`;
+ b.innerHTML=`&lt;span class=&quot;st&quot;&gt;${cleaning?&quot;清&quot;:stateLabel(state(id)).slice(0,1)}&lt;/span&gt;&lt;span&gt;${id}&lt;/span&gt;&lt;span class=&quot;cap&quot;&gt;${cap}人&lt;/span&gt;`;
  if(g){const badge=document.createElement(&quot;span&quot;);badge.className=&quot;group-badge&quot;;badge.textContent=&quot;連&quot;;b.appendChild(badge)}
- b.onclick=()=&gt;handle(id);return b;
+ b.onclick=()=&gt;handle(id);bindLongPress(b,id);return b;
 }
 function splitElement(base,p){
  const wrap=document.createElement(&quot;div&quot;);wrap.className=&quot;split-wrap&quot;;styleBox(wrap,p);
  if(data.merged[base]){
   const g=groupFor(base),d=document.createElement(&quot;button&quot;);
-  d.className=`split-merged ${state(base)} ${selected.has(base)?&quot;selected&quot;:&quot;&quot;} ${g?&quot;grouped&quot;:&quot;&quot;}`;
-  d.innerHTML=`&lt;div class=&quot;segment seg2&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;segment seg4&quot;&gt;4&lt;/div&gt;&lt;span class=&quot;state-badge&quot;&gt;${stateLabel(state(base)).slice(0,1)}&lt;/span&gt;&lt;span class=&quot;merged-label&quot;&gt;${base}　6人&lt;/span&gt;`;
+  const cleaning=isCleaning(base);
+  d.className=`split-merged ${cleaning?&quot;cleaning&quot;:state(base)} ${selected.has(base)?&quot;selected&quot;:&quot;&quot;} ${g?&quot;grouped&quot;:&quot;&quot;}`;
+  d.innerHTML=`&lt;div class=&quot;segment seg2&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;segment seg4&quot;&gt;4&lt;/div&gt;&lt;span class=&quot;state-badge&quot;&gt;${cleaning?&quot;清&quot;:stateLabel(state(base)).slice(0,1)}&lt;/span&gt;&lt;span class=&quot;merged-label&quot;&gt;${base}　6人&lt;/span&gt;`;
   if(g){const badge=document.createElement(&quot;span&quot;);badge.className=&quot;group-badge&quot;;badge.textContent=&quot;連&quot;;d.appendChild(badge)}
-  d.onclick=()=&gt;handle(base);wrap.appendChild(d);
+  d.onclick=()=&gt;handle(base);bindLongPress(d,base);wrap.appendChild(d);
  }else{
   const d=document.createElement(&quot;div&quot;);d.className=&quot;split-parts&quot;;d.append(tableButton(base+&quot;A&quot;,2),tableButton(base+&quot;B&quot;,4));wrap.appendChild(d);
  }
@@ -3749,7 +5396,14 @@ function updateArrows(){
  const h=document.getElementById(&quot;options&quot;),m=Math.max(0,h.scrollWidth-h.clientWidth);
  document.getElementById(&quot;prev&quot;).disabled=h.scrollLeft&lt;=2;document.getElementById(&quot;next&quot;).disabled=h.scrollLeft&gt;=m-2;
 }
-function renderAll(){renderSummary();renderRoomButtons();renderManual();renderOptions();renderMap()}
+function renderAll(){
+ renderPeople();
+ renderSummary();
+ renderRoomButtons();
+ renderManual();
+ renderOptions();
+ renderMap();
+}
 
 document.querySelectorAll(&quot;#stateRow button&quot;).forEach(b=&gt;b.onclick=()=&gt;{
  selectedState=b.dataset.state;document.querySelectorAll(&quot;#stateRow button&quot;).forEach(x=&gt;x.classList.toggle(&quot;active&quot;,x===b))
@@ -3758,7 +5412,8 @@ document.getElementById(&quot;manualToggle&quot;).onclick=()=&gt;{manual=!manual
 document.getElementById(&quot;manualClear&quot;).onclick=()=&gt;{selected.clear();renderAll()};
 document.getElementById(&quot;manualConfirm&quot;).onclick=()=&gt;{const ids=[...selected];if(ids.length&lt;2){toast(&quot;2卓以上を選択してください&quot;);return}createGroup(ids);manual=false;selected.clear();renderAll()};
 document.getElementById(&quot;reset&quot;).onclick=()=&gt;{
- data={states:{},groups:[],merged:{}};for(const r of ROOM_ORDER)for(const [id,p] of Object.entries(ROOMS[r].positions))if(p.type===&quot;split&quot;)data.merged[id]=true;
+ data={states:{},groups:[],merged:{},cleaning:{}};
+ for(const r of ROOM_ORDER)for(const [id,p] of Object.entries(ROOMS[r].positions))if(p.type===&quot;split&quot;)data.merged[id]=true;
  manual=false;selected.clear();save();renderAll();toast(&quot;初期状態に戻しました&quot;)
 };
 const oh=document.getElementById(&quot;options&quot;);
@@ -3770,24 +5425,23 @@ renderPeople();renderAll();
 })();
 &lt;/script&gt;
 &lt;/body&gt;
-&lt;/html&gt;"></iframe></main>
-</div>
+&lt;/html&gt;"></iframe></main></div>
 <script>
 (()=>{
- "use strict";
  const buttons=[...document.querySelectorAll(".tab-btn")];
  const frames=[...document.querySelectorAll(".app-frame")];
- const key="sekifuri-all-tabs-active";
- let active=Number(localStorage.getItem(key)||0);
- if(!Number.isInteger(active)||active<0||active>=frames.length) active=0;
- function show(index){
-   buttons.forEach((button,i)=>button.classList.toggle("active",i===index));
-   frames.forEach((frame,i)=>frame.classList.toggle("active",i===index));
-   localStorage.setItem(key,String(index));
+ function activate(index){
+  buttons.forEach((b,i)=>b.classList.toggle("active",i===index));
+  frames.forEach((f,i)=>f.classList.toggle("active",i===index));
+  try{localStorage.setItem("sekifuri-all-active-tab",String(index))}catch{}
  }
- buttons.forEach((button,i)=>button.addEventListener("click",()=>show(i)));
- show(active);
+ buttons.forEach((b,i)=>b.addEventListener("click",()=>activate(i)));
+ let initial=0;
+ try{
+  const saved=Number(localStorage.getItem("sekifuri-all-active-tab"));
+  if(Number.isInteger(saved)&&saved>=0&&saved<frames.length)initial=saved;
+ }catch{}
+ activate(initial);
 })();
 </script>
-</body>
-</html>
+</body></html>
