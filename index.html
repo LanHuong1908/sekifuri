@@ -1,35 +1,21 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>席振り</title>
 <style>
 :root{--bg:#e9edf2;--panel:#fff;--line:#cbd2da;--text:#111827;--accent:#2563eb}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;color:var(--text);overflow:hidden}
-.shell{height:100%;display:flex;flex-direction:column}
-.topbar{flex:0 0 auto;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.08);z-index:10}
-.outer-title{padding:7px 10px 4px;font-weight:950;font-size:16px}
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:4px 7px 7px}
-.tab-btn{border:1px solid var(--line);background:#f8fafc;border-radius:9px;padding:8px 5px;font-weight:950;font-size:13px}
-.tab-btn.active{background:#111827;color:#fff;border-color:#111827;box-shadow:inset 0 -3px 0 var(--accent)}
-.stage{position:relative;flex:1;min-height:0}
-.app-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff;display:none}
-.app-frame.active{display:block}
+.shell{height:100%;display:flex;flex-direction:column}.topbar{flex:0 0 auto;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.08);z-index:10}
+.outer-title{padding:7px 10px 4px;font-weight:950;font-size:16px}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:4px 7px 7px}
+.tab-btn{border:1px solid var(--line);background:#f8fafc;border-radius:9px;padding:8px 5px;font-weight:950;font-size:13px}.tab-btn.active{background:#111827;color:#fff;border-color:#111827;box-shadow:inset 0 -3px 0 var(--accent)}
+.stage{position:relative;flex:1;min-height:0}.app-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff;display:none}.app-frame.active{display:block}
 @media(max-width:430px){.outer-title{font-size:14px;padding-top:5px}.tabs{gap:3px;padding:3px 5px 5px}.tab-btn{padding:7px 3px;font-size:12px}}
-</style>
-</head>
-<body>
-<div class="shell">
-<header class="topbar">
-<div class="outer-title">席振り</div>
-<nav class="tabs"><button class="tab-btn active" data-index="0" type="button">1F</button><button class="tab-btn" data-index="1" type="button">2F</button><button class="tab-btn" data-index="2" type="button">3F</button><button class="tab-btn" data-index="3" type="button">個室</button></nav></header><main class="stage"><iframe class="app-frame active" data-index="0" title="1F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ja&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;&lt;title&gt;1F 席振り 清掃待ちテスト&lt;/title&gt;&lt;style&gt;
+</style></head><body><div class="shell"><header class="topbar"><div class="outer-title">席振り</div><nav class="tabs"><button class="tab-btn active" data-index="0" type="button">1F</button><button class="tab-btn" data-index="1" type="button">2F</button><button class="tab-btn" data-index="2" type="button">3F</button><button class="tab-btn" data-index="3" type="button">個室</button></nav></header><main class="stage"><iframe class="app-frame active" data-index="0" title="1F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ja&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;&lt;title&gt;1F 席振り 清掃待ちテスト&lt;/title&gt;&lt;style&gt;
 :root{--bg:#f4f6f8;--card:#fff;--line:#d5d9df;--text:#17202a;--muted:#667085;--empty:#fff;--reserved:#ffe49a;--used:#ef6b73;--cleaning:#dbe2ea;--accent:#2563eb;--sel:#dbeafe}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,&quot;Noto Sans JP&quot;,sans-serif}button{font:inherit}
 .fixed{position:sticky;top:0;z-index:20;background:rgba(244,246,248,.97);backdrop-filter:blur(7px);border-bottom:1px solid var(--line)}
 .fixed-inner{max-width:980px;margin:auto;padding:7px}.title{display:flex;justify-content:space-between;align-items:center;gap:8px}.title b{font-size:17px}
-.reset{border:1px solid #aaa;background:#fff;border-radius:8px;padding:6px 10px}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:6px}
-.sum{background:#fff;border:1px solid var(--line);border-radius:8px;text-align:center;padding:4px}.sum small{display:block;color:var(--muted);font-size:10px}.sum b{font-size:17px}
+.reset{border:1px solid #aaa;background:#fff;border-radius:8px;padding:6px 10px}.summary{display:flex;flex-wrap:nowrap;gap:4px;margin-top:6px;overflow-x:auto;scrollbar-width:none}.summary::-webkit-scrollbar{display:none}
+.sum{background:#fff;border:1px solid var(--line);border-radius:8px;text-align:center;padding:4px;flex:1 0 68px;min-width:0}.sum small{display:block;color:var(--muted);font-size:10px}.sum b{font-size:17px}
 .label{font-size:11px;font-weight:800;margin:6px 2px 3px}.row-scroll{display:flex;gap:5px;overflow-x:auto;padding-bottom:3px}.row-scroll button{flex:0 0 auto;border:1px solid #b9c0ca;background:#fff;border-radius:8px;padding:6px 10px;font-weight:800}
 .row-scroll button.active{border-color:#111;background:#111;color:#fff}.state-row button[data-state=empty].active{background:#fff;color:#111;border:2px solid #111}.state-row button[data-state=reserved].active{background:var(--reserved);color:#111;border:2px solid #9a7200}.state-row button[data-state=used].active{background:var(--used);color:#111;border:2px solid #8f2733}
 .manualbar{display:flex;gap:5px;align-items:center;overflow-x:auto}.manualbar button{border:1px solid #9aa4b2;background:#fff;border-radius:8px;padding:6px 9px;font-weight:900;white-space:nowrap}.manualbar button.active{background:#111;color:#fff}.manualbar .confirm{background:#2563eb;color:#fff;border-color:#2563eb}.manualbar .confirm:disabled{opacity:.35}.selection-info{font-size:11px;font-weight:800;white-space:nowrap;color:#334155}
@@ -449,7 +435,11 @@ document.querySelectorAll(&quot;#stateRow button&quot;).forEach(b=&gt;b.onclick=
 document.getElementById(&quot;manualToggle&quot;).onclick=()=&gt;{manual=!manual;selected.clear();renderAll()};
 document.getElementById(&quot;manualClear&quot;).onclick=()=&gt;{selected.clear();renderAll()};
 document.getElementById(&quot;manualConfirm&quot;).onclick=()=&gt;{if(!validManual()){toast(&quot;隣り合う卓を選択してください&quot;);return}const ids=[...selected].sort((a,b)=&gt;{const row=currentRows().find(r=&gt;r.some(u=&gt;u.id===a));return row.findIndex(u=&gt;u.id===a)-row.findIndex(u=&gt;u.id===b)});createGroup(ids);manual=false;selected.clear();renderAll()};
-document.getElementById(&quot;reset&quot;).onclick=()=&gt;{data={states:{},groups:[],merged:{},cleaning:{}};for(const c of CONFIG.composites)data.merged[c.id]=true;manual=false;selected.clear();save();renderAll();toast(&quot;初期状態に戻しました&quot;)};
+document.getElementById(&quot;reset&quot;).onclick=()=&gt;{
+ data={states:{},groups:[],merged:{},cleaning:{}};
+ for(const c of CONFIG.composites)data.merged[c.id]=true;
+ manual=false;selected.clear();save();renderAll();toast(&quot;初期状態に戻しました&quot;)
+};
 const oh=document.getElementById(&quot;options&quot;);document.getElementById(&quot;prev&quot;).onclick=()=&gt;oh.scrollBy({left:-oh.clientWidth*.85,behavior:&quot;smooth&quot;});document.getElementById(&quot;next&quot;).onclick=()=&gt;oh.scrollBy({left:oh.clientWidth*.85,behavior:&quot;smooth&quot;});oh.addEventListener(&quot;scroll&quot;,updateArrows,{passive:true});
 renderPeople();renderAll();
 })();
@@ -496,8 +486,10 @@ button{font:inherit;color:inherit}
   padding:4px 8px;
   font-size:11px;
 }
-.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:5px}
+.summary{display:flex;flex-wrap:nowrap;gap:4px;margin-bottom:5px;overflow-x:auto;scrollbar-width:none}.summary::-webkit-scrollbar{display:none}
 .summary-card{
+  flex:1 0 68px;
+  min-width:0;
   background:#fff;
   border:1px solid var(--line);
   border-radius:8px;
@@ -2468,7 +2460,7 @@ function renderRenbanOptions(){
   });
 
   document.getElementById(&quot;resetBtn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-    appState = {states:{}, merged:{}, groups:[], cleaning:{}};
+appState = {states:{}, merged:{}, groups:[], cleaning:{}};
     selectedStatus = &quot;reserved&quot;;
     tableView = &quot;all&quot;;
     peopleFilter = &quot;all&quot;;
@@ -2534,8 +2526,10 @@ button{font:inherit;color:inherit}
   padding:4px 8px;
   font-size:11px;
 }
-.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:5px}
+.summary{display:flex;flex-wrap:nowrap;gap:4px;margin-bottom:5px;overflow-x:auto;scrollbar-width:none}.summary::-webkit-scrollbar{display:none}
 .summary-card{
+  flex:1 0 68px;
+  min-width:0;
   background:#fff;
   border:1px solid var(--line);
   border-radius:8px;
@@ -4305,7 +4299,7 @@ function renderRenbanOptions(){
   });
 
   document.getElementById(&quot;resetBtn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-    appState = {states:{}, merged:{...defaultMerged}, groups:[], cleaning:{}};
+appState = {states:{}, merged:{...defaultMerged}, groups:[], cleaning:{}};
     selectedStatus = &quot;reserved&quot;;
     tableView = &quot;all&quot;;
     peopleFilter = &quot;all&quot;;
@@ -4348,8 +4342,8 @@ button{font:inherit}
 .title{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .title b{font-size:17px}
 .reset{border:1px solid #9ca3af;background:#fff;border-radius:8px;padding:6px 10px;font-weight:800}
-.summary-all{display:grid;gap:5px;margin-top:6px}
-.room-summary{display:grid;grid-template-columns:42px repeat(5,minmax(54px,1fr));gap:4px}
+.summary-all{display:grid;gap:5px;margin-top:6px;overflow-x:auto;scrollbar-width:none}.summary-all::-webkit-scrollbar{display:none}
+.room-summary{display:grid;grid-template-columns:42px repeat(5,minmax(54px,1fr));gap:4px;min-width:340px}
 .room-name{display:flex;align-items:center;justify-content:center;background:#111;color:#fff;border-radius:8px;font-weight:950}
 .sum{background:#fff;border:1px solid var(--line);border-radius:8px;text-align:center;padding:4px 2px}
 .sum small{display:block;color:var(--muted);font-size:9px;line-height:1.1}
@@ -5425,23 +5419,8 @@ renderPeople();renderAll();
 })();
 &lt;/script&gt;
 &lt;/body&gt;
-&lt;/html&gt;"></iframe></main></div>
-<script>
-(()=>{
- const buttons=[...document.querySelectorAll(".tab-btn")];
- const frames=[...document.querySelectorAll(".app-frame")];
- function activate(index){
-  buttons.forEach((b,i)=>b.classList.toggle("active",i===index));
-  frames.forEach((f,i)=>f.classList.toggle("active",i===index));
-  try{localStorage.setItem("sekifuri-all-active-tab",String(index))}catch{}
- }
- buttons.forEach((b,i)=>b.addEventListener("click",()=>activate(i)));
- let initial=0;
- try{
-  const saved=Number(localStorage.getItem("sekifuri-all-active-tab"));
-  if(Number.isInteger(saved)&&saved>=0&&saved<frames.length)initial=saved;
- }catch{}
- activate(initial);
-})();
-</script>
-</body></html>
+&lt;/html&gt;"></iframe></main></div><script>
+(()=>{const bs=[...document.querySelectorAll(".tab-btn")],fs=[...document.querySelectorAll(".app-frame")];
+function a(n){bs.forEach((b,i)=>b.classList.toggle("active",i===n));fs.forEach((f,i)=>f.classList.toggle("active",i===n));try{localStorage.setItem("sekifuri-all-active-tab",String(n))}catch{}}
+bs.forEach((b,i)=>b.addEventListener("click",()=>a(i)));let n=0;try{const s=Number(localStorage.getItem("sekifuri-all-active-tab"));if(Number.isInteger(s)&&s>=0&&s<fs.length)n=s}catch{}a(n)})();
+</script></body></html>
