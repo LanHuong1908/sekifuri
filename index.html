@@ -4404,11 +4404,13 @@ main{max-width:1040px;margin:auto;padding:7px}
 .split-merged .segment{display:flex;align-items:center;justify-content:center;font-weight:950}
 .split-merged .seg2{background:var(--empty2);border-right:2px solid #64748b}
 .split-merged .seg4{background:var(--empty4)}
+.split-merged .segment{position:relative}
+.split-merged .seg-cap{position:absolute;left:50%;bottom:3px;transform:translateX(-50%);font-size:9px;line-height:1;font-weight:400;color:#475569;white-space:nowrap}
 .split-merged .state-badge{position:absolute;right:4px;top:2px;font-size:8px;font-weight:900}
-.split-merged .merged-label{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,.82);padding:2px 5px;border-radius:5px;font-size:11px;font-weight:950;white-space:nowrap}
+.split-merged .merged-label{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:transparent;padding:0;border-radius:0;font-size:11px;font-weight:950;white-space:nowrap}
 .split-parts{width:100%;height:100%;display:grid;grid-template-columns:1fr 2fr;gap:3px}
-.split-parts .table{border-width:2px}
-.split-action{position:absolute;right:-44px;top:50%;transform:translateY(-50%);border:1px solid #64748b;background:#fff;border-radius:999px;padding:2px 7px;font-size:10px;font-weight:950;z-index:5}
+.split-parts .table{border-width:2px;padding:1px 1px 9px;font-size:11px}.split-parts .table .cap{bottom:2px;font-size:8px;color:#667085;line-height:1}
+.split-action{position:absolute;left:50%;bottom:-19px;right:auto;top:auto;transform:translateX(-50%);border:1px solid #64748b;background:#fff;border-radius:999px;padding:1px 7px;font-size:9px;font-weight:950;z-index:5;white-space:nowrap}
 .group-badge{position:absolute;left:2px;top:2px;background:#2563eb;color:white;border-radius:999px;padding:1px 5px;font-size:8px;font-weight:900;z-index:5}
 .legend{display:flex;gap:11px;flex-wrap:wrap;font-size:11px;color:var(--muted);padding:8px 2px 2px}
 .swatch{display:inline-block;width:17px;height:13px;border:1px solid #777;border-radius:3px;vertical-align:-2px;margin-right:3px}
@@ -4434,6 +4436,34 @@ main{max-width:1040px;margin:auto;padding:7px}
 .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#111;color:#fff;padding:8px 13px;border-radius:999px;opacity:0;pointer-events:none;transition:.2s;z-index:60;font-size:12px}
 .toast.show{opacity:1}
 .empty-note{color:var(--muted);padding:12px}
+
+/* 個室：分割中の2人/4人表示を通常卓の定員表示と同じ小さい灰色に固定 */
+.split-parts .table > .cap{
+  position:absolute !important;
+  left:auto !important;
+  right:auto !important;
+  bottom:3px !important;
+  transform:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  font-size:9px !important;
+  line-height:1 !important;
+  font-weight:400 !important;
+  color:#475569 !important;
+  white-space:nowrap !important;
+}
+
+/* 個室：分割卓の「名前」は、連結中・分割中とも通常卓と同じ大きさ */
+.split-parts .table{
+  font-size:12px !important;
+  font-weight:950 !important;
+}
+.split-merged .merged-label{
+  font-size:12px !important;
+  font-weight:950 !important;
+}
 @media(max-width:430px){
  .title b{font-size:15px}.fixed-inner,main{padding:5px}.room-summary{grid-template-columns:37px repeat(5,minmax(53px,1fr));gap:3px;min-width:317px}
  .sum small{font-size:8px}.sum b{font-size:14px}.row-scroll button,.manualbar button{padding:5px 8px}
@@ -5313,7 +5343,7 @@ function splitElement(base,p){
   const g=groupFor(base),d=document.createElement(&quot;button&quot;);
   const cleaning=isCleaning(base);
   d.className=`split-merged ${cleaning?&quot;cleaning&quot;:state(base)} ${selected.has(base)?&quot;selected&quot;:&quot;&quot;} ${g?&quot;grouped&quot;:&quot;&quot;}`;
-  d.innerHTML=`&lt;div class=&quot;segment seg2&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;segment seg4&quot;&gt;4&lt;/div&gt;&lt;span class=&quot;state-badge&quot;&gt;${cleaning?&quot;清&quot;:stateLabel(state(base)).slice(0,1)}&lt;/span&gt;&lt;span class=&quot;merged-label&quot;&gt;${base}　6人&lt;/span&gt;`;
+  d.innerHTML=`&lt;div class=&quot;segment seg2&quot;&gt;&lt;span class=&quot;seg-cap&quot;&gt;2人&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;segment seg4&quot;&gt;&lt;span class=&quot;seg-cap&quot;&gt;4人&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;state-badge&quot;&gt;${cleaning?&quot;清&quot;:stateLabel(state(base)).slice(0,1)}&lt;/span&gt;&lt;span class=&quot;merged-label&quot;&gt;${base} 6人&lt;/span&gt;`;
   if(g){const badge=document.createElement(&quot;span&quot;);badge.className=&quot;group-badge&quot;;badge.textContent=&quot;連&quot;;d.appendChild(badge)}
   d.onclick=()=&gt;handle(base);bindLongPress(d,base);wrap.appendChild(d);
  }else{
