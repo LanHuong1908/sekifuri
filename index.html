@@ -4522,16 +4522,16 @@ const ROOMS={
  SG:{
   label:&quot;SG&quot;,
   positions:{
-   SG3:{x:8,y:63,w:18,h:18,type:&quot;split&quot;},
+   SG34:{x:8,y:63,w:18,h:18,type:&quot;split&quot;},
    SG2:{x:32,y:63,w:10,h:18,type:&quot;fixed4&quot;},
    SG1:{x:48,y:63,w:10,h:18,type:&quot;fixed4&quot;},
 
    SG8:{x:8,y:18,w:10,h:18,type:&quot;fixed4&quot;},
    SG7:{x:25,y:18,w:10,h:18,type:&quot;fixed4&quot;},
-   SG5:{x:42,y:18,w:10,h:18,type:&quot;fixed4&quot;},
-   SG4:{x:59,y:18,w:10,h:18,type:&quot;fixed4&quot;}
+   SG6:{x:42,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   SG5:{x:59,y:18,w:10,h:18,type:&quot;fixed4&quot;}
   },
-  autoLanes:[[&quot;SG1&quot;,&quot;SG2&quot;,&quot;SG3&quot;],[&quot;SG4&quot;,&quot;SG5&quot;,&quot;SG7&quot;,&quot;SG8&quot;]]
+  autoLanes:[[&quot;SG1&quot;,&quot;SG2&quot;,&quot;SG34&quot;],[&quot;SG5&quot;,&quot;SG6&quot;,&quot;SG7&quot;,&quot;SG8&quot;]]
  },
  KH:{
   label:&quot;KH&quot;,
@@ -4566,7 +4566,7 @@ const ROOMS={
  }
 };
 const ROOM_ORDER=[&quot;SG&quot;,&quot;KH&quot;,&quot;CD&quot;];
-const KEY=&quot;sekifuri-koshitsu-renumber-v2&quot;;
+const KEY=&quot;sekifuri-koshitsu-renumber-v3-sg-full&quot;;
 let data=JSON.parse(localStorage.getItem(KEY)||&#x27;{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{}}&#x27;);
 data.states||={};data.groups||=[];data.merged||={};data.cleaning||={};
 for(const room of ROOM_ORDER)for(const [id,p] of Object.entries(ROOMS[room].positions))if(p.type===&quot;split&quot;&amp;&amp;data.merged[id]===undefined)data.merged[id]=true;
@@ -4577,6 +4577,13 @@ const state=id=&gt;data.states[id]||&quot;empty&quot;;
 const stateLabel=s=&gt;s===&quot;reserved&quot;?&quot;席取り&quot;:s===&quot;used&quot;?&quot;使用中&quot;:&quot;空席&quot;;
 function toast(m){const t=document.getElementById(&quot;toast&quot;);t.textContent=m;t.classList.add(&quot;show&quot;);clearTimeout(window.__t);window.__t=setTimeout(()=&gt;t.classList.remove(&quot;show&quot;),1250)}
 function roomOf(id){return ROOM_ORDER.find(r=&gt;id.startsWith(r))||null}
+function displayId(id){
+ if(id===&quot;SG34&quot;)return &quot;SG3・SG4&quot;;
+ if(id===&quot;SG34A&quot;)return &quot;SG4&quot;;
+ if(id===&quot;SG34B&quot;)return &quot;SG3&quot;;
+ return id;
+}
+function displayIds(ids){return ids.map(displayId).join(&quot;・&quot;)}
 function baseOf(id){return id.endsWith(&quot;A&quot;)||id.endsWith(&quot;B&quot;)?id.slice(0,-1):id}
 function posOf(id){const r=roomOf(id),b=baseOf(id);return r?ROOMS[r].positions[b]:null}
 function capOf(id){
@@ -4863,7 +4870,7 @@ function applySplitUse(option){
 
  save();
  renderAll();
- toast(base+&quot; を分割 → &quot;+target+&quot; を&quot;+stateLabel(selectedState));
+ toast(displayId(base)+&quot; を分割 → &quot;+displayId(target)+&quot; を&quot;+stateLabel(selectedState));
 }
 
 function flexibilityPenalty(option){
@@ -5113,7 +5120,7 @@ function markCleaning(id){
  const g=groupFor(id),ids=g?g.ids:[id];
  ids.forEach(x=&gt;{delete data.states[x];data.cleaning[x]=true});
  if(g)g.state=&quot;empty&quot;;
- save();renderAll();toast(ids.join(&quot;・&quot;)+&quot; → 清掃待ち&quot;);
+ save();renderAll();toast(displayIds(ids)+&quot; → 清掃待ち&quot;);
 }
 function bindLongPress(btn,id){
  let timer=null,held=false,suppressClick=false,startX=0,startY=0;
@@ -5295,7 +5302,7 @@ function renderOptions(){
    if(excess&gt;0)note+=&quot;・空き&quot;+excess+&quot;席&quot;;
   }else if(o.splitUse){
    note=
-    &quot;優先・&quot;+o.base+&quot;を分割&quot;+
+    &quot;優先・&quot;+displayId(o.base)+&quot;を分割&quot;+
     &quot;・MAX &quot;+o.cap+&quot;名&quot;+
     &quot;・&quot;+o.keptSplitCapacity+&quot;人卓を残す&quot;;
   }else{
@@ -5304,7 +5311,7 @@ function renderOptions(){
    note+=&quot;・残すMAX &quot;+o.remainMax+&quot;名&quot;;
   }
 
-  const title=o.splitUse ? (o.ids[0]+&quot;（分割）&quot;) : o.ids.join(&quot;・&quot;);
+  const title=o.splitUse ? (displayId(o.ids[0])+&quot;（分割）&quot;) : displayIds(o.ids);
 
   b.innerHTML=
    `&lt;strong&gt;${title}&lt;/strong&gt;`+
@@ -5333,7 +5340,7 @@ function styleBox(el,p){
 function tableButton(id,cap){
  const b=document.createElement(&quot;button&quot;),g=groupFor(id),cleaning=isCleaning(id);
  b.className=`table cap${cap} ${cleaning?&quot;cleaning&quot;:state(id)} ${selected.has(id)?&quot;selected&quot;:&quot;&quot;} ${g?&quot;grouped&quot;:&quot;&quot;}`;
- b.innerHTML=`&lt;span class=&quot;st&quot;&gt;${cleaning?&quot;清&quot;:stateLabel(state(id)).slice(0,1)}&lt;/span&gt;&lt;span&gt;${id}&lt;/span&gt;&lt;span class=&quot;cap&quot;&gt;${cap}人&lt;/span&gt;`;
+ b.innerHTML=`&lt;span class=&quot;st&quot;&gt;${cleaning?&quot;清&quot;:stateLabel(state(id)).slice(0,1)}&lt;/span&gt;&lt;span&gt;${displayId(id)}&lt;/span&gt;&lt;span class=&quot;cap&quot;&gt;${cap}人&lt;/span&gt;`;
  if(g){const badge=document.createElement(&quot;span&quot;);badge.className=&quot;group-badge&quot;;badge.textContent=&quot;連&quot;;b.appendChild(badge)}
  b.onclick=()=&gt;handle(id);bindLongPress(b,id);return b;
 }
@@ -5343,7 +5350,7 @@ function splitElement(base,p){
   const g=groupFor(base),d=document.createElement(&quot;button&quot;);
   const cleaning=isCleaning(base);
   d.className=`split-merged ${cleaning?&quot;cleaning&quot;:state(base)} ${selected.has(base)?&quot;selected&quot;:&quot;&quot;} ${g?&quot;grouped&quot;:&quot;&quot;}`;
-  d.innerHTML=`&lt;div class=&quot;segment seg2&quot;&gt;&lt;span class=&quot;seg-cap&quot;&gt;2人&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;segment seg4&quot;&gt;&lt;span class=&quot;seg-cap&quot;&gt;4人&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;state-badge&quot;&gt;${cleaning?&quot;清&quot;:stateLabel(state(base)).slice(0,1)}&lt;/span&gt;&lt;span class=&quot;merged-label&quot;&gt;${base} 6人&lt;/span&gt;`;
+  d.innerHTML=`&lt;div class=&quot;segment seg2&quot;&gt;&lt;span class=&quot;seg-cap&quot;&gt;2人&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;segment seg4&quot;&gt;&lt;span class=&quot;seg-cap&quot;&gt;4人&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;state-badge&quot;&gt;${cleaning?&quot;清&quot;:stateLabel(state(base)).slice(0,1)}&lt;/span&gt;&lt;span class=&quot;merged-label&quot;&gt;${displayId(base)} 6人&lt;/span&gt;`;
   if(g){const badge=document.createElement(&quot;span&quot;);badge.className=&quot;group-badge&quot;;badge.textContent=&quot;連&quot;;d.appendChild(badge)}
   d.onclick=()=&gt;handle(base);bindLongPress(d,base);wrap.appendChild(d);
  }else{
@@ -5390,7 +5397,7 @@ function renderManualGroups(map){
    placeAbsolute(wrap,{x:Math.max(0,minX-pad),y:Math.max(0,minY-pad),w:Math.min(100,maxX-minX+pad*2),h:Math.min(100,maxY-minY+pad*2)});
    const b=document.createElement(&quot;button&quot;);b.className=`manual-group ${g.state||state(g.ids[0])}`;
    const cap=g.ids.reduce((s,id)=&gt;s+capOf(id),0);
-   b.innerHTML=`&lt;span class=&quot;group-ids&quot;&gt;${g.ids.join(&quot;・&quot;)}&lt;/span&gt;&lt;span class=&quot;group-cap&quot;&gt;MAX ${cap}名&lt;/span&gt;`;
+   b.innerHTML=`&lt;span class=&quot;group-ids&quot;&gt;${displayIds(g.ids)}&lt;/span&gt;&lt;span class=&quot;group-cap&quot;&gt;MAX ${cap}名&lt;/span&gt;`;
    b.onclick=()=&gt;manual?toast(&quot;手動連結中です&quot;):setIds(g.ids);
    const x=document.createElement(&quot;button&quot;);x.className=&quot;group-release&quot;;x.textContent=&quot;×&quot;;
    x.title=&quot;連結解除&quot;;x.onclick=e=&gt;{e.stopPropagation();releaseGroup(g.id)};
