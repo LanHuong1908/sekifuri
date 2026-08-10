@@ -4526,12 +4526,12 @@ const ROOMS={
    SG2:{x:32,y:63,w:10,h:18,type:&quot;fixed4&quot;},
    SG1:{x:48,y:63,w:10,h:18,type:&quot;fixed4&quot;},
 
-   SG7:{x:8,y:18,w:10,h:18,type:&quot;fixed4&quot;},
-   SG6:{x:25,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   SG8:{x:8,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   SG7:{x:25,y:18,w:10,h:18,type:&quot;fixed4&quot;},
    SG5:{x:42,y:18,w:10,h:18,type:&quot;fixed4&quot;},
    SG4:{x:59,y:18,w:10,h:18,type:&quot;fixed4&quot;}
   },
-  autoLanes:[[&quot;SG1&quot;,&quot;SG2&quot;,&quot;SG3&quot;],[&quot;SG4&quot;,&quot;SG5&quot;,&quot;SG6&quot;,&quot;SG7&quot;]]
+  autoLanes:[[&quot;SG1&quot;,&quot;SG2&quot;,&quot;SG3&quot;],[&quot;SG4&quot;,&quot;SG5&quot;,&quot;SG7&quot;,&quot;SG8&quot;]]
  },
  KH:{
   label:&quot;KH&quot;,
@@ -4566,7 +4566,7 @@ const ROOMS={
  }
 };
 const ROOM_ORDER=[&quot;SG&quot;,&quot;KH&quot;,&quot;CD&quot;];
-const KEY=&quot;sekifuri-koshitsu-renumber-v1&quot;;
+const KEY=&quot;sekifuri-koshitsu-renumber-v2&quot;;
 let data=JSON.parse(localStorage.getItem(KEY)||&#x27;{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{}}&#x27;);
 data.states||={};data.groups||=[];data.merged||={};data.cleaning||={};
 for(const room of ROOM_ORDER)for(const [id,p] of Object.entries(ROOMS[room].positions))if(p.type===&quot;split&quot;&amp;&amp;data.merged[id]===undefined)data.merged[id]=true;
