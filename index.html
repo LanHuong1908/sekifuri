@@ -4438,7 +4438,7 @@ main{max-width:1040px;margin:auto;padding:7px}
 .empty-note{color:var(--muted);padding:12px}
 
 /* 個室：分割中の2人/4人表示を通常卓の定員表示と同じ小さい灰色に固定 */
-.split-parts .table > .cap{
+.split-parts .table &gt; .cap{
   position:absolute !important;
   left:auto !important;
   right:auto !important;
@@ -4522,51 +4522,51 @@ const ROOMS={
  SG:{
   label:&quot;SG&quot;,
   positions:{
-   SG5:{x:8,y:63,w:18,h:18,type:&quot;split&quot;},
-   SG3:{x:32,y:63,w:10,h:18,type:&quot;fixed4&quot;},
+   SG3:{x:8,y:63,w:18,h:18,type:&quot;split&quot;},
+   SG2:{x:32,y:63,w:10,h:18,type:&quot;fixed4&quot;},
    SG1:{x:48,y:63,w:10,h:18,type:&quot;fixed4&quot;},
 
-   SG8:{x:8,y:18,w:10,h:18,type:&quot;fixed4&quot;},
-   SG7:{x:25,y:18,w:10,h:18,type:&quot;fixed4&quot;},
-   SG4:{x:42,y:18,w:10,h:18,type:&quot;fixed4&quot;},
-   SG2:{x:59,y:18,w:10,h:18,type:&quot;fixed4&quot;}
+   SG7:{x:8,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   SG6:{x:25,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   SG5:{x:42,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   SG4:{x:59,y:18,w:10,h:18,type:&quot;fixed4&quot;}
   },
-  autoLanes:[[&quot;SG1&quot;,&quot;SG3&quot;,&quot;SG5&quot;],[&quot;SG2&quot;,&quot;SG4&quot;,&quot;SG7&quot;,&quot;SG8&quot;]]
+  autoLanes:[[&quot;SG1&quot;,&quot;SG2&quot;,&quot;SG3&quot;],[&quot;SG4&quot;,&quot;SG5&quot;,&quot;SG6&quot;,&quot;SG7&quot;]]
  },
  KH:{
   label:&quot;KH&quot;,
   positions:{
-   KH7:{x:6,y:63,w:18,h:18,type:&quot;split&quot;},
-   KH5:{x:29,y:63,w:18,h:18,type:&quot;split&quot;},
-   KH3:{x:52,y:63,w:10,h:18,type:&quot;fixed4&quot;},
-   KH1:{x:67,y:63,w:10,h:18,type:&quot;fixed4&quot;},
+   KH8:{x:6,y:63,w:18,h:18,type:&quot;split&quot;},
+   KH7:{x:29,y:63,w:18,h:18,type:&quot;split&quot;},
+   KH6:{x:52,y:63,w:10,h:18,type:&quot;fixed4&quot;},
+   KH5:{x:67,y:63,w:10,h:18,type:&quot;fixed4&quot;},
 
-   KH8:{x:6,y:18,w:18,h:18,type:&quot;fixed6&quot;},
-   KH6:{x:29,y:18,w:10,h:18,type:&quot;fixed4&quot;},
-   KH4:{x:45,y:18,w:10,h:18,type:&quot;fixed4&quot;},
-   KH2:{x:61,y:18,w:10,h:18,type:&quot;fixed4&quot;}
+   KH4:{x:6,y:18,w:18,h:18,type:&quot;fixed6&quot;},
+   KH3:{x:29,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   KH2:{x:45,y:18,w:10,h:18,type:&quot;fixed4&quot;},
+   KH1:{x:61,y:18,w:10,h:18,type:&quot;fixed4&quot;}
   },
-  autoLanes:[[&quot;KH1&quot;,&quot;KH3&quot;,&quot;KH5&quot;,&quot;KH7&quot;],[&quot;KH2&quot;,&quot;KH4&quot;,&quot;KH6&quot;,&quot;KH8&quot;]]
+  autoLanes:[[&quot;KH5&quot;,&quot;KH6&quot;,&quot;KH7&quot;,&quot;KH8&quot;],[&quot;KH1&quot;,&quot;KH2&quot;,&quot;KH3&quot;,&quot;KH4&quot;]]
  },
  CD:{
   label:&quot;CD&quot;,
   positions:{
-   CD7:{x:6,y:63,w:9,h:18,type:&quot;fixed4h&quot;},
+   CD4:{x:6,y:63,w:9,h:18,type:&quot;fixed4h&quot;},
    ICE:{x:19,y:60,w:18,h:24,type:&quot;fixture&quot;,label:&quot;わたあめ機&quot;},
-   CD5:{x:42,y:63,w:9,h:18,type:&quot;fixed4&quot;},
-   CD3:{x:55,y:63,w:9,h:18,type:&quot;fixed4&quot;},
+   CD3:{x:42,y:63,w:9,h:18,type:&quot;fixed4&quot;},
+   CD2:{x:55,y:63,w:9,h:18,type:&quot;fixed4&quot;},
    CD1:{x:68,y:63,w:9,h:18,type:&quot;fixed4&quot;},
 
    CD8:{x:6,y:18,w:9,h:18,type:&quot;fixed4&quot;},
-   CD6:{x:23,y:18,w:9,h:18,type:&quot;fixed4&quot;},
-   CD4:{x:40,y:18,w:9,h:18,type:&quot;fixed4&quot;},
-   CD2:{x:57,y:18,w:9,h:18,type:&quot;fixed4&quot;}
+   CD7:{x:23,y:18,w:9,h:18,type:&quot;fixed4&quot;},
+   CD6:{x:40,y:18,w:9,h:18,type:&quot;fixed4&quot;},
+   CD5:{x:57,y:18,w:9,h:18,type:&quot;fixed4&quot;}
   },
-  autoLanes:[[&quot;CD1&quot;,&quot;CD3&quot;,&quot;CD5&quot;],[&quot;CD2&quot;,&quot;CD4&quot;,&quot;CD6&quot;,&quot;CD8&quot;],[&quot;CD7&quot;]]
+  autoLanes:[[&quot;CD1&quot;,&quot;CD2&quot;,&quot;CD3&quot;],[&quot;CD5&quot;,&quot;CD6&quot;,&quot;CD7&quot;,&quot;CD8&quot;],[&quot;CD4&quot;]]
  }
 };
 const ROOM_ORDER=[&quot;SG&quot;,&quot;KH&quot;,&quot;CD&quot;];
-const KEY=&quot;sekifuri-koshitsu-cleaning-final-v3&quot;;
+const KEY=&quot;sekifuri-koshitsu-renumber-v1&quot;;
 let data=JSON.parse(localStorage.getItem(KEY)||&#x27;{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{}}&#x27;);
 data.states||={};data.groups||=[];data.merged||={};data.cleaning||={};
 for(const room of ROOM_ORDER)for(const [id,p] of Object.entries(ROOMS[room].positions))if(p.type===&quot;split&quot;&amp;&amp;data.merged[id]===undefined)data.merged[id]=true;
@@ -4934,7 +4934,7 @@ function candidates(){
 
  const readySorter=(a,b)=&gt;{
   /* 1) Vừa số khách nhất.
-        Ví dụ 4名: phần 4 của SG5/KH5 tự nhiên đứng trước bàn cố định6 KH8. */
+        Ví dụ 4名: phần 4 của SG3/KH7 tự nhiên đứng trước bàn cố định6 KH4. */
   const capDiff=(a.cap-people)-(b.cap-people);
   if(capDiff)return capDiff;
 
@@ -4956,8 +4956,8 @@ function candidates(){
 
   /* 3) Nếu cùng phòng / cùng mức vừa khách:
         ưu tiên bàn CỐ ĐỊNH trước bàn split đang ghép.
-        Ví dụ 6名 trong KH: KH8 cố định phải trước KH5=2+4,
-        vì KH5 còn có thể tách ra dùng cho 4名 + 2名 sau. */
+        Ví dụ 6名 trong KH: KH4 cố định phải trước KH7=2+4,
+        vì KH7 còn có thể tách ra dùng cho 4名 + 2名 sau. */
   if(a.room===b.room){
    const flexibilityDiff=flexibilityPenalty(a)-flexibilityPenalty(b);
    if(flexibilityDiff)return flexibilityDiff;
@@ -5218,7 +5218,7 @@ function applyCleaningOption(option){
 
  /* 同じsplit卓のA+Bなら、清掃待ちを解除してその場で再連結し、
     選択中の 席取り / 使用中 にする。
-    例: SG5A + SG5B → SG5（6人） */
+    例: SG5A + SG5B → SG3（6人） */
  if(ids.length===2){
   const bases=[...new Set(ids.map(baseOf))];
   if(bases.length===1){
