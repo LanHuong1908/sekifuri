@@ -2921,32 +2921,32 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
 (() =&gt; {
   &quot;use strict&quot;;
 
-  const STORAGE_KEY = &quot;sekifuri-3f-cleaning-v4-baseline&quot;;
-  const PREVIOUS_STORAGE_KEY = &quot;sekifuri-3f-v7-priority-route&quot;;
-  if(!localStorage.getItem(STORAGE_KEY) &amp;&amp; localStorage.getItem(PREVIOUS_STORAGE_KEY)){
-    localStorage.setItem(STORAGE_KEY, localStorage.getItem(PREVIOUS_STORAGE_KEY));
-  }
+  const STORAGE_KEY = &quot;sekifuri-3f-layout-20260814-v2-flex-group&quot;;
 
   const fixedTables = {
     &quot;F1&quot;:2,&quot;F2&quot;:2,&quot;F3&quot;:2,&quot;F4&quot;:2,&quot;F5&quot;:2,
-
-    &quot;G6&quot;:2,&quot;G7&quot;:2,&quot;G8&quot;:2,&quot;G9&quot;:2,&quot;G10&quot;:2,&quot;G11&quot;:2
+    &quot;G6&quot;:2
   };
 
   const pairDefinitions = [
     {id:&quot;E1&quot;, parts:[&quot;E1A&quot;,&quot;E1B&quot;]},
     {id:&quot;E2&quot;, parts:[&quot;E2A&quot;,&quot;E2B&quot;]},
-    {id:&quot;E3E4&quot;, parts:[&quot;E3&quot;,&quot;E4&quot;]},
-    {id:&quot;E5E6&quot;, parts:[&quot;E5&quot;,&quot;E6&quot;]},
-    {id:&quot;E7&quot;, parts:[&quot;E7A&quot;,&quot;E7B&quot;]},
+    {id:&quot;E3&quot;, parts:[&quot;E3A&quot;,&quot;E3B&quot;]},
+    {id:&quot;E4&quot;, parts:[&quot;E4A&quot;,&quot;E4B&quot;]},
+    {id:&quot;E5&quot;, parts:[&quot;E5A&quot;,&quot;E5B&quot;]},
+    {id:&quot;E6E7&quot;, parts:[&quot;E6&quot;,&quot;E7&quot;]},
     {id:&quot;E8E9&quot;, parts:[&quot;E8&quot;,&quot;E9&quot;]},
     {id:&quot;E10&quot;, parts:[&quot;E10A&quot;,&quot;E10B&quot;]},
     {id:&quot;E11&quot;, parts:[&quot;E11A&quot;,&quot;E11B&quot;]},
 
     {id:&quot;G1&quot;, parts:[&quot;G1A&quot;,&quot;G1B&quot;]},
-    {id:&quot;G2G3&quot;, parts:[&quot;G2&quot;,&quot;G3&quot;]},
+    {id:&quot;G2&quot;, parts:[&quot;G2A&quot;,&quot;G2B&quot;]},
+    {id:&quot;G3&quot;, parts:[&quot;G3A&quot;,&quot;G3B&quot;]},
     {id:&quot;G4&quot;, parts:[&quot;G4A&quot;,&quot;G4B&quot;]},
-    {id:&quot;G5&quot;, parts:[&quot;G5A&quot;,&quot;G5B&quot;]}
+    {id:&quot;G5&quot;, parts:[&quot;G5A&quot;,&quot;G5B&quot;]},
+    {id:&quot;G7&quot;, parts:[&quot;G7A&quot;,&quot;G7B&quot;]},
+    {id:&quot;G8G9&quot;, parts:[&quot;G8&quot;,&quot;G9&quot;]},
+    {id:&quot;G10G11&quot;, parts:[&quot;G10&quot;,&quot;G11&quot;]}
   ];
 
   const pairPrefixes = pairDefinitions.map(def =&gt; def.id);
@@ -2959,8 +2959,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
   );
 
   const twoFixedOrder = [
-    &quot;F1&quot;,&quot;F2&quot;,&quot;F3&quot;,&quot;F4&quot;,&quot;F5&quot;,
-    &quot;G6&quot;,&quot;G7&quot;,&quot;G8&quot;,&quot;G9&quot;,&quot;G10&quot;,&quot;G11&quot;
+    &quot;F1&quot;,&quot;F2&quot;,&quot;F3&quot;,&quot;F4&quot;,&quot;F5&quot;,&quot;G6&quot;
   ];
 
   const fourFixedOrder = [];
@@ -2978,17 +2977,22 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
     &quot;E11&quot;,&quot;E11A&quot;,&quot;E11B&quot;,
     &quot;E10&quot;,&quot;E10A&quot;,&quot;E10B&quot;,
     &quot;E8E9&quot;,&quot;E9&quot;,&quot;E8&quot;,
-    &quot;E7&quot;,&quot;E7A&quot;,&quot;E7B&quot;,
-    &quot;E5E6&quot;,&quot;E6&quot;,&quot;E5&quot;,
-    &quot;E3E4&quot;,&quot;E4&quot;,&quot;E3&quot;,
+    &quot;E6E7&quot;,&quot;E7&quot;,&quot;E6&quot;,
+    &quot;E5&quot;,&quot;E5A&quot;,&quot;E5B&quot;,
+    &quot;E4&quot;,&quot;E4A&quot;,&quot;E4B&quot;,
+    &quot;E3&quot;,&quot;E3A&quot;,&quot;E3B&quot;,
     &quot;E2&quot;,&quot;E2A&quot;,&quot;E2B&quot;,
     &quot;E1&quot;,&quot;E1A&quot;,&quot;E1B&quot;,
 
     &quot;G1&quot;,&quot;G1A&quot;,&quot;G1B&quot;,
-    &quot;G2G3&quot;,&quot;G2&quot;,&quot;G3&quot;,
+    &quot;G2&quot;,&quot;G2A&quot;,&quot;G2B&quot;,
+    &quot;G3&quot;,&quot;G3A&quot;,&quot;G3B&quot;,
     &quot;G4&quot;,&quot;G4A&quot;,&quot;G4B&quot;,
     &quot;G5&quot;,&quot;G5A&quot;,&quot;G5B&quot;,
-    &quot;G6&quot;,&quot;G7&quot;,&quot;G8&quot;,&quot;G9&quot;,&quot;G10&quot;,&quot;G11&quot;
+    &quot;G6&quot;,
+    &quot;G7&quot;,&quot;G7A&quot;,&quot;G7B&quot;,
+    &quot;G8G9&quot;,&quot;G8&quot;,&quot;G9&quot;,
+    &quot;G10G11&quot;,&quot;G10&quot;,&quot;G11&quot;
   ];
 
   function recommendationIdRank(id){
@@ -3026,8 +3030,8 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
   }
 
   const renbanBaseGroups = [
-    [&quot;E1&quot;,&quot;E2&quot;,&quot;E3E4&quot;,&quot;E5E6&quot;,&quot;E7&quot;,&quot;E8E9&quot;,&quot;E10&quot;,&quot;E11&quot;],
-    [&quot;G1&quot;,&quot;G2G3&quot;,&quot;G4&quot;,&quot;G5&quot;,&quot;G6&quot;,&quot;G7&quot;,&quot;G8&quot;,&quot;G9&quot;,&quot;G10&quot;,&quot;G11&quot;]
+    [&quot;E1&quot;,&quot;E2&quot;,&quot;E3&quot;,&quot;E4&quot;,&quot;E5&quot;,&quot;E6E7&quot;,&quot;E8E9&quot;,&quot;E10&quot;,&quot;E11&quot;],
+    [&quot;G1&quot;,&quot;G2&quot;,&quot;G3&quot;,&quot;G4&quot;,&quot;G5&quot;,&quot;G6&quot;,&quot;G7&quot;,&quot;G8G9&quot;,&quot;G10G11&quot;]
   ];
 
   let appState = loadState();
@@ -3381,19 +3385,51 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
     return ids.filter(id =&gt; getStatus(id) === &quot;empty&quot;).length;
   }
 
+  /* 表示順だけは常に E → F → G。
+     おすすめ案の優先ロジックとは分離する。 */
+  function visualAreaRank(id){
+    const group = appState.groups.find(g =&gt; g.id === id);
+    const sample = group ? group.ids[0] : id;
+    const head = String(sample || &quot;&quot;).charAt(0);
+    return head === &quot;E&quot; ? 0 : head === &quot;F&quot; ? 1 : head === &quot;G&quot; ? 2 : 9;
+  }
+
+  function visualNumber(id){
+    const group = appState.groups.find(g =&gt; g.id === id);
+    const ids = group ? group.ids : [id];
+    const nums = ids
+      .map(x =&gt; {
+        const m = String(x).match(/\d+/);
+        return m ? Number(m[0]) : 999;
+      });
+    return Math.min(...nums);
+  }
+
+  function compareVisual(a,b){
+    const ar = visualAreaRank(a.id), br = visualAreaRank(b.id);
+    if(ar !== br) return ar - br;
+    const an = visualNumber(a.id), bn = visualNumber(b.id);
+    if(an !== bn) return an - bn;
+    return String(a.id).localeCompare(String(b.id));
+  }
+
   function createSection(title, ids, pairMode){
     const section = document.createElement(&quot;section&quot;);
     section.className = &quot;card&quot;;
 
+    const sectionCapacity = Number(title.replace(&quot;人卓&quot;,&quot;&quot;));
+    const manualGroups = appState.groups
+      .filter(group =&gt; group.capacity &lt;= 6 &amp;&amp; group.capacity === sectionCapacity);
+
     let freeCount = ids.filter(id =&gt; !isGrouped(id) &amp;&amp; getStatus(id) === &quot;empty&quot;).length;
-    const manualGroups = appState.groups.filter(group =&gt; group.capacity === Number(title.replace(&quot;人卓&quot;,&quot;&quot;)));
     freeCount += manualGroups.filter(group =&gt; getStatus(group.id) === &quot;empty&quot;).length;
 
     if(pairMode === &quot;split-first&quot;){
       pairDefinitions.forEach(def =&gt; {
         if(!appState.merged[def.id]){
-          if(!isGrouped(def.parts[0]) &amp;&amp; getStatus(def.parts[0]) === &quot;empty&quot;) freeCount++;
-          if(!isGrouped(def.parts[1]) &amp;&amp; getStatus(def.parts[1]) === &quot;empty&quot;) freeCount++;
+          def.parts.forEach(part =&gt; {
+            if(!isGrouped(part) &amp;&amp; getStatus(part) === &quot;empty&quot;) freeCount++;
+          });
         }
       });
     }
@@ -3411,37 +3447,70 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
 
     const grid = document.createElement(&quot;div&quot;);
     grid.className = &quot;table-grid&quot;;
-
     const tables = currentTables();
 
-    /* 2人卓・4人卓は82〜88を先頭に置き、その後に各エリアを動線順で並べる。 */
+    const entries = [];
+
     if(pairMode === &quot;split-first&quot;){
-      pairDefinitions
-        .filter(def =&gt;
-          !appState.merged[def.id] &amp;&amp;
-          !isGrouped(def.parts[0]) &amp;&amp;
-          !isGrouped(def.parts[1])
-        )
-        .forEach(def =&gt; grid.appendChild(createPairCard(def.id)));
+      pairDefinitions.forEach(def =&gt; {
+        if(appState.merged[def.id]) return;
+
+        const freeParts = def.parts.filter(part =&gt; !isGrouped(part));
+
+        if(freeParts.length === 2){
+          /* 通常は2卓をセット表示して、すぐ連結できる形を維持。 */
+          entries.push({
+            id:def.id,
+            kind:&quot;pair&quot;,
+            render:()=&gt;createPairCard(def.id)
+          });
+        }else{
+          /* 例: E7+E8 を手動連結した場合、
+             E6 と E9 は消さずに2人卓として残す。 */
+          freeParts.forEach(part =&gt; {
+            entries.push({
+              id:part,
+              kind:&quot;single&quot;,
+              render:()=&gt;createTableButton(part,2)
+            });
+          });
+        }
+      });
     }
 
     if(pairMode === &quot;merged-first&quot;){
-      pairDefinitions
-        .filter(def =&gt;
-          appState.merged[def.id] &amp;&amp;
-          !isGrouped(def.id)
-        )
-        .forEach(def =&gt; grid.appendChild(createPairCard(def.id)));
+      pairDefinitions.forEach(def =&gt; {
+        if(appState.merged[def.id] &amp;&amp; !isGrouped(def.id)){
+          entries.push({
+            id:def.id,
+            kind:&quot;pair&quot;,
+            render:()=&gt;createPairCard(def.id)
+          });
+        }
+      });
     }
 
-    const sectionCapacity = Number(title.replace(&quot;人卓&quot;,&quot;&quot;));
-    appState.groups
-      .filter(group =&gt; group.capacity &lt;= 6 &amp;&amp; group.capacity === sectionCapacity)
-      .forEach(group =&gt; grid.appendChild(createManualGroupCard(group)));
+    manualGroups.forEach(group =&gt; {
+      entries.push({
+        id:group.id,
+        kind:&quot;manual&quot;,
+        render:()=&gt;createManualGroupCard(group)
+      });
+    });
 
     ids
       .filter(id =&gt; !isGrouped(id))
-      .forEach(id =&gt; grid.appendChild(createTableButton(id, tables[id])));
+      .forEach(id =&gt; {
+        entries.push({
+          id,
+          kind:&quot;single&quot;,
+          render:()=&gt;createTableButton(id,tables[id])
+        });
+      });
+
+    entries
+      .sort(compareVisual)
+      .forEach(entry =&gt; grid.appendChild(entry.render()));
 
     if(!grid.children.length){
       const empty = document.createElement(&quot;div&quot;);
@@ -3961,10 +4030,10 @@ function renderRenbanOptions(){
         );
 
         /* その時点の分割/連結状態を実配置として扱う。
-           E3E4等が現在連結済みなら ids.length===1 の既存卓として
+           E6E7等が現在連結済みなら ids.length===1 の既存卓として
            MAXが大きくても予備候補に残す。
-           現在E3/E4に分割されているなら、2名客のために
-           E3+E4=4を新規連結する案は出さない。 */
+           現在E6/E7に分割されているなら、2名客のために
+           E6+E7=4を新規連結する案は出さない。 */
         return [
           ...singles,
           ...combos.filter(item =&gt; capacityOf(item) === minOverallCapacity)
