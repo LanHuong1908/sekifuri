@@ -1,36 +1,5 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Sekifuri ALL FINAL</title>
-<style>
-:root{--bg:#f3f4f6;--line:#d1d5db;--accent:#2563eb;--text:#111827}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;color:var(--text);overflow:hidden}
-#allShell{height:100dvh;display:flex;flex-direction:column}
-#allNav{flex:0 0 auto;display:flex;gap:5px;padding:6px;background:rgba(243,244,246,.99);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.08);z-index:10}
-#allNav button{flex:1;border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:7px 6px;font-size:12px;font-weight:950}
-#allNav button.active{border-color:var(--accent);outline:2px solid var(--accent);outline-offset:0;background:#eff6ff;color:#1d4ed8}
-#frameWrap{position:relative;flex:1 1 auto;min-height:0}
-.app-frame{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:#fff}
-.app-frame.active{display:block}
-@media(max-width:430px){
- #allNav{gap:3px;padding:4px}
- #allNav button{padding:6px 3px;font-size:11px}
-}
-</style>
-</head>
-<body>
-<div id="allShell">
-<nav id="allNav">
- <button data-index="0" class="active">1F</button>
- <button data-index="1">2F</button>
- <button data-index="2">3F</button>
- <button data-index="3">個室</button>
-</nav>
-<div id="frameWrap">
-<iframe class="app-frame active" data-index="0" title="1F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ja&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;&lt;title&gt;1F 席振り 清掃待ちテスト&lt;/title&gt;&lt;style&gt;
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Sekifuri ALL FINAL</title><style>
+:root{--bg:#f3f4f6;--line:#d1d5db;--accent:#2563eb;--text:#111827}*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;color:var(--text);overflow:hidden}#allShell{height:100dvh;display:flex;flex-direction:column}#allNav{flex:0 0 auto;display:flex;gap:5px;padding:6px;background:rgba(243,244,246,.99);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.08);z-index:10}#allNav button{flex:1;border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:7px 6px;font-size:12px;font-weight:950}#allNav button.active{border-color:var(--accent);outline:2px solid var(--accent);background:#eff6ff;color:#1d4ed8}#frameWrap{position:relative;flex:1;min-height:0}.app-frame{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:#fff}.app-frame.active{display:block}@media(max-width:430px){#allNav{gap:3px;padding:4px}#allNav button{padding:6px 3px;font-size:11px}}</style></head><body><div id="allShell"><nav id="allNav"><button data-index="0" class="active">1F</button><button data-index="1">2F</button><button data-index="2">3F</button><button data-index="3">個室</button></nav><div id="frameWrap"><iframe class="app-frame active" data-index="0" title="1F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ja&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot;&gt;&lt;title&gt;1F 席振り 清掃待ちテスト&lt;/title&gt;&lt;style&gt;
 :root{--bg:#f4f6f8;--card:#fff;--line:#d5d9df;--text:#17202a;--muted:#667085;--empty:#fff;--reserved:#ffe49a;--used:#ef6b73;--cleaning:#dbe2ea;--accent:#2563eb;--sel:#dbeafe;--empty2:#eadcff;--empty4:#dcecff;--empty6:#d9f3e4}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,&quot;Segoe UI&quot;,&quot;Noto Sans JP&quot;,sans-serif}button{font:inherit}
 .fixed{position:sticky;top:0;z-index:20;background:rgba(244,246,248,.97);backdrop-filter:blur(7px);border-bottom:1px solid var(--line)}
@@ -2051,8 +2020,7 @@ cfgRefreshAddRowOptions();
 cfgSaveLayout();
 renderAll();
 })();
-&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
-<iframe class="app-frame" data-index="1" title="2F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe><iframe class="app-frame" data-index="1" title="2F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;vi&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
@@ -5402,8 +5370,7 @@ appState = {states:{}, merged:{}, groups:[], cleaning:{}};
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-"></iframe>
-<iframe class="app-frame" data-index="2" title="3F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;
+"></iframe><iframe class="app-frame" data-index="2" title="3F" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;vi&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
@@ -8960,8 +8927,7 @@ appState = {states:{}, merged:{}, groups:[], cleaning:{}};
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-"></iframe>
-<iframe class="app-frame" data-index="3" title="個室" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;
+"></iframe><iframe class="app-frame" data-index="3" title="個室" sandbox="allow-scripts allow-same-origin" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;ja&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
@@ -9137,16 +9103,26 @@ const LAYOUT_KEY=KEY+&quot;-renban-layout-v2&quot;;
 const ROOM_ORDER=[&quot;SG&quot;,&quot;KH&quot;,&quot;CD&quot;];
 const SIDE_ORDER=[&quot;left&quot;,&quot;right&quot;];
 const DEFAULT_TABLES={
- SG1:{room:&quot;SG&quot;,side:&quot;left&quot;,parts:[4]}, SG2:{room:&quot;SG&quot;,side:&quot;left&quot;,parts:[4]},
- SG3:{room:&quot;SG&quot;,side:&quot;left&quot;,parts:[4]}, SG4:{room:&quot;SG&quot;,side:&quot;left&quot;,parts:[2]},
- SG5:{room:&quot;SG&quot;,side:&quot;right&quot;,parts:[4]}, SG6:{room:&quot;SG&quot;,side:&quot;right&quot;,parts:[4]}, SG7:{room:&quot;SG&quot;,side:&quot;right&quot;,parts:[4]}, SG8:{room:&quot;SG&quot;,side:&quot;right&quot;,parts:[4]},
- KH1:{room:&quot;KH&quot;,side:&quot;left&quot;,parts:[4]}, KH2:{room:&quot;KH&quot;,side:&quot;left&quot;,parts:[4]}, KH3:{room:&quot;KH&quot;,side:&quot;left&quot;,parts:[4]}, KH4:{room:&quot;KH&quot;,side:&quot;left&quot;,parts:[6]},
- KH5:{room:&quot;KH&quot;,side:&quot;right&quot;,parts:[4]}, KH6:{room:&quot;KH&quot;,side:&quot;right&quot;,parts:[4]}, KH7:{room:&quot;KH&quot;,side:&quot;right&quot;,parts:[2,4]}, KH8:{room:&quot;KH&quot;,side:&quot;right&quot;,parts:[2,4]},
- CD1:{room:&quot;CD&quot;,side:&quot;left&quot;,parts:[4]}, CD2:{room:&quot;CD&quot;,side:&quot;left&quot;,parts:[4]}, CD3:{room:&quot;CD&quot;,side:&quot;left&quot;,parts:[4]}, CD4:{room:&quot;CD&quot;,side:&quot;left&quot;,parts:[4]},
- CD5:{room:&quot;CD&quot;,side:&quot;right&quot;,parts:[4]}, CD6:{room:&quot;CD&quot;,side:&quot;right&quot;,parts:[4]}, CD7:{room:&quot;CD&quot;,side:&quot;right&quot;,parts:[4]}, CD8:{room:&quot;CD&quot;,side:&quot;right&quot;,parts:[4]}
+ SG1:{room:&quot;SG&quot;,side:&quot;right&quot;,parts:[4]}, SG2:{room:&quot;SG&quot;,side:&quot;right&quot;,parts:[4]},
+ SG3:{room:&quot;SG&quot;,side:&quot;right&quot;,parts:[4]}, SG4:{room:&quot;SG&quot;,side:&quot;right&quot;,parts:[2]},
+ SG5:{room:&quot;SG&quot;,side:&quot;left&quot;,parts:[4]}, SG6:{room:&quot;SG&quot;,side:&quot;left&quot;,parts:[4]}, SG7:{room:&quot;SG&quot;,side:&quot;left&quot;,parts:[4]}, SG8:{room:&quot;SG&quot;,side:&quot;left&quot;,parts:[4]},
+ KH1:{room:&quot;KH&quot;,side:&quot;right&quot;,parts:[4]}, KH2:{room:&quot;KH&quot;,side:&quot;right&quot;,parts:[4]}, KH3:{room:&quot;KH&quot;,side:&quot;right&quot;,parts:[4]}, KH4:{room:&quot;KH&quot;,side:&quot;right&quot;,parts:[6]},
+ KH5:{room:&quot;KH&quot;,side:&quot;left&quot;,parts:[4]}, KH6:{room:&quot;KH&quot;,side:&quot;left&quot;,parts:[4]}, KH7:{room:&quot;KH&quot;,side:&quot;left&quot;,parts:[2,4]}, KH8:{room:&quot;KH&quot;,side:&quot;left&quot;,parts:[2,4]},
+ CD1:{room:&quot;CD&quot;,side:&quot;right&quot;,parts:[4]}, CD2:{room:&quot;CD&quot;,side:&quot;right&quot;,parts:[4]}, CD3:{room:&quot;CD&quot;,side:&quot;right&quot;,parts:[4]}, CD4:{room:&quot;CD&quot;,side:&quot;right&quot;,parts:[4]},
+ CD5:{room:&quot;CD&quot;,side:&quot;left&quot;,parts:[4]}, CD6:{room:&quot;CD&quot;,side:&quot;left&quot;,parts:[4]}, CD7:{room:&quot;CD&quot;,side:&quot;left&quot;,parts:[4]}, CD8:{room:&quot;CD&quot;,side:&quot;left&quot;,parts:[4]}
 };
+const SIDE_MAPPING_VERSION=&quot;row1-right-v1&quot;;
 let tables=JSON.parse(JSON.stringify(DEFAULT_TABLES));
-try{const x=JSON.parse(localStorage.getItem(LAYOUT_KEY)||&quot;null&quot;);if(x&amp;&amp;x.tables)tables=x.tables}catch{}
+let __loadedLayout=null;
+try{
+ __loadedLayout=JSON.parse(localStorage.getItem(LAYOUT_KEY)||&quot;null&quot;);
+ if(__loadedLayout&amp;&amp;__loadedLayout.tables){
+  tables=__loadedLayout.tables;
+  if(__loadedLayout.sideMappingVersion!==SIDE_MAPPING_VERSION){
+   Object.values(tables).forEach(t=&gt;{if(t&amp;&amp;t.side)t.side=t.side===&quot;left&quot;?&quot;right&quot;:t.side===&quot;right&quot;?&quot;left&quot;:t.side});
+  }
+ }
+}catch{}
 let data=JSON.parse(localStorage.getItem(KEY)||&#x27;{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{},&quot;cleaning&quot;:{}}&#x27;);
 data.states||={};data.groups||=[];data.merged||={};data.cleaning||={};
 Object.keys(tables).forEach(id=&gt;{if(tables[id].parts.length&gt;1&amp;&amp;data.merged[id]===undefined)data.merged[id]=true});
@@ -9155,7 +9131,7 @@ let renbanMembers=[];
 const clickTimers=new Map();
 
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch{}}
-function saveLayout(){try{localStorage.setItem(LAYOUT_KEY,JSON.stringify({tables,renbanGroups:RENBAN_GROUPS}))}catch{}}
+function saveLayout(){try{localStorage.setItem(LAYOUT_KEY,JSON.stringify({tables,renbanGroups:RENBAN_GROUPS,sideMappingVersion:SIDE_MAPPING_VERSION}))}catch{}}
 function norm(v){return String(v||&quot;&quot;).trim().toUpperCase()}
 function natural(a,b){return String(a).localeCompare(String(b),&quot;ja&quot;,{numeric:true,sensitivity:&quot;base&quot;})}
 function validActiveId(id){
@@ -9280,18 +9256,28 @@ function sameRoomForIds(ids){
 
 function laneBases(room,side){return Object.keys(tables).filter(id=&gt;tables[id].room===room&amp;&amp;tables[id].side===side).sort(natural)}
 const RENBAN_GROUPS={
- &quot;SG:left&quot;:[[&quot;SG1&quot;,&quot;SG2&quot;,&quot;SG3&quot;,&quot;SG4&quot;]],
- &quot;SG:right&quot;:[[&quot;SG5&quot;,&quot;SG6&quot;,&quot;SG7&quot;,&quot;SG8&quot;]],
- &quot;KH:left&quot;:[[&quot;KH1&quot;,&quot;KH2&quot;,&quot;KH3&quot;,&quot;KH4&quot;]],
- &quot;KH:right&quot;:[[&quot;KH5&quot;,&quot;KH6&quot;,&quot;KH7&quot;,&quot;KH8&quot;]],
- &quot;CD:left&quot;:[[&quot;CD1&quot;,&quot;CD2&quot;,&quot;CD3&quot;]],
- &quot;CD:right&quot;:[[&quot;CD5&quot;,&quot;CD6&quot;,&quot;CD7&quot;,&quot;CD8&quot;]]
+ &quot;SG:right&quot;:[[&quot;SG1&quot;,&quot;SG2&quot;,&quot;SG3&quot;,&quot;SG4&quot;]],
+ &quot;SG:left&quot;:[[&quot;SG5&quot;,&quot;SG6&quot;,&quot;SG7&quot;,&quot;SG8&quot;]],
+ &quot;KH:right&quot;:[[&quot;KH1&quot;,&quot;KH2&quot;,&quot;KH3&quot;,&quot;KH4&quot;]],
+ &quot;KH:left&quot;:[[&quot;KH5&quot;,&quot;KH6&quot;,&quot;KH7&quot;,&quot;KH8&quot;]],
+ &quot;CD:right&quot;:[[&quot;CD1&quot;,&quot;CD2&quot;,&quot;CD3&quot;]],
+ &quot;CD:left&quot;:[[&quot;CD5&quot;,&quot;CD6&quot;,&quot;CD7&quot;,&quot;CD8&quot;]]
 };
 try{
- const x=JSON.parse(localStorage.getItem(LAYOUT_KEY)||&quot;null&quot;);
+ const x=__loadedLayout||JSON.parse(localStorage.getItem(LAYOUT_KEY)||&quot;null&quot;);
  if(x&amp;&amp;x.renbanGroups&amp;&amp;typeof x.renbanGroups===&quot;object&quot;){
+  let groups=x.renbanGroups;
+  if(x.sideMappingVersion!==SIDE_MAPPING_VERSION){
+   const migrated={};
+   Object.entries(groups).forEach(([key,val])=&gt;{
+    const mm=key.match(/^(SG|KH|CD):(left|right)$/);
+    if(!mm){migrated[key]=val;return}
+    migrated[mm[1]+&quot;:&quot;+(mm[2]===&quot;left&quot;?&quot;right&quot;:&quot;left&quot;)]=val;
+   });
+   groups=migrated;
+  }
   Object.keys(RENBAN_GROUPS).forEach(k=&gt;delete RENBAN_GROUPS[k]);
-  Object.assign(RENBAN_GROUPS,x.renbanGroups);
+  Object.assign(RENBAN_GROUPS,groups);
  }
 }catch{}
 cleanupStaleIds();
@@ -10205,36 +10191,34 @@ document.getElementById(&quot;bulkCommit&quot;).onclick=e=&gt;{
  e.preventDefault();
  deleteSelected();
 };
-document.getElementById(&quot;reset&quot;).onclick=()=&gt;{if(!confirm(&quot;個室をすべて空席・初期連結状態に戻しますか？&quot;))return;data={states:{},groups:[],merged:{},cleaning:{}};Object.keys(tables).forEach(id=&gt;{if(tables[id].parts.length&gt;1)data.merged[id]=true});selectedState=&quot;empty&quot;;manual=false;selected.clear();save();document.querySelectorAll(&quot;#stateRow button&quot;).forEach(b=&gt;b.classList.toggle(&quot;active&quot;,b.dataset.state===&quot;empty&quot;));renderAll()};
+document.getElementById(&quot;reset&quot;).onclick=()=&gt;{
+ data={states:{},groups:[],merged:{},cleaning:{}};
+
+ /* Keep the edited room/table/renban layout, but restore operational state. */
+ Object.keys(tables).forEach(id=&gt;{
+  if(tables[id].parts.length&gt;1)data.merged[id]=true;
+ });
+
+ selectedState=&quot;empty&quot;;
+ manual=false;
+ selected.clear();
+
+ bulk=false;
+ bulkSelected.clear();
+
+ editingId=null;
+ addMode=false;
+
+ document.querySelectorAll(&quot;#stateRow button&quot;).forEach(b=&gt;{
+  b.classList.toggle(&quot;active&quot;,b.dataset.state===&quot;empty&quot;);
+ });
+
+ save();
+ renderAll();
+ toast(&quot;初期状態に戻しました&quot;);
+};
 cleanupStaleIds();saveLayout();save();renderAll();
 })();
 &lt;/script&gt;
 &lt;/body&gt;
-&lt;/html&gt;"></iframe>
-</div>
-</div>
-<script>
-(()=>{
- const buttons=[...document.querySelectorAll("#allNav button")];
- const frames=[...document.querySelectorAll(".app-frame")];
-
- function activate(i){
-   buttons.forEach((b,n)=>b.classList.toggle("active",n===i));
-   frames.forEach((fr,n)=>fr.classList.toggle("active",n===i));
-   try{localStorage.setItem("sekifuri-all-active-tab",String(i))}catch{}
- }
-
- buttons.forEach(b=>{
-   b.addEventListener("click",()=>activate(Number(b.dataset.index)));
- });
-
- let initial=0;
- try{
-   const saved=Number(localStorage.getItem("sekifuri-all-active-tab"));
-   if(Number.isInteger(saved)&&saved>=0&&saved<frames.length) initial=saved;
- }catch{}
- activate(initial);
-})();
-</script>
-</body>
-</html>
+&lt;/html&gt;"></iframe></div></div><script>(()=>{const b=[...document.querySelectorAll("#allNav button")],fr=[...document.querySelectorAll(".app-frame")];function a(i){b.forEach((x,n)=>x.classList.toggle("active",n===i));fr.forEach((x,n)=>x.classList.toggle("active",n===i));try{localStorage.setItem("sekifuri-all-active-tab",String(i))}catch{}}b.forEach(x=>x.addEventListener("click",()=>a(Number(x.dataset.index))));let i=0;try{const s=Number(localStorage.getItem("sekifuri-all-active-tab"));if(Number.isInteger(s)&&s>=0&&s<fr.length)i=s}catch{}a(i)})();</script></body></html>
