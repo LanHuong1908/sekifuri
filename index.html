@@ -10697,8 +10697,10 @@ async function login(){
     await auth.signInWithEmailAndPassword(email,password);
     passEl.value = "";
   }catch(e){
-    console.error(e);
-    errEl.textContent = "ログインできません。Email / Password を確認してください。";
+    console.error("Firebase login error:", e);
+    const code = e && e.code ? String(e.code) : "unknown-error";
+    const msg = e && e.message ? String(e.message) : "";
+    errEl.textContent = "Firebase: " + code + (msg ? " / " + msg : "");
     setStatus("未接続", "error");
   }finally{
     loginBtn.disabled = false;
