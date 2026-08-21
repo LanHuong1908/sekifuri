@@ -9134,6 +9134,99 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch{}}
 function saveLayout(){try{localStorage.setItem(LAYOUT_KEY,JSON.stringify({tables,renbanGroups:RENBAN_GROUPS,sideMappingVersion:SIDE_MAPPING_VERSION}))}catch{}}
 function norm(v){return String(v||&quot;&quot;).trim().toUpperCase()}
 function natural(a,b){return String(a).localeCompare(String(b),&quot;ja&quot;,{numeric:true,sensitivity:&quot;base&quot;})}
+
+function renameEveryReference(oldId,newId){
+ if(!oldId||!newId||oldId===newId)return;
+
+ // operational state
+ if(data.states[oldId]!==undefined){data.states[newId]=data.states[oldId];delete data.states[oldId]}
+ if(data.cleaning[oldId]!==undefined){data.cleaning[newId]=data.cleaning[oldId];delete data.cleaning[oldId]}
+ if(data.merged[oldId]!==undefined){data.merged[newId]=data.merged[oldId];delete data.merged[oldId]}
+
+ // manual groups
+ (data.groups||[]).forEach(g=&gt;{
+   g.ids=(g.ids||[]).map(x=&gt;x===oldId?newId:x);
+ });
+
+ // renban groups
+ Object.keys(RENBAN_GROUPS||{}).forEach(key=&gt;{
+   RENBAN_GROUPS[key]=(RENBAN_GROUPS[key]||[]).map(group=&gt;
+     group.map(x=&gt;x===oldId?newId:x)
+   );
+ });
+
+ // current UI selections
+ if(selected.has(oldId)){selected.delete(oldId);selected.add(newId)}
+ if(bulkSelected.has(oldId)){bulkSelected.delete(oldId);bulkSelected.add(newId)}
+ if(editingId===oldId)editingId=newId;
+
+ // Any explicit partNames in other tables
+ Object.values(tables).forEach(t=&gt;{
+   if(Array.isArray(t.partNames)){
+     t.partNames=t.partNames.map(x=&gt;x===oldId?newId:x);
+   }
+ });
+}
+
+function normalizeCompositeAfterPartDelete(base){
+ const t=tables[base];
+ if(!t)return;
+
+ if(t.parts.length&lt;=1){
+   const onlyCap=t.parts[0] ?? 2;
+
+   // Preserve the base identity and room/side. It is now a normal single table.
+   t.parts=[onlyCap];
+   delete t.partNames;
+   delete data.merged[base];
+
+   // Remove any leftover part ids belonging to this base.
+   Object.keys(data.states).forEach(id=&gt;{
+     const p=partInfo(id);
+     if(p&amp;&amp;p.base===base){delete data.states[id]}
+   });
+   Object.keys(data.cleaning).forEach(id=&gt;{
+     const p=partInfo(id);
+     if(p&amp;&amp;p.base===base){delete data.cleaning[id]}
+   });
+ }
+
+ cleanupStaleIds();
+}
+
+function deleteSplitPart(partId){
+ const info=partInfo(partId);
+ if(!info)return false;
+ const base=info.base;
+ const t=tables[base];
+ if(!t||data.merged[base]!==false)return false;
+
+ // Do not delete a used/cleaning/manual-grouped part.
+ if(state(partId)!==&quot;empty&quot;||cleaning(partId)||grouped(partId))return false;
+
+ const oldIds=partIds(base);
+ const idx=oldIds.indexOf(partId);
+ if(idx&lt;0)return false;
+
+ t.parts.splice(idx,1);
+ if(Array.isArray(t.partNames))t.partNames.splice(idx,1);
+
+ delete data.states[partId];
+ delete data.cleaning[partId];
+
+ // Remap remaining part state from old ids to regenerated ids when needed.
+ const remainingOld=oldIds.filter(x=&gt;x!==partId);
+ const newIds=partIds(base);
+ remainingOld.forEach((oldPart,i)=&gt;{
+   const newPart=newIds[i];
+   if(oldPart!==newPart){
+     renameEveryReference(oldPart,newPart);
+   }
+ });
+
+ normalizeCompositeAfterPartDelete(base);
+ return true;
+}
 function validActiveId(id){
  if(tables[id])return true;
  const p=partInfo(id);
@@ -9482,13 +9575,96 @@ function createGroup(idsOverride=null){
 function releaseGroup(gid){const i=data.groups.findIndex(g=&gt;g.id===gid);if(i&lt;0)return;data.groups[i].ids.forEach(id=&gt;{delete data.states[id];delete data.cleaning[id]});data.groups.splice(i,1);save();renderAll()}
 function toggleComposite(base){const t=tables[base];if(!t||t.parts.length&lt;2)return;const ids=partIds(base);if(data.merged[base]){if(state(base)!==&quot;empty&quot;||grouped(base)){toast(&quot;空席・連結解除後に分割してください&quot;);return}delete data.states[base];data.merged[base]=false}else{if(ids.some(id=&gt;state(id)!==&quot;empty&quot;||grouped(id))){toast(&quot;全て空席・連結解除後に連結してください&quot;);return}ids.forEach(id=&gt;delete data.states[id]);data.merged[base]=true}selected.clear();save();renderAll()}
 
-function quickRename(id,el){
- if(bulk)return;const base=baseOf(id);if(!tables[base]||id!==base){toast(&quot;分割中の部分名は卓編集から変更してください&quot;);return}
- const old=id,oldHtml=el.innerHTML,input=document.createElement(&quot;input&quot;);input.className=&quot;quick-rename-input&quot;;input.value=old;el.innerHTML=&quot;&quot;;el.appendChild(input);
- requestAnimationFrame(()=&gt;{input.focus();try{input.setSelectionRange(input.value.length,input.value.length)}catch{}});
- let done=false;const finish=saveIt=&gt;{if(done)return;done=true;const nw=norm(input.value);if(!saveIt||!nw||nw===old){el.innerHTML=oldHtml;return}cleanupStaleIds();if(Object.prototype.hasOwnProperty.call(tables,nw)){done=false;toast(&quot;同名の卓があります&quot;);input.focus();return}
- tables[nw]=tables[old];delete tables[old];if(data.merged[old]!==undefined){data.merged[nw]=data.merged[old];delete data.merged[old]}if(data.states[old]!==undefined){data.states[nw]=data.states[old];delete data.states[old]}if(data.cleaning[old]!==undefined){data.cleaning[nw]=data.cleaning[old];delete data.cleaning[old]}data.groups.forEach(g=&gt;g.ids=g.ids.map(x=&gt;x===old?nw:x));saveLayout();save();renderAll();toast(old+&quot; → &quot;+nw)};
- input.onkeydown=e=&gt;{e.stopPropagation();if(e.key===&quot;Enter&quot;){e.preventDefault();finish(true)}else if(e.key===&quot;Escape&quot;){e.preventDefault();finish(false)}};input.onclick=e=&gt;e.stopPropagation();input.ondblclick=e=&gt;e.stopPropagation();input.onmousedown=e=&gt;e.stopPropagation();input.onblur=()=&gt;finish(true)
+function quickRename(id,button){
+ if(bulk||manual||grouped(id))return;
+
+ const base=baseOf(id);
+ const isPart=id!==base;
+ const oldBase=base;
+
+ const input=document.createElement(&quot;input&quot;);
+ input.className=&quot;quick-rename-input&quot;;
+ input.value=displayId(id);
+ button.replaceChildren(input);
+ input.focus();
+ input.select();
+
+ let done=false;
+ const finish=saveIt=&gt;{
+   if(done)return;
+   done=true;
+
+   if(!saveIt){renderAll();return}
+
+   const nw=norm(input.value);
+   if(!nw||nw===id){renderAll();return}
+
+   cleanupStaleIds();
+
+   // part rename
+   if(isPart){
+     const p=partInfo(id);
+     if(!p){renderAll();return}
+     if(Object.keys(tables).includes(nw)||partInfo(nw)){
+       done=false;toast(&quot;同名の卓があります&quot;);input.focus();return
+     }
+     const t=tables[p.base];
+     if(!t.partNames)t.partNames=partIds(p.base);
+     const idx=t.partNames.indexOf(id);
+     if(idx&gt;=0)t.partNames[idx]=nw;
+
+     renameEveryReference(id,nw);
+     saveLayout();save();renderAll();toast(id+&quot; → &quot;+nw);
+     return;
+   }
+
+   // base rename
+   if(Object.prototype.hasOwnProperty.call(tables,nw)||partInfo(nw)){
+     done=false;toast(&quot;同名の卓があります&quot;);input.focus();return
+   }
+
+   const oldTable=tables[id];
+   tables[nw]=oldTable;
+   delete tables[id];
+   tables[nw].display=nw;
+
+   // rename generated part names too
+   const oldPartIds=oldTable.parts.length&gt;1 ? partIds(id) : [];
+   renameEveryReference(id,nw);
+
+   if(oldTable.parts.length&gt;1){
+     const explicit=Array.isArray(oldTable.partNames)?[...oldTable.partNames]:null;
+     if(explicit){
+       // Explicit custom part names remain as-is except ones prefixed by old base.
+       oldTable.partNames=explicit.map((pn,i)=&gt;{
+         const autoOld=id+String.fromCharCode(65+i);
+         const autoNew=nw+String.fromCharCode(65+i);
+         if(pn===autoOld){
+           renameEveryReference(pn,autoNew);
+           return autoNew;
+         }
+         return pn;
+       });
+     }else{
+       oldPartIds.forEach((op,i)=&gt;{
+         const np=nw+String.fromCharCode(65+i);
+         renameEveryReference(op,np);
+       });
+     }
+   }
+
+   cleanupStaleIds();
+   saveLayout();
+   save();
+   renderAll();
+   toast(id+&quot; → &quot;+nw);
+ };
+
+ input.onkeydown=e=&gt;{
+   if(e.key===&quot;Enter&quot;){e.preventDefault();finish(true)}
+   else if(e.key===&quot;Escape&quot;){e.preventDefault();finish(false)}
+ };
+ input.onblur=()=&gt;finish(true);
 }
 
 function tableButton(id,cap){
@@ -9932,58 +10108,64 @@ function saveForm(){
 
  cleanupStaleIds();
 
- if((!editingId||id!==editingId)&amp;&amp;Object.prototype.hasOwnProperty.call(tables,id)){
+ if((!editingId||id!==editingId) &amp;&amp;
+    (Object.prototype.hasOwnProperty.call(tables,id)||partInfo(id))){
   document.getElementById(&quot;formError&quot;).textContent=&quot;同名の卓があります。&quot;;
   return;
  }
 
  const oldId=editingId;
+
  if(oldId&amp;&amp;id!==oldId){
-  tables[id]=tables[oldId];
-  delete tables[oldId];
+   const old=tables[oldId];
+   const oldPartIds=old&amp;&amp;old.parts.length&gt;1 ? partIds(oldId) : [];
 
-  if(data.merged[oldId]!==undefined){
-   data.merged[id]=data.merged[oldId];
-   delete data.merged[oldId];
-  }
-  if(data.states[oldId]!==undefined){
-   data.states[id]=data.states[oldId];
-   delete data.states[oldId];
-  }
-  if(data.cleaning[oldId]!==undefined){
-   data.cleaning[id]=data.cleaning[oldId];
-   delete data.cleaning[oldId];
-  }
-  data.groups.forEach(g=&gt;g.ids=g.ids.map(x=&gt;x===oldId?id:x));
+   tables[id]=old;
+   delete tables[oldId];
+   tables[id].display=id;
 
-  Object.keys(RENBAN_GROUPS||{}).forEach(key=&gt;{
-   (RENBAN_GROUPS[key]||[]).forEach(g=&gt;{
-    const ix=g.indexOf(oldId);
-    if(ix&gt;=0)g[ix]=id;
-   });
-  });
+   renameEveryReference(oldId,id);
+
+   if(old&amp;&amp;old.parts.length&gt;1){
+     if(Array.isArray(old.partNames)){
+       old.partNames=old.partNames.map((pn,i)=&gt;{
+         const autoOld=oldId+String.fromCharCode(65+i);
+         const autoNew=id+String.fromCharCode(65+i);
+         if(pn===autoOld){
+           renameEveryReference(pn,autoNew);
+           return autoNew;
+         }
+         return pn;
+       });
+     }else{
+       oldPartIds.forEach((op,i)=&gt;{
+         const np=id+String.fromCharCode(65+i);
+         renameEveryReference(op,np);
+       });
+     }
+   }
  }
 
- const old=tables[id]||{};
+ const prev=tables[id]||{};
  tables[id]={room,side,parts,display:id};
 
- if(old.partNames&amp;&amp;old.parts&amp;&amp;old.parts.length===parts.length){
-  tables[id].partNames=old.partNames;
+ if(prev.partNames&amp;&amp;prev.parts&amp;&amp;prev.parts.length===parts.length){
+   tables[id].partNames=prev.partNames;
  }
 
  if(parts.length&gt;1){
-  if(data.merged[id]===undefined)data.merged[id]=true;
+   if(data.merged[id]===undefined)data.merged[id]=true;
  }else{
-  delete data.merged[id];
+   delete data.merged[id];
+   delete tables[id].partNames;
  }
 
- /* Renban failure must not block 保存. */
  try{
-  applyRenbanMembership(id,renbanMembers);
+   applyRenbanMembership(id,renbanMembers);
  }catch(err){
-  console.error(&quot;renban save error&quot;,err);
-  document.getElementById(&quot;formError&quot;).textContent=&quot;連番の保存に失敗しました。&quot;;
-  return;
+   console.error(&quot;renban save error&quot;,err);
+   document.getElementById(&quot;formError&quot;).textContent=&quot;連番の保存に失敗しました。&quot;;
+   return;
  }
 
  cleanupStaleIds();
@@ -10006,35 +10188,26 @@ function deleteEditingTable(){
 
  const related=activeIds(id);
 
- const badState=related.find(x=&gt;state(x)!==&quot;empty&quot;);
- if(badState){
-  toast(`${badState} は空席ではありません`);
+ if(related.some(x=&gt;state(x)!==&quot;empty&quot;)){
+  toast(&quot;空席ではないため削除できません&quot;);
+  return;
+ }
+ if(related.some(x=&gt;cleaning(x))){
+  toast(&quot;清掃待ちのため削除できません&quot;);
+  return;
+ }
+ if(related.some(x=&gt;grouped(x))){
+  toast(&quot;手動連結中のため削除できません&quot;);
   return;
  }
 
- const badCleaning=related.find(x=&gt;cleaning(x));
- if(badCleaning){
-  toast(`${badCleaning} は清掃待ちです`);
-  return;
- }
-
- const badGroup=related.find(x=&gt;grouped(x));
- if(badGroup){
-  toast(`${badGroup} は手動連結中です`);
-  return;
- }
-
- /* Renban: remove this table, preserving the remaining members. */
  const found=findRenbanGroupFor(id);
  if(found){
   RENBAN_GROUPS[found.key]=RENBAN_GROUPS[found.key].filter(g=&gt;g!==found.group);
-  const remain=found.group.filter(x=&gt;x!==id &amp;&amp; tables[x]);
-  if(remain.length&gt;=2){
-   RENBAN_GROUPS[found.key].push(remain.sort(natural));
-  }
+  const remain=found.group.filter(x=&gt;x!==id&amp;&amp;tables[x]);
+  if(remain.length&gt;=2)RENBAN_GROUPS[found.key].push(remain.sort(natural));
  }
 
- /* Remove all references before deleting the identity itself. */
  data.groups=(data.groups||[])
   .map(g=&gt;({...g,ids:(g.ids||[]).filter(x=&gt;x!==id&amp;&amp;!related.includes(x))}))
   .filter(g=&gt;g.ids.length&gt;=2);
@@ -10053,11 +10226,6 @@ function deleteEditingTable(){
  saveLayout();
  save();
 
- if(tables[id]){
-  toast(&quot;卓削除に失敗しました&quot;);
-  return;
- }
-
  editingId=null;
  closeModal();
  renderAll();
@@ -10071,50 +10239,48 @@ function deleteSelected(){
  }
 
  let deleted=0;
- let blocked=[];
+ let blocked=0;
 
  [...bulkSelected].forEach(rawId=&gt;{
-  const base=baseOf(rawId);
-  if(!base||!tables[base])return;
-
-  const related=activeIds(base);
-
-  if(related.some(x=&gt;state(x)!==&quot;empty&quot;)){
-   blocked.push(base+&quot;（空席ではありません）&quot;);
-   return;
-  }
-  if(related.some(x=&gt;cleaning(x))){
-   blocked.push(base+&quot;（清掃待ち）&quot;);
-   return;
-  }
-  if(related.some(x=&gt;grouped(x))){
-   blocked.push(base+&quot;（手動連結中）&quot;);
-   return;
-  }
-
-  const found=findRenbanGroupFor(base);
-  if(found){
-   RENBAN_GROUPS[found.key]=RENBAN_GROUPS[found.key].filter(g=&gt;g!==found.group);
-   const remain=found.group.filter(x=&gt;x!==base&amp;&amp;tables[x]);
-   if(remain.length&gt;=2){
-    RENBAN_GROUPS[found.key].push(remain.sort(natural));
+   // If this is a split part, delete only that part.
+   const p=partInfo(rawId);
+   if(p &amp;&amp; data.merged[p.base]===false){
+     if(deleteSplitPart(rawId)){deleted++;return}
+     blocked++;return;
    }
-  }
 
-  data.groups=(data.groups||[])
-   .map(g=&gt;({...g,ids:(g.ids||[]).filter(x=&gt;x!==base&amp;&amp;!related.includes(x))}))
-   .filter(g=&gt;g.ids.length&gt;=2);
+   const base=baseOf(rawId);
+   if(!base||!tables[base])return;
 
-  related.forEach(x=&gt;{
-   delete data.states[x];
-   delete data.cleaning[x];
-  });
+   const related=activeIds(base);
 
-  delete data.states[base];
-  delete data.cleaning[base];
-  delete data.merged[base];
-  delete tables[base];
-  deleted++;
+   if(related.some(x=&gt;state(x)!==&quot;empty&quot;) ||
+      related.some(x=&gt;cleaning(x)) ||
+      related.some(x=&gt;grouped(x))){
+     blocked++;return;
+   }
+
+   const found=findRenbanGroupFor(base);
+   if(found){
+     RENBAN_GROUPS[found.key]=RENBAN_GROUPS[found.key].filter(g=&gt;g!==found.group);
+     const remain=found.group.filter(x=&gt;x!==base&amp;&amp;tables[x]);
+     if(remain.length&gt;=2)RENBAN_GROUPS[found.key].push(remain.sort(natural));
+   }
+
+   data.groups=(data.groups||[])
+    .map(g=&gt;({...g,ids:(g.ids||[]).filter(x=&gt;x!==base&amp;&amp;!related.includes(x))}))
+    .filter(g=&gt;g.ids.length&gt;=2);
+
+   related.forEach(x=&gt;{
+     delete data.states[x];
+     delete data.cleaning[x];
+   });
+
+   delete data.states[base];
+   delete data.cleaning[base];
+   delete data.merged[base];
+   delete tables[base];
+   deleted++;
  });
 
  cleanupStaleIds();
@@ -10125,11 +10291,8 @@ function deleteSelected(){
  bulkSelected.clear();
  renderAll();
 
- if(blocked.length){
-  toast(`${deleted}卓 削除・${blocked.length}卓 は削除できません`);
- }else{
-  toast(`${deleted}卓 を削除しました`);
- }
+ if(blocked)toast(`${deleted}卓 削除・${blocked}卓 は削除できません`);
+ else toast(`${deleted}卓 を削除しました`);
 }
 
 function renderBulk(){
