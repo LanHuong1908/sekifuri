@@ -8458,14 +8458,29 @@ function renderRenbanOptions(){
     if(!cfgStructures[id])cfgStructures[id]={&quot;2&quot;:1,&quot;4&quot;:0,&quot;6&quot;:0,&quot;BOX&quot;:0};
   });
 
-  /* Real renban structure is independent from capacity/type. */
-  cfgRenbanGroups=[
+  /* Preserve the renban groups loaded from saved layout/Firebase.
+     The old code reset them to the original E/F/G defaults on EVERY page load,
+     which is why changes such as G16/G17 renban reverted when another device opened the app. */
+  const default3FRenbanGroups=[
     [&quot;E1&quot;,&quot;E2&quot;,&quot;E3&quot;,&quot;E4&quot;,&quot;E5&quot;,&quot;E6&quot;,&quot;E7&quot;,&quot;E8&quot;,&quot;E9&quot;,&quot;E10&quot;,&quot;E11&quot;],
     [&quot;F1&quot;,&quot;F2&quot;,&quot;F3&quot;,&quot;F4&quot;,&quot;F5&quot;],
     [&quot;G1&quot;,&quot;G2&quot;,&quot;G3&quot;,&quot;G4&quot;,&quot;G5&quot;,&quot;G6&quot;,&quot;G7&quot;,&quot;G8&quot;,&quot;G9&quot;,&quot;G10&quot;,&quot;G11&quot;]
-  ].map(g=&gt;g.filter(id=&gt;cfgStructures[id]));
+  ];
+
+  if(!Array.isArray(cfgRenbanGroups) || cfgRenbanGroups.length===0){
+    cfgRenbanGroups=default3FRenbanGroups.map(g=&gt;g.filter(id=&gt;cfgStructures[id]));
+  }else{
+    const seenRenbanIds=new Set();
+    cfgRenbanGroups=cfgRenbanGroups
+      .filter(Array.isArray)
+      .map(g=&gt;g.filter(id=&gt;{
+        if(!cfgStructures[id] || seenRenbanIds.has(id))return false;
+        seenRenbanIds.add(id);
+        return true;
+      }))
+      .filter(g=&gt;g.length);
+  }
   normalizeAllStructures();
-  saveLayout3F();
 
   
 
@@ -8696,7 +8711,7 @@ function renderRenbanOptions(){
   document.getElementById(&#x27;bulkDeleteModeBtn&#x27;).onclick=()=&gt;{bulkDeleteMode=true;bulkDeleteSelected.clear();manualSelected.clear();bulkDeleteUpdate();renderAll();showToast(&#x27;削除する卓を選択してください&#x27;)};
   document.getElementById(&#x27;bulkDeleteCancel&#x27;).onclick=()=&gt;{bulkDeleteMode=false;bulkDeleteSelected.clear();bulkDeleteUpdate();renderAll()};
   document.getElementById(&#x27;bulkDeleteCommit&#x27;).onclick=bulkDeleteCommit2;
-  rebuildOrders();saveLayout3F();
+  rebuildOrders();
 
 
 
@@ -10814,7 +10829,7 @@ function applyValues(floorId, values){
 }
 
 async function uploadFloor(floorId){
-  if(!signedIn || applyingRemote) return;
+  if(!signedIn || !initialSyncDone || applyingRemote) return;
 
   const values = snapshotFloor(floorId);
   const sig = stable(values);
@@ -10851,6 +10866,7 @@ async function uploadFloor(floorId){
 }
 
 function scheduleUpload(floorId){
+  if(!signedIn || !initialSyncDone || applyingRemote)return;
   const sig = stable(snapshotFloor(floorId));
   pendingLocal[floorId] = sig;
   lastObserved[floorId] = sig;
@@ -10890,6 +10906,7 @@ function stopListeners(){
   Object.keys(pendingLocal).forEach(k=>delete pendingLocal[k]);
   Object.keys(uploadSeq).forEach(k=>delete uploadSeq[k]);
   Object.keys(lastObserved).forEach(k=>delete lastObserved[k]);
+  Object.keys(lastSeen).forEach(k=>delete lastSeen[k]);
 }
 
 async function initRemoteForFloor(floorId){
@@ -10897,20 +10914,44 @@ async function initRemoteForFloor(floorId){
   const snap = await ref.get();
 
   if(!snap.exists){
-    // Firestore is empty for this floor: current device becomes the seed.
-    await uploadFloor(floorId);
-  }else{
-    const data = snap.data() || {};
-    applyValues(floorId, data.values || {});
+    /* Seed only a genuinely empty Firestore document during bootstrap. */
+    const values = snapshotFloor(floorId);
+    await ref.set({
+      values,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      updatedBy: auth.currentUser ? auth.currentUser.uid : null
+    }, {merge:false});
+    applyValues(floorId, values);
+    return values;
   }
 
+  const data = snap.data() || {};
+  const values = data.values || {};
+  applyValues(floorId, values);
+  return values;
+}
+
+function subscribeFloor(floorId){
+  const ref = db.collection("sekifuriSync").doc(floorId);
+
   const unsub = ref.onSnapshot(s=>{
-    if(!signedIn || !s.exists) return;
+    if(!signedIn || !s.exists)return;
 
     const data = s.data() || {};
     const values = data.values || {};
     const remoteSig = stable(values);
     const localSig = stable(snapshotFloor(floorId));
+
+    /* During startup, remote is authoritative.
+       iframe startup writes/default-normalization are never treated as user edits. */
+    if(!initialSyncDone){
+      if(remoteSig !== localSig)applyValues(floorId, values);
+      else{
+        lastSeen[floorId] = remoteSig;
+        lastObserved[floorId] = remoteSig;
+      }
+      return;
+    }
 
     const localIsDirty =
       !!pendingLocal[floorId] ||
@@ -10922,9 +10963,7 @@ async function initRemoteForFloor(floorId){
         lastObserved[floorId] = localSig;
         scheduleUpload(floorId);
       }
-      if(remoteSig === localSig){
-        setStatus("同期中…");
-      }
+      if(remoteSig === localSig)setStatus("同期中…");
       return;
     }
 
@@ -10940,8 +10979,10 @@ async function initRemoteForFloor(floorId){
     console.error("Firestore listener failed", floorId, err);
     setStatus("同期エラー", "error");
   });
+
   unsubs.push(unsub);
 }
+
 
 async function beginSync(user){
   signedIn = true;
@@ -10951,15 +10992,41 @@ async function beginSync(user){
   stopListeners();
 
   try{
+    const remoteBaseline = {};
+
+    /* Pass 1: always load current Firestore state first. */
     for(const floorId of Object.keys(FLOOR_SYNC)){
-      await initRemoteForFloor(floorId);
+      remoteBaseline[floorId] = await initRemoteForFloor(floorId);
     }
+
+    /* Let iframe startup finish while uploads are still blocked. */
+    await new Promise(resolve=>setTimeout(resolve,700));
+
+    /* Pass 2: overwrite any startup-only local drift with the remote baseline. */
+    for(const floorId of Object.keys(FLOOR_SYNC)){
+      applyValues(floorId, remoteBaseline[floorId] || {});
+    }
+
+    await new Promise(resolve=>setTimeout(resolve,350));
+
+    /* Establish a clean baseline before live sync begins. */
+    Object.keys(FLOOR_SYNC).forEach(floorId=>{
+      const sig = stable(remoteBaseline[floorId] || {});
+      lastSeen[floorId] = sig;
+      lastObserved[floorId] = sig;
+      delete pendingLocal[floorId];
+    });
+
+    Object.keys(FLOOR_SYNC).forEach(subscribeFloor);
+
     initialSyncDone = true;
     startLocalPoll();
+
     gate.classList.add("hidden");
     userBar.classList.add("show");
     userText.textContent = user.email || "同期済み";
     dot.className = "online";
+    setStatus("同期済み", "online");
   }catch(e){
     console.error("Initial Firebase sync failed", e);
     errEl.textContent = "同期に失敗しました。Firestore Rules とネット接続を確認してください。";
