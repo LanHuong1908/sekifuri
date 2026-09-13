@@ -2314,7 +2314,14 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
 .table-btn.c6 .cap{background:var(--orange)}
 .table-btn.cbox .cap{background:var(--purple)}
 .table-btn.reserved{background:var(--reserved);border-color:#f59e0b}
-.table-btn.cleaning{background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)}
+.table-btn.cleaning,.physical-table.cleaning{
+ background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)!important;
+ color:#111827!important
+}
+.physical-table.cleaning .phys-seg{
+ background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)!important;
+ color:#111827!important
+}
 .table-btn.used{background:var(--used);border-color:#ef4444}
 
 .pair-card{
@@ -3260,13 +3267,22 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
   }
 
   function markCleaning(id){
-    const group = groupFor(id);
-    const ids = group ? group.ids : [id];
+    const input = Array.isArray(id) ? id : [id];
+
+    /* If any selected member belongs to a manual group, clean the whole group. */
+    const group = appState.groups.find(g =&gt;
+      input.some(x =&gt; g.id === x || g.ids.includes(x))
+    );
+
+    const ids = [...new Set(group ? group.ids : input)];
+
     ids.forEach(x =&gt; {
       delete appState.states[x];
       appState.cleaning[x] = true;
     });
+
     if(group) group.state = &quot;empty&quot;;
+
     saveState();
     renderAll();
     showToast(ids.join(&quot;・&quot;) + &quot; → 清掃待ち&quot;);
@@ -3684,7 +3700,7 @@ function createTableButton(id, capacity){
 
     const total = parts.reduce((sum,p) =&gt; sum + Number(p.cap||0),0);
     const table = document.createElement(&quot;button&quot;);
-    table.className = `physical-table ${group.state || &quot;empty&quot;}`;
+    table.className = `physical-table ${group.ids.some(id=&gt;isCleaning(id)) ? &quot;cleaning&quot; : (group.state || &quot;empty&quot;)}`;
     table.dataset.id = group.id;
     table.style.width = (parts.reduce((s,p)=&gt;s+seatWidth(p.cap,!!p.box),0)*52 + Math.max(0,parts.length-1)*7) + &quot;px&quot;;
 
@@ -5664,7 +5680,14 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
 .table-btn.c6 .cap{background:var(--orange)}
 .table-btn.cbox .cap{background:var(--purple)}
 .table-btn.reserved{background:var(--reserved);border-color:#f59e0b}
-.table-btn.cleaning{background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)}
+.table-btn.cleaning,.physical-table.cleaning{
+ background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)!important;
+ color:#111827!important
+}
+.physical-table.cleaning .phys-seg{
+ background:repeating-linear-gradient(135deg,#f8fafc,#f8fafc 8px,#dbe2ea 8px,#dbe2ea 12px)!important;
+ color:#111827!important
+}
 .table-btn.used{background:var(--used);border-color:#ef4444}
 
 .pair-card{
@@ -6624,13 +6647,22 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
   }
 
   function markCleaning(id){
-    const group = groupFor(id);
-    const ids = group ? group.ids : [id];
+    const input = Array.isArray(id) ? id : [id];
+
+    /* If any selected member belongs to a manual group, clean the whole group. */
+    const group = appState.groups.find(g =&gt;
+      input.some(x =&gt; g.id === x || g.ids.includes(x))
+    );
+
+    const ids = [...new Set(group ? group.ids : input)];
+
     ids.forEach(x =&gt; {
       delete appState.states[x];
       appState.cleaning[x] = true;
     });
+
     if(group) group.state = &quot;empty&quot;;
+
     saveState();
     renderAll();
     showToast(ids.join(&quot;・&quot;) + &quot; → 清掃待ち&quot;);
@@ -7073,7 +7105,7 @@ function createTableButton(id, capacity){
 
     const total = parts.reduce((sum,p) =&gt; sum + Number(p.cap||0),0);
     const table = document.createElement(&quot;button&quot;);
-    table.className = `physical-table ${group.state || &quot;empty&quot;}`;
+    table.className = `physical-table ${group.ids.some(id=&gt;isCleaning(id)) ? &quot;cleaning&quot; : (group.state || &quot;empty&quot;)}`;
     table.dataset.id = group.id;
     table.style.width = (parts.reduce((s,p)=&gt;s+seatWidth(p.cap,!!p.box),0)*52 + Math.max(0,parts.length-1)*7) + &quot;px&quot;;
 
@@ -9180,14 +9212,48 @@ let tables=JSON.parse(JSON.stringify(DEFAULT_TABLES));
 let __loadedLayout=null;
 try{
  __loadedLayout=JSON.parse(localStorage.getItem(LAYOUT_KEY)||&quot;null&quot;);
- if(__loadedLayout&amp;&amp;__loadedLayout.tables){
-  tables=__loadedLayout.tables;
-  if(__loadedLayout.sideMappingVersion!==SIDE_MAPPING_VERSION){
-   Object.values(tables).forEach(t=&gt;{if(t&amp;&amp;t.side)t.side=t.side===&quot;left&quot;?&quot;right&quot;:t.side===&quot;right&quot;?&quot;left&quot;:t.side});
+ if(__loadedLayout&amp;&amp;__loadedLayout.tables&amp;&amp;typeof __loadedLayout.tables===&quot;object&quot;){
+  const savedTables=__loadedLayout.tables;
+  const savedIds=Object.keys(savedTables);
+  const validSaved=savedIds.filter(id=&gt;{
+   const t=savedTables[id];
+   return t &amp;&amp; [&quot;SG&quot;,&quot;KH&quot;,&quot;CD&quot;].includes(t.room) &amp;&amp;
+          [&quot;left&quot;,&quot;right&quot;].includes(t.side) &amp;&amp;
+          Array.isArray(t.parts) &amp;&amp; t.parts.length&gt;0;
+  });
+
+  /*
+    Self-heal only a clearly broken/empty saved layout.
+    Normal partial layouts are preserved exactly, so intentionally deleted tables do not return.
+  */
+  if(savedIds.length&gt;0 &amp;&amp; validSaved.length&gt;0){
+   tables=savedTables;
+   if(__loadedLayout.sideMappingVersion!==SIDE_MAPPING_VERSION){
+    Object.values(tables).forEach(t=&gt;{
+     if(t&amp;&amp;t.side)t.side=t.side===&quot;left&quot;?&quot;right&quot;:t.side===&quot;right&quot;?&quot;left&quot;:t.side
+    });
+   }
+  }else{
+   console.warn(&quot;個室 layout was empty/invalid; restored built-in table layout&quot;);
+   tables=JSON.parse(JSON.stringify(DEFAULT_TABLES));
+   __loadedLayout=null;
   }
  }
-}catch{}
-let data=JSON.parse(localStorage.getItem(KEY)||&#x27;{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{},&quot;cleaning&quot;:{}}&#x27;);
+}catch(e){
+ console.warn(&quot;個室 layout load failed; restored built-in table layout&quot;,e);
+ tables=JSON.parse(JSON.stringify(DEFAULT_TABLES));
+ __loadedLayout=null;
+}
+let data={states:{},groups:[],merged:{},cleaning:{}};
+try{
+ const raw=localStorage.getItem(KEY);
+ if(raw){
+  const parsed=JSON.parse(raw);
+  if(parsed&amp;&amp;typeof parsed===&quot;object&quot;)data=parsed;
+ }
+}catch(e){
+ console.warn(&quot;個室 state load failed; using safe empty operational state&quot;,e);
+}
 data.states||={};data.groups||=[];data.merged||={};data.cleaning||={};
 Object.keys(tables).forEach(id=&gt;{if(tables[id].parts.length&gt;1&amp;&amp;data.merged[id]===undefined)data.merged[id]=true});
 let selectedState=&quot;empty&quot;,people=4,manual=false,selected=new Set(),bulk=false,bulkSelected=new Set(),editingId=null,addMode=false;
@@ -9421,7 +9487,10 @@ const RENBAN_GROUPS={
  &quot;CD:left&quot;:[[&quot;CD5&quot;,&quot;CD6&quot;,&quot;CD7&quot;,&quot;CD8&quot;]]
 };
 try{
- const x=__loadedLayout||JSON.parse(localStorage.getItem(LAYOUT_KEY)||&quot;null&quot;);
+ let x=__loadedLayout;
+ if(!x){
+  try{x=JSON.parse(localStorage.getItem(LAYOUT_KEY)||&quot;null&quot;)}catch{x=null}
+ }
  if(x&amp;&amp;x.renbanGroups&amp;&amp;typeof x.renbanGroups===&quot;object&quot;){
   let groups=x.renbanGroups;
   if(x.sideMappingVersion!==SIDE_MAPPING_VERSION){
@@ -9437,6 +9506,17 @@ try{
   Object.assign(RENBAN_GROUPS,groups);
  }
 }catch{}
+
+/* Remove stale renban members that no longer exist, without changing valid user layout. */
+Object.keys(RENBAN_GROUPS).forEach(key=&gt;{
+ const mm=key.match(/^(SG|KH|CD):(left|right)$/);
+ if(!mm){delete RENBAN_GROUPS[key];return}
+ const room=mm[1],side=mm[2];
+ RENBAN_GROUPS[key]=(RENBAN_GROUPS[key]||[])
+  .map(group=&gt;(group||[]).filter(id=&gt;tables[id]&amp;&amp;tables[id].room===room&amp;&amp;tables[id].side===side))
+  .filter(group=&gt;group.length&gt;0);
+});
+
 cleanupStaleIds();
 function renbanKey(room,side){return room+&quot;:&quot;+side}
 function renbanOptionsFor(room,side){
@@ -9563,8 +9643,85 @@ function physicalCount(ids){
 }
 
 function setUnits(ids,s=selectedState){ids.forEach(id=&gt;{delete data.cleaning[id];s===&quot;empty&quot;?delete data.states[id]:data.states[id]=s});const g=data.groups.find(x=&gt;ids.some(id=&gt;x.ids.includes(id)));if(g)g.state=s;save();renderAll()}
-function markCleaning(ids){(Array.isArray(ids)?ids:[ids]).forEach(id=&gt;{delete data.states[id];data.cleaning[id]=true});save();renderAll()}
-function bindLongPress(btn,ids){let timer=null,held=false,sx=0,sy=0;const begin=(x,y)=&gt;{sx=x;sy=y;held=false;clearTimeout(timer);timer=setTimeout(()=&gt;{if(bulk)return;held=true;markCleaning(ids)},500)};const move=(x,y)=&gt;{if(Math.abs(x-sx)&gt;12||Math.abs(y-sy)&gt;12)clearTimeout(timer)};const end=()=&gt;clearTimeout(timer);btn.addEventListener(&quot;mousedown&quot;,e=&gt;{if(e.button===0)begin(e.clientX,e.clientY)});btn.addEventListener(&quot;mousemove&quot;,e=&gt;move(e.clientX,e.clientY));btn.addEventListener(&quot;mouseup&quot;,end);btn.addEventListener(&quot;mouseleave&quot;,end);btn.addEventListener(&quot;touchstart&quot;,e=&gt;{const t=e.touches[0];begin(t.clientX,t.clientY)},{passive:true});btn.addEventListener(&quot;touchmove&quot;,e=&gt;{const t=e.touches[0];move(t.clientX,t.clientY)},{passive:true});btn.addEventListener(&quot;touchend&quot;,end);btn.addEventListener(&quot;contextmenu&quot;,e=&gt;e.preventDefault())}
+function markCleaning(ids){
+ const input=[...new Set(Array.isArray(ids)?ids:[ids])];
+
+ /* Manual group: long-press means the whole linked group waits for cleaning. */
+ const group=data.groups.find(g=&gt;input.some(id=&gt;g.ids.includes(id)));
+ const targets=group?[...group.ids]:input;
+
+ targets.forEach(id=&gt;{
+  delete data.states[id];
+  data.cleaning[id]=true;
+ });
+
+ if(group)group.state=&quot;empty&quot;;
+
+ save();
+ renderAll();
+ toast(targets.map(displayId).join(&quot;・&quot;)+&quot; 清掃待ち&quot;);
+}
+function bindLongPress(btn,ids){
+ let timer=null,held=false,suppressClick=false,sx=0,sy=0;
+
+ const begin=(x,y)=&gt;{
+  sx=x;sy=y;held=false;suppressClick=false;
+  clearTimeout(timer);
+  timer=setTimeout(()=&gt;{
+   if(bulk)return;
+   held=true;
+   suppressClick=true;
+   markCleaning(ids);
+   try{navigator.vibrate&amp;&amp;navigator.vibrate(25)}catch{}
+  },500);
+ };
+
+ const move=(x,y)=&gt;{
+  if(Math.abs(x-sx)&gt;12||Math.abs(y-sy)&gt;12){
+   clearTimeout(timer);
+   timer=null;
+  }
+ };
+
+ const end=()=&gt;{
+  clearTimeout(timer);
+  timer=null;
+ };
+
+ btn.addEventListener(&quot;mousedown&quot;,e=&gt;{
+  if(e.button===0)begin(e.clientX,e.clientY);
+ });
+ btn.addEventListener(&quot;mousemove&quot;,e=&gt;move(e.clientX,e.clientY));
+ btn.addEventListener(&quot;mouseup&quot;,end);
+ btn.addEventListener(&quot;mouseleave&quot;,end);
+
+ btn.addEventListener(&quot;touchstart&quot;,e=&gt;{
+  const t=e.touches[0];
+  begin(t.clientX,t.clientY);
+ },{passive:true});
+
+ btn.addEventListener(&quot;touchmove&quot;,e=&gt;{
+  const t=e.touches[0];
+  move(t.clientX,t.clientY);
+ },{passive:true});
+
+ btn.addEventListener(&quot;touchend&quot;,e=&gt;{
+  end();
+  if(held)e.preventDefault();
+ },{passive:false});
+
+ btn.addEventListener(&quot;touchcancel&quot;,end);
+
+ btn.addEventListener(&quot;click&quot;,e=&gt;{
+  if(suppressClick){
+   suppressClick=false;
+   e.preventDefault();
+   e.stopImmediatePropagation();
+  }
+ },true);
+
+ btn.addEventListener(&quot;contextmenu&quot;,e=&gt;e.preventDefault());
+}
 
 function validManual(){
  if(selected.size&lt;2)return false;
@@ -9737,7 +9894,8 @@ function tableButton(id,cap){
 }
 function physicalButton(base,cls=&quot;physical&quot;,group=null){
  const ids=group?group.ids:partIds(base),parts=group?ids.map(id=&gt;capOf(id)):tables[base].parts,total=parts.reduce((s,c)=&gt;s+(c===&quot;BOX&quot;?7:Number(c)),0),mainId=group?group.id:base;
- const b=document.createElement(&quot;button&quot;);b.className=`${cls} ${cleaning(mainId)?&quot;cleaning&quot;:group?(group.state||&quot;empty&quot;):state(base)}`;b.style.width=(52*parts.reduce((s,c)=&gt;s+seatWidth(c),0))+&quot;px&quot;;
+ const groupCleaning=group?group.ids.some(id=&gt;cleaning(id)):cleaning(mainId);
+ const b=document.createElement(&quot;button&quot;);b.className=`${cls} ${groupCleaning?&quot;cleaning&quot;:group?(group.state||&quot;empty&quot;):state(base)}`;b.style.width=(52*parts.reduce((s,c)=&gt;s+seatWidth(c),0))+&quot;px&quot;;
  parts.forEach(c=&gt;{const seg=document.createElement(&quot;span&quot;),cc=c===2?&quot;cap2&quot;:c===4?&quot;cap4&quot;:c===6?&quot;cap6&quot;:&quot;capbox&quot;;seg.className=&quot;seg &quot;+cc;seg.style.flex=seatWidth(c);seg.textContent=c===&quot;BOX&quot;?&quot;BOX&quot;:c;b.appendChild(seg)});
  const lab=document.createElement(&quot;span&quot;);lab.className=&quot;phys-label&quot;;lab.innerHTML=`&lt;span&gt;${group?group.ids.map(displayId).join(&quot;・&quot;):displayId(base)}&lt;/span&gt;&lt;small&gt;MAX ${total}名&lt;/small&gt;`;b.appendChild(lab);
  b.onclick=()=&gt;{if(group){setUnits(group.ids);return}if(bulk){bulkSelected.has(base)?bulkSelected.delete(base):bulkSelected.add(base);renderAll();return}if(clickTimers.has(base))clearTimeout(clickTimers.get(base));clickTimers.set(base,setTimeout(()=&gt;{clickTimers.delete(base);manual?toggleSelect(base):setUnits([base])},220))};b.ondblclick=e=&gt;{if(group)return;if(clickTimers.has(base)){clearTimeout(clickTimers.get(base));clickTimers.delete(base)}e.preventDefault();quickRename(base,b)};if(bulk&amp;&amp;bulkSelected.has(base))b.classList.add(&quot;bulk-selected&quot;);bindLongPress(b,group?group.ids:base);return b
@@ -9927,7 +10085,64 @@ function roomAvailableCapacity(room){
  return total;
 }
 
-function renderRooms(){const root=document.getElementById(&quot;rooms&quot;);root.innerHTML=&quot;&quot;;ROOM_ORDER.forEach(room=&gt;{const sec=document.createElement(&quot;section&quot;);sec.className=&quot;room-card&quot;;sec.id=&quot;room-&quot;+room;sec.innerHTML=`&lt;div class=room-title&gt;&lt;b&gt;${room}&lt;/b&gt;&lt;span&gt;受入可能 ${roomAvailableCapacity(room)}名&lt;/span&gt;&lt;/div&gt;`;sec.appendChild(renderLane(room,&quot;left&quot;));sec.appendChild(renderLane(room,&quot;right&quot;));root.appendChild(sec)})}
+function renderRooms(){
+ const root=document.getElementById(&quot;rooms&quot;);
+ if(!root)return;
+
+ const currentIds=Object.keys(tables||{});
+ if(currentIds.length===0){
+  console.warn(&quot;個室 tables became empty at render time; restoring default layout&quot;);
+  tables=JSON.parse(JSON.stringify(DEFAULT_TABLES));
+  saveLayout();
+ }
+
+ root.innerHTML=&quot;&quot;;
+ ROOM_ORDER.forEach(room=&gt;{
+  const sec=document.createElement(&quot;section&quot;);
+  sec.className=&quot;room-card&quot;;
+  sec.id=&quot;room-&quot;+room;
+
+  let available=0;
+  try{available=roomAvailableCapacity(room)}catch(e){console.error(&quot;capacity&quot;,room,e)}
+  sec.innerHTML=`&lt;div class=room-title&gt;&lt;b&gt;${room}&lt;/b&gt;&lt;span&gt;受入可能 ${available}名&lt;/span&gt;&lt;/div&gt;`;
+
+  [&quot;left&quot;,&quot;right&quot;].forEach(side=&gt;{
+   try{
+    sec.appendChild(renderLane(room,side));
+   }catch(e){
+    console.error(&quot;lane render&quot;,room,side,e);
+    /* Fallback: still show the physical tables on this side. */
+    const lane=document.createElement(&quot;div&quot;);
+    lane.className=&quot;lane&quot;;
+    lane.innerHTML=`&lt;div class=lane-title&gt;&lt;span&gt;${side===&quot;left&quot;?&quot;左列&quot;:&quot;右列&quot;}&lt;/span&gt;&lt;/div&gt;`;
+    const strip=document.createElement(&quot;div&quot;);
+    strip.className=&quot;table-strip&quot;;
+    laneBases(room,side).forEach(base=&gt;{
+     try{
+      const wrap=document.createElement(&quot;div&quot;);
+      wrap.className=&quot;table-wrap&quot;;
+      wrap.style.width=(52*tables[base].parts.reduce((s,c)=&gt;s+seatWidth(c),0))+&quot;px&quot;;
+      if(tables[base].parts.length&gt;1 &amp;&amp; data.merged[base]!==false){
+       wrap.appendChild(physicalButton(base));
+      }else if(tables[base].parts.length&gt;1){
+       const inner=document.createElement(&quot;div&quot;);
+       inner.style.display=&quot;flex&quot;;
+       inner.style.gap=&quot;2px&quot;;
+       activeIds(base).forEach(id=&gt;inner.appendChild(tableButton(id,capOf(id))));
+       wrap.appendChild(inner);
+      }else{
+       wrap.appendChild(tableButton(base,capOf(base)));
+      }
+      strip.appendChild(wrap);
+     }catch(innerErr){console.error(&quot;table fallback&quot;,base,innerErr)}
+    });
+    lane.appendChild(strip);
+    sec.appendChild(lane);
+   }
+  });
+  root.appendChild(sec);
+ });
+}
 
 const TYPES=[{k:&quot;2&quot;,label:&quot;2人卓&quot;,cap:2},{k:&quot;4&quot;,label:&quot;4人卓&quot;,cap:4},{k:&quot;6&quot;,label:&quot;6人卓&quot;,cap:6},{k:&quot;BOX&quot;,label:&quot;BOX&quot;,cap:&quot;BOX&quot;}];let counts={&quot;2&quot;:1,&quot;4&quot;:0,&quot;6&quot;:0,&quot;BOX&quot;:0};
 function nextTableNameForRoom(room){
@@ -10372,7 +10587,22 @@ function renderBulk(){
 
  document.getElementById(&quot;bulkCommit&quot;).disabled=bulkSelected.size===0;
 }
-function renderAll(){renderSummary();renderPeople();renderOptions();renderManual();renderRooms();renderBulk()}
+function renderAll(){
+ /* Render the actual room/table map before recommendations.
+    This prevents an error in recommendation calculation from hiding all tables below. */
+ const steps=[
+  [&quot;summary&quot;,renderSummary],
+  [&quot;people&quot;,renderPeople],
+  [&quot;manual&quot;,renderManual],
+  [&quot;rooms&quot;,renderRooms],
+  [&quot;options&quot;,renderOptions],
+  [&quot;bulk&quot;,renderBulk]
+ ];
+ steps.forEach(([name,fn])=&gt;{
+  try{fn()}
+  catch(e){console.error(&quot;個室 render error:&quot;,name,e)}
+ });
+}
 document.querySelectorAll(&quot;#roomJumpRow button&quot;).forEach(btn=&gt;{
  btn.addEventListener(&quot;click&quot;,()=&gt;{
   const room=btn.dataset.room;
@@ -10504,7 +10734,10 @@ let applyingRemote = false;
 let pollTimer = null;
 let writeTimers = {};
 let unsubs = [];
-const lastSeen = {};
+const lastSeen = {};       // last remote/confirmed signature
+const lastObserved = {};   // last local signature observed by the poller
+const pendingLocal = {};   // local signature waiting to be written/acknowledged
+const uploadSeq = {};      // guards overlapping writes
 
 const gate = document.getElementById("fbGate");
 const emailEl = document.getElementById("fbEmail");
@@ -10570,7 +10803,10 @@ function applyValues(floorId, values){
         changed = true;
       }
     });
-    lastSeen[floorId] = stable(snapshotFloor(floorId));
+    const sig = stable(snapshotFloor(floorId));
+    lastSeen[floorId] = sig;
+    lastObserved[floorId] = sig;
+    delete pendingLocal[floorId];
   }finally{
     applyingRemote = false;
   }
@@ -10579,16 +10815,35 @@ function applyValues(floorId, values){
 
 async function uploadFloor(floorId){
   if(!signedIn || applyingRemote) return;
+
   const values = snapshotFloor(floorId);
   const sig = stable(values);
-  lastSeen[floorId] = sig;
+  const seq = (uploadSeq[floorId] || 0) + 1;
+  uploadSeq[floorId] = seq;
+  pendingLocal[floorId] = sig;
+  lastObserved[floorId] = sig;
+  setStatus("同期中…");
+
   try{
     await db.collection("sekifuriSync").doc(floorId).set({
       values,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedBy: auth.currentUser ? auth.currentUser.uid : null
     }, {merge:false});
-    setStatus("同期済み", "online");
+
+    if(uploadSeq[floorId] !== seq) return;
+
+    const currentSig = stable(snapshotFloor(floorId));
+    if(currentSig === sig){
+      lastSeen[floorId] = sig;
+      lastObserved[floorId] = sig;
+      delete pendingLocal[floorId];
+      setStatus("同期済み", "online");
+    }else{
+      pendingLocal[floorId] = currentSig;
+      lastObserved[floorId] = currentSig;
+      scheduleUpload(floorId);
+    }
   }catch(e){
     console.error("Firestore write failed", floorId, e);
     setStatus("同期エラー", "error");
@@ -10596,6 +10851,9 @@ async function uploadFloor(floorId){
 }
 
 function scheduleUpload(floorId){
+  const sig = stable(snapshotFloor(floorId));
+  pendingLocal[floorId] = sig;
+  lastObserved[floorId] = sig;
   clearTimeout(writeTimers[floorId]);
   writeTimers[floorId] = setTimeout(()=>uploadFloor(floorId), 450);
 }
@@ -10604,18 +10862,23 @@ function startLocalPoll(){
   if(pollTimer) clearInterval(pollTimer);
   pollTimer = setInterval(()=>{
     if(!signedIn || !initialSyncDone || applyingRemote) return;
+
     Object.keys(FLOOR_SYNC).forEach(floorId=>{
       const sig = stable(snapshotFloor(floorId));
-      if(lastSeen[floorId] === undefined){
-        lastSeen[floorId] = sig;
+
+      if(lastObserved[floorId] === undefined){
+        lastObserved[floorId] = sig;
+        if(lastSeen[floorId] === undefined) lastSeen[floorId] = sig;
         return;
       }
-      if(sig !== lastSeen[floorId]){
-        lastSeen[floorId] = sig;
+
+      if(sig !== lastObserved[floorId]){
+        lastObserved[floorId] = sig;
+        pendingLocal[floorId] = sig;
         scheduleUpload(floorId);
       }
     });
-  }, 650);
+  }, 250);
 }
 
 function stopListeners(){
@@ -10624,6 +10887,9 @@ function stopListeners(){
   if(pollTimer){clearInterval(pollTimer);pollTimer=null}
   Object.values(writeTimers).forEach(t=>clearTimeout(t));
   writeTimers = {};
+  Object.keys(pendingLocal).forEach(k=>delete pendingLocal[k]);
+  Object.keys(uploadSeq).forEach(k=>delete uploadSeq[k]);
+  Object.keys(lastObserved).forEach(k=>delete lastObserved[k]);
 }
 
 async function initRemoteForFloor(floorId){
@@ -10640,16 +10906,34 @@ async function initRemoteForFloor(floorId){
 
   const unsub = ref.onSnapshot(s=>{
     if(!signedIn || !s.exists) return;
+
     const data = s.data() || {};
     const values = data.values || {};
     const remoteSig = stable(values);
     const localSig = stable(snapshotFloor(floorId));
+
+    const localIsDirty =
+      !!pendingLocal[floorId] ||
+      (lastSeen[floorId] !== undefined && localSig !== lastSeen[floorId]);
+
+    if(localIsDirty){
+      if(!pendingLocal[floorId]){
+        pendingLocal[floorId] = localSig;
+        lastObserved[floorId] = localSig;
+        scheduleUpload(floorId);
+      }
+      if(remoteSig === localSig){
+        setStatus("同期中…");
+      }
+      return;
+    }
 
     if(remoteSig !== localSig){
       applyValues(floorId, values);
       setStatus("他の端末から更新", "online");
     }else{
       lastSeen[floorId] = localSig;
+      lastObserved[floorId] = localSig;
       setStatus("同期済み", "online");
     }
   }, err=>{
