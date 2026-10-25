@@ -308,7 +308,7 @@ main{max-width:980px;margin:auto;padding:7px}.card,.map-card{background:#fff;bor
 }
 
 
-.physical-merged.selected,.physical-group.selected{outline:4px solid #2563eb!important;outline-offset:2px!important;box-shadow:0 0 0 2px white!important}
+.physical-merged.selected,.physical-group.selected{outline:4px solid #2563eb!important;outline-offset:3px!important;box-shadow:0 0 0 2px white!important;z-index:2}
 &lt;/style&gt;&lt;/head&gt;
 &lt;body&gt;&lt;div class=&quot;fixed&quot;&gt;&lt;div class=&quot;fixed-inner&quot;&gt;&lt;div class=&quot;title&quot;&gt;
 &lt;div class=&quot;config-actions&quot;&gt;&lt;button class=&quot;config-btn&quot; id=&quot;openEdit&quot;&gt;卓編集&lt;/button&gt;&lt;button class=&quot;config-btn add&quot; id=&quot;openAdd&quot;&gt;＋卓追加&lt;/button&gt;&lt;button class=&quot;config-btn&quot; id=&quot;bulkDeleteModeBtn&quot; type=&quot;button&quot;&gt;卓削除&lt;/button&gt;&lt;/div&gt;
@@ -2719,6 +2719,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
 .renban-cluster-grid .composite-card,.renban-cluster-grid .pair-card{flex:0 0 auto}
 #largeManualSection{display:none!important}
 
+.pair-card.merged .table-btn.manual-selected,.table-btn.physical.manual-selected{outline:4px solid #2563eb!important;outline-offset:2px!important;box-shadow:0 0 0 2px #fff!important;position:relative;z-index:2}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -3316,7 +3317,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
   let cfgEditingId=null,cfgEditCounts={},cfgEditMembers=[],cfgAddCounts={&quot;2&quot;:1,&quot;4&quot;:0,&quot;6&quot;:0,&quot;BOX&quot;:0},cfgAddMembers=[];
 
   function cfgIdentityIds(){
-    return Object.keys(cfgStructures).sort(cfgCompare);
+    return Object.keys(cfgStructures).sort((a,b)=&gt;{ const order={&quot;8&quot;:0,C:1,S:2,&quot;9&quot;:3,D:4}; const aa=cfgAreaOf(a),bb=cfgAreaOf(b); if(aa!==bb)return (order[aa]??99)-(order[bb]??99); const na=cfgNum(a),nb=cfgNum(b); if(na!==nb)return na-nb; return String(a).localeCompare(String(b),&quot;ja&quot;,{numeric:true}); });
   }
   function cfgRenderRows(rootId,c,rerender){
     const root=document.getElementById(rootId);root.innerHTML=&quot;&quot;;
@@ -3621,7 +3622,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
 function createTableButton(id, capacity){
     const btn = document.createElement(&quot;button&quot;);
     btn.className = &quot;table-btn &quot; + capacityClass(capacity) + &quot; &quot; + (isCleaning(id) ? &quot;cleaning&quot; : getStatus(id));
-    if(manualSelected.has(id)) btn.classList.add(&quot;manual-selected&quot;);
+    if(manualSelected.has(id) || (id.endsWith(&quot;AB&quot;) &amp;&amp; manualSelected.has(id.slice(0,-2)))) btn.classList.add(&quot;manual-selected&quot;);
 
     if(!cfgPhysicalize(btn,id,capacity,id)){
       btn.innerHTML = (isCleaning(id) ? &quot;清 &quot; : &quot;&quot;) + id + &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
@@ -3774,6 +3775,7 @@ function createTableButton(id, capacity){
     if(appState.merged[prefix]){
       wrap.className = &quot;pair-card merged&quot;;
       const mergedBtn=createTableButton(prefix + &quot;AB&quot;,4);
+       if(manualSelected.has(prefix))mergedBtn.classList.add(&quot;manual-selected&quot;);
       const ov=mergedBtn.querySelector(&quot;.phys-overlay span&quot;);if(ov)ov.textContent=prefix;
       wrap.appendChild(mergedBtn);
 
@@ -6071,6 +6073,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
 .renban-cluster-grid .composite-card,.renban-cluster-grid .pair-card{flex:0 0 auto}
 #largeManualSection{display:none!important}
 
+.pair-card.merged .table-btn.manual-selected,.table-btn.physical.manual-selected{outline:4px solid #2563eb!important;outline-offset:2px!important;box-shadow:0 0 0 2px #fff!important;position:relative;z-index:2}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -6682,7 +6685,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
   let cfgEditingId=null,cfgEditCounts={},cfgEditMembers=[],cfgAddCounts={&quot;2&quot;:1,&quot;4&quot;:0,&quot;6&quot;:0,&quot;BOX&quot;:0},cfgAddMembers=[];
 
   function cfgIdentityIds(){
-    return Object.keys(cfgStructures).sort(cfgCompare);
+    return Object.keys(cfgStructures).sort((a,b)=&gt;{ const order={E:0,F:1,G:2}; const aa=cfgAreaOf(a),bb=cfgAreaOf(b); if(aa!==bb)return (order[aa]??99)-(order[bb]??99); const na=cfgNum(a),nb=cfgNum(b); if(na!==nb)return na-nb; return String(a).localeCompare(String(b),&quot;ja&quot;,{numeric:true}); });
   }
   function cfgRenderRows(rootId,c,rerender){
     const root=document.getElementById(rootId);root.innerHTML=&quot;&quot;;
@@ -7012,7 +7015,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
 function createTableButton(id, capacity){
     const btn = document.createElement(&quot;button&quot;);
     btn.className = &quot;table-btn &quot; + capacityClass(capacity) + &quot; &quot; + (isCleaning(id) ? &quot;cleaning&quot; : getStatus(id));
-    if(manualSelected.has(id)) btn.classList.add(&quot;manual-selected&quot;);
+    if(manualSelected.has(id) || (id.endsWith(&quot;AB&quot;) &amp;&amp; manualSelected.has(id.slice(0,-2)))) btn.classList.add(&quot;manual-selected&quot;);
 
     if(!cfgPhysicalize(btn,id,capacity,id)){
       btn.innerHTML = (isCleaning(id) ? &quot;清 &quot; : &quot;&quot;) + id + &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
@@ -7165,6 +7168,7 @@ function createTableButton(id, capacity){
     if(appState.merged[prefix]){
       wrap.className = &quot;pair-card merged&quot;;
       const mergedBtn=createTableButton(prefix + &quot;AB&quot;,4);
+       if(manualSelected.has(prefix))mergedBtn.classList.add(&quot;manual-selected&quot;);
       const ov=mergedBtn.querySelector(&quot;.phys-overlay span&quot;);if(ov)ov.textContent=prefix;
       wrap.appendChild(mergedBtn);
 
@@ -9120,6 +9124,7 @@ main{max-width:980px;margin:auto;padding:7px}.card,.room-card{background:#fff;bo
   outline:none;
 }
 
+.physical.selected,.group.selected{outline:4px solid #2563eb!important;outline-offset:3px!important;box-shadow:0 0 0 2px #fff!important;z-index:2}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -9878,7 +9883,7 @@ function tableButton(id,cap){
 function physicalButton(base,cls=&quot;physical&quot;,group=null){
  const ids=group?group.ids:partIds(base),parts=group?ids.map(id=&gt;capOf(id)):tables[base].parts,total=parts.reduce((s,c)=&gt;s+(c===&quot;BOX&quot;?7:Number(c)),0),mainId=group?group.id:base;
  const groupCleaning=group?group.ids.some(id=&gt;cleaning(id)):cleaning(mainId);
- const b=document.createElement(&quot;button&quot;);b.className=`${cls} ${groupCleaning?&quot;cleaning&quot;:group?(group.state||&quot;empty&quot;):state(base)}`;b.style.width=(52*parts.reduce((s,c)=&gt;s+seatWidth(c),0))+&quot;px&quot;;
+ const b=document.createElement(&quot;button&quot;);b.className=`${cls} ${groupCleaning?&quot;cleaning&quot;:group?(group.state||&quot;empty&quot;):state(base)} ${!group&amp;&amp;selected.has(base)?&quot;selected&quot;:&quot;&quot;}`;b.style.width=(52*parts.reduce((s,c)=&gt;s+seatWidth(c),0))+&quot;px&quot;;
  parts.forEach(c=&gt;{const seg=document.createElement(&quot;span&quot;),cc=c===2?&quot;cap2&quot;:c===4?&quot;cap4&quot;:c===6?&quot;cap6&quot;:&quot;capbox&quot;;seg.className=&quot;seg &quot;+cc;seg.style.flex=seatWidth(c);seg.textContent=c===&quot;BOX&quot;?&quot;BOX&quot;:c;b.appendChild(seg)});
  const lab=document.createElement(&quot;span&quot;);lab.className=&quot;phys-label&quot;;lab.innerHTML=`&lt;span&gt;${group?group.ids.map(displayId).join(&quot;・&quot;):displayId(base)}&lt;/span&gt;&lt;small&gt;MAX ${total}名&lt;/small&gt;`;b.appendChild(lab);
  b.onclick=()=&gt;{if(group){setUnits(group.ids);return}if(bulk){bulkSelected.has(base)?bulkSelected.delete(base):bulkSelected.add(base);renderAll();return}if(clickTimers.has(base))clearTimeout(clickTimers.get(base));clickTimers.set(base,setTimeout(()=&gt;{clickTimers.delete(base);manual?toggleSelect(base):setUnits([base])},220))};b.ondblclick=e=&gt;{if(group)return;if(clickTimers.has(base)){clearTimeout(clickTimers.get(base));clickTimers.delete(base)}e.preventDefault();quickRename(base,b)};if(bulk&amp;&amp;bulkSelected.has(base))b.classList.add(&quot;bulk-selected&quot;);bindLongPress(b,group?group.ids:base);return b
