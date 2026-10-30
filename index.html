@@ -2057,6 +2057,10 @@ document.getElementById(&quot;manualToggle&quot;).onclick=()=&gt;{manual=!manual
 document.getElementById(&quot;manualClear&quot;).onclick=()=&gt;{selected.clear();renderAll()};
 document.getElementById(&quot;manualConfirm&quot;).onclick=()=&gt;{if(!validManual()){toast(&quot;隣り合う卓を選択してください&quot;);return}const ids=[...selected].sort((a,b)=&gt;{const row=currentRows().find(r=&gt;r.some(u=&gt;u.id===a));return row.findIndex(u=&gt;u.id===a)-row.findIndex(u=&gt;u.id===b)});createGroup(ids);manual=false;selected.clear();renderAll()};
 document.getElementById(&quot;reset&quot;).onclick=()=&gt;{
+ const resetPin=prompt(&quot;リセットするには6桁のPINを入力してください&quot;);
+ if(resetPin===null)return;
+ if(resetPin!==&quot;251291&quot;){alert(&quot;PINが違います。リセットは実行されませんでした。&quot;);return;}
+ if(!confirm(&quot;本当にリセットしますか？\nこのフロアの席状況・連結状態が初期化されます。&quot;))return;
  data={states:{},groups:[],merged:{},cleaning:{}};
  for(const c of CONFIG.composites)data.merged[c.id]=true;
  manual=false;selected.clear();save();renderAll();toast(&quot;初期状態に戻しました&quot;)
@@ -5361,6 +5365,10 @@ function renderRenbanOptions(){
   });
 
   document.getElementById(&quot;resetBtn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+ const resetPin=prompt(&quot;リセットするには6桁のPINを入力してください&quot;);
+ if(resetPin===null)return;
+ if(resetPin!==&quot;251291&quot;){alert(&quot;PINが違います。リセットは実行されませんでした。&quot;);return;}
+ if(!confirm(&quot;本当にリセットしますか？\nこのフロアの席状況・連結状態が初期化されます。&quot;))return;
 appState = {states:{}, merged:{}, groups:[], cleaning:{}};
     Object.keys(cfgStructures).forEach(id=&gt;{if(isCompositeIdentity(id))appState.merged[id]=true});
     selectedStatus = &quot;reserved&quot;;
@@ -8938,6 +8946,10 @@ const n=cfgNum(base);
   });
 
   document.getElementById(&quot;resetBtn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+ const resetPin=prompt(&quot;リセットするには6桁のPINを入力してください&quot;);
+ if(resetPin===null)return;
+ if(resetPin!==&quot;251291&quot;){alert(&quot;PINが違います。リセットは実行されませんでした。&quot;);return;}
+ if(!confirm(&quot;本当にリセットしますか？\nこのフロアの席状況・連結状態が初期化されます。&quot;))return;
 appState = {states:{}, merged:{}, groups:[], cleaning:{}};
     Object.keys(cfgStructures).forEach(id=&gt;{
       if(isCompositeIdentity(id))appState.merged[id]=true;
@@ -10650,6 +10662,10 @@ document.getElementById(&quot;bulkCommit&quot;).onclick=e=&gt;{
  deleteSelected();
 };
 document.getElementById(&quot;reset&quot;).onclick=()=&gt;{
+ const resetPin=prompt(&quot;リセットするには6桁のPINを入力してください&quot;);
+ if(resetPin===null)return;
+ if(resetPin!==&quot;251291&quot;){alert(&quot;PINが違います。リセットは実行されませんでした。&quot;);return;}
+ if(!confirm(&quot;本当にリセットしますか？\nこのフロアの席状況・連結状態が初期化されます。&quot;))return;
  data={states:{},groups:[],merged:{},cleaning:{}};
 
  /* Keep the edited room/table/renban layout, but restore operational state. */
