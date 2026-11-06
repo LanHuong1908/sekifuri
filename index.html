@@ -2909,7 +2909,6 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
   const cfgBaseRoute = [
     &quot;80&quot;,&quot;81&quot;,&quot;82&quot;,&quot;83&quot;,&quot;84&quot;,&quot;85&quot;,&quot;86&quot;,&quot;87&quot;,&quot;88&quot;,
     &quot;C1&quot;,&quot;C2&quot;,&quot;C3&quot;,&quot;C4&quot;,&quot;C5&quot;,&quot;C6&quot;,&quot;C7&quot;,&quot;C8&quot;,
-    &quot;S1&quot;,&quot;S2&quot;,&quot;S3&quot;,&quot;S4&quot;,&quot;S5&quot;,
     &quot;90&quot;,&quot;91&quot;,&quot;92&quot;,&quot;93&quot;,&quot;94&quot;,&quot;95&quot;,&quot;96&quot;,&quot;97&quot;,&quot;98&quot;,&quot;99&quot;,&quot;100&quot;,&quot;101&quot;,
     &quot;D1&quot;,&quot;D2&quot;,&quot;D3&quot;,&quot;D4&quot;,&quot;D5&quot;,&quot;D6&quot;,&quot;D7&quot;,&quot;D8&quot;,&quot;D9&quot;,&quot;D10&quot;,&quot;D11&quot;
   ];
@@ -3012,6 +3011,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
     同じ列の中では番号の小さい卓から先に表示する。
   */
   const recommendationRoute = [
+    &quot;S1&quot;,&quot;S2&quot;,&quot;S3&quot;,&quot;S4&quot;,&quot;S5&quot;,
     &quot;80&quot;,&quot;81&quot;,
     &quot;82A&quot;,&quot;82B&quot;,&quot;82AB&quot;,&quot;83A&quot;,&quot;83B&quot;,&quot;83AB&quot;,&quot;84A&quot;,&quot;84B&quot;,&quot;84AB&quot;,
     &quot;85A&quot;,&quot;85B&quot;,&quot;85AB&quot;,&quot;86A&quot;,&quot;86B&quot;,&quot;86AB&quot;,&quot;87A&quot;,&quot;87B&quot;,&quot;87AB&quot;,&quot;88A&quot;,&quot;88B&quot;,&quot;88AB&quot;,
@@ -4575,6 +4575,15 @@ function renderRenbanOptions(){
           a.ids.reduce((sum,id)=&gt;sum+physicalCountForId(id),0) -
           b.ids.reduce((sum,id)=&gt;sum+physicalCountForId(id),0);
         if(physicalDiff)return physicalDiff;
+
+        /* For 2名, use the operational seating route before renban MAX:
+           2F S / 3F F first; when 82/83 are already split, use A then B
+           from the same original table before moving to the next one.
+           This never splits or joins a table automatically. */
+        if(requested === 2){
+          const routeDiff=compareRecommendationRoute(a,b);
+          if(routeDiff)return routeDiff;
+        }
 
         /* Then: preserve MAX capacities across all remaining vacant runs. */
         const maxDiff=compareRemainingMaxProfiles(
@@ -8015,6 +8024,15 @@ function renderRenbanOptions(){
           a.ids.reduce((sum,id)=&gt;sum+physicalCountForId(id),0) -
           b.ids.reduce((sum,id)=&gt;sum+physicalCountForId(id),0);
         if(physicalDiff)return physicalDiff;
+
+        /* For 2名, use the operational seating route before renban MAX:
+           2F S / 3F F first; when 82/83 are already split, use A then B
+           from the same original table before moving to the next one.
+           This never splits or joins a table automatically. */
+        if(requested === 2){
+          const routeDiff=compareRecommendationRoute(a,b);
+          if(routeDiff)return routeDiff;
+        }
 
         /* Then: preserve MAX capacities across all remaining vacant runs. */
         const maxDiff=compareRemainingMaxProfiles(
