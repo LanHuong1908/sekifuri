@@ -1,4 +1,5 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Sekifuri ALL FINAL</title><style>
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>Sekifuri ALL FINAL</title><style>
 :root{--bg:#f3f4f6;--line:#d1d5db;--accent:#2563eb;--text:#111827}*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;color:var(--text);overflow:hidden}#allShell{height:100dvh;display:flex;flex-direction:column}#allNav{flex:0 0 auto;display:flex;gap:5px;padding:6px;background:rgba(243,244,246,.99);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.08);z-index:10}#allNav button{flex:1;border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:7px 6px;font-size:12px;font-weight:950}#allNav button.active{border-color:var(--accent);outline:2px solid var(--accent);background:#eff6ff;color:#1d4ed8}#frameWrap{position:relative;flex:1;min-height:0}.app-frame{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:#fff}.app-frame.active{display:block}@media(max-width:430px){#allNav{gap:3px;padding:4px}#allNav button{padding:6px 3px;font-size:11px}}
 /* ===== Firebase shared sync ===== */
 #fbGate{
@@ -42,28 +43,28 @@
 
 </style></head><body>
 <div id="fbGate">
-  <div class="fb-card">
-    <h2>Sekifuri ログイン</h2>
-    <p>2台で同じ席状況を共有するため、Firebaseの登録済みアカウントでログインしてください。</p>
-    <div class="fb-field">
-      <label>Email</label>
-      <input id="fbEmail" type="email" autocomplete="username" placeholder="email@example.com">
-    </div>
-    <div class="fb-field">
-      <label>Password</label>
-      <input id="fbPassword" type="password" autocomplete="current-password">
-    </div>
-    <button id="fbLoginBtn" type="button">ログイン</button>
-    <div id="fbError"></div>
-    <div id="fbSyncState">Firebase に接続しています…</div>
-  </div>
+<div class="fb-card">
+<h2>Sekifuri ログイン</h2>
+<p>2台で同じ席状況を共有するため、Firebaseの登録済みアカウントでログインしてください。</p>
+<div class="fb-field">
+<label>Email</label>
+<input autocomplete="username" id="fbEmail" placeholder="email@example.com" type="email"/>
+</div>
+<div class="fb-field">
+<label>Password</label>
+<input autocomplete="current-password" id="fbPassword" type="password"/>
+</div>
+<button id="fbLoginBtn" type="button">ログイン</button>
+<div id="fbError"></div>
+<div id="fbSyncState">Firebase に接続しています…</div>
+</div>
 </div>
 <div id="fbUserBar">
-  <span id="fbDot"></span>
-  <span id="fbUserText">同期</span>
-  <button id="fbLogoutBtn" type="button">ログアウト</button>
+<span id="fbDot"></span>
+<span id="fbUserText">同期</span>
+<button id="fbLogoutBtn" type="button">ログアウト</button>
 </div>
-<div id="allShell"><nav id="allNav"><button data-index="0" class="active">1F</button><button data-index="1">2F</button><button data-index="2">3F</button><button data-index="3">個室</button></nav><div id="frameWrap"><iframe class="app-frame active" data-index="0" title="1F" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!DOCTYPE html&gt;
+<div id="allShell"><nav id="allNav"><button class="active" data-index="0">1F</button><button data-index="1">2F</button><button data-index="2">3F</button><button data-index="3">個室</button></nav><div id="frameWrap"><iframe class="app-frame active" data-index="0" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!DOCTYPE html&gt;
 
 &lt;html lang=&quot;ja&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;/&gt;&lt;meta content=&quot;width=device-width,initial-scale=1,viewport-fit=cover&quot; name=&quot;viewport&quot;/&gt;&lt;title&gt;1F 席振り 清掃待ちテスト&lt;/title&gt;&lt;style&gt;
 :root{--bg:#f4f6f8;--card:#fff;--line:#d5d9df;--text:#17202a;--muted:#667085;--empty:#fff;--reserved:#ffe49a;--used:#ef6b73;--cleaning:#dbe2ea;--accent:#2563eb;--sel:#dbeafe;--empty2:#eadcff;--empty4:#dcecff;--empty6:#d9f3e4}
@@ -313,6 +314,12 @@ main{max-width:980px;margin:auto;padding:7px}.card,.map-card{background:#fff;bor
 
 /* Keep manual selection outline visible within physical table bounds. */
 .physical-merged.selected,.physical-group.selected{outline:4px solid #2563eb!important;outline-offset:-4px!important;box-shadow:inset 0 0 0 2px #fff!important;position:relative;z-index:3}
+
+/* MAX appears alongside its own physical row, not in the top summary. */
+.row-max-on-map{align-self:center;justify-self:start;white-space:nowrap;
+ padding:5px 7px;background:#eef6ff;border:1px solid #93c5fd;
+ border-radius:7px;font-size:11px;font-weight:900;color:#1e40af;z-index:1}
+.row-max-on-map b{font-size:14px}
 &lt;/style&gt;&lt;/head&gt;
 &lt;body&gt;&lt;div class=&quot;fixed&quot;&gt;&lt;div class=&quot;fixed-inner&quot;&gt;&lt;div class=&quot;title&quot;&gt;
 &lt;div class=&quot;config-actions&quot;&gt;&lt;button class=&quot;config-btn&quot; id=&quot;openEdit&quot;&gt;卓編集&lt;/button&gt;&lt;button class=&quot;config-btn add&quot; id=&quot;openAdd&quot;&gt;＋卓追加&lt;/button&gt;&lt;button class=&quot;config-btn&quot; id=&quot;bulkDeleteModeBtn&quot; type=&quot;button&quot;&gt;卓削除&lt;/button&gt;&lt;/div&gt;
@@ -1015,7 +1022,7 @@ document.getElementById(&quot;bulkDeleteModeBtn&quot;).onclick=bulkDeleteStart;
 document.getElementById(&quot;bulkDeleteCancel&quot;).onclick=bulkDeleteCancel;
 document.getElementById(&quot;bulkDeleteCommit&quot;).onclick=bulkDeleteCommit;
 
-let data=JSON.parse(localStorage.getItem(KEY)||&#x27;{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{}}&#x27;);
+let data=JSON.parse(localStorage.getItem(KEY)||'{&quot;states&quot;:{},&quot;groups&quot;:[],&quot;merged&quot;:{}}');
 data.states||={}; data.groups||=[]; data.merged||={}; data.cleaning||={};
 for(const c of CONFIG.composites) if(data.merged[c.id]===undefined)data.merged[c.id]=true;
 let selectedState=&quot;empty&quot;, people=4, manual=false, selected=new Set();
@@ -1693,10 +1700,11 @@ function candidates(){
    // An already assembled table matching the party size is harder to split.
    // Prefer it before considering the remaining contiguous MAX capacity.
    Number(b.existingReadyUnit)-Number(a.existingReadyUnit) ||
-   // MAX is evaluated before wheelchair-row preference; the first row is only a tie-breaker.
+   b.remainMax-a.remainMax ||
+   // Keep the wheelchair row last among options preserving the same MAX.
+   Number(a.rowIndex===0)-Number(b.rowIndex===0) ||
    compareRemainingMaxProfiles(a.remainingProfile,b.remainingProfile) ||
    a.physicalCount-b.physicalCount ||
-   Number(a.rowIndex===0)-Number(b.rowIndex===0) ||
    a.rowIndex-b.rowIndex ||
    a.start-b.start;
 
@@ -1729,14 +1737,6 @@ function createGroup(ids){
  }
 
  expanded=[...new Set(expanded)];
-
- // Aisles separate rows: never create a combined group across row keys.
- const unitsById=unitMap();
- if(new Set(expanded.map(id=&gt;unitsById[id]?.rowKey)).size!==1){
-  involved.forEach(g=&gt;data.groups.push(g));
-  toast(&quot;別の列の卓は連結できません&quot;);
-  return;
- }
 
  if(expanded.length&lt;2){
   setUnits(expanded);
@@ -1846,7 +1846,7 @@ function applyRecommendedCleaning(ids){
 function renderOptions(){
  const h=document.getElementById(&quot;options&quot;);h.innerHTML=&quot;&quot;;const arr=candidates();
  document.getElementById(&quot;optionCount&quot;).textContent=arr.length+&quot;案&quot;;
- if(!arr.length){h.innerHTML=&#x27;&lt;div class=&quot;empty-note&quot;&gt;利用できる連番がありません。&lt;/div&gt;&#x27;;return}
+ if(!arr.length){h.innerHTML='&lt;div class=&quot;empty-note&quot;&gt;利用できる連番がありません。&lt;/div&gt;';return}
  arr.forEach((o,i)=&gt;{
    const excess=o.cap-people;
    let cls=o.cleaning?&quot;low&quot;:excess===0?&quot;p1&quot;:excess===1?&quot;p2&quot;:&quot;p3&quot;;
@@ -1873,14 +1873,7 @@ function renderSummary(){
   `&lt;div class=sum&gt;&lt;small&gt;4人卓 空き&lt;/small&gt;&lt;b&gt;${c4}&lt;/b&gt;&lt;/div&gt;`+
   `&lt;div class=sum&gt;&lt;small&gt;6人卓 空き&lt;/small&gt;&lt;b&gt;${c6}&lt;/b&gt;&lt;/div&gt;`+
   `&lt;div class=sum&gt;&lt;small&gt;MAX&lt;/small&gt;&lt;b&gt;${max}名&lt;/b&gt;&lt;/div&gt;`+
-  `&lt;div class=sum&gt;&lt;small&gt;清掃待ち&lt;/small&gt;&lt;b&gt;${cleaning}&lt;/b&gt;&lt;/div&gt;`+
-  currentRows().map((row,index)=&gt;{
-   const key=CONFIG.rowKeys[index];
-   const title=(CONFIG.rowLabels&amp;&amp;CONFIG.rowLabels[key])||row.map(u=&gt;u.id).join(&#x27;・&#x27;)||key;
-   let best=0,run=0;
-   row.forEach(u=&gt;{if(operationalVacant(u)){run+=u.cap;best=Math.max(best,run)}else run=0});
-   return `&lt;div class=sum&gt;&lt;small&gt;${title} MAX&lt;/small&gt;&lt;b&gt;${best}名&lt;/b&gt;&lt;/div&gt;`;
-  }).join(&#x27;&#x27;);
+  `&lt;div class=sum&gt;&lt;small&gt;清掃待ち&lt;/small&gt;&lt;b&gt;${cleaning}&lt;/b&gt;&lt;/div&gt;`;
 }
 
 function markCleaning(ids){
@@ -2043,6 +2036,26 @@ function renderMap(){
  [...CONFIG.composites].forEach(c=&gt;{if(c.parts.length&lt;=1)cfgNormalizeComposite(c.id)});
  const map=document.getElementById(&quot;floorMap&quot;);map.innerHTML=&quot;&quot;;
  if(CONFIG.roomLabels) CONFIG.roomLabels.forEach(r=&gt;{const d=document.createElement(&quot;div&quot;);d.className=&quot;room-label&quot;;d.textContent=r.text;d.style.gridColumn=`${r.col} / span ${r.span}`;d.style.gridRow=String(r.row);map.appendChild(d)});
+ // Place each independent row's current MAX beside that row on the floor plan.
+ currentRows().forEach((row,index)=&gt;{
+   if(!row.length)return;
+   const key=CONFIG.rowKeys[index];
+   let best=0,run=0;
+   row.forEach(u=&gt;{
+     if(operationalVacant(u)){run+=u.cap;best=Math.max(best,run)}
+     else run=0;
+   });
+   const lastColumn=Math.max(...row.map(u=&gt;(u.pos?.[0]||1)+(u.pos?.[2]||1)));
+   const gridRow=row[0].pos?.[1];
+   if(!gridRow)return;
+   const marker=document.createElement(&quot;div&quot;);
+   marker.className=&quot;row-max-on-map&quot;;
+   marker.textContent=&quot;MAX &quot;+best+&quot;名&quot;;
+   marker.title=&quot;列 &quot;+((CONFIG.rowLabels||{})[key]||key)+&quot; の連結可能な最大人数&quot;;
+   marker.style.gridRow=String(gridRow);
+   marker.style.gridColumn=String(Math.min(18,lastColumn+1))+&quot; / span 2&quot;;
+   map.appendChild(marker);
+ });
  const groupedIds=new Set(data.groups.flatMap(g=&gt;g.ids));
  CONFIG.items.forEach(item=&gt;{
    if(item.kind===&quot;single&quot;){
@@ -2135,7 +2148,7 @@ cfgRefreshAddRowOptions();
 cfgSaveLayout();
 renderAll();
 })();
-&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe><iframe class="app-frame" data-index="1" title="2F" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;" title="1F"></iframe><iframe class="app-frame" data-index="1" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!DOCTYPE html&gt;
 
 &lt;html lang=&quot;vi&quot;&gt;
 &lt;head&gt;
@@ -2745,10 +2758,10 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
   background-size:8px 8px!important;
 }
 #peopleRow::-webkit-scrollbar-button:single-button:horizontal:decrement,#clusterStrip::-webkit-scrollbar-button:single-button:horizontal:decrement,#renbanOptions::-webkit-scrollbar-button:single-button:horizontal:decrement,.row-scroll::-webkit-scrollbar-button:single-button:horizontal:decrement{
-  background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 10 10&#x27;%3E%3Cpath d=&#x27;M6.8 1.5 3.2 5l3.6 3.5&#x27; fill=&#x27;none&#x27; stroke=&#x27;%23475569&#x27; stroke-width=&#x27;1.8&#x27; stroke-linecap=&#x27;round&#x27; stroke-linejoin=&#x27;round&#x27;/%3E%3C/svg%3E&quot;)!important;
+  background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M6.8 1.5 3.2 5l3.6 3.5' fill='none' stroke='%23475569' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E&quot;)!important;
 }
 #peopleRow::-webkit-scrollbar-button:single-button:horizontal:increment,#clusterStrip::-webkit-scrollbar-button:single-button:horizontal:increment,#renbanOptions::-webkit-scrollbar-button:single-button:horizontal:increment,.row-scroll::-webkit-scrollbar-button:single-button:horizontal:increment{
-  background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 10 10&#x27;%3E%3Cpath d=&#x27;M3.2 1.5 6.8 5 3.2 8.5&#x27; fill=&#x27;none&#x27; stroke=&#x27;%23475569&#x27; stroke-width=&#x27;1.8&#x27; stroke-linecap=&#x27;round&#x27; stroke-linejoin=&#x27;round&#x27;/%3E%3C/svg%3E&quot;)!important;
+  background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M3.2 1.5 6.8 5 3.2 8.5' fill='none' stroke='%23475569' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E&quot;)!important;
 }
 
 /* ===== 2F RENBAN AREA LAYOUT ===== */
@@ -3388,7 +3401,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
     document.getElementById(prefix+&quot;Summary&quot;).innerHTML=`&lt;div class=&quot;cfg-sum&quot;&gt;&lt;small&gt;MAX&lt;/small&gt;&lt;b&gt;${m.max}名&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;cfg-sum&quot;&gt;&lt;small&gt;物理卓&lt;/small&gt;&lt;b&gt;${m.physical}卓&lt;/b&gt;&lt;/div&gt;`;
     let h=&quot;&quot;;
     cfgTypes.forEach(t=&gt;{for(let i=0;i&lt;(c[t.key]||0);i++)h+=`&lt;div class=&quot;cfg-pseg&quot; style=&quot;flex:${t.cap}&quot;&gt;${t.key===&quot;BOX&quot;?&quot;BOX&quot;:t.cap}&lt;/div&gt;`});
-    document.getElementById(prefix+&quot;Preview&quot;).innerHTML=h||&#x27;&lt;span style=&quot;font-size:11px;color:var(--muted);padding:8px&quot;&gt;構成を選択してください&lt;/span&gt;&#x27;;
+    document.getElementById(prefix+&quot;Preview&quot;).innerHTML=h||'&lt;span style=&quot;font-size:11px;color:var(--muted);padding:8px&quot;&gt;構成を選択してください&lt;/span&gt;';
   }
   function cfgRenderEdit(){cfgRenderRows(&quot;cfgEditRows&quot;,cfgEditCounts,cfgRenderEdit);cfgRenderDetail(&quot;cfgEdit&quot;,cfgEditCounts)}
   function cfgRenderAdd(){cfgRenderRows(&quot;cfgAddRows&quot;,cfgAddCounts,cfgRenderAdd);cfgRenderDetail(&quot;cfgAdd&quot;,cfgAddCounts)}
@@ -3413,7 +3426,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
 
   function cfgRenderMembers(rootId,members,removeFn){
     const root=document.getElementById(rootId);root.innerHTML=&quot;&quot;;
-    if(!members.length){root.innerHTML=&#x27;&lt;span style=&quot;font-size:11px;color:var(--muted)&quot;&gt;なし&lt;/span&gt;&#x27;;return}
+    if(!members.length){root.innerHTML='&lt;span style=&quot;font-size:11px;color:var(--muted)&quot;&gt;なし&lt;/span&gt;';return}
     members.sort(cfgCompare).forEach(id=&gt;{
       const chip=document.createElement(&quot;span&quot;);chip.className=&quot;cfg-chip&quot;;
       chip.innerHTML=`${id}&lt;button type=&quot;button&quot;&gt;×&lt;/button&gt;`;
@@ -3679,7 +3692,7 @@ function createTableButton(id, capacity){
     if(manualSelected.has(id) || (id.endsWith(&quot;AB&quot;) &amp;&amp; manualSelected.has(id.slice(0,-2)))) btn.classList.add(&quot;manual-selected&quot;);
 
     if(!cfgPhysicalize(btn,id,capacity,id)){
-      btn.innerHTML = (isCleaning(id) ? &quot;清 &quot; : &quot;&quot;) + id + &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
+      btn.innerHTML = (isCleaning(id) ? &quot;清 &quot; : &quot;&quot;) + id + '&lt;span class=&quot;cap&quot;&gt;' + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
     }
 
     btn.addEventListener(&quot;click&quot;, () =&gt; {
@@ -3718,7 +3731,7 @@ function createTableButton(id, capacity){
     wrap.className = &quot;pair-card merged&quot;;
 
     /* Build the physical appearance from EACH member table, not from the
-       group&#x27;s total capacity. Example: 80 + 81 must render as 6 + 6. */
+       group's total capacity. Example: 80 + 81 must render as 6 + 6. */
     const parts = [];
     group.ids.forEach(memberId =&gt; {
       const info = partInfo(memberId);
@@ -3886,7 +3899,7 @@ function createTableButton(id, capacity){
     }
 
     section.innerHTML =
-      &#x27;&lt;div class=&quot;card-title&quot;&gt;&lt;span&gt;&#x27; + title + &#x27;&lt;/span&gt;&lt;span&gt;空き &#x27; + freeCount + &quot;&lt;/span&gt;&lt;/div&gt;&quot;;
+      '&lt;div class=&quot;card-title&quot;&gt;&lt;span&gt;' + title + '&lt;/span&gt;&lt;span&gt;空き ' + freeCount + &quot;&lt;/span&gt;&lt;/div&gt;&quot;;
 
     const grid = document.createElement(&quot;div&quot;);
     grid.className = &quot;table-grid&quot;;
@@ -4812,9 +4825,9 @@ function renderRenbanOptions(){
 
       btn.innerHTML =
         &quot;&lt;strong&gt;&quot; + (requested ?? option.pax) + &quot;名&lt;/strong&gt;&quot; +
-        &#x27;&lt;div class=&quot;chips&quot;&gt;&#x27; +
+        '&lt;div class=&quot;chips&quot;&gt;' +
         option.ids.map(id =&gt;
-          &#x27;&lt;span class=&quot;chip &#x27; + capacityClass(tables[id]) + &#x27;&quot;&gt;&#x27; +
+          '&lt;span class=&quot;chip ' + capacityClass(tables[id]) + '&quot;&gt;' +
           id +
           &quot;&lt;/span&gt;&quot;
         ).join(&quot;&quot;) +
@@ -5284,11 +5297,11 @@ function renderRenbanOptions(){
   cfgDelete=function(){if(!cfgEditingId)return;if(!deleteOne(cfgEditingId)){showToast(&quot;空席で手動連結されていない卓だけ削除できます&quot;);return}saveLayout2F();saveState();rebuildOrders();renderAll();cfgClose();showToast(`${cfgEditingId} を削除しました`)};
 
   /* remove any legacy external arrow buttons from DOM, even if older HTML contains them */
-  document.querySelectorAll(&#x27;.scroll-arrow,.cfg-scroll-arrow&#x27;).forEach(b=&gt;b.remove());
-  [&#x27;peopleRow&#x27;,&#x27;clusterStrip&#x27;,&#x27;renbanOptions&#x27;].forEach(id=&gt;{const h=document.getElementById(id);if(h)h.addEventListener(&#x27;wheel&#x27;,e=&gt;{if(Math.abs(e.deltaY)&gt;Math.abs(e.deltaX)){h.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false})});
-  document.getElementById(&#x27;bulkDeleteModeBtn&#x27;).onclick=()=&gt;{bulkDeleteMode=true;bulkDeleteSelected.clear();manualSelected.clear();bulkDeleteUpdate();renderAll();showToast(&#x27;削除する卓を選択してください&#x27;)};
-  document.getElementById(&#x27;bulkDeleteCancel&#x27;).onclick=()=&gt;{bulkDeleteMode=false;bulkDeleteSelected.clear();bulkDeleteUpdate();renderAll()};
-  document.getElementById(&#x27;bulkDeleteCommit&#x27;).onclick=bulkDeleteCommit2;
+  document.querySelectorAll('.scroll-arrow,.cfg-scroll-arrow').forEach(b=&gt;b.remove());
+  ['peopleRow','clusterStrip','renbanOptions'].forEach(id=&gt;{const h=document.getElementById(id);if(h)h.addEventListener('wheel',e=&gt;{if(Math.abs(e.deltaY)&gt;Math.abs(e.deltaX)){h.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false})});
+  document.getElementById('bulkDeleteModeBtn').onclick=()=&gt;{bulkDeleteMode=true;bulkDeleteSelected.clear();manualSelected.clear();bulkDeleteUpdate();renderAll();showToast('削除する卓を選択してください')};
+  document.getElementById('bulkDeleteCancel').onclick=()=&gt;{bulkDeleteMode=false;bulkDeleteSelected.clear();bulkDeleteUpdate();renderAll()};
+  document.getElementById('bulkDeleteCommit').onclick=bulkDeleteCommit2;
   rebuildOrders();saveLayout2F();
 
 
@@ -5307,7 +5320,7 @@ function renderRenbanOptions(){
     });
 
     /* S is a real area but has no separate renban definitions in the base data. */
-    if(areaKey===&#x27;S&#x27; &amp;&amp; all.length){
+    if(areaKey==='S' &amp;&amp; all.length){
       const sids=all.filter(id=&gt;!inGroup.has(id));
       if(sids.length){sids.forEach(id=&gt;inGroup.add(id));clusters.push({ids:sids,label:sids.length&gt;1?`${sids[0]}–${sids[sids.length-1]}`:sids[0],rank:sids[0]})}
     }
@@ -5322,15 +5335,15 @@ function renderRenbanOptions(){
   }
 
   function renderRenbanCluster(cluster){
-    const box=document.createElement(&#x27;div&#x27;);box.className=&#x27;renban-cluster&#x27;;
+    const box=document.createElement('div');box.className='renban-cluster';
     const activeIds=cluster.ids.flatMap(activeIdsForIdentity);
     const activeSet=new Set(activeIds);
     const groups=appState.groups.filter(g=&gt;g.ids.some(id=&gt;activeSet.has(id)));
     const groupedIds=new Set(groups.flatMap(g=&gt;g.ids));
-    const free=activeIds.filter(id=&gt;!groupedIds.has(id)&amp;&amp;getStatus(id)===&#x27;empty&#x27;&amp;&amp;!isCleaning(id)).length
-      + groups.filter(g=&gt;(g.state||&#x27;empty&#x27;)===&#x27;empty&#x27;&amp;&amp;!isCleaning(g.id)).length;
+    const free=activeIds.filter(id=&gt;!groupedIds.has(id)&amp;&amp;getStatus(id)==='empty'&amp;&amp;!isCleaning(id)).length
+      + groups.filter(g=&gt;(g.state||'empty')==='empty'&amp;&amp;!isCleaning(g.id)).length;
     box.innerHTML=`&lt;div class=&quot;renban-cluster-title&quot;&gt;&lt;span&gt;${cluster.label}&lt;/span&gt;&lt;/div&gt;`;
-    const grid=document.createElement(&#x27;div&#x27;);grid.className=&#x27;renban-cluster-grid&#x27;;
+    const grid=document.createElement('div');grid.className='renban-cluster-grid';
 
     const renderedGroups=new Set();
     cluster.ids.forEach(base=&gt;{
@@ -5357,7 +5370,7 @@ function renderRenbanOptions(){
     });
 
     groups.filter(g=&gt;!renderedGroups.has(g.id)).forEach(g=&gt;grid.appendChild(createManualGroupCard(g)));
-    if(!grid.children.length){const e=document.createElement(&#x27;div&#x27;);e.className=&#x27;empty-note&#x27;;e.textContent=&#x27;卓がありません。&#x27;;grid.appendChild(e)}
+    if(!grid.children.length){const e=document.createElement('div');e.className='empty-note';e.textContent='卓がありません。';grid.appendChild(e)}
     box.appendChild(grid);return box;
   }
 
@@ -5370,34 +5383,34 @@ function renderRenbanOptions(){
   }
 
   function renderAreaRenbanStrip(areaKey){
-    const wrap=document.createElement(&#x27;div&#x27;);
-    const label=document.createElement(&#x27;div&#x27;);
-    label.className=&#x27;renban-area-renban-label&#x27;;
-    label.textContent=&#x27;連番&#x27;;
+    const wrap=document.createElement('div');
+    const label=document.createElement('div');
+    label.className='renban-area-renban-label';
+    label.textContent='連番';
     wrap.appendChild(label);
 
-    const strip=document.createElement(&#x27;div&#x27;);
-    strip.className=&#x27;area-renban-strip&#x27;;
+    const strip=document.createElement('div');
+    strip.className='area-renban-strip';
     const runs=renbanRunsForArea(areaKey);
 
     if(!runs.length){
-      const chip=document.createElement(&#x27;span&#x27;);
-      chip.className=&#x27;cluster-chip disabled&#x27;;
-      chip.textContent=&#x27;利用できる連番なし&#x27;;
+      const chip=document.createElement('span');
+      chip.className='cluster-chip disabled';
+      chip.textContent='利用できる連番なし';
       strip.appendChild(chip);
     }else{
       runs.forEach(run=&gt;{
-        const btn=document.createElement(&#x27;button&#x27;);
-        btn.type=&#x27;button&#x27;;
-        btn.className=&#x27;cluster-chip&#x27;;
-        btn.innerHTML=run.label+&#x27;&lt;small&gt;&#x27;+(run.allBox?(&#x27;BOX×&#x27;+run.ids.length):(run.max+&#x27;名 max&#x27;))+&#x27;&lt;/small&gt;&#x27;;
+        const btn=document.createElement('button');
+        btn.type='button';
+        btn.className='cluster-chip';
+        btn.innerHTML=run.label+'&lt;small&gt;'+(run.allBox?('BOX×'+run.ids.length):(run.max+'名 max'))+'&lt;/small&gt;';
         btn.onclick=()=&gt;{
-          peopleFilter=&#x27;all&#x27;;
+          peopleFilter='all';
           renderPeopleRow();
           renderRenbanOptions();
-          const rec=document.getElementById(&#x27;renbanOptions&#x27;);
-          if(rec)rec.scrollIntoView({behavior:&#x27;smooth&#x27;,block:&#x27;nearest&#x27;});
-          showToast(&#x27;連番: &#x27;+run.label);
+          const rec=document.getElementById('renbanOptions');
+          if(rec)rec.scrollIntoView({behavior:'smooth',block:'nearest'});
+          showToast('連番: '+run.label);
         };
         strip.appendChild(btn);
       });
@@ -5408,16 +5421,16 @@ function renderRenbanOptions(){
 
   function renderTablesByRenbanArea(){
     rebuildOrders();
-    const root=document.getElementById(&#x27;tableArea&#x27;);root.innerHTML=&#x27;&#x27;;
-    const areaLabels={&#x27;8&#x27;:&#x27;8系&#x27;,&#x27;S&#x27;:&#x27;S系&#x27;,&#x27;9&#x27;:&#x27;9系&#x27;,&#x27;C&#x27;:&#x27;C系&#x27;,&#x27;D&#x27;:&#x27;D系&#x27;};
-    [&#x27;8&#x27;,&#x27;C&#x27;,&#x27;S&#x27;,&#x27;9&#x27;,&#x27;D&#x27;].forEach(areaKey=&gt;{
+    const root=document.getElementById('tableArea');root.innerHTML='';
+    const areaLabels={'8':'8系','S':'S系','9':'9系','C':'C系','D':'D系'};
+    ['8','C','S','9','D'].forEach(areaKey=&gt;{
       const clusters=areaIdentityClusters(areaKey);
       if(!clusters.length)return;
-      const section=document.createElement(&#x27;section&#x27;);section.className=&#x27;renban-area&#x27;;
+      const section=document.createElement('section');section.className='renban-area';
       const totalIds=clusters.flatMap(c=&gt;c.ids.flatMap(activeIdsForIdentity));
       const areaGroups=appState.groups.filter(g=&gt;g.ids.some(id=&gt;totalIds.includes(id)));
       const grouped=new Set(areaGroups.flatMap(g=&gt;g.ids));
-      const free=totalIds.filter(id=&gt;!grouped.has(id)&amp;&amp;getStatus(id)===&#x27;empty&#x27;&amp;&amp;!isCleaning(id)).length + areaGroups.filter(g=&gt;(g.state||&#x27;empty&#x27;)===&#x27;empty&#x27;).length;
+      const free=totalIds.filter(id=&gt;!grouped.has(id)&amp;&amp;getStatus(id)==='empty'&amp;&amp;!isCleaning(id)).length + areaGroups.filter(g=&gt;(g.state||'empty')==='empty').length;
       section.innerHTML=`&lt;div class=&quot;renban-area-title&quot;&gt;&lt;span&gt;${areaLabels[areaKey]}&lt;/span&gt;&lt;/div&gt;`;
       section.appendChild(renderAreaRenbanStrip(areaKey));
       clusters.forEach(c=&gt;section.appendChild(renderRenbanCluster(c)));
@@ -5554,7 +5567,7 @@ appState = {states:{}, merged:{}, groups:[], cleaning:{}};
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-"></iframe><iframe class="app-frame" data-index="2" title="3F" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!DOCTYPE html&gt;
+" title="2F"></iframe><iframe class="app-frame" data-index="2" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!DOCTYPE html&gt;
 
 &lt;html lang=&quot;vi&quot;&gt;
 &lt;head&gt;
@@ -6164,10 +6177,10 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
   background-size:8px 8px!important;
 }
 #peopleRow::-webkit-scrollbar-button:single-button:horizontal:decrement,#clusterStrip::-webkit-scrollbar-button:single-button:horizontal:decrement,#renbanOptions::-webkit-scrollbar-button:single-button:horizontal:decrement,.row-scroll::-webkit-scrollbar-button:single-button:horizontal:decrement{
-  background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 10 10&#x27;%3E%3Cpath d=&#x27;M6.8 1.5 3.2 5l3.6 3.5&#x27; fill=&#x27;none&#x27; stroke=&#x27;%23475569&#x27; stroke-width=&#x27;1.8&#x27; stroke-linecap=&#x27;round&#x27; stroke-linejoin=&#x27;round&#x27;/%3E%3C/svg%3E&quot;)!important;
+  background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M6.8 1.5 3.2 5l3.6 3.5' fill='none' stroke='%23475569' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E&quot;)!important;
 }
 #peopleRow::-webkit-scrollbar-button:single-button:horizontal:increment,#clusterStrip::-webkit-scrollbar-button:single-button:horizontal:increment,#renbanOptions::-webkit-scrollbar-button:single-button:horizontal:increment,.row-scroll::-webkit-scrollbar-button:single-button:horizontal:increment{
-  background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 10 10&#x27;%3E%3Cpath d=&#x27;M3.2 1.5 6.8 5 3.2 8.5&#x27; fill=&#x27;none&#x27; stroke=&#x27;%23475569&#x27; stroke-width=&#x27;1.8&#x27; stroke-linecap=&#x27;round&#x27; stroke-linejoin=&#x27;round&#x27;/%3E%3C/svg%3E&quot;)!important;
+  background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M3.2 1.5 6.8 5 3.2 8.5' fill='none' stroke='%23475569' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E&quot;)!important;
 }
 
 /* ===== 3F RENBAN AREA LAYOUT ===== */
@@ -6821,7 +6834,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
     document.getElementById(prefix+&quot;Summary&quot;).innerHTML=`&lt;div class=&quot;cfg-sum&quot;&gt;&lt;small&gt;MAX&lt;/small&gt;&lt;b&gt;${m.max}名&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;cfg-sum&quot;&gt;&lt;small&gt;物理卓&lt;/small&gt;&lt;b&gt;${m.physical}卓&lt;/b&gt;&lt;/div&gt;`;
     let h=&quot;&quot;;
     cfgTypes.forEach(t=&gt;{for(let i=0;i&lt;(c[t.key]||0);i++)h+=`&lt;div class=&quot;cfg-pseg&quot; style=&quot;flex:${t.cap}&quot;&gt;${t.key===&quot;BOX&quot;?&quot;BOX&quot;:t.cap}&lt;/div&gt;`});
-    document.getElementById(prefix+&quot;Preview&quot;).innerHTML=h||&#x27;&lt;span style=&quot;font-size:11px;color:var(--muted);padding:8px&quot;&gt;構成を選択してください&lt;/span&gt;&#x27;;
+    document.getElementById(prefix+&quot;Preview&quot;).innerHTML=h||'&lt;span style=&quot;font-size:11px;color:var(--muted);padding:8px&quot;&gt;構成を選択してください&lt;/span&gt;';
   }
   function cfgRenderEdit(){cfgRenderRows(&quot;cfgEditRows&quot;,cfgEditCounts,cfgRenderEdit);cfgRenderDetail(&quot;cfgEdit&quot;,cfgEditCounts)}
   function cfgRenderAdd(){cfgRenderRows(&quot;cfgAddRows&quot;,cfgAddCounts,cfgRenderAdd);cfgRenderDetail(&quot;cfgAdd&quot;,cfgAddCounts)}
@@ -6846,7 +6859,7 @@ main{max-width:760px;margin:auto;padding:7px 8px 30px}
 
   function cfgRenderMembers(rootId,members,removeFn){
     const root=document.getElementById(rootId);root.innerHTML=&quot;&quot;;
-    if(!members.length){root.innerHTML=&#x27;&lt;span style=&quot;font-size:11px;color:var(--muted)&quot;&gt;なし&lt;/span&gt;&#x27;;return}
+    if(!members.length){root.innerHTML='&lt;span style=&quot;font-size:11px;color:var(--muted)&quot;&gt;なし&lt;/span&gt;';return}
     members.sort(cfgCompare).forEach(id=&gt;{
       const chip=document.createElement(&quot;span&quot;);chip.className=&quot;cfg-chip&quot;;
       chip.innerHTML=`${id}&lt;button type=&quot;button&quot;&gt;×&lt;/button&gt;`;
@@ -7137,7 +7150,7 @@ function createTableButton(id, capacity){
     if(manualSelected.has(id) || (id.endsWith(&quot;AB&quot;) &amp;&amp; manualSelected.has(id.slice(0,-2)))) btn.classList.add(&quot;manual-selected&quot;);
 
     if(!cfgPhysicalize(btn,id,capacity,id)){
-      btn.innerHTML = (isCleaning(id) ? &quot;清 &quot; : &quot;&quot;) + id + &#x27;&lt;span class=&quot;cap&quot;&gt;&#x27; + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
+      btn.innerHTML = (isCleaning(id) ? &quot;清 &quot; : &quot;&quot;) + id + '&lt;span class=&quot;cap&quot;&gt;' + (capacity === &quot;BOX&quot; ? &quot;B&quot; : capacity) + &quot;&lt;/span&gt;&quot;;
     }
 
     btn.addEventListener(&quot;click&quot;, () =&gt; {
@@ -7176,7 +7189,7 @@ function createTableButton(id, capacity){
     wrap.className = &quot;pair-card merged&quot;;
 
     /* Build the physical appearance from EACH member table, not from the
-       group&#x27;s total capacity. Example: 80 + 81 must render as 6 + 6. */
+       group's total capacity. Example: 80 + 81 must render as 6 + 6. */
     const parts = [];
     group.ids.forEach(memberId =&gt; {
       const info = partInfo(memberId);
@@ -7344,7 +7357,7 @@ function createTableButton(id, capacity){
     }
 
     section.innerHTML =
-      &#x27;&lt;div class=&quot;card-title&quot;&gt;&lt;span&gt;&#x27; + title + &#x27;&lt;/span&gt;&lt;span&gt;空き &#x27; + freeCount + &quot;&lt;/span&gt;&lt;/div&gt;&quot;;
+      '&lt;div class=&quot;card-title&quot;&gt;&lt;span&gt;' + title + '&lt;/span&gt;&lt;span&gt;空き ' + freeCount + &quot;&lt;/span&gt;&lt;/div&gt;&quot;;
 
     const grid = document.createElement(&quot;div&quot;);
     grid.className = &quot;table-grid&quot;;
@@ -8272,9 +8285,9 @@ function renderRenbanOptions(){
 
       btn.innerHTML =
         &quot;&lt;strong&gt;&quot; + (requested ?? option.pax) + &quot;名&lt;/strong&gt;&quot; +
-        &#x27;&lt;div class=&quot;chips&quot;&gt;&#x27; +
+        '&lt;div class=&quot;chips&quot;&gt;' +
         option.ids.map(id =&gt;
-          &#x27;&lt;span class=&quot;chip &#x27; + capacityClass(tables[id]) + &#x27;&quot;&gt;&#x27; +
+          '&lt;span class=&quot;chip ' + capacityClass(tables[id]) + '&quot;&gt;' +
           displayTableId(id) +
           &quot;&lt;/span&gt;&quot;
         ).join(&quot;&quot;) +
@@ -8859,11 +8872,11 @@ function renderRenbanOptions(){
   cfgDelete=function(){if(!cfgEditingId)return;if(!deleteOne(cfgEditingId)){showToast(&quot;空席で手動連結されていない卓だけ削除できます&quot;);return}saveLayout3F();saveState();rebuildOrders();renderAll();cfgClose();showToast(`${cfgEditingId} を削除しました`)};
 
   /* remove any legacy external arrow buttons from DOM, even if older HTML contains them */
-  document.querySelectorAll(&#x27;.scroll-arrow,.cfg-scroll-arrow&#x27;).forEach(b=&gt;b.remove());
-  [&#x27;peopleRow&#x27;,&#x27;clusterStrip&#x27;,&#x27;renbanOptions&#x27;].forEach(id=&gt;{const h=document.getElementById(id);if(h)h.addEventListener(&#x27;wheel&#x27;,e=&gt;{if(Math.abs(e.deltaY)&gt;Math.abs(e.deltaX)){h.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false})});
-  document.getElementById(&#x27;bulkDeleteModeBtn&#x27;).onclick=()=&gt;{bulkDeleteMode=true;bulkDeleteSelected.clear();manualSelected.clear();bulkDeleteUpdate();renderAll();showToast(&#x27;削除する卓を選択してください&#x27;)};
-  document.getElementById(&#x27;bulkDeleteCancel&#x27;).onclick=()=&gt;{bulkDeleteMode=false;bulkDeleteSelected.clear();bulkDeleteUpdate();renderAll()};
-  document.getElementById(&#x27;bulkDeleteCommit&#x27;).onclick=bulkDeleteCommit2;
+  document.querySelectorAll('.scroll-arrow,.cfg-scroll-arrow').forEach(b=&gt;b.remove());
+  ['peopleRow','clusterStrip','renbanOptions'].forEach(id=&gt;{const h=document.getElementById(id);if(h)h.addEventListener('wheel',e=&gt;{if(Math.abs(e.deltaY)&gt;Math.abs(e.deltaX)){h.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false})});
+  document.getElementById('bulkDeleteModeBtn').onclick=()=&gt;{bulkDeleteMode=true;bulkDeleteSelected.clear();manualSelected.clear();bulkDeleteUpdate();renderAll();showToast('削除する卓を選択してください')};
+  document.getElementById('bulkDeleteCancel').onclick=()=&gt;{bulkDeleteMode=false;bulkDeleteSelected.clear();bulkDeleteUpdate();renderAll()};
+  document.getElementById('bulkDeleteCommit').onclick=bulkDeleteCommit2;
   rebuildOrders();
 
 
@@ -8921,14 +8934,14 @@ const n=cfgNum(base);
   }
 
   function renderRenbanCluster(cluster){
-    const box=document.createElement(&#x27;div&#x27;);box.className=&#x27;renban-cluster&#x27;;
+    const box=document.createElement('div');box.className='renban-cluster';
     const activeIds=cluster.ids.flatMap(activeIdsForIdentity);
     const activeSet=new Set(activeIds);
     const groups=appState.groups.filter(g=&gt;g.ids.some(id=&gt;activeSet.has(id)));
     const groupedIds=new Set(groups.flatMap(g=&gt;g.ids));
 
     box.innerHTML=`&lt;div class=&quot;renban-cluster-title&quot;&gt;&lt;span&gt;${cluster.label}&lt;/span&gt;&lt;/div&gt;`;
-    const grid=document.createElement(&#x27;div&#x27;);grid.className=&#x27;renban-cluster-grid&#x27;;
+    const grid=document.createElement('div');grid.className='renban-cluster-grid';
 
     /*
       Build ONE display list, then sort it by the real physical renban position.
@@ -8986,9 +8999,9 @@ const n=cfgNum(base);
     });
 
     if(!grid.children.length){
-      const e=document.createElement(&#x27;div&#x27;);
-      e.className=&#x27;empty-note&#x27;;
-      e.textContent=&#x27;卓がありません。&#x27;;
+      const e=document.createElement('div');
+      e.className='empty-note';
+      e.textContent='卓がありません。';
       grid.appendChild(e);
     }
     box.appendChild(grid);
@@ -9002,26 +9015,26 @@ const n=cfgNum(base);
   }
 
   function renderAreaRenbanStrip(areaKey){
-    const wrap=document.createElement(&#x27;div&#x27;);
-    const label=document.createElement(&#x27;div&#x27;);
-    label.className=&#x27;renban-area-renban-label&#x27;;
-    label.textContent=&#x27;連番&#x27;;
+    const wrap=document.createElement('div');
+    const label=document.createElement('div');
+    label.className='renban-area-renban-label';
+    label.textContent='連番';
     wrap.appendChild(label);
 
-    const strip=document.createElement(&#x27;div&#x27;);
-    strip.className=&#x27;area-renban-strip&#x27;;
+    const strip=document.createElement('div');
+    strip.className='area-renban-strip';
     const groups=structuralRenbanGroupsForArea(areaKey);
 
     if(!groups.length){
-      const chip=document.createElement(&#x27;span&#x27;);
-      chip.className=&#x27;cluster-chip disabled&#x27;;
-      chip.textContent=&#x27;連番なし&#x27;;
+      const chip=document.createElement('span');
+      chip.className='cluster-chip disabled';
+      chip.textContent='連番なし';
       strip.appendChild(chip);
     }else{
       groups.forEach(group=&gt;{
-        const btn=document.createElement(&#x27;button&#x27;);
-        btn.type=&#x27;button&#x27;;
-        btn.className=&#x27;cluster-chip&#x27;;
+        const btn=document.createElement('button');
+        btn.type='button';
+        btn.className='cluster-chip';
 
         const labelText = group.length===1
           ? group[0]
@@ -9032,10 +9045,10 @@ const n=cfgNum(base);
 
         btn.innerHTML=`${labelText}&lt;small&gt;${availableCount}卓 空き&lt;/small&gt;`;
         btn.onclick=()=&gt;{
-          peopleFilter=&#x27;all&#x27;;
+          peopleFilter='all';
           renderPeopleRow();
           renderRenbanOptions();
-          showToast(&#x27;連番: &#x27;+labelText);
+          showToast('連番: '+labelText);
         };
         strip.appendChild(btn);
       });
@@ -9047,16 +9060,16 @@ const n=cfgNum(base);
 
   function renderTablesByRenbanArea(){
     rebuildOrders();
-    const root=document.getElementById(&#x27;tableArea&#x27;);root.innerHTML=&#x27;&#x27;;
-    const areaLabels={&#x27;E&#x27;:&#x27;E系&#x27;,&#x27;F&#x27;:&#x27;F系&#x27;,&#x27;G&#x27;:&#x27;G系&#x27;};
-    [&#x27;E&#x27;,&#x27;F&#x27;,&#x27;G&#x27;].forEach(areaKey=&gt;{
+    const root=document.getElementById('tableArea');root.innerHTML='';
+    const areaLabels={'E':'E系','F':'F系','G':'G系'};
+    ['E','F','G'].forEach(areaKey=&gt;{
       const clusters=areaIdentityClusters(areaKey);
       if(!clusters.length)return;
-      const section=document.createElement(&#x27;section&#x27;);section.className=&#x27;renban-area&#x27;;
+      const section=document.createElement('section');section.className='renban-area';
       const totalIds=clusters.flatMap(c=&gt;c.ids.flatMap(activeIdsForIdentity));
       const areaGroups=appState.groups.filter(g=&gt;g.ids.some(id=&gt;totalIds.includes(id)));
       const grouped=new Set(areaGroups.flatMap(g=&gt;g.ids));
-      const free=totalIds.filter(id=&gt;!grouped.has(id)&amp;&amp;getStatus(id)===&#x27;empty&#x27;&amp;&amp;!isCleaning(id)).length + areaGroups.filter(g=&gt;(g.state||&#x27;empty&#x27;)===&#x27;empty&#x27;).length;
+      const free=totalIds.filter(id=&gt;!grouped.has(id)&amp;&amp;getStatus(id)==='empty'&amp;&amp;!isCleaning(id)).length + areaGroups.filter(g=&gt;(g.state||'empty')==='empty').length;
       section.innerHTML=`&lt;div class=&quot;renban-area-title&quot;&gt;&lt;span&gt;${areaLabels[areaKey]}&lt;/span&gt;&lt;/div&gt;`;
       section.appendChild(renderAreaRenbanStrip(areaKey));
       clusters.forEach(c=&gt;section.appendChild(renderRenbanCluster(c)));
@@ -9195,7 +9208,7 @@ appState = {states:{}, merged:{}, groups:[], cleaning:{}};
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-"></iframe><iframe class="app-frame" data-index="3" title="個室" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!DOCTYPE html&gt;
+" title="3F"></iframe><iframe class="app-frame" data-index="3" sandbox="allow-scripts allow-same-origin allow-modals" srcdoc="&lt;!DOCTYPE html&gt;
 
 &lt;html lang=&quot;ja&quot;&gt;
 &lt;head&gt;
@@ -10400,7 +10413,7 @@ function renderRenbanMembers(){
  if(!root)return;
  root.innerHTML=&quot;&quot;;
  if(!renbanMembers.length){
-  root.innerHTML=&#x27;&lt;span style=&quot;font-size:11px;color:var(--muted)&quot;&gt;なし&lt;/span&gt;&#x27;;
+  root.innerHTML='&lt;span style=&quot;font-size:11px;color:var(--muted)&quot;&gt;なし&lt;/span&gt;';
  }else{
   [...renbanMembers].sort(natural).forEach(id=&gt;{
    const chip=document.createElement(&quot;span&quot;);
@@ -10426,7 +10439,7 @@ function renderRenbanQuickGroups(){
  const room=document.getElementById(&quot;roomSelect&quot;).value;
  const side=document.getElementById(&quot;sideSelect&quot;).value;
  if(!room){
-  root.innerHTML=&#x27;&lt;span style=&quot;font-size:11px;color:var(--muted)&quot;&gt;先に個室を選択してください&lt;/span&gt;&#x27;;
+  root.innerHTML='&lt;span style=&quot;font-size:11px;color:var(--muted)&quot;&gt;先に個室を選択してください&lt;/span&gt;';
   return;
  }
  (RENBAN_GROUPS[renbanKey(room,side)]||[])
@@ -10444,7 +10457,7 @@ function renderRenbanQuickGroups(){
    root.appendChild(b);
   });
  if(!root.children.length){
-  root.innerHTML=&#x27;&lt;span style=&quot;font-size:11px;color:var(--muted)&quot;&gt;既存グループなし&lt;/span&gt;&#x27;;
+  root.innerHTML='&lt;span style=&quot;font-size:11px;color:var(--muted)&quot;&gt;既存グループなし&lt;/span&gt;';
  }
 }
 function refreshRenbanMembershipUI(){
@@ -10478,7 +10491,7 @@ function applyRenbanMembership(id,members){
  const chosen=[id,...members.filter(x=&gt;x&amp;&amp;x!==id)];
  const chosenSet=new Set(chosen);
 
- /* First remove the edited table&#x27;s old group, preserving the members
+ /* First remove the edited table's old group, preserving the members
     that were not kept with this table. This matches the 2F behavior. */
  if(oldGroupInfo){
   RENBAN_GROUPS[oldGroupInfo.key]=RENBAN_GROUPS[oldGroupInfo.key]
@@ -10882,7 +10895,7 @@ cleanupStaleIds();saveLayout();save();renderAll();
 })();
 &lt;/script&gt;
 &lt;/body&gt;
-&lt;/html&gt;"></iframe></div></div>
+&lt;/html&gt;" title="個室"></iframe></div></div>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
@@ -11285,5 +11298,4 @@ try{
 }
 })();
 </script>
-
 </body></html>
