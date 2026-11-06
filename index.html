@@ -1690,8 +1690,10 @@ function candidates(){
  const sorter=(a,b)=&gt;
    a.cleaningPhysical-b.cleaningPhysical ||
    (a.cap-people)-(b.cap-people) ||
-   compareRemainingMaxProfiles(a.remainingProfile,b.remainingProfile) ||
+   // An already assembled table matching the party size is harder to split.
+   // Prefer it before considering the remaining contiguous MAX capacity.
    Number(b.existingReadyUnit)-Number(a.existingReadyUnit) ||
+   compareRemainingMaxProfiles(a.remainingProfile,b.remainingProfile) ||
    a.physicalCount-b.physicalCount ||
    Number(a.rowIndex===0)-Number(b.rowIndex===0) ||
    a.rowIndex-b.rowIndex ||
