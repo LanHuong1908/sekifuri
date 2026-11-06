@@ -1693,6 +1693,7 @@ function candidates(){
    // An already assembled table matching the party size is harder to split.
    // Prefer it before considering the remaining contiguous MAX capacity.
    Number(b.existingReadyUnit)-Number(a.existingReadyUnit) ||
+   // MAX is evaluated before wheelchair-row preference; the first row is only a tie-breaker.
    compareRemainingMaxProfiles(a.remainingProfile,b.remainingProfile) ||
    a.physicalCount-b.physicalCount ||
    Number(a.rowIndex===0)-Number(b.rowIndex===0) ||
@@ -1702,7 +1703,7 @@ function candidates(){
  return [
    ...ready.sort(sorter),
    ...waiting.sort(sorter)
- ].slice(0,35);
+ ];
 }
 function setUnits(ids,s=selectedState){
  ids.forEach(id=&gt;{
@@ -1728,6 +1729,14 @@ function createGroup(ids){
  }
 
  expanded=[...new Set(expanded)];
+
+ // Aisles separate rows: never create a combined group across row keys.
+ const unitsById=unitMap();
+ if(new Set(expanded.map(id=&gt;unitsById[id]?.rowKey)).size!==1){
+  involved.forEach(g=&gt;data.groups.push(g));
+  toast(&quot;別の列の卓は連結できません&quot;);
+  return;
+ }
 
  if(expanded.length&lt;2){
   setUnits(expanded);
@@ -1864,7 +1873,14 @@ function renderSummary(){
   `&lt;div class=sum&gt;&lt;small&gt;4人卓 空き&lt;/small&gt;&lt;b&gt;${c4}&lt;/b&gt;&lt;/div&gt;`+
   `&lt;div class=sum&gt;&lt;small&gt;6人卓 空き&lt;/small&gt;&lt;b&gt;${c6}&lt;/b&gt;&lt;/div&gt;`+
   `&lt;div class=sum&gt;&lt;small&gt;MAX&lt;/small&gt;&lt;b&gt;${max}名&lt;/b&gt;&lt;/div&gt;`+
-  `&lt;div class=sum&gt;&lt;small&gt;清掃待ち&lt;/small&gt;&lt;b&gt;${cleaning}&lt;/b&gt;&lt;/div&gt;`;
+  `&lt;div class=sum&gt;&lt;small&gt;清掃待ち&lt;/small&gt;&lt;b&gt;${cleaning}&lt;/b&gt;&lt;/div&gt;`+
+  currentRows().map((row,index)=&gt;{
+   const key=CONFIG.rowKeys[index];
+   const title=(CONFIG.rowLabels&amp;&amp;CONFIG.rowLabels[key])||row.map(u=&gt;u.id).join(&#x27;・&#x27;)||key;
+   let best=0,run=0;
+   row.forEach(u=&gt;{if(operationalVacant(u)){run+=u.cap;best=Math.max(best,run)}else run=0});
+   return `&lt;div class=sum&gt;&lt;small&gt;${title} MAX&lt;/small&gt;&lt;b&gt;${best}名&lt;/b&gt;&lt;/div&gt;`;
+  }).join(&#x27;&#x27;);
 }
 
 function markCleaning(ids){
