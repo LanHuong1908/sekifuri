@@ -4568,6 +4568,14 @@ function renderRenbanOptions(){
         const capacityDiff=(capA-requested)-(capB-requested);
         if(capacityDiff)return capacityDiff;
 
+        /* Same guest-fit MAX: use fewer physical tables first.
+           A fixed 4-seat table must beat joining two flexible 2-seat tables.
+           Only then compare the remaining renban MAX profile (e.g. D vs C). */
+        const physicalDiff =
+          a.ids.reduce((sum,id)=&gt;sum+physicalCountForId(id),0) -
+          b.ids.reduce((sum,id)=&gt;sum+physicalCountForId(id),0);
+        if(physicalDiff)return physicalDiff;
+
         /* Then: preserve MAX capacities across all remaining vacant runs. */
         const maxDiff=compareRemainingMaxProfiles(
           remainingMaxProfileAfter(a.ids),remainingMaxProfileAfter(b.ids)
@@ -7999,6 +8007,14 @@ function renderRenbanOptions(){
         /* First: match the requested guest count as closely as possible. */
         const capacityDiff=(capA-requested)-(capB-requested);
         if(capacityDiff)return capacityDiff;
+
+        /* Same guest-fit MAX: use fewer physical tables first.
+           A fixed 4-seat table must beat joining two flexible 2-seat tables.
+           Only then compare the remaining renban MAX profile (e.g. D vs C). */
+        const physicalDiff =
+          a.ids.reduce((sum,id)=&gt;sum+physicalCountForId(id),0) -
+          b.ids.reduce((sum,id)=&gt;sum+physicalCountForId(id),0);
+        if(physicalDiff)return physicalDiff;
 
         /* Then: preserve MAX capacities across all remaining vacant runs. */
         const maxDiff=compareRemainingMaxProfiles(
