@@ -4568,6 +4568,17 @@ function renderRenbanOptions(){
         const capacityDiff=(capA-requested)-(capB-requested);
         if(capacityDiff)return capacityDiff;
 
+        /* 2名: the narrow curved S zone is always the first seating choice
+           among immediately available, capacity-matched tables.
+           Split 82A/82B remain real 2-seat tables but come afterwards.
+           Never infer a split that has not been made in the layout. */
+        if(requested === 2 &amp;&amp; capA === 2 &amp;&amp; capB === 2){
+          const isPriorityZone = option =&gt; option.ids.length === 1 &amp;&amp;
+            /^S[1-5]$/.test(option.ids[0]);
+          const zoneDiff = Number(isPriorityZone(b)) - Number(isPriorityZone(a));
+          if(zoneDiff) return zoneDiff;
+        }
+
         /* Same guest-fit MAX: use fewer physical tables first.
            A fixed 4-seat table must beat joining two flexible 2-seat tables.
            Only then compare the remaining renban MAX profile (e.g. D vs C). */
@@ -8016,6 +8027,17 @@ function renderRenbanOptions(){
         /* First: match the requested guest count as closely as possible. */
         const capacityDiff=(capA-requested)-(capB-requested);
         if(capacityDiff)return capacityDiff;
+
+        /* 2名: the narrow curved F zone is always the first seating choice
+           among immediately available, capacity-matched tables.
+           Split 82A/82B remain real 2-seat tables but come afterwards.
+           Never infer a split that has not been made in the layout. */
+        if(requested === 2 &amp;&amp; capA === 2 &amp;&amp; capB === 2){
+          const isPriorityZone = option =&gt; option.ids.length === 1 &amp;&amp;
+            /^F[1-5]$/.test(option.ids[0]);
+          const zoneDiff = Number(isPriorityZone(b)) - Number(isPriorityZone(a));
+          if(zoneDiff) return zoneDiff;
+        }
 
         /* Same guest-fit MAX: use fewer physical tables first.
            A fixed 4-seat table must beat joining two flexible 2-seat tables.
